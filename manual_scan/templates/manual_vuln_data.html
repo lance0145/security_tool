@@ -1,0 +1,33 @@
+{% extends 'dashboard/base.html' %}
+
+{% block body %}
+    {% for data in vuln_detail %}
+        <div class="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>{{ data.vuln_name }}</h1>
+                        <br>
+                        <h2>Description</h2>
+                        {{ data.description }}
+                        <br>
+                        <br>
+                        <h2>Instance</h2>
+                        {{ data.vuln_url }}
+                        <br>
+                        <br>
+                        <h2>Solutions</h2>
+                        {{ data.solution }}
+                        <br>
+                        <br>
+                        <h2>Reference</h2>
+                        {{ data.reference | safe }}
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
