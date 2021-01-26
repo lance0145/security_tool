@@ -70,15 +70,15 @@ class month_db(models.Model):
 
 class Client(models.Model):
     name = models.TextField(blank=True, null=True)
-    address = models.IntegerField(blank=True, default=0)
-    telephone = models.IntegerField(blank=True, default=0)
-    email = models.IntegerField(blank=True, default=0)
-    website = models.TextField(blank=True, default=0)
-    ip = models.CharField(max_length=256, null=True)
+    address = models.TextField(blank=True, null=True)
+    phone = models.TextField(blank=True, null=True)
+    email = models.TextField(blank=True, null=True)
+    website = models.TextField(blank=True, null=True)
+    ip = models.TextField(blank=True, null=True)
     url = models.TextField(blank=True, null=True)
 
 class Note(models.Model):
     name = models.TextField(blank=True, null=True)
-    description = models.IntegerField(blank=True, default=0)
-    date = models.IntegerField(blank=True, default=0)
+    description = models.TextField(blank=True, null=True)
+    date = models.DateTimeField(null=True)
 
