@@ -1,18 +1,9 @@
 # -*- coding: utf-8 -*-
-#                    _
-#     /\            | |
-#    /  \   _ __ ___| |__   ___ _ __ _   _
-#   / /\ \ | '__/ __| '_ \ / _ \ '__| | | |
-#  / ____ \| | | (__| | | |  __/ |  | |_| |
-# /_/    \_\_|  \___|_| |_|\___|_|   \__, |
-#                                     __/ |
-#                                    |___/
-# Copyright (C) 2017 Anand Tiwari
+# Copyright (C) 20210125 Allan Abendanio
 #
-# Email:   anandtiwarics@gmail.com
-# Twitter: @anandtiwarics
+# Email:   lance0145@gmail.com
 #
-# This file is part of ArcherySec Project.
+# This file is part of Afovos Project.
 
 from __future__ import unicode_literals
 
@@ -76,3 +67,18 @@ class month_db(models.Model):
     low = models.IntegerField(blank=True, default=0)
     project_id = models.TextField(blank=True, default=0)
     username = models.CharField(max_length=256, null=True)
+
+class Client(models.Model):
+    name = models.TextField(blank=True, null=True)
+    address = models.IntegerField(blank=True, default=0)
+    telephone = models.IntegerField(blank=True, default=0)
+    email = models.IntegerField(blank=True, default=0)
+    website = models.TextField(blank=True, default=0)
+    ip = models.CharField(max_length=256, null=True)
+    url = models.TextField(blank=True, null=True)
+
+class Note(models.Model):
+    name = models.TextField(blank=True, null=True)
+    description = models.IntegerField(blank=True, default=0)
+    date = models.IntegerField(blank=True, default=0)
+
