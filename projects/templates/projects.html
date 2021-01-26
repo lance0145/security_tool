@@ -16,9 +16,9 @@
 <div id="content">
     <div id="content-header">
         <div id="breadcrumb"><a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a
-                href="#" class="current">Projects List</a></div>
+                href="#" class="current">Projects</a></div>
 
-        <h1>Client List</h1>
+        <h1>Projects</h1>
     </div>
 
     <div class="container-fluid">
@@ -29,7 +29,7 @@
                     <h5>Client List</h5>
                     <div class="buttons"><a data-toggle="modal" href="/projects/create_form/"
                                             class="btn btn-primary btn-mini"><i
-                            class="icon-plus icon-white"></i> Add new Project</a>
+                            class="icon-plus icon-white"></i> Add new Client</a>
                     </div>
                 </div>
                 <div class="widget-content nopadding">
@@ -38,12 +38,12 @@
                         <tr>
                             <!--<th>ID</th>-->
                             <th>Client</th>
-                            <th>Date Time</th>
-                            <th>Project Start Date</th>
-                            <th>Project End Date</th>
-                            <th>Project Owner</th>
-                            <th>Project Status</th>
-                            <th>Action</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Website</th>
+                            <th>Ip</th>
+                            <th>Url</th>
                         </tr>
                         </thead>
                         <tbody>{% for data in all_projects %}
