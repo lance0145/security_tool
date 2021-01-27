@@ -38,10 +38,10 @@
                         <tr>
                             <!--<th>ID</th>-->
                             <th>Client</th>
-                            <th>Email</th>
                             <th>Website</th>
                             <th>Ip</th>
                             <th>Url</th>
+                            <th>Note</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -50,10 +50,10 @@
                             <!---<td><a href="projects_view/?proj_id={{data.project_id}}">{{data.project_name}}</a></td>--->
                             <td><a href="../proj_data/?project_id={{data.project_id}}">{{data.project_name}}</a></td>
                             <td>{{data.name}}</td>
-                            <td>{{data.email}}</td>
                             <td>{{data.website}}</td>
                             <td>{{data.ip}}</td>
                             <td>{{data.url}}</td>
+                            <td>{{data.note}}</td>
                             <td class="confirm-delete">
                                 <form action="/projects/" method="POST">
                                     <input type="hidden" name="proj_id" value="{{data.id}}"/>{% csrf_token %}

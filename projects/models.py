@@ -76,6 +76,7 @@ class client_db(models.Model):
     website = models.TextField(blank=True, null=True)
     ip = models.TextField(blank=True, null=True)
     url = models.TextField(blank=True, null=True)
+    note = models.TextField(blank=True, null=True)
 
 class note_db(models.Model):
     name = models.TextField(blank=True, null=True)
