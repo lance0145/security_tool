@@ -18,7 +18,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import messages
 import uuid
-from projects.models import project_db, project_scan_db
+from projects.models import project_db, project_scan_db, client_db
 from webscanners.models import zap_scans_db, zap_scan_results_db, \
     burp_scan_db, burp_scan_result_db, \
     arachni_scan_db, arachni_scan_result_db, \
@@ -65,6 +65,37 @@ def create_form(request):
 
 def create_client_form(request):
     return render(request, 'create_client.html')
+
+def create_client(request):
+    if request.method == 'POST':
+        username = request.user.username
+        print(username)
+        client_id = uuid.uuid4()
+        client_name = request.POST.get("clientname", )
+        client_address = request.POST.get("clientaddress", )
+        client_phone = request.POST.get("clientphone", )
+        client_email = request.POST.get("clientemail", )
+        client_website = request.POST.get("clientwebsite", )
+        client_ip = request.POST.get("clientip", )
+        client_url = request.POST.get("clienturl", )
+        client_note = request.POST.get("clientnote", )
+
+        save_client = client_db(username=username,
+                                  client_id=client_id,
+                                  name=client_name,
+                                  address=client_address,
+                                  phone=client_phone,
+                                  email=client_email,
+                                  website=client_website,
+                                  ip=client_ip,
+                                  url=client_url,
+                                  note=client_note,
+                                  )
+        save_client.save()
+
+        return HttpResponseRedirect(reverse('dashboard:dashboard'))
+
+    return render(request, 'dashboard/project.html')
 
 def create(request):
     if request.method == 'POST':

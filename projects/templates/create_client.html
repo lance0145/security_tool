@@ -15,7 +15,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="col-md-12">
-                                    <form class="form-horizontal" method="POST" action="{% url 'projects:create' %}">
+                                    <form class="form-horizontal" method="POST" action="{% url 'projects:create_client' %}">
                                         {% csrf_token %}
                                         <div class="form-group row">
                                             <label class="col-sm-4 col-form-label">Client Name :</label>

@@ -69,6 +69,7 @@ class month_db(models.Model):
     username = models.CharField(max_length=256, null=True)
 
 class client_db(models.Model):
+    client_id = models.TextField(blank=True)
     name = models.TextField(blank=True, null=True)
     address = models.TextField(blank=True, null=True)
     phone = models.TextField(blank=True, null=True)
@@ -77,9 +78,5 @@ class client_db(models.Model):
     ip = models.TextField(blank=True, null=True)
     url = models.TextField(blank=True, null=True)
     note = models.TextField(blank=True, null=True)
-
-class note_db(models.Model):
-    name = models.TextField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    date = models.DateTimeField(null=True)
+    username = models.CharField(max_length=256, null=True)
 
