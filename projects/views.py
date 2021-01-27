@@ -63,6 +63,8 @@ def list_projects(request):
 def create_form(request):
     return render(request, 'project_create.html')
 
+def create_client_form(request):
+    return render(request, 'create_client.html')
 
 def create(request):
     if request.method == 'POST':
