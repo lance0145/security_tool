@@ -38,26 +38,25 @@
                         <tr>
                             <!--<th>ID</th>-->
                             <th>Client</th>
-                            <th>Address</th>
-                            <th>Phone</th>
                             <th>Email</th>
                             <th>Website</th>
                             <th>Ip</th>
                             <th>Url</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
-                        <tbody>{% for data in all_projects %}
+                        <tbody>{% for data in all_clients %}
                         <tr data-target="#">
                             <!---<td><a href="projects_view/?proj_id={{data.project_id}}">{{data.project_name}}</a></td>--->
                             <td><a href="../proj_data/?project_id={{data.project_id}}">{{data.project_name}}</a></td>
-                            <td>{{data.date_time}}</td>
-                            <td>{{data.project_start}}</td>
-                            <td>{{data.project_end}}</td>
-                            <td>{{data.project_owner}}</td>
-                            <td>{{data.project_status}}</td>
+                            <td>{{data.name}}</td>
+                            <td>{{data.email}}</td>
+                            <td>{{data.website}}</td>
+                            <td>{{data.ip}}</td>
+                            <td>{{data.url}}</td>
                             <td class="confirm-delete">
                                 <form action="/projects/" method="POST">
-                                    <input type="hidden" name="proj_id" value="{{data.project_id}}"/>{% csrf_token %}
+                                    <input type="hidden" name="proj_id" value="{{data.id}}"/>{% csrf_token %}
                                     <button class="btn btn-danger"><i class="icon-remove"></i></button>
                                 </form>
                             </td>

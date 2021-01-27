@@ -20,7 +20,7 @@ from __future__ import unicode_literals
 import uuid
 from manual_scan.models import manual_scan_results_db, manual_scans_db
 from datetime import datetime
-from projects.models import project_db
+from projects.models import project_db, client_db
 from manual_scan.models import VulnerabilityData
 import uuid
 from django.core.files.storage import FileSystemStorage
@@ -52,6 +52,7 @@ def add_list_scan(request):
     """
     username = request.user.username
     all_projects = project_db.objects.filter(username=username)
+    all_clients = client_db.objects.filter(username=username)
 
     if request.method == 'POST':
         scan_url = request.POST.get('scan_url')
@@ -73,7 +74,8 @@ def add_list_scan(request):
 
     return render(request,
                   'add_list_scan.html',
-                  {'all_projects': all_projects}
+                  {'all_projects': all_projects,
+                   'all_clients': all_clients,}
                   )
 
 
