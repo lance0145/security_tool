@@ -34,7 +34,7 @@
                 </div>
                 <div class="widget-content nopadding">
                     <table class="table table-bordered data-table">
-                        <thead><td><a href="../proj_data/?project_id={{data.project_id}}">{{data.project_name}}</a></td>
+                        <thead>
                             <th>Client</th>
                             <th>Address</th>
                             <th>Phone</th>                            
@@ -46,7 +46,6 @@
                         </tr>
                         </thead>
                         <tbody>{% for data in all_clients %}
-                            <td><a href="../proj_data/?project_id={{data.project_id}}">{{data.project_name}}</a></td>
                             <td>{{data.client_name}}</td>
                             <td>{{data.client_address}}</td>
                             <td>{{data.client_phone}}</td>
