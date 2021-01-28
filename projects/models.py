@@ -76,7 +76,6 @@ class client_db(models.Model):
     client_email = models.TextField(blank=True, null=True)
     client_website = models.TextField(blank=True, null=True)
     client_ip = models.TextField(blank=True, null=True)
-    client_url = models.TextField(blank=True, null=True)
     client_note = models.TextField(blank=True, null=True)
     username = models.CharField(max_length=256, null=True)
 

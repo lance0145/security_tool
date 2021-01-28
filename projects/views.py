@@ -77,7 +77,6 @@ def create_client(request):
         client_email = request.POST.get("client_email", )
         client_website = request.POST.get("client_website", )
         client_ip = request.POST.get("client_ip", )
-        client_url = request.POST.get("client_url", )
         client_note = request.POST.get("client_note", )
 
         save_client = client_db(username=username,
@@ -88,7 +87,6 @@ def create_client(request):
                                   client_email=client_email,
                                   client_website=client_website,
                                   client_ip=client_ip,
-                                  client_url=client_url,
                                   client_note=client_note,
                                   )
         save_client.save()
