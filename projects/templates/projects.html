@@ -44,6 +44,7 @@
                         </tr>
                         </thead>
                         <tbody>{% for data in all_clients %}
+                            <td><a href="../proj_data/?project_id={{data.project_id}}">{{data.project_name}}</a></td>
                             <td>{{data.client_name}}</td>
                             <td>{{data.client_website}}</td>
                             <td>{{data.client_ip}}</td>
