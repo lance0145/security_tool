@@ -11,6 +11,18 @@ from django.db import models
 from django.db.models import Func, F, Sum
 
 
+class client_db(models.Model):
+    client_id = models.TextField(blank=True)
+    client_name = models.TextField(blank=True, null=True)
+    client_address = models.TextField(blank=True, null=True)
+    client_phone = models.TextField(blank=True, null=True)
+    client_email = models.TextField(blank=True, null=True)
+    client_website = models.TextField(blank=True, null=True)
+    client_ip = models.TextField(blank=True, null=True)
+    client_note = models.TextField(blank=True, null=True)
+    username = models.CharField(max_length=256, null=True)
+    # projects = models.ManyToManyField(project_db)
+
 class project_db(models.Model):
     project_id = models.TextField(blank=True)
     project_name = models.TextField(blank=True)
@@ -40,7 +52,8 @@ class project_db(models.Model):
     low_web = models.IntegerField(blank=True, null=True)
     low_static = models.IntegerField(blank=True, null=True)
     username = models.CharField(max_length=256, null=True)
-
+    project_note = models.TextField(blank=True, null=True)
+    client = models.ForeignKey(client_db, null=True, on_delete=models.SET_NULL)
 
 class project_scan_db(models.Model):
     project_url = models.TextField(blank=True) #this is scan url
@@ -67,15 +80,3 @@ class month_db(models.Model):
     low = models.IntegerField(blank=True, default=0)
     project_id = models.TextField(blank=True, default=0)
     username = models.CharField(max_length=256, null=True)
-
-class client_db(models.Model):
-    client_id = models.TextField(blank=True)
-    client_name = models.TextField(blank=True, null=True)
-    client_address = models.TextField(blank=True, null=True)
-    client_phone = models.TextField(blank=True, null=True)
-    client_email = models.TextField(blank=True, null=True)
-    client_website = models.TextField(blank=True, null=True)
-    client_ip = models.TextField(blank=True, null=True)
-    client_note = models.TextField(blank=True, null=True)
-    username = models.CharField(max_length=256, null=True)
-

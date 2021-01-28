@@ -107,6 +107,8 @@ def create(request):
         project_owner = request.POST.get("projectowner", )
         project_disc = request.POST.get("project_disc", )
         date_time = datetime.datetime.now()
+        client = request.POST.get("client", )
+        project_note = request.POST.get("project_note", )
 
         save_project = project_db(username=username,
                                   project_name=project_name,
@@ -115,6 +117,8 @@ def create(request):
                                   project_end=project_end,
                                   project_owner=project_owner,
                                   project_disc=project_disc,
+                                  client=client,
+                                  project_note=project_note,
                                   date_time=date_time,
                                   total_vuln=0,
                                   total_high=0,
