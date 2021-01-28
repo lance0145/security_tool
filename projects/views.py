@@ -69,29 +69,30 @@ def create_client_form(request):
 def create_client(request):
     if request.method == 'POST':
         username = request.user.username
-        print(username)
         client_id = uuid.uuid4()
-        client_name = request.POST.get("clientname", )
-        client_address = request.POST.get("clientaddress", )
-        client_phone = request.POST.get("clientphone", )
-        client_email = request.POST.get("clientemail", )
-        client_website = request.POST.get("clientwebsite", )
-        client_ip = request.POST.get("clientip", )
-        client_url = request.POST.get("clienturl", )
-        client_note = request.POST.get("clientnote", )
+        client_name = request.POST.get("client_name", )
+        client_address = request.POST.get("client_address", )
+        client_phone = request.POST.get("client_phone", )
+        client_email = request.POST.get("client_email", )
+        client_website = request.POST.get("client_website", )
+        client_ip = request.POST.get("client_ip", )
+        client_url = request.POST.get("client_url", )
+        client_note = request.POST.get("client_note", )
 
         save_client = client_db(username=username,
                                   client_id=client_id,
-                                  name=client_name,
-                                  address=client_address,
-                                  phone=client_phone,
-                                  email=client_email,
-                                  website=client_website,
-                                  ip=client_ip,
-                                  url=client_url,
-                                  note=client_note,
+                                  client_name=client_name,
+                                  client_address=client_address,
+                                  client_phone=client_phone,
+                                  client_email=client_email,
+                                  client_website=client_website,
+                                  client_ip=client_ip,
+                                  client_url=client_url,
+                                  client_note=client_note,
                                   )
         save_client.save()
+
+        print(client_id, client_name, client_address, username)
 
         return HttpResponseRedirect(reverse('dashboard:dashboard'))
 
@@ -100,7 +101,6 @@ def create_client(request):
 def create(request):
     if request.method == 'POST':
         username = request.user.username
-        print(username)
         project_id = uuid.uuid4()
         project_name = request.POST.get("projectname", )
         project_date = request.POST.get("projectstart", )
@@ -137,6 +137,9 @@ def create(request):
                                   low_web=0,
                                   low_static=0)
         save_project.save()
+
+
+        print(username, project_id, project_name, date_time)
 
         # messages.success(request, "Project Created")
         all_month_data_display = month_db.objects.filter(username=username)

@@ -70,13 +70,13 @@ class month_db(models.Model):
 
 class client_db(models.Model):
     client_id = models.TextField(blank=True)
-    name = models.TextField(blank=True, null=True)
-    address = models.TextField(blank=True, null=True)
-    phone = models.TextField(blank=True, null=True)
-    email = models.TextField(blank=True, null=True)
-    website = models.TextField(blank=True, null=True)
-    ip = models.TextField(blank=True, null=True)
-    url = models.TextField(blank=True, null=True)
-    note = models.TextField(blank=True, null=True)
+    client_name = models.TextField(blank=True, null=True)
+    client_address = models.TextField(blank=True, null=True)
+    client_phone = models.TextField(blank=True, null=True)
+    client_email = models.TextField(blank=True, null=True)
+    client_website = models.TextField(blank=True, null=True)
+    client_ip = models.TextField(blank=True, null=True)
+    client_url = models.TextField(blank=True, null=True)
+    client_note = models.TextField(blank=True, null=True)
     username = models.CharField(max_length=256, null=True)
 
