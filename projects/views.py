@@ -53,12 +53,13 @@ def list_projects(request):
     """
     username = request.user.username
     all_projects = project_db.objects.filter(username=username)
+    all_clients = client_db.objects.filter(username=username)
 
     return render(request,
                   'projects.html',
-                  {'all_projects': all_projects}
+                  {'all_projects': all_projects,
+                  'all_clients': all_clients}
                   )
-
 
 def create_form(request):
     return render(request, 'project_create.html')
