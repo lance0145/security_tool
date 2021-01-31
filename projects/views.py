@@ -61,18 +61,11 @@ def list_projects(request):
                   'all_clients': all_clients}
                   )
 
-def list_clients(request):
-
-    username = request.user.username
-    all_clients = client_db.objects.filter(username=username)
-
-    return render(request,
-                  'projects_create.html',
-                  {'all_clients': all_clients}
-                  )
-
 def create_form(request):
-    return render(request, 'project_create.html')
+
+    all_clients = client_db.objects.all()
+
+    return render(request, 'project_create.html', {'all_clients': all_clients})
 
 def create_client_form(request):
     return render(request, 'create_client.html')
