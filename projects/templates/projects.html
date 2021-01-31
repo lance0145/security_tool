@@ -54,8 +54,8 @@
                             <td>{{data.client_ip}}</td>
                             <td>{{data.client_note}}</td>
                             <td class="confirm-delete">
-                                <form action="/client_delete/" method="POST">
-                                    <input type="hidden" name="id" value="{{data.id}}"/>{% csrf_token %}
+                                <form action="/projects/" method="POST">
+                                    <input type="hidden" name="client_id" value="{{data.client_id}}"/>{% csrf_token %}
                                     <button class="btn btn-danger"><i class="icon-remove"></i></button>
                                 </form>
                             </td>

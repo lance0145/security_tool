@@ -164,21 +164,19 @@ def create(request):
 
     return render(request, 'dashboard/project.html')
 
-def client_delete(request):
+def projects(request):
 
-    if request.method == 'POST':
-        id = request.POST.get("id", )
+    client_id = request.POST.get("client_id", )
 
-        client_proj = client_db.objects.filter(id=id)
+    if request.method == 'POST' and client_id:
+
+        client_proj = client_db.objects.filter(client_id=client_id)
         client_proj.delete()
 
         return HttpResponseRedirect(reverse('dashboard:dashboard'))
 
-    return render(request, 'dashboard/project.html')
-
-def projects(request):
-
     if request.method == 'POST':
+
         project_id = request.POST.get("proj_id", )
 
         del_proj = project_db.objects.filter(project_id=project_id)
