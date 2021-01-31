@@ -16,9 +16,3 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-
-from .models import VulnerabilityData, manual_scans_db, manual_scan_results_db
-
-admin.site.register(VulnerabilityData)
-admin.site.register(manual_scans_db)
-admin.site.register(manual_scan_results_db)

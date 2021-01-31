@@ -52,7 +52,6 @@ def add_list_scan(request):
     """
     username = request.user.username
     all_projects = project_db.objects.filter(username=username)
-    all_clients = client_db.objects.filter(username=username)
 
     if request.method == 'POST':
         scan_url = request.POST.get('scan_url')
@@ -74,8 +73,7 @@ def add_list_scan(request):
 
     return render(request,
                   'add_list_scan.html',
-                  {'all_projects': all_projects,
-                   'all_clients': all_clients,}
+                  {'all_projects': all_projects,}
                   )
 
 

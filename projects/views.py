@@ -62,8 +62,8 @@ def list_projects(request):
                   )
 
 def create_form(request):
-
-    all_clients = client_db.objects.all()
+    username = request.user.username
+    all_clients = client_db.objects.filter(username=username)
 
     return render(request, 'project_create.html', {'all_clients': all_clients})
 
@@ -164,6 +164,17 @@ def create(request):
 
     return render(request, 'dashboard/project.html')
 
+def client_delete(request):
+
+    if request.method == 'POST':
+        id = request.POST.get("id", )
+
+        client_proj = client_db.objects.filter(id=id)
+        client_proj.delete()
+
+        return HttpResponseRedirect(reverse('dashboard:dashboard'))
+
+    return render(request, 'dashboard/project.html')
 
 def projects(request):
 

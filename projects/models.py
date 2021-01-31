@@ -23,6 +23,9 @@ class client_db(models.Model):
     username = models.CharField(max_length=256, null=True)
     # projects = models.ManyToManyField(project_db)
 
+    def __str__(self):
+        return self.client_name
+
 class project_db(models.Model):
     project_id = models.TextField(blank=True)
     project_name = models.TextField(blank=True)
@@ -53,8 +56,8 @@ class project_db(models.Model):
     low_static = models.IntegerField(blank=True, null=True)
     username = models.CharField(max_length=256, null=True)
     project_note = models.TextField(blank=True, null=True)
-    client = models.TextField(blank=True, null=True)
-    # client = models.ForeignKey(client_db, null=True, on_delete=models.SET_NULL)
+    #client = models.TextField(blank=True, null=True)
+    client = models.ForeignKey(client_db, null=True, on_delete=models.SET_NULL)
 
 class project_scan_db(models.Model):
     project_url = models.TextField(blank=True) #this is scan url

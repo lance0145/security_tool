@@ -18,4 +18,7 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-# Register your models here.
+from .models import client_db, project_db
+
+admin.site.register(client_db)
+admin.site.register(project_db)
