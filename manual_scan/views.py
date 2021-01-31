@@ -257,7 +257,7 @@ def edit_vuln(request):
         if severity == "Severe":
             severity_color = "danger"
 
-        elif severity == "High":
+        elif severity == "Risk":
             severity_color = "danger"
 
         elif severity == 'Medium':
@@ -266,7 +266,7 @@ def edit_vuln(request):
         elif severity == 'Low':
             severity_color = "info"
 
-        elif severity == 'Info':
+        elif severity == 'Concern':
             severity_color = "info"
 
         manual_scan_results_db.objects.filter(username=username, vuln_id=vuln_id).update(
