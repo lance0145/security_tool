@@ -70,6 +70,12 @@ def create_form(request):
 def create_client_form(request):
     return render(request, 'create_client.html')
 
+def edit_client_form(request):
+    return render(request, 'edit_client.html')
+
+def edit_project_form(request):
+    return render(request, 'edit_project.html')
+
 def create_client(request):
     if request.method == 'POST':
         username = request.user.username
