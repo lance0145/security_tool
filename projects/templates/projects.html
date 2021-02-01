@@ -56,6 +56,12 @@
                             <td class="confirm-delete">
                                 <form action="/projects/" method="POST">
                                     <input type="hidden" name="client_id" value="{{data.client_id}}"/>{% csrf_token %}
+                                    <button class="btn btn-warning"><i class="icon-pencil"></i></button>
+                                </form>
+                            </td>
+                            <td class="confirm-delete">
+                                <form action="/projects/" method="POST">
+                                    <input type="hidden" name="client_id" value="{{data.client_id}}"/>{% csrf_token %}
                                     <button class="btn btn-danger"><i class="icon-remove"></i></button>
                                 </form>
                             </td>
@@ -107,6 +113,12 @@
                             <td>{{data.project_status}}</td>
                             <td>{{data.client}}</td>
                             <td>{{data.project_note}}</td>
+                            <td class="confirm-delete">
+                                <form action="/projects/" method="POST">
+                                    <input type="hidden" name="proj_id" value="{{data.project_id}}"/>{% csrf_token %}
+                                    <button class="btn btn-warning"><i class="icon-pencil"></i></button>
+                                </form>
+                            </td>
                             <td class="confirm-delete">
                                 <form action="/projects/" method="POST">
                                     <input type="hidden" name="proj_id" value="{{data.project_id}}"/>{% csrf_token %}
