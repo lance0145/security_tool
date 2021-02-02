@@ -209,26 +209,27 @@ def create(request):
 
 def projects(request):
 
-    client_id = request.POST.get("client_id", )
+    client_id = request.GET["client_id"]
 
     if request.method == 'GET' and client_id:
 
-        project_id = request.GET['proj_id']
         edit_client = client_db.objects.filter(client_id=client_id)
+        print("************************************************************************************************************")
+        print(edit_client[0].client_note)
         return render(request,
                   'edit_client.html',
                   {'edit_client': edit_client[0]}
                   )
 
-    if request.method == 'POST' and client_id:
-
+    if request.method == 'POST':
+        
+        client_id = request.POST.get("client_id", )
         client_proj = client_db.objects.filter(client_id=client_id)
         client_proj.delete()
 
         return HttpResponseRedirect(reverse('dashboard:dashboard'))
 
-
-    project_id = request.POST.get("proj_id", )
+    project_id = request.GET["proj_id"]
     
     if request.method == 'GET' and project_id:
 
@@ -238,8 +239,9 @@ def projects(request):
                   {'edit_proj': edit_proj[0]}
                   )
 
-    if request.method == 'POST' and project_id:
+    if request.method == 'POST':
 
+        project_id = request.POST.get("proj_id", )
         del_proj = project_db.objects.filter(project_id=project_id)
         del_proj.delete()
 
