@@ -54,7 +54,7 @@
                             <td>{{data.client_ip}}</td>
                             <td>{{data.client_note}}</td>
                             <td class="confirm-delete">
-                                <form action="/projects/" method="POST">
+                                <form action="/edit_client_form/" method="POST">
                                     <input type="hidden" name="client_id" value="{{data.client_id}}"/>{% csrf_token %}
                                     <button class="btn btn-warning"><i class="icon-pencil"></i></button>
                                 </form>
@@ -114,9 +114,9 @@
                             <td>{{data.client}}</td>
                             <td>{{data.project_note}}</td>
                             <td class="confirm-delete">
-                                <form action="/projects/" method="POST">
+                                <form action="/projects/" method="GET">
                                     <input type="hidden" name="proj_id" value="{{data.project_id}}"/>{% csrf_token %}
-                                    <button class="btn btn-warning"><i class="icon-pencil"></i></button>
+                                    <button class="btn btn-warning" ><i class="icon-pencil"></i></button>
                                 </form>
                             </td>
                             <td class="confirm-delete">

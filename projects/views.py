@@ -100,13 +100,30 @@ def create_client(request):
                                   )
         save_client.save()
 
-        print(client_id, client_name, client_address, username)
-
         return HttpResponseRedirect(reverse('dashboard:dashboard'))
 
     return render(request, 'dashboard/project.html')
 
 def create(request):
+    project_id = request.POST.get('proj_id', )
+
+    if request.method == 'POST' and project_id:
+        project_name = request.POST.get("project_name")
+        project_date = request.POST.get("project_start")
+        project_end = request.POST.get("project_end")
+        project_owner = request.POST.get("project_owner")
+        project_disc = request.POST.get("project_disc")
+
+        project_db.objects.filter(project_id=project_id
+        ).update(
+            project_name=project_name,
+            project_start=project_date,
+            project_end=project_end,
+            project_owner=project_owner,
+            project_disc=project_disc
+        )
+        return HttpResponseRedirect(reverse('dashboard:dashboard'))
+
     if request.method == 'POST':
         username = request.user.username
         project_id = uuid.uuid4()
@@ -150,9 +167,6 @@ def create(request):
                                   low_static=0)
         save_project.save()
 
-
-        print(username, project_id, project_name, date_time)
-
         # messages.success(request, "Project Created")
         all_month_data_display = month_db.objects.filter(username=username)
 
@@ -180,6 +194,15 @@ def projects(request):
         client_proj.delete()
 
         return HttpResponseRedirect(reverse('dashboard:dashboard'))
+    
+    if request.method == 'GET':
+
+        project_id = request.GET['proj_id']
+        edit_proj = project_db.objects.filter(project_id=project_id)
+        return render(request,
+                  'edit_project.html',
+                  {'edit_proj': edit_proj[0]}
+                  )
 
     if request.method == 'POST':
 
@@ -359,6 +382,7 @@ def project_edit(request):
         )
         return HttpResponseRedirect(reverse('projects:projects') + '?proj_id=%s' % project_id)
     return render(request,
-                  'project_edit.html',
+                  'edit_project.html',
+                #   'project_edit.html',
                   {'project_dat': project_dat}
                   )
