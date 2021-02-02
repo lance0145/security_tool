@@ -21,8 +21,7 @@
                                             <label class="col-sm-4 col-form-label">Client Name :</label>
                                             <div class="col-sm-6">
                                                 <input type="text" name="client_name" value="{{ client_name }}"
-                                                       class="form-control"
-                                                       placeholder="Client Name"/>
+                                                       class="form-control"/>
                                             </div>
                                         </div>
 
@@ -30,51 +29,46 @@
                                             <label class="col-sm-4 col-form-label">Client Address :</label>
                                             <div class="col-sm-6">
                                                 <input type="text" name="client_address" value="{{ client_address }}"
-                                                        class="form-control"
-                                                        placeholder="Client Address"/>
+                                                        class="form-control"/>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-4 col-form-label">Client Phone :</label>
                                             <div class="col-sm-6">
                                                 <input type="text" name="client_phone" value="{{ client_phone }}"
-                                                        class="form-control"
-                                                        placeholder="Client Phone"/>
+                                                        class="form-control"/>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-4 col-form-label">Client Email :</label>
                                             <div class="col-sm-6">
                                                 <input type="email" name="client_email" value="{{ client_email }}"
-                                                       class="form-control"
-                                                       placeholder="Client Email"/>
+                                                       class="form-control"/>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-4 col-form-label">Client Website :</label>
                                             <div class="col-sm-6">
                                                 <input type="text" name="client_website" value="{{ client_website }}"
-                                                        class="form-control"
-                                                        placeholder="Client Website"/></textarea>
+                                                        class="form-control"/>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-4 col-form-label">Client Ip :</label>
                                             <div class="col-sm-6">
                                                 <input type="text" name="client_ip" value="{{ client_ip }}"
-                                                        class="form-control"
-                                                        placeholder="Client Ip"/>
+                                                        class="form-control"/>
                                             </div>
                                         </div>                                    
                                         <div class="form-group row">
                                             <label class="col-sm-4 col-form-label">Note :</label>
                                             <div class="col-sm-6">
                                                 <textarea name="client_note" value="{{ client_note }}"
-                                                        class="form-control"
-                                                        placeholder="Note"/></textarea>
+                                                        class="form-control"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-actions">
+                                            <input type="hidden" name="client_id" value="{{edit_client.client_id}}"/>{% csrf_token %}
                                             <button type="submit" class="btn btn-success">Update</button>
                                         </div>
                                     </form>

@@ -77,6 +77,29 @@ def edit_project_form(request):
     return render(request, 'edit_project.html')
 
 def create_client(request):
+    client_id = request.POST.get('client_id', )
+
+    if request.method == 'POST' and client_id:
+        client_name = request.POST.get("client_name", )
+        client_address = request.POST.get("client_address", )
+        client_phone = request.POST.get("client_phone", )
+        client_email = request.POST.get("client_email", )
+        client_website = request.POST.get("client_website", )
+        client_ip = request.POST.get("client_ip", )
+        client_note = request.POST.get("client_note", )
+
+        client_db.objects.filter(client_id=client_id
+        ).update(
+            client_name=client_name,
+            client_address=client_address,
+            client_phone=client_phone,
+            client_email=client_email,
+            client_website=client_website,
+            client_ip=client_ip,
+            client_note=client_note,
+        )
+        return HttpResponseRedirect(reverse('dashboard:dashboard'))
+
     if request.method == 'POST':
         username = request.user.username
         client_id = uuid.uuid4()
@@ -188,25 +211,34 @@ def projects(request):
 
     client_id = request.POST.get("client_id", )
 
+    if request.method == 'GET' and client_id:
+
+        project_id = request.GET['proj_id']
+        edit_client = client_db.objects.filter(client_id=client_id)
+        return render(request,
+                  'edit_client.html',
+                  {'edit_client': edit_client[0]}
+                  )
+
     if request.method == 'POST' and client_id:
 
         client_proj = client_db.objects.filter(client_id=client_id)
         client_proj.delete()
 
         return HttpResponseRedirect(reverse('dashboard:dashboard'))
-    
-    if request.method == 'GET':
 
-        project_id = request.GET['proj_id']
+
+    project_id = request.POST.get("proj_id", )
+    
+    if request.method == 'GET' and project_id:
+
         edit_proj = project_db.objects.filter(project_id=project_id)
         return render(request,
                   'edit_project.html',
                   {'edit_proj': edit_proj[0]}
                   )
 
-    if request.method == 'POST':
-
-        project_id = request.POST.get("proj_id", )
+    if request.method == 'POST' and project_id:
 
         del_proj = project_db.objects.filter(project_id=project_id)
         del_proj.delete()
