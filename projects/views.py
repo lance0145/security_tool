@@ -208,38 +208,17 @@ def create(request):
     return render(request, 'dashboard/project.html')
 
 def projects(request):
-
-    client_id = request.GET["client_id"]
-
-    if request.method == 'GET' and client_id:
-
-        edit_client = client_db.objects.filter(client_id=client_id)
-        print("************************************************************************************************************")
-        print(edit_client[0].client_note)
-        return render(request,
-                  'edit_client.html',
-                  {'edit_client': edit_client[0]}
-                  )
-
-    if request.method == 'POST':
-        
-        client_id = request.POST.get("client_id", )
-        client_proj = client_db.objects.filter(client_id=client_id)
-        client_proj.delete()
-
-        return HttpResponseRedirect(reverse('dashboard:dashboard'))
-
-    project_id = request.GET["proj_id"]
     
-    if request.method == 'GET' and project_id:
+    if request.method == 'GET' and request.GET["proj_id"]:
 
+        project_id = request.GET["proj_id"]
         edit_proj = project_db.objects.filter(project_id=project_id)
         return render(request,
                   'edit_project.html',
                   {'edit_proj': edit_proj[0]}
                   )
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.POST.get("proj_id", ):
 
         project_id = request.POST.get("proj_id", )
         del_proj = project_db.objects.filter(project_id=project_id)
@@ -385,38 +364,23 @@ def projects(request):
     return render(request, 'dashboard/project.html', {'all_projects': all_projects})
 
 
-def project_edit(request):
-    """
+def clients(request):
+    
+    if request.method == 'GET' and request.GET["client_id"]:
 
-    :param request:
-    :return:
-    """
-    global project_dat
-    if request.method == 'GET':
-        project_id = request.GET['project_id']
-        username = request.user.username
-        project_dat = project_db.objects.filter(project_id=project_id, username=username)
-
-    if request.method == 'POST':
-        project_id = request.POST.get('project_id')
-        project_name = request.POST.get("projectname")
-        project_date = request.POST.get("projectstart")
-        project_end = request.POST.get("projectend")
-        project_owner = request.POST.get("projectowner")
-        project_disc = request.POST.get("project_disc")
-
-        project_db.objects.filter(
-            project_id=project_id
-        ).update(
-            project_name=project_name,
-            project_start=project_date,
-            project_end=project_end,
-            project_owner=project_owner,
-            project_disc=project_disc
-        )
-        return HttpResponseRedirect(reverse('projects:projects') + '?proj_id=%s' % project_id)
-    return render(request,
-                  'edit_project.html',
-                #   'project_edit.html',
-                  {'project_dat': project_dat}
+        client_id = request.GET["client_id"]
+        edit_client = client_db.objects.filter(client_id=client_id)
+        return render(request,
+                  'edit_client.html',
+                  {'edit_client': edit_client[0]}
                   )
+
+    if request.method == 'POST' and request.POST.get("client_id", ):
+        
+        client_id = request.POST.get("client_id", )
+        client_proj = client_db.objects.filter(client_id=client_id)
+        client_proj.delete()
+
+        return HttpResponseRedirect(reverse('dashboard:dashboard'))
+
+    return render(request, 'dashboard/project.html', {'all_projects': all_projects})

@@ -44,7 +44,7 @@ urlpatterns = [
     url(r'^list_projects$',
         views.list_projects,
         name='list_projects'),
-    url(r'^project_edit$',
-        views.project_edit,
-        name='project_edit'),
+    url(r'^clients$',
+        views.clients,
+        name='clients'),
 ]
