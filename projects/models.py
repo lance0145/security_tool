@@ -34,6 +34,7 @@ class project_db(models.Model):
     project_owner = models.TextField(blank=True, null=True)
     project_disc = models.TextField(blank=True, null=True)
     project_status = models.TextField(blank=True, null=True)
+    pentester = models.TextField(blank=True, null=True)
     date_time = models.DateTimeField(null=True)
     total_vuln = models.IntegerField(blank=True, null=True)
     total_high = models.IntegerField(blank=True, null=True)

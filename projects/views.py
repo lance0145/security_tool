@@ -138,6 +138,8 @@ def create(request):
         project_end = request.POST.get("project_end")
         project_owner = request.POST.get("project_owner")
         project_disc = request.POST.get("project_disc")
+        project_note = request.POST.get("project_note")
+        pentester = request.POST.get("pentester")
 
         project_db.objects.filter(project_id=project_id
         ).update(
@@ -145,7 +147,9 @@ def create(request):
             project_start=project_date,
             project_end=project_end,
             project_owner=project_owner,
-            project_disc=project_disc
+            project_disc=project_disc,
+            project_note=project_note,
+            pentester=pentester
         )
 
         return HttpResponseRedirect(reverse('projects:list_projects'))
@@ -160,6 +164,7 @@ def create(request):
         date_time = datetime.datetime.now()
         client = request.POST.get("client", )
         project_note = request.POST.get("project_note", )
+        pentester = request.POST.get("pentester", )
 
         save_project = project_db(username=username,
                                   project_name=project_name,
@@ -170,6 +175,7 @@ def create(request):
                                   project_disc=project_disc,
                                   client=client,
                                   project_note=project_note,
+                                  pentester=pentester,
                                   date_time=date_time,
                                   total_vuln=0,
                                   total_high=0,
