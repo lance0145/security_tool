@@ -57,8 +57,8 @@ class project_db(models.Model):
     low_static = models.IntegerField(blank=True, null=True)
     username = models.CharField(max_length=256, null=True)
     project_note = models.TextField(blank=True, null=True)
-    #client = models.TextField(blank=True, null=True)
-    client = models.ForeignKey(client_db, null=True, on_delete=models.SET_NULL)
+    client = models.TextField(blank=True, null=True)
+    #client = models.ForeignKey(client_db, null=True, on_delete=models.SET_NULL)
 
 class project_scan_db(models.Model):
     project_url = models.TextField(blank=True) #this is scan url

@@ -134,6 +134,7 @@ def create(request):
         project_disc = request.POST.get("project_disc")
         project_note = request.POST.get("project_note")
         pentester = request.POST.get("pentester")
+        client = request.POST.get("client", )
 
         project_db.objects.filter(project_id=project_id
         ).update(
@@ -143,7 +144,8 @@ def create(request):
             project_owner=project_owner,
             project_disc=project_disc,
             project_note=project_note,
-            pentester=pentester
+            pentester=pentester,
+            client=client
         )
 
         return HttpResponseRedirect(reverse('projects:list_projects'))
