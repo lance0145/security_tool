@@ -46,12 +46,11 @@ project_dat = None
 
 
 def list_projects(request):
-    """
 
-    :param request:
-    :return:
-    """
     username = request.user.username
+    all_projects = project_db.objects.filter(username=username)
+    all_clients = client_db.objects.filter(username=username)
+
     all_projects = project_db.objects.filter(username=username)
     all_clients = client_db.objects.filter(username=username)
 
@@ -62,6 +61,7 @@ def list_projects(request):
                   )
 
 def create_form(request):
+
     username = request.user.username
     all_clients = client_db.objects.filter(username=username)
 
@@ -77,7 +77,9 @@ def edit_project_form(request):
     return render(request, 'edit_project.html')
 
 def create_client(request):
+
     client_id = request.POST.get('client_id', )
+    username = request.user.username
 
     if request.method == 'POST' and client_id:
         client_name = request.POST.get("client_name", )
@@ -98,10 +100,10 @@ def create_client(request):
             client_ip=client_ip,
             client_note=client_note,
         )
-        return HttpResponseRedirect(reverse('dashboard:dashboard'))
+
+        return HttpResponseRedirect(reverse('projects:list_projects'))
 
     if request.method == 'POST':
-        username = request.user.username
         client_id = uuid.uuid4()
         client_name = request.POST.get("client_name", )
         client_address = request.POST.get("client_address", )
@@ -123,12 +125,12 @@ def create_client(request):
                                   )
         save_client.save()
 
-        return HttpResponseRedirect(reverse('dashboard:dashboard'))
-
-    return render(request, 'dashboard/project.html')
+        return HttpResponseRedirect(reverse('projects:list_projects'))
 
 def create(request):
+
     project_id = request.POST.get('proj_id', )
+    username = request.user.username
 
     if request.method == 'POST' and project_id:
         project_name = request.POST.get("project_name")
@@ -145,10 +147,10 @@ def create(request):
             project_owner=project_owner,
             project_disc=project_disc
         )
-        return HttpResponseRedirect(reverse('dashboard:dashboard'))
+
+        return HttpResponseRedirect(reverse('projects:list_projects'))
 
     if request.method == 'POST':
-        username = request.user.username
         project_id = uuid.uuid4()
         project_name = request.POST.get("projectname", )
         project_date = request.POST.get("projectstart", )
@@ -203,13 +205,11 @@ def create(request):
                                         )
             save_months_data.save()
 
-        return HttpResponseRedirect(reverse('dashboard:dashboard'))
-
-    return render(request, 'dashboard/project.html')
+        return HttpResponseRedirect(reverse('projects:list_projects'))
 
 def projects(request):
-    
-    if request.method == 'GET' and request.GET["proj_id"]:
+
+    if request.method == 'GET':
 
         project_id = request.GET["proj_id"]
         edit_proj = project_db.objects.filter(project_id=project_id)
@@ -218,7 +218,7 @@ def projects(request):
                   {'edit_proj': edit_proj[0]}
                   )
 
-    if request.method == 'POST' and request.POST.get("proj_id", ):
+    if request.method == 'POST':
 
         project_id = request.POST.get("proj_id", )
         del_proj = project_db.objects.filter(project_id=project_id)
@@ -359,10 +359,7 @@ def projects(request):
 
         # messages.success(request, "Deleted Project")
 
-        return HttpResponseRedirect(reverse('dashboard:dashboard'))
-
-    return render(request, 'dashboard/project.html', {'all_projects': all_projects})
-
+    return HttpResponseRedirect(reverse('projects:list_projects'))
 
 def clients(request):
     
@@ -381,6 +378,6 @@ def clients(request):
         client_proj = client_db.objects.filter(client_id=client_id)
         client_proj.delete()
 
-        return HttpResponseRedirect(reverse('dashboard:dashboard'))
+        # messages.success(request, "Deleted Client")
 
-    return render(request, 'dashboard/project.html', {'all_projects': all_projects})
+    return HttpResponseRedirect(reverse('projects:list_projects'))

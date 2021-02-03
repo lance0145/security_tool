@@ -28,12 +28,12 @@ class client_db(models.Model):
 
 class project_db(models.Model):
     project_id = models.TextField(blank=True)
-    project_name = models.TextField(blank=True)
-    project_start = models.TextField(blank=True)
-    project_end = models.TextField(blank=True)
-    project_owner = models.TextField(blank=True)
-    project_disc = models.TextField(blank=True)
-    project_status = models.TextField(blank=True)
+    project_name = models.TextField(blank=True, null=True)
+    project_start = models.TextField(blank=True, null=True)
+    project_end = models.TextField(blank=True, null=True)
+    project_owner = models.TextField(blank=True, null=True)
+    project_disc = models.TextField(blank=True, null=True)
+    project_status = models.TextField(blank=True, null=True)
     date_time = models.DateTimeField(null=True)
     total_vuln = models.IntegerField(blank=True, null=True)
     total_high = models.IntegerField(blank=True, null=True)
