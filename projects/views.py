@@ -70,12 +70,6 @@ def create_form(request):
 def create_client_form(request):
     return render(request, 'create_client.html')
 
-def edit_client_form(request):
-    return render(request, 'edit_client.html')
-
-def edit_project_form(request):
-    return render(request, 'edit_project.html')
-
 def create_client(request):
 
     client_id = request.POST.get('client_id', )
@@ -219,9 +213,12 @@ def projects(request):
 
         project_id = request.GET["proj_id"]
         edit_proj = project_db.objects.filter(project_id=project_id)
+        username = request.user.username
+        all_clients = client_db.objects.filter(username=username)
         return render(request,
                   'edit_project.html',
-                  {'edit_proj': edit_proj[0]}
+                  {'edit_proj': edit_proj[0],
+                  'all_clients': all_clients}
                   )
 
     if request.method == 'POST':
