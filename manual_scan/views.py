@@ -152,19 +152,19 @@ def add_vuln(request):
         # uploaded_poc_url = fs.url(filename)
         uploaded_poc_url = None
 
-        if severity == "Severe":
+        if severity == "5. Very High":
             severity_color = "danger"
 
-        elif severity == "High":
+        elif severity == "4. High":
             severity_color = "danger"
 
-        elif severity == 'Medium':
+        elif severity == '3. Medium':
             severity_color = "warning"
 
-        elif severity == 'Low':
+        elif severity == '2. Low':
             severity_color = "info"
 
-        elif severity == 'Info':
+        elif severity == '1. Very Low':
             severity_color = "info"
 
 
@@ -190,11 +190,11 @@ def add_vuln(request):
         all_scan_data = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id)
 
         total_vuln = len(all_scan_data)
-        total_severe = len(all_scan_data.filter(severity="Severe"))
-        total_high = len(all_scan_data.filter(severity="High"))
-        total_medium = len(all_scan_data.filter(severity="Medium"))
-        total_low = len(all_scan_data.filter(severity="Low"))
-        total_info = len(all_scan_data.filter(severity="Info"))
+        total_very_high = len(all_scan_data.filter(severity="5. Very High"))
+        total_high = len(all_scan_data.filter(severity="4. High"))
+        total_medium = len(all_scan_data.filter(severity="3. Medium"))
+        total_low = len(all_scan_data.filter(severity="2. Low"))
+        total_very_low = len(all_scan_data.filter(severity="1. Very Low"))
 
         manual_scans_db.objects.filter(username=username, scan_id=scan_id).update(
             date_time=date_time,
@@ -258,19 +258,19 @@ def edit_vuln(request):
         scan_id = request.POST.get('scan_id')
         date_time = datetime.now()
 
-        if severity == "Severe":
+        if severity == "5. Very High":
             severity_color = "danger"
 
-        elif severity == "Risk":
+        elif severity == "4. High":
             severity_color = "danger"
 
-        elif severity == 'Medium':
+        elif severity == '3. Medium':
             severity_color = "warning"
 
-        elif severity == 'Low':
+        elif severity == '2. Low':
             severity_color = "info"
 
-        elif severity == 'Concern':
+        elif severity == '1. Very Low':
             severity_color = "info"
 
         manual_scan_results_db.objects.filter(username=username, vuln_id=vuln_id).update(

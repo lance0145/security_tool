@@ -164,21 +164,15 @@ def updated_nessus_parser(root, project_id, scan_id, username):
                     plugin_output = "NA"
                 vuln_id = uuid.uuid4()
 
-                if risk_factor == 'Severe':
-                    vuln_color = 'danger'
-                    risk_factor = 'High'
-                elif risk_factor == 'High':
+                if risk_factor == 'High':
                     vuln_color = 'danger'
                     risk_factor = 'High'
                 elif risk_factor == 'Medium':
                     vuln_color = 'warning'
                     risk_factor = 'Medium'
-                elif risk_factor == 'Low':
-                    vuln_color = 'info'
-                    risk_factor = 'Low'
                 else:
-                    risk_factor = 'Low'
                     vuln_color = 'info'
+                    risk_factor = 'Low'
 
                 dup_data = target + plugin_name + severity + port
                 duplicate_hash = hashlib.sha256(dup_data.encode('utf-8')).hexdigest()
