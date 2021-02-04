@@ -26,6 +26,34 @@
                             <h1 class="card-title">Pentest List</h1>
                         </div>
                         <br>
+                        <label class="col-sm-4 col-form-label">Project :</label>
+                            <form class="form-horizontal" method="POST" action="{% url 'manual_scan:list_scan' %}">
+                            {% csrf_token %}
+                                <select name="project_id" class="select2 form-control custom-select"
+                                        style="width: 50%; height:36px;">
+                                    {% for data in all_projects %}
+                                        <option value="{{data.project_id}}">{{data.project_id}}</option>
+                                    {% endfor %}
+                                </select>
+
+                                <!-- <select name="client" class="select2 form-control custom-select"
+                                        style="width: 50%; height:36px;">
+                                    {% for data in all_clients %}
+                                        <option value="{{data.client_name}}">{{data.client_name}}</option>
+                                    {% endfor %}
+                                </select> -->
+
+                                <!-- <div class="btn-group"><a name="project_id"
+                                        href="{% url 'manual_scan:list_scan' %}?project_id={{ data.project_id }}"
+                                        class="btn btn-primary btn-sm"><i
+                                        class="icon-plus icon-white"></i>Load</a>{% csrf_token %} -->
+
+                                <div class="form-actions">
+                                    <input type="hidden" name="project_id" value="{{ data.project_id }}"/>{% csrf_token %}
+                                    <button type="submit" class="btn btn-success">Load</button>
+                                </div>
+                            </form>
+                        <br>
                         <div class="row">
                             <div class="table-responsive">
                                 <table id="manual_scans_list" class="table table-bordered data-table">

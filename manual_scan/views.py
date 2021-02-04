@@ -36,11 +36,21 @@ def list_scan(request):
     :return:
     """
     username = request.user.username
-    all_scans = manual_scans_db.objects.filter(username=username)
+    project_id = request.POST.get('project_id')
+    if request.method == 'POST':
+        print("***********************************************************************")
+        print(str(project_id))
+        all_scans = manual_scans_db.objects.filter(username=username, project_id=project_id)
+    else:
+        print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+        print(project_id)
+        all_scans = manual_scans_db.objects.filter(username=username)
+    all_projects = project_db.objects.filter(username=username)
 
     return render(request,
                   'list_scan.html',
-                  {'all_scans': all_scans}
+                  {'all_projects': all_projects,
+                   'all_scans': all_scans}
                   )
 
 
