@@ -95,9 +95,9 @@ def clair_vuln_data(request):
                                                               vuln_status='Open')
 
         total_vul = len(all_clair_data)
-        total_high = len(all_clair_data.filter(Severity='High'))
+        total_high = len(all_clair_data.filter(Severity='High')) +  len(all_clair_data.filter(Severity='Critical'))
         total_medium = len(all_clair_data.filter(Severity='Medium'))
-        total_low = len(all_clair_data.filter(Severity='Low'))
+        total_low = len(all_clair_data.filter(Severity='Minimal')) +  len(all_clair_data.filter(Severity='Very Minimal'))
         total_duplicate = len(all_clair_data.filter(vuln_duplicate='Yes'))
 
         clair_scan_db.objects.filter(username=username, scan_id=scan_id).update(
@@ -191,9 +191,9 @@ def clair_del_vuln(request):
         all_clair_data = clair_scan_results_db.objects.filter(scan_id=scan_id, username=username)
 
         total_vul = len(all_clair_data)
-        total_high = len(all_clair_data.filter(Severity="High"))
-        total_medium = len(all_clair_data.filter(Severity="Medium"))
-        total_low = len(all_clair_data.filter(Severity="Low"))
+        total_high = len(all_clair_data.filter(Severity='High')) +  len(all_clair_data.filter(Severity='Critical'))
+        total_medium = len(all_clair_data.filter(Severity='Medium'))
+        total_low = len(all_clair_data.filter(Severity='Minimal')) +  len(all_clair_data.filter(Severity='Very Minimal'))
         total_duplicate = len(all_clair_data.filter(vuln_duplicate='Yes'))
 
         clair_scan_db.objects.filter(scan_id=scan_id, username=username).update(

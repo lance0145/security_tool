@@ -332,7 +332,7 @@ def arachni_vuln_out(request):
 
         total_high = len(arachni_all_vul.filter(severity="High"))
         total_medium = len(arachni_all_vul.filter(severity="Medium"))
-        total_low = len(arachni_all_vul.filter(severity="Low"))
+        total_low = len(arachni_all_vul.filter(severity="Minimal"))
         total_info = len(arachni_all_vul.filter(severity="Informational"))
         total_duplicate = len(arachni_all_vul.filter(vuln_duplicate='Yes'))
         total_vul = total_high + total_medium + total_low + total_info
@@ -419,7 +419,7 @@ def arachni_del_vuln(request):
         total_vul = len(arachni_all_vul)
         total_high = len(arachni_all_vul.filter(severity="High"))
         total_medium = len(arachni_all_vul.filter(severity="Medium"))
-        total_low = len(arachni_all_vul.filter(severity="Low"))
+        total_low = len(arachni_all_vul.filter(severity="Minimal"))
         arachni_scan_db.objects.filter(username=username, scan_id=un_scanid).update(
             total_vul=total_vul,
             high_vul=total_high,

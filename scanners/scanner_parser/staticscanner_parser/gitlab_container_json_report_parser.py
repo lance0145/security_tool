@@ -103,15 +103,15 @@ def gitlabcontainerscan_report_json(data, project_id, scan_id, username):
         elif severity == 'Medium':
             vul_col = "warning"
 
-        elif severity == 'Low':
+        elif severity == 'Minimal':
             vul_col = "info"
 
         elif severity == 'Unknown':
-            severity = "Low"
+            severity = "Minimal"
             vul_col = "info"
 
         elif severity == 'Everything else':
-            severity = "Low"
+            severity = "Minimal"
             vul_col = "info"
 
         vul_id = uuid.uuid4()
@@ -190,9 +190,9 @@ def gitlabcontainerscan_report_json(data, project_id, scan_id, username):
     duplicate_count = gitlabcontainerscan_scan_results_db.objects.filter(username=username, scan_id=scan_id, vuln_duplicate='Yes')
 
     total_vul = len(all_findbugs_data)
-    total_high = len(all_findbugs_data.filter(Severity="High"))
+    total_high = len(all_findbugs_data.filter(Severity="High")) + len(all_findbugs_data.filter(Severity="Critical"))
     total_medium = len(all_findbugs_data.filter(Severity="Medium"))
-    total_low = len(all_findbugs_data.filter(Severity="Low"))
+    total_low = len(all_findbugs_data.filter(Severity="Minimal")) + len(all_findbugs_data.filter(Severity="Very Minimal"))
     total_duplicate = len(duplicate_count.filter(vuln_duplicate='Yes'))
 
     gitlabcontainerscan_scan_db.objects.filter(scan_id=scan_id).update(username=username,
@@ -205,6 +205,6 @@ def gitlabcontainerscan_report_json(data, project_id, scan_id, username):
     subject = 'Archery Tool Scan Status - GitLab Container Scan Report Uploaded'
     message = 'GitLab Container Scan has completed the scan ' \
               '  %s <br> Total: %s <br>High: %s <br>' \
-              'Medium: %s <br>Low %s' % (Target, total_vul, total_high, total_medium, total_low)
+              'Medium: %s <br>Minimal %s' % (Target, total_vul, total_high, total_medium, total_low)
 
     email_sch_notify(subject=subject, message=message)

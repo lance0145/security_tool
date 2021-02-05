@@ -234,8 +234,8 @@ class burp_scans(object):
             elif severity == 'medium':
                 severity = 'Medium'
                 vul_col = "warning"
-            elif severity == 'low':
-                severity = 'Low'
+            elif severity == 'Minimal':
+                severity = 'Minimal'
                 vul_col = "info"
             elif severity == 'info':
                 severity = 'Info'
@@ -310,7 +310,7 @@ class burp_scans(object):
         total_vul = len(burp_all_vul)
         total_high = len(burp_all_vul.filter(severity="High"))
         total_medium = len(burp_all_vul.filter(severity="Medium"))
-        total_low = len(burp_all_vul.filter(severity="Low"))
+        total_low = len(burp_all_vul.filter(severity="Minimal"))
         total_info = len(burp_all_vul.filter(severity="Info"))
         total_duplicate = len(burp_all_vul.filter(vuln_duplicate='Yes'))
         burp_scan_db.objects.filter(username=self.user.username, scan_id=self.scan_id).update(

@@ -145,7 +145,7 @@ def updated_xml_parser(root, project_id, scan_id, username):
             vuln_color = 'danger'
         elif threat == 'Medium':
             vuln_color = 'warning'
-        elif threat == 'Low':
+        elif threat == 'Minimal':
             vuln_color = 'info'
         elif threat == 'Log':
             vuln_color = 'info'
@@ -192,7 +192,7 @@ def updated_xml_parser(root, project_id, scan_id, username):
         openvas_vul = ov_scan_result_db.objects.filter(username=username, scan_id=host)
         total_high = len(openvas_vul.filter(threat="High"))
         total_medium = len(openvas_vul.filter(threat="Medium"))
-        total_low = len(openvas_vul.filter(threat="Low"))
+        total_low = len(openvas_vul.filter(threat="Minimal"))
         total_duplicate = len(openvas_vul.filter(vuln_duplicate='Yes'))
         total_vul = total_high + total_medium + total_low
         openvas_scan_db.objects.filter(username=username, scan_id=host). \
@@ -207,7 +207,7 @@ def updated_xml_parser(root, project_id, scan_id, username):
     subject = 'Archery Tool Scan Status - OpenVAS Report Uploaded'
     message = 'OpenVAS Scanner has completed the scan ' \
               '  %s <br> Total: %s <br>High: %s <br>' \
-              'Medium: %s <br>Low %s' % (scan_id, total_vul, total_high, total_medium, total_low)
+              'Medium: %s <br>Minimal %s' % (scan_id, total_vul, total_high, total_medium, total_low)
 
     email_sch_notify(subject=subject, message=message)
 

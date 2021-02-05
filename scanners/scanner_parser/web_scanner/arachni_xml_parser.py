@@ -201,12 +201,12 @@ def xml_parser(root, project_id, scan_id, username, target_url):
                         vul_col = "warning"
                         severity = "Medium"
 
-                    elif severity == 'low':
-                        severity = "Low"
+                    elif severity == 'minimal':
+                        severity = "Minimal"
                         vul_col = "info"
 
                     else:
-                        severity = "Low"
+                        severity = "Minimal"
                         vul_col = "info"
 
                     for extra_data in vuln:
@@ -327,8 +327,8 @@ def xml_parser(root, project_id, scan_id, username, target_url):
 
     total_high = len(arachni_all_vul.filter(severity="High"))
     total_medium = len(arachni_all_vul.filter(severity="Medium"))
-    total_low = len(arachni_all_vul.filter(severity="Low"))
-    total_info = len(arachni_all_vul.filter(severity="Informational"))
+    total_low = len(arachni_all_vul.filter(severity="Minimal"))
+    total_info = len(arachni_all_vul.filter(severity="Very Minimal"))
     total_duplicate = len(duplicate_count.filter(vuln_duplicate='Yes'))
     total_vul = total_high + total_medium + total_low + total_info
 
@@ -346,6 +346,6 @@ def xml_parser(root, project_id, scan_id, username, target_url):
     subject = 'Archery Tool Scan Status - Arachni Report Uploaded'
     message = 'Arachni Scanner has completed the scan ' \
               '  %s <br> Total: %s <br>High: %s <br>' \
-              'Medium: %s <br>Low %s' % (url, total_vul, total_high, total_medium, total_low)
+              'Medium: %s <br>Minimal %s' % (url, total_vul, total_high, total_medium, total_low)
 
     email_sch_notify(subject=subject, message=message)

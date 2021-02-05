@@ -89,9 +89,9 @@ def dependencycheck_vuln_data(request):
                                                                              vuln_status='Open')
 
         total_vul = len(all_dependency_data)
-        total_high = len(all_dependency_data.filter(severity="High"))
+        total_high = len(all_dependency_data.filter(severity="High")) + len(all_dependency_data.filter(severity="Critical"))
         total_medium = len(all_dependency_data.filter(severity="Medium"))
-        total_low = len(all_dependency_data.filter(severity="Low"))
+        total_low = len(all_dependency_data.filter(severity="Minimal")) + len(all_dependency_data.filter(severity="Very Minimal"))
         total_duplicate = len(all_dependency_data.filter(vuln_duplicate='Yes'))
 
         dependencycheck_scan_db.objects.filter(username=username, scan_id=scan_id).update(
@@ -181,9 +181,9 @@ def dependencycheck_del_vuln(request):
         all_dependency_data = dependencycheck_scan_results_db.objects.filter(username=username, scan_id=scan_id)
 
         total_vul = len(all_dependency_data)
-        total_high = len(all_dependency_data.filter(severity="High"))
+        total_high = len(all_dependency_data.filter(severity="High")) + len(all_dependency_data.filter(severity="Critical"))
         total_medium = len(all_dependency_data.filter(severity="Medium"))
-        total_low = len(all_dependency_data.filter(severity="Low"))
+        total_low = len(all_dependency_data.filter(severity="Minimal")) + len(all_dependency_data.filter(severity="Very Minimal"))
         total_duplicate = len(all_dependency_data.filter(vuln_duplicate='Yes'))
 
         dependencycheck_scan_db.objects.filter(username=username, scan_id=scan_id).update(

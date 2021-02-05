@@ -135,8 +135,8 @@ def acunetix_vuln_out(request):
 
         total_high = len(acunetix_all_vul.filter(VulnSeverity="High"))
         total_medium = len(acunetix_all_vul.filter(VulnSeverity="Medium"))
-        total_low = len(acunetix_all_vul.filter(VulnSeverity="Low"))
-        total_info = len(acunetix_all_vul.filter(VulnSeverity="Informational"))
+        total_low = len(acunetix_all_vul.filter(VulnSeverity="Minimal"))
+        total_info = len(acunetix_all_vul.filter(VulnSeverity="Very Minimal"))
         total_duplicate = len(acunetix_all_vul.filter(vuln_duplicate='Yes'))
         total_vul = total_high + total_medium + total_low + total_info
 
@@ -220,7 +220,7 @@ def edit_acunetix_vuln(request):
             vul_col = "danger"
         elif severity == 'Medium':
             vul_col = "warning"
-        elif severity == 'Low':
+        elif severity == 'Minimal':
             vul_col = "info"
         else:
             vul_col = "info"
@@ -270,8 +270,8 @@ def acunetix_del_vuln(request):
         total_critical = len(acunetix_all_vul.filter(VulnSeverity='Critical'))
         total_high = len(acunetix_all_vul.filter(VulnSeverity="High"))
         total_medium = len(acunetix_all_vul.filter(VulnSeverity="Medium"))
-        total_low = len(acunetix_all_vul.filter(VulnSeverity="Low"))
-        total_info = len(acunetix_all_vul.filter(VulnSeverity="Information"))
+        total_low = len(acunetix_all_vul.filter(VulnSeverity="Minimal"))
+        total_info = len(acunetix_all_vul.filter(VulnSeverity="Very Minimal"))
 
         acunetix_scan_db.objects.filter(username=username, scan_id=un_scanid).update(
             total_vul=total_vul,

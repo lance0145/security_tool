@@ -221,12 +221,12 @@ def xml_parser(root, project_id, scan_id, username):
                     elif VulnSeverity == 'medium':
                         vul_col = "warning"
                         risk = "Medium"
-                    elif VulnSeverity == 'low':
+                    elif VulnSeverity == 'minimal':
                         vul_col = "info"
-                        risk = "Low"
+                        risk = "Minimal"
                     else:
                         vul_col = "info"
-                        risk = "Low"
+                        risk = "Minimal"
 
                 if VulnName is None:
                     print(VulnName)
@@ -377,8 +377,8 @@ def xml_parser(root, project_id, scan_id, username):
 
     total_high = len(acunetix_all_vul.filter(VulnSeverity="High"))
     total_medium = len(acunetix_all_vul.filter(VulnSeverity="Medium"))
-    total_low = len(acunetix_all_vul.filter(VulnSeverity="Low"))
-    total_info = len(acunetix_all_vul.filter(VulnSeverity="Informational"))
+    total_low = len(acunetix_all_vul.filter(VulnSeverity="Minimal"))
+    total_info = len(acunetix_all_vul.filter(VulnSeverity="Very Minimal"))
     total_duplicate = len(duplicate_count.filter(vuln_duplicate='Yes'))
     total_vul = total_high + total_medium + total_low + total_info
 
@@ -398,6 +398,6 @@ def xml_parser(root, project_id, scan_id, username):
     subject = 'Archery Tool Scan Status - Acunetix Report Uploaded'
     message = 'Acunetix Scanner has completed the scan ' \
               '  %s <br> Total: %s <br>High: %s <br>' \
-              'Medium: %s <br>Low %s' % (ScanStartURL, total_vul, total_high, total_medium, total_low)
+              'Medium: %s <br>Minimal %s' % (ScanStartURL, total_vul, total_high, total_medium, total_low)
 
     email_sch_notify(subject=subject, message=message)

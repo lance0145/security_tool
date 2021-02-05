@@ -177,10 +177,10 @@ def burp_scan_data(root, project_id, scan_id, username):
             vul_col = "danger"
         elif severity == 'Medium':
             vul_col = "warning"
-        elif severity == 'Low':
+        elif severity == 'Minimal':
             vul_col = "info"
         else:
-            severity = 'Low'
+            severity = 'Minimal'
             vul_col = "info"
 
         vuln_id = uuid.uuid4()
@@ -288,7 +288,7 @@ def burp_scan_data(root, project_id, scan_id, username):
     total_vul = len(burp_all_vul)
     total_high = len(burp_all_vul.filter(severity="High"))
     total_medium = len(burp_all_vul.filter(severity="Medium"))
-    total_low = len(burp_all_vul.filter(severity="Low"))
+    total_low = len(burp_all_vul.filter(severity="Minimal"))
     total_info = len(burp_all_vul.filter(severity="Information"))
     total_duplicate = len(duplicate_count.filter(vuln_duplicate='Yes'))
     burp_scan_db.objects.filter(username=username,
@@ -305,7 +305,7 @@ def burp_scan_data(root, project_id, scan_id, username):
     subject = 'Archery Tool Scan Status - Burp Report Uploaded'
     message = 'Burp Scanner has completed the scan ' \
               '  %s <br> Total: %s <br>High: %s <br>' \
-              'Medium: %s <br>Low %s' % (host, total_vul, total_high, total_medium, total_low)
+              'Medium: %s <br>Minimal %s' % (host, total_vul, total_high, total_medium, total_low)
 
     email_sch_notify(subject=subject, message=message)
 

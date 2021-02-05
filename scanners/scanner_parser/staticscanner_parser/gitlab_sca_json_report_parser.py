@@ -104,15 +104,15 @@ def gitlabsca_report_json(data, project_id, scan_id, username):
         elif severity == 'Medium':
             vul_col = "warning"
 
-        elif severity == 'Low':
+        elif severity == 'Minimal':
             vul_col = "info"
 
         elif severity == 'Unknown':
-            severity = "Low"
+            severity = "Minimal"
             vul_col = "info"
 
         elif severity == 'Everything else':
-            severity = "Low"
+            severity = "Minimal"
             vul_col = "info"
 
         vul_id = uuid.uuid4()
@@ -195,7 +195,7 @@ def gitlabsca_report_json(data, project_id, scan_id, username):
     total_vul = len(all_findbugs_data)
     total_high = len(all_findbugs_data.filter(Severity="High"))
     total_medium = len(all_findbugs_data.filter(Severity="Medium"))
-    total_low = len(all_findbugs_data.filter(Severity="Low"))
+    total_low = len(all_findbugs_data.filter(Severity="Minimal"))
     total_duplicate = len(duplicate_count.filter(vuln_duplicate='Yes'))
 
     gitlabsca_scan_db.objects.filter(scan_id=scan_id).update(username=username,
@@ -209,6 +209,6 @@ def gitlabsca_report_json(data, project_id, scan_id, username):
     subject = 'Archery Tool Scan Status - GitLab Dependency Report Uploaded'
     message = 'GitLab Dependency Scanner has completed the scan ' \
               '  %s <br> Total: %s <br>High: %s <br>' \
-              'Medium: %s <br>Low %s' % (Target, total_vul, total_high, total_medium, total_low)
+              'Medium: %s <br>Minimal %s' % (Target, total_vul, total_high, total_medium, total_low)
 
     email_sch_notify(subject=subject, message=message)

@@ -162,8 +162,8 @@ def scan_vul_details(request):
         total_crit = len(openvas_vul.filter(threat="Critical"))
         total_high = len(openvas_vul.filter(threat="High"))
         total_medium = len(openvas_vul.filter(threat="Medium"))
-        total_low = len(openvas_vul.filter(threat="Low"))
-        total_info = len(openvas_vul.filter(threat="Info"))
+        total_low = len(openvas_vul.filter(threat="Minimal"))
+        total_info = len(openvas_vul.filter(threat="Very Minimal"))
         total_duplicate = len(openvas_vul.filter(vuln_duplicate='Yes'))
         total_vul = total_crit + total_high + total_medium + total_low + total_info
 
@@ -252,7 +252,7 @@ def openvas_scanner(scan_ip, project_id, sel_profile, user):
     subject = 'Archery Tool Notification'
     message = 'OpenVAS Scan Completed  <br>' \
               'Total: %s  <br>Total High: %s <br>' \
-              'Total Medium: %s  <br>Total Low %s' % (all_vuln, total_high, total_medium, total_low)
+              'Total Medium: %s  <br>Total Minimal %s' % (all_vuln, total_high, total_medium, total_low)
 
     email_notify(user=user, subject=subject, message=message)
 
@@ -420,8 +420,8 @@ def del_vuln(request):
         total_crit = len(ov_all_vul.filter(threat="Critical"))
         total_high = len(ov_all_vul.filter(threat="High"))
         total_medium = len(ov_all_vul.filter(threat="Medium"))
-        total_low = len(ov_all_vul.filter(threat="Low"))
-        total_info = len(ov_all_vul.filter(threat="Info"))
+        total_low = len(ov_all_vul.filter(threat="Minimal"))
+        total_info = len(ov_all_vul.filter(threat="Very Minimal"))
 
         openvas_scan_db.objects.filter(username=username, scan_id=un_scanid) \
             .update(total_vul=total_vul,

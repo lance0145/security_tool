@@ -99,9 +99,9 @@ def checkmarx_vuln_data(request):
                                                                       false_positive='No', vuln_status='Open')
 
         total_vul = len(all_checkmarx_data)
-        total_high = len(all_checkmarx_data.filter(severity='High'))
+        total_high = len(all_checkmarx_data.filter(severity='High')) + len(all_checkmarx_data.filter(severity='Critical'))
         total_medium = len(all_checkmarx_data.filter(severity='Medium'))
-        total_low = len(all_checkmarx_data.filter(severity='Low'))
+        total_low = len(all_checkmarx_data.filter(severity='Minimal')) + len(all_checkmarx_data.filter(severity='Very Minimal'))
         total_duplicate = len(all_checkmarx_data.filter(vuln_duplicate='Yes'))
 
         checkmarx_scan_db.objects.filter(username=username, scan_id=scan_id).update(
@@ -192,9 +192,9 @@ def checkmarx_del_vuln(request):
         all_checkmarx_data = checkmarx_scan_results_db.objects.filter(username=username, scan_id=scan_id)
 
         total_vul = len(all_checkmarx_data)
-        total_high = len(all_checkmarx_data.filter(severity="High"))
-        total_medium = len(all_checkmarx_data.filter(severity="Medium"))
-        total_low = len(all_checkmarx_data.filter(severity="Low"))
+        total_high = len(all_checkmarx_data.filter(severity='High')) + len(all_checkmarx_data.filter(severity='Critical'))
+        total_medium = len(all_checkmarx_data.filter(severity='Medium'))
+        total_low = len(all_checkmarx_data.filter(severity='Minimal')) + len(all_checkmarx_data.filter(severity='Very Minimal'))
         total_duplicate = len(all_checkmarx_data.filter(vuln_duplicate='Yes'))
 
         checkmarx_scan_db.objects.filter(username=username, scan_id=scan_id).update(

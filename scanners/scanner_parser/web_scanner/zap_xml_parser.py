@@ -126,10 +126,10 @@ def xml_parser(username, root, project_id, scan_id):
                 risk = "Medium"
             elif riskcode == '1':
                 vul_col = "info"
-                risk = "Low"
+                risk = "Minimal"
             else:
                 vul_col = "info"
-                risk = "Low"
+                risk = "Minimal"
 
         if name == "None":
             print(name)
@@ -244,8 +244,8 @@ def xml_parser(username, root, project_id, scan_id):
 
     total_high = len(zap_all_vul.filter(risk="High"))
     total_medium = len(zap_all_vul.filter(risk="Medium"))
-    total_low = len(zap_all_vul.filter(risk="Low"))
-    total_info = len(zap_all_vul.filter(risk="Informational"))
+    total_low = len(zap_all_vul.filter(risk="Minimal"))
+    total_info = len(zap_all_vul.filter(risk="Very Minimal"))
     total_duplicate = len(duplicate_count.filter(vuln_duplicate='Yes'))
     total_vul = total_high + total_medium + total_low + total_info
 
@@ -272,6 +272,6 @@ def xml_parser(username, root, project_id, scan_id):
     subject = 'Archery Tool Scan Status - ZAP Report Uploaded'
     message = 'ZAP Scanner has completed the scan ' \
               '  %s <br> Total: %s <br>High: %s <br>' \
-              'Medium: %s <br>Low %s' % (target_url, total_vul, total_high, total_medium, total_low)
+              'Medium: %s <br>Minimal %s' % (target_url, total_vul, total_high, total_medium, total_low)
 
     email_sch_notify(subject=subject, message=message)

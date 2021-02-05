@@ -190,9 +190,9 @@ def dockle_del_vuln(request):
         all_dockle_data = dockle_scan_results_db.objects.filter(username=username, scan_id=scan_id)
 
         total_vul = len(all_dockle_data)
-        total_high = len(all_dockle_data.filter(Severity="High"))
+        total_high = len(all_dockle_data.filter(Severity="High")) + len(all_dockle_data.filter(Severity="Critical"))
         total_medium = len(all_dockle_data.filter(Severity="Medium"))
-        total_low = len(all_dockle_data.filter(Severity="Low"))
+        total_low = len(all_dockle_data.filter(Severity="Minimal")) + len(all_dockle_data.filter(Severity="Very Minimal"))
         total_duplicate = len(all_dockle_data.filter(vuln_duplicate='Yes'))
 
         dockle_scan_db.objects.filter(username=username, scan_id=scan_id).update(

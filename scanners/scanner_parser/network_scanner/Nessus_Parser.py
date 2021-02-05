@@ -172,7 +172,7 @@ def updated_nessus_parser(root, project_id, scan_id, username):
                     risk_factor = 'Medium'
                 else:
                     vuln_color = 'info'
-                    risk_factor = 'Low'
+                    risk_factor = 'Minimal'
 
                 dup_data = target + plugin_name + severity + port
                 duplicate_hash = hashlib.sha256(dup_data.encode('utf-8')).hexdigest()
@@ -192,7 +192,7 @@ def updated_nessus_parser(root, project_id, scan_id, username):
                     else:
                         false_positive = 'No'
                     if risk_factor == 'None':
-                        risk_factor = 'Low'
+                        risk_factor = 'Minimal'
 
                     all_data_save = nessus_scan_results_db(project_id=project_id,
                                                            report_name=report_name,
@@ -291,7 +291,7 @@ def updated_nessus_parser(root, project_id, scan_id, username):
             target_total_vuln = len(target_filter)
             target_total_high = len(target_filter.filter(risk_factor="High"))
             target_total_medium = len(target_filter.filter(risk_factor="Medium"))
-            target_total_low = len(target_filter.filter(risk_factor="Low"))
+            target_total_low = len(target_filter.filter(risk_factor="Minimal"))
             target_total_duplicate = len(duplicate_count.filter(vuln_duplicate='Yes'))
             target_scan_dump = nessus_targets_db(
                 report_name=report_name,
@@ -317,7 +317,7 @@ def updated_nessus_parser(root, project_id, scan_id, username):
         total_vuln = len(ov_all_vul)
         total_high = len(ov_all_vul.filter(risk_factor="High"))
         total_medium = len(ov_all_vul.filter(risk_factor="Medium"))
-        total_low = len(ov_all_vul.filter(risk_factor="Low"))
+        total_low = len(ov_all_vul.filter(risk_factor="Minimal"))
         total_duplicate = len(duplicate_count_report.filter(vuln_duplicate='Yes'))
 
         nessus_scan_db.objects.filter(username=username, scan_id=scan_id) \
@@ -332,6 +332,6 @@ def updated_nessus_parser(root, project_id, scan_id, username):
     subject = 'Archery Tool Scan Status - Nessus Report Uploaded'
     message = 'Nessus Scanner has completed the scan ' \
               '  %s <br> Total: %s <br>High: %s <br>' \
-              'Medium: %s <br>Low %s' % (scan_id, total_vul, total_high, total_medium, total_low)
+              'Medium: %s <br>Minimal %s' % (scan_id, total_vul, total_high, total_medium, total_low)
 
     email_sch_notify(subject=subject, message=message)

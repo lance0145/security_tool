@@ -96,7 +96,7 @@ def gitlabsca_vuln_data(request):
             total_vul = len(all_gitlabsca_data)
             total_high = len(all_gitlabsca_data.filter(Severity='High'))
             total_medium = len(all_gitlabsca_data.filter(Severity='Medium'))
-            total_low = len(all_gitlabsca_data.filter(Severity='Low'))
+            total_low = len(all_gitlabsca_data.filter(Severity='Minimal'))
             total_duplicate = len(all_gitlabsca_data.filter(vuln_duplicate='Yes'))
 
             gitlabsca_scan_db.objects.filter(username=username, scan_id=scan_id).update(
@@ -192,7 +192,7 @@ def gitlabsca_del_vuln(request):
         total_vul = len(all_gitlabsca_data)
         total_high = len(all_gitlabsca_data.filter(Severity="High"))
         total_medium = len(all_gitlabsca_data.filter(Severity="Medium"))
-        total_low = len(all_gitlabsca_data.filter(Severity="Low"))
+        total_low = len(all_gitlabsca_data.filter(Severity="Minimal"))
         total_duplicate = len(all_gitlabsca_data.filter(vuln_duplicate='Yes'))
 
         gitlabsca_scan_db.objects.filter(username=username, scan_id=scan_id).update(

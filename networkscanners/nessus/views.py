@@ -126,9 +126,9 @@ def nessus_vuln_data(request):
                                                               target=Target)
 
         target_total_vuln = len(target_filter)
-        target_total_high = len(target_filter.filter(risk_factor="High"))
+        target_total_high = len(target_filter.filter(risk_factor="High")) + len(target_filter.filter(risk_factor="Critical"))
         target_total_medium = len(target_filter.filter(risk_factor="Medium"))
-        target_total_low = len(target_filter.filter(risk_factor="Low"))
+        target_total_low = len(target_filter.filter(risk_factor="Minimal")) + len(target_filter.filter(risk_factor="Very Minimal"))
         target_total_duplicate = len(target_filter.filter(vuln_duplicate='Yes'))
 
         nessus_targets_db.objects.filter(username=username, scan_id=scan_id, target=Target).update(
@@ -142,9 +142,9 @@ def nessus_vuln_data(request):
         ov_all_vul = nessus_scan_results_db.objects.filter(username=username, scan_id=scan_id, false_positive='No',
                                                            vuln_status='Open')
         total_vuln = len(ov_all_vul)
-        total_high = len(ov_all_vul.filter(risk_factor="High"))
+        total_high = len(ov_all_vul.filter(risk_factor="High")) + len(ov_all_vul.filter(risk_factor="Critical"))
         total_medium = len(ov_all_vul.filter(risk_factor="Medium"))
-        total_low = len(ov_all_vul.filter(risk_factor="Low"))
+        total_low = len(ov_all_vul.filter(risk_factor="Minimal")) + len(ov_all_vul.filter(risk_factor="Very Minimal"))
         total_duplicate = len(ov_all_vul.filter(vuln_duplicate='Yes'))
 
         nessus_scan_db.objects.filter(username=username, scan_id=scan_id) \
@@ -241,7 +241,7 @@ def nessus_del_vuln(request):
         total_vul = len(all_nessus_data)
         total_high = len(all_nessus_data.filter(risk_factor="High"))
         total_medium = len(all_nessus_data.filter(risk_factor="Medium"))
-        total_low = len(all_nessus_data.filter(risk_factor="Low"))
+        total_low = len(all_nessus_data.filter(risk_factor="Minimal"))
 
         nessus_scan_db.objects.filter(username=username, scan_id=scan_id).update(
             total_vuln=total_vul,
@@ -255,7 +255,7 @@ def nessus_del_vuln(request):
         all_target_total_vuln = len(all_nessus_target)
         all_target_total_high = len(all_nessus_target.filter(risk_factor="High"))
         all_target_total_medium = len(all_nessus_target.filter(risk_factor="Medium"))
-        all_target_total_low = len(all_nessus_target.filter(risk_factor="Low"))
+        all_target_total_low = len(all_nessus_target.filter(risk_factor="Minimal"))
 
         nessus_targets_db.objects.filter(username=username, scan_id=scan_id, target=target).update(
             total_vuln=all_target_total_vuln,

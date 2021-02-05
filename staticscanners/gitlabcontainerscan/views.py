@@ -96,7 +96,7 @@ def gitlabcontainerscan_vuln_data(request):
             total_vul = len(all_gitlabcontainerscan_data)
             total_high = len(all_gitlabcontainerscan_data.filter(Severity='High'))
             total_medium = len(all_gitlabcontainerscan_data.filter(Severity='Medium'))
-            total_low = len(all_gitlabcontainerscan_data.filter(Severity='Low'))
+            total_low = len(all_gitlabcontainerscan_data.filter(Severity='Minimal'))
             total_duplicate = len(all_gitlabcontainerscan_data.filter(vuln_duplicate='Yes'))
 
             gitlabcontainerscan_scan_db.objects.filter(username=username, scan_id=scan_id).update(
@@ -191,7 +191,7 @@ def gitlabcontainerscan_del_vuln(request):
         total_vul = len(all_gitlabcontainerscan_data)
         total_high = len(all_gitlabcontainerscan_data.filter(Severity="High"))
         total_medium = len(all_gitlabcontainerscan_data.filter(Severity="Medium"))
-        total_low = len(all_gitlabcontainerscan_data.filter(Severity="Low"))
+        total_low = len(all_gitlabcontainerscan_data.filter(Severity="Minimal"))
         total_duplicate = len(all_gitlabcontainerscan_data.filter(vuln_duplicate='Yes'))
 
         gitlabcontainerscan_scan_db.objects.filter(username=username, scan_id=scan_id).update(

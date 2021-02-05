@@ -106,7 +106,7 @@ def semgrepscan_vuln_data(request):
         total_vul = len(all_semgrepscan_data)
         total_high = len(all_semgrepscan_data.filter(severity='High'))
         total_medium = len(all_semgrepscan_data.filter(severity='Medium'))
-        total_low = len(all_semgrepscan_data.filter(severity='Low'))
+        total_low = len(all_semgrepscan_data.filter(severity='Minimal'))
         total_duplicate = len(all_semgrepscan_data.filter(vuln_duplicate='Yes'))
 
         semgrepscan_scan_db.objects.filter(username=username, scan_id=scan_id).update(
@@ -203,7 +203,7 @@ def semgrepscan_del_vuln(request):
         total_vul = len(all_semgrepscan_data)
         total_high = len(all_semgrepscan_data.filter(severity="High"))
         total_medium = len(all_semgrepscan_data.filter(severity="Medium"))
-        total_low = len(all_semgrepscan_data.filter(severity="Low"))
+        total_low = len(all_semgrepscan_data.filter(severity="Minimal"))
         total_duplicate = len(all_semgrepscan_data.filter(vuln_duplicate='Yes'))
 
         semgrepscan_scan_db.objects.filter(username=username, scan_id=scan_id).update(

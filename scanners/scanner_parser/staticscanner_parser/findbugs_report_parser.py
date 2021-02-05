@@ -182,6 +182,6 @@ def xml_parser(root, project_id, scan_id, username):
     subject = 'Archery Tool Scan Status - Findbugs Report Uploaded'
     message = 'Findbugs Scanner has completed the scan ' \
               '  %s <br> Total: %s <br>High: %s <br>' \
-              'Medium: %s <br>Low %s' % (scan_id, total_vul, total_high, total_medium, total_low)
+              'Medium: %s <br>Minimal %s' % (scan_id, total_vul, total_high, total_medium, total_low)
 
     email_sch_notify(subject=subject, message=message)

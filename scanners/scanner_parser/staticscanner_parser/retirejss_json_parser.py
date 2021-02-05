@@ -93,7 +93,7 @@ def retirejs_report_json(data, project_id, scan_id, username):
         elif severity == "MEDIUM":
             vul_col = 'warning'
 
-        elif severity == "LOW":
+        elif severity == "MINIMAL":
             vul_col = "info"
 
         dup_data = files + component + severity

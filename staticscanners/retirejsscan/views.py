@@ -101,7 +101,7 @@ def retirejsscan_vuln_data(request):
         total_vul = len(all_retirejs_data)
         total_high = len(all_retirejs_data.filter(severity='High'))
         total_medium = len(all_retirejs_data.filter(severity='Medium'))
-        total_low = len(all_retirejs_data.filter(severity='Low'))
+        total_low = len(all_retirejs_data.filter(severity='Minimal'))
         total_duplicate = len(all_retirejs_data.filter(vuln_duplicate='Yes'))
 
         retirejs_scan_db.objects.filter(username=username, scan_id=scan_id).update(
@@ -197,7 +197,7 @@ def retirejs_del_vuln(request):
         total_vul = len(all_retirejs_data)
         total_high = len(all_retirejs_data.filter(issue_severity="HIGH"))
         total_medium = len(all_retirejs_data.filter(issue_severity="MEDIUM"))
-        total_low = len(all_retirejs_data.filter(issue_severity="LOW"))
+        total_low = len(all_retirejs_data.filter(issue_severity="MINIMAL"))
 
         retirejs_scan_db.objects.filter(username=username, scan_id=un_scanid).update(
             total_vuln=total_vul,

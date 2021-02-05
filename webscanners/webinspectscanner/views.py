@@ -135,8 +135,8 @@ def webinspect_vuln_out(request):
         total_critical = len(webinspect_all_vul.filter(severity='Critical'))
         total_high = len(webinspect_all_vul.filter(severity="High"))
         total_medium = len(webinspect_all_vul.filter(severity="Medium"))
-        total_low = len(webinspect_all_vul.filter(severity="Low"))
-        total_info = len(webinspect_all_vul.filter(severity="Information"))
+        total_low = len(webinspect_all_vul.filter(severity="Minimal"))
+        total_info = len(webinspect_all_vul.filter(severity="Very Minimal"))
         total_duplicate = len(webinspect_all_vul.filter(severity='Yes'))
         total_vul = total_critical + total_high + total_medium + total_low + total_info
 
@@ -219,7 +219,7 @@ def edit_webinspect_vuln(request):
             vul_col = "danger"
         elif severity == 'Medium':
             vul_col = "warning"
-        elif severity == 'Low':
+        elif severity == 'Minimal':
             vul_col = "info"
         else:
             vul_col = "info"
@@ -269,8 +269,8 @@ def webinspect_del_vuln(request):
         total_critical = len(webinspect_all_vul.filter(severity_name='Critical'))
         total_high = len(webinspect_all_vul.filter(severity_name="High"))
         total_medium = len(webinspect_all_vul.filter(severity_name="Medium"))
-        total_low = len(webinspect_all_vul.filter(severity_name="Low"))
-        total_info = len(webinspect_all_vul.filter(severity_name="Information"))
+        total_low = len(webinspect_all_vul.filter(severity_name="Minimal"))
+        total_info = len(webinspect_all_vul.filter(severity_name="Very Minimal"))
 
         webinspect_scan_db.objects.filter(username=username, scan_id=un_scanid).update(
             total_vul=total_vul,

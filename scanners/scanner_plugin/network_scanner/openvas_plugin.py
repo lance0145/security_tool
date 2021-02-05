@@ -308,7 +308,7 @@ def vuln_an_id(scan_id, project_id, username):
 
         total_high = len(openvas_vul.filter(threat="High"))
         total_medium = len(openvas_vul.filter(threat="Medium"))
-        total_low = len(openvas_vul.filter(threat="Low"))
+        total_low = len(openvas_vul.filter(threat="Minimal"))
         log_total = len(openvas_vul.filter(threat="Log"))
         total_duplicate = len(openvas_vul.filter(vuln_duplicate='Yes'))
         total_vul = total_high + total_medium + total_low

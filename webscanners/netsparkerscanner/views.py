@@ -127,7 +127,7 @@ def netsparker_vuln_out(request):
         total_critical = len(netsparker_all_vul.filter(severity='Critical'))
         total_high = len(netsparker_all_vul.filter(severity="High"))
         total_medium = len(netsparker_all_vul.filter(severity="Medium"))
-        total_low = len(netsparker_all_vul.filter(severity="Low"))
+        total_low = len(netsparker_all_vul.filter(severity="Minimal"))
         total_info = len(netsparker_all_vul.filter(severity="Information"))
         total_duplicate = len(netsparker_all_vul.filter(vuln_duplicate='Yes'))
         total_vul = total_critical + total_high + total_medium + total_low + total_info
@@ -212,7 +212,7 @@ def edit_netsparker_vuln(request):
             vul_col = "danger"
         elif severity == 'Medium':
             vul_col = "warning"
-        elif severity == 'Low':
+        elif severity == 'Minimal':
             vul_col = "info"
         else:
             vul_col = "info"
@@ -262,7 +262,7 @@ def netsparker_del_vuln(request):
         total_critical = len(netsparker_all_vul.filter(severity='Critical'))
         total_high = len(netsparker_all_vul.filter(severity="High"))
         total_medium = len(netsparker_all_vul.filter(severity="Medium"))
-        total_low = len(netsparker_all_vul.filter(severity="Low"))
+        total_low = len(netsparker_all_vul.filter(severity="Minimal"))
         total_info = len(netsparker_all_vul.filter(severity="Information"))
 
         netsparker_scan_db.objects.filter(username=username, scan_id=un_scanid).update(

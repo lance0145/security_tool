@@ -119,11 +119,11 @@ def xml_parser(root,
                 vul_col = "warning"
 
             elif Severity == '1':
-                Severity = 'Low'
+                Severity = 'Minimal'
                 vul_col = "info"
 
             else:
-                Severity = 'Low'
+                Severity = 'Minimal'
                 vul_col = "info"
 
             dup_data = Name + url + Severity
@@ -217,7 +217,7 @@ def xml_parser(root,
         total_critical = len(webinspect_all_vul.filter(severity='Critical'))
         total_high = len(webinspect_all_vul.filter(severity="High"))
         total_medium = len(webinspect_all_vul.filter(severity="Medium"))
-        total_low = len(webinspect_all_vul.filter(severity="Low"))
+        total_low = len(webinspect_all_vul.filter(severity="Minimal"))
         total_info = len(webinspect_all_vul.filter(severity="Information"))
         total_duplicate = len(duplicate_count.filter(vuln_duplicate='Yes'))
         total_vul = total_critical + total_high + total_medium + total_low + total_info
@@ -235,6 +235,6 @@ def xml_parser(root,
     subject = 'Archery Tool Scan Status - Webinspect Report Uploaded'
     message = 'Webinspect Scanner has completed the scan ' \
               '  %s <br> Total: %s <br>High: %s <br>' \
-              'Medium: %s <br>Low %s' % (Host, total_vul, total_high, total_medium, total_low)
+              'Medium: %s <br>Minimal %s' % (Host, total_vul, total_high, total_medium, total_low)
 
     email_sch_notify(subject=subject, message=message)

@@ -277,7 +277,7 @@ def clair_report_json(data, project_id, scan_id, username):
         # pass
 
     try:
-        low = data['Vulnerabilities']['Low']
+        low = data['Vulnerabilities']['Minimal']
 
         for vuln in low:
             vul_id = uuid.uuid4()
@@ -320,7 +320,7 @@ def clair_report_json(data, project_id, scan_id, username):
             except Exception:
                 FeatureName = "Not Found"
 
-            if Severity == "Low":
+            if Severity == "Minimal":
                 vul_col = "info"
 
             dup_data = Name + Severity + NamespaceName
@@ -391,7 +391,7 @@ def clair_report_json(data, project_id, scan_id, username):
                 save_all.save()
 
     except Exception:
-        print("Low Vulnerability Not found")
+        print("Minimal Vulnerability Not found")
         low = data['vulnerabilities']
 
         for vuln in low:
@@ -435,7 +435,7 @@ def clair_report_json(data, project_id, scan_id, username):
             except Exception:
                 FeatureName = "Not Found"
 
-            if Severity == "Low":
+            if Severity == "Minimal":
                 vul_col = "info"
 
             if Severity == "Critical":
@@ -522,9 +522,9 @@ def clair_report_json(data, project_id, scan_id, username):
                                                                      vuln_duplicate='Yes')
 
     total_vul = len(all_clair_data)
-    total_high = len(all_clair_data.filter(Severity='High'))
+    total_high = len(all_clair_data.filter(Severity='High')) + len(all_clair_data.filter(Severity='Critical'))
     total_medium = len(all_clair_data.filter(Severity='Medium'))
-    total_low = len(all_clair_data.filter(Severity='Low'))
+    total_low = len(all_clair_data.filter(Severity='Minimal')) + len(all_clair_data.filter(Severity='Very Minimal'))
     total_duplicate = len(duplicate_count.filter(vuln_duplicate='Yes'))
 
     clair_scan_db.objects.filter(username=username, scan_id=scan_id).update(
@@ -539,6 +539,6 @@ def clair_report_json(data, project_id, scan_id, username):
     subject = 'Archery Tool Scan Status - Clair Report Uploaded'
     message = 'Clair Scanner has completed the scan ' \
               '  %s <br> Total: %s <br>High: %s <br>' \
-              'Medium: %s <br>Low %s' % (Name, total_vul, total_high, total_medium, total_low)
+              'Medium: %s <br>Minimal %s' % (Name, total_vul, total_high, total_medium, total_low)
 
     email_sch_notify(subject=subject, message=message)

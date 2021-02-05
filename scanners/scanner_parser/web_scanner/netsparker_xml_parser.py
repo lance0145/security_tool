@@ -124,11 +124,11 @@ def xml_parser(root,
         elif vuln_severity == 'Medium':
             vul_col = "warning"
 
-        elif vuln_severity == 'Low':
+        elif vuln_severity == 'Minimal':
             vul_col = "info"
 
         else:
-            vuln_severity = "Low"
+            vuln_severity = "Very Minimal"
             vul_col = "info"
 
         dup_data = str(vuln_type) + str(vuln_url) + str(vuln_severity)
@@ -222,7 +222,7 @@ def xml_parser(root,
     total_critical = len(netsparker_all_vul.filter(severity='Critical'))
     total_high = len(netsparker_all_vul.filter(severity="High"))
     total_medium = len(netsparker_all_vul.filter(severity="Medium"))
-    total_low = len(netsparker_all_vul.filter(severity="Low"))
+    total_low = len(netsparker_all_vul.filter(severity="Minimal"))
     total_info = len(netsparker_all_vul.filter(severity="Information"))
     total_duplicate = len(duplicate_count.filter(vuln_duplicate='Yes'))
     total_vul = total_critical + total_high + total_medium + total_low + total_info
@@ -252,6 +252,6 @@ def xml_parser(root,
     subject = 'Archery Tool Scan Status - Netsparker Report Uploaded'
     message = 'Netsparker Scanner has completed the scan ' \
               '  %s <br> Total: %s <br>High: %s <br>' \
-              'Medium: %s <br>Low %s' % (target, total_vul, total_high, total_medium, total_low)
+              'Medium: %s <br>Minimal %s' % (target, total_vul, total_high, total_medium, total_low)
 
     email_sch_notify(subject=subject, message=message)

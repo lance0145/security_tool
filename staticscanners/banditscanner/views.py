@@ -114,7 +114,7 @@ def banditscan_vuln_data(request):
         total_vul = len(all_bandit_data)
         total_high = len(all_bandit_data.filter(issue_severity="HIGH"))
         total_medium = len(all_bandit_data.filter(issue_severity="MEDIUM"))
-        total_low = len(all_bandit_data.filter(issue_severity="LOW"))
+        total_low = len(all_bandit_data.filter(issue_severity="MINIMAL"))
         total_duplicate = len(all_bandit_data.filter(vuln_duplicate='Yes'))
 
         bandit_scan_db.objects.filter(username=username, scan_id=scan_id).update(
@@ -215,7 +215,7 @@ def bandit_del_vuln(request):
         total_vul = len(all_bandit_data)
         total_high = len(all_bandit_data.filter(issue_severity="HIGH"))
         total_medium = len(all_bandit_data.filter(issue_severity="MEDIUM"))
-        total_low = len(all_bandit_data.filter(issue_severity="LOW"))
+        total_low = len(all_bandit_data.filter(issue_severity="MINIMAL"))
 
         bandit_scan_db.objects.filter(username=username, scan_id=un_scanid).update(
             total_vuln=total_vul,

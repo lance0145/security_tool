@@ -170,8 +170,8 @@ def dashboard(request):
         total_crit = scans_query.all_vuln(username=username, project_id=proj_id, query='critical')
         total_high = scans_query.all_vuln(username=username, project_id=proj_id, query='high')
         total_medium = scans_query.all_vuln(username=username, project_id=proj_id, query='medium')
-        total_low = scans_query.all_vuln(username=username, project_id=proj_id, query='low')
-        total_info = scans_query.all_vuln(username=username, project_id=proj_id, query='info')
+        total_low = scans_query.all_vuln(username=username, project_id=proj_id, query='minimal')
+        total_info = scans_query.all_vuln(username=username, project_id=proj_id, query='very minimal')
 
         total_open = scans_query.all_vuln_count_data(username, proj_id, query='Open')
         total_close = scans_query.all_vuln_count_data(username, proj_id, query='Closed')
@@ -189,9 +189,9 @@ def dashboard(request):
         medium_web = scans_query.all_web(username, proj_id, query='medium')
         medium_static = scans_query.all_static(username, proj_id, query='medium')
 
-        low_net = scans_query.all_net(username, proj_id, query='low')
-        low_web = scans_query.all_web(username, proj_id, query='low')
-        low_static = scans_query.all_static(username, proj_id, query='low')
+        low_net = scans_query.all_net(username, proj_id, query='minimal')
+        low_web = scans_query.all_web(username, proj_id, query='minimal')
+        low_static = scans_query.all_static(username, proj_id, query='minimal')
 
         project_db.objects.filter(username=username,
                                   project_id=proj_id
@@ -338,7 +338,7 @@ def proj_data(request):
 
     all_high = scans_query.all_vuln(username=username, project_id=project_id, query='high')
     all_medium = scans_query.all_vuln(username=username, project_id=project_id, query='medium')
-    all_low = scans_query.all_vuln(username=username, project_id=project_id, query='low')
+    all_low = scans_query.all_vuln(username=username, project_id=project_id, query='minimal')
 
     total = all_high, all_medium, all_low
 
@@ -359,15 +359,15 @@ def proj_data(request):
                    'all_web_medium': scans_query.all_web(username=username, project_id=project_id, query='medium'),
                    'all_network_medium': scans_query.all_net(username=username, project_id=project_id, query='medium'),
                    'all_network_high': scans_query.all_net(username=username, project_id=project_id, query='high'),
-                   'all_web_low': scans_query.all_web(username=username, project_id=project_id, query='low'),
-                   'all_network_low': scans_query.all_net(username=username, project_id=project_id, query='low'),
+                   'all_web_low': scans_query.all_web(username=username, project_id=project_id, query='minimal'),
+                   'all_network_low': scans_query.all_net(username=username, project_id=project_id, query='minimal'),
                    'all_project': all_project,
                    'project_dat': project_dat,
                    'web_scan_dat': web_scan_dat,
                    'all_static_high': scans_query.all_static(username=username, project_id=project_id, query='high'),
                    'all_static_medium': scans_query.all_static(username=username, project_id=project_id,
                                                                query='medium'),
-                   'all_static_low': scans_query.all_static(username=username, project_id=project_id, query='low'),
+                   'all_static_low': scans_query.all_static(username=username, project_id=project_id, query='minimal'),
                    'static_scan': static_scan,
                    'zap': zap,
                    'burp': burp,
@@ -1001,65 +1001,65 @@ def all_high_vuln(request):
         pentest_all_high = manual_scan_results_db.objects.filter(username=username, severity='Medium',
                                                                  project_id=project_id)
 
-    # All Low
-    elif severity == 'Low':
+    # All Minimal
+    elif severity == 'Minimal':
 
         zap_all_high = zap_scan_results_db.objects.filter(username=username, project_id=project_id,
-                                                          risk='Low')
+                                                          risk='Minimal')
         arachni_all_high = arachni_scan_result_db.objects.filter(username=username, project_id=project_id,
-                                                                 severity='Low')
+                                                                 severity='Minimal')
         webinspect_all_high = webinspect_scan_result_db.objects.filter(username=username, project_id=project_id,
                                                                        severity__in=[
-                                                                           'Low'])
+                                                                           'Minimal'])
         netsparker_all_high = netsparker_scan_result_db.objects.filter(username=username, project_id=project_id,
-                                                                       severity='Low')
+                                                                       severity='Minimal')
         acunetix_all_high = acunetix_scan_result_db.objects.filter(username=username, project_id=project_id,
-                                                                   VulnSeverity='Low')
+                                                                   VulnSeverity='Minimal')
         burp_all_high = burp_scan_result_db.objects.filter(username=username, project_id=project_id,
-                                                           severity='Low')
+                                                           severity='Minimal')
         dependencycheck_all_high = dependencycheck_scan_results_db.objects.filter(username=username,
                                                                                   project_id=project_id,
-                                                                                  severity='Low')
-        findbugs_all_high = findbugs_scan_results_db.objects.filter(username=username, risk='Low',
+                                                                                  severity='Minimal')
+        findbugs_all_high = findbugs_scan_results_db.objects.filter(username=username, risk='Minimal',
                                                                     project_id=project_id)
-        bandit_all_high = bandit_scan_results_db.objects.filter(username=username, issue_severity='LOW',
+        bandit_all_high = bandit_scan_results_db.objects.filter(username=username, issue_severity='MINIMAL',
                                                                 project_id=project_id)
-        clair_all_high = clair_scan_results_db.objects.filter(username=username, Severity='Low', project_id=project_id)
+        clair_all_high = clair_scan_results_db.objects.filter(username=username, Severity='Minimal', project_id=project_id)
 
-        trivy_all_high = trivy_scan_results_db.objects.filter(username=username, Severity='Low', project_id=project_id)
+        trivy_all_high = trivy_scan_results_db.objects.filter(username=username, Severity='Minimal', project_id=project_id)
 
-        gitlabsast_all_high = gitlabsast_scan_results_db.objects.filter(username=username, Severity='Low',
+        gitlabsast_all_high = gitlabsast_scan_results_db.objects.filter(username=username, Severity='Minimal',
                                                                         project_id=project_id)
 
         gitlabcontainerscan_all_high = gitlabcontainerscan_scan_results_db.objects.filter(username=username,
-                                                                                          Severity='Low',
+                                                                                          Severity='Minimal',
                                                                                           project_id=project_id)
 
-        gitlabsca_all_high = gitlabsca_scan_results_db.objects.filter(username=username, Severity='Low',
+        gitlabsca_all_high = gitlabsca_scan_results_db.objects.filter(username=username, Severity='Minimal',
                                                                       project_id=project_id)
 
-        npmaudit_all_high = npmaudit_scan_results_db.objects.filter(username=username, severity='Low',
+        npmaudit_all_high = npmaudit_scan_results_db.objects.filter(username=username, severity='Minimal',
                                                                     project_id=project_id)
 
-        nodejsscan_all_high = nodejsscan_scan_results_db.objects.filter(username=username, severity='Low',
+        nodejsscan_all_high = nodejsscan_scan_results_db.objects.filter(username=username, severity='Minimal',
                                                                         project_id=project_id)
 
-        semgrepscan_all_high = semgrepscan_scan_results_db.objects.filter(username=username, severity='Low',
+        semgrepscan_all_high = semgrepscan_scan_results_db.objects.filter(username=username, severity='Minimal',
                                                                           project_id=project_id)
 
-        tfsec_all_high = tfsec_scan_results_db.objects.filter(username=username, severity='Low', project_id=project_id)
+        tfsec_all_high = tfsec_scan_results_db.objects.filter(username=username, severity='Minimal', project_id=project_id)
 
-        whitesource_all_high = whitesource_scan_results_db.objects.filter(username=username, severity='Low',
+        whitesource_all_high = whitesource_scan_results_db.objects.filter(username=username, severity='Minimal',
                                                                           project_id=project_id)
 
-        checkmarx_all_high = checkmarx_scan_results_db.objects.filter(username=username, severity='Low',
+        checkmarx_all_high = checkmarx_scan_results_db.objects.filter(username=username, severity='Minimal',
                                                                       project_id=project_id)
 
-        openvas_all_high = ov_scan_result_db.objects.filter(username=username, threat='Low', project_id=project_id)
-        nessus_all_high = nessus_scan_results_db.objects.filter(username=username, risk_factor='Low',
+        openvas_all_high = ov_scan_result_db.objects.filter(username=username, threat='Minimal', project_id=project_id)
+        nessus_all_high = nessus_scan_results_db.objects.filter(username=username, risk_factor='Minimal',
                                                                 project_id=project_id)
 
-        pentest_all_high = manual_scan_results_db.objects.filter(username=username, severity='Low',
+        pentest_all_high = manual_scan_results_db.objects.filter(username=username, severity='Minimal',
                                                                  project_id=project_id)
 
     elif severity == 'Total':

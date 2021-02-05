@@ -155,19 +155,19 @@ def add_vuln(request):
         # uploaded_poc_url = fs.url(filename)
         uploaded_poc_url = None
 
-        if severity == "5. Very High":
+        if severity == "Critical":
             severity_color = "danger"
 
-        elif severity == "4. High":
+        elif severity == "High":
             severity_color = "danger"
 
-        elif severity == '3. Medium':
+        elif severity == 'Medium':
             severity_color = "warning"
 
-        elif severity == '2. Low':
+        elif severity == 'Minimal':
             severity_color = "info"
 
-        elif severity == '1. Very Low':
+        elif severity == 'Very Minimal':
             severity_color = "info"
 
 
@@ -193,11 +193,11 @@ def add_vuln(request):
         all_scan_data = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id)
 
         total_vuln = len(all_scan_data)
-        total_very_high = len(all_scan_data.filter(severity="5. Very High"))
-        total_high = len(all_scan_data.filter(severity="4. High"))
-        total_medium = len(all_scan_data.filter(severity="3. Medium"))
-        total_low = len(all_scan_data.filter(severity="2. Low"))
-        total_very_low = len(all_scan_data.filter(severity="1. Very Low"))
+        total_very_high = len(all_scan_data.filter(severity="Critical"))
+        total_high = len(all_scan_data.filter(severity="High"))
+        total_medium = len(all_scan_data.filter(severity="Medium"))
+        total_low = len(all_scan_data.filter(severity="Minimal"))
+        total_very_low = len(all_scan_data.filter(severity="Very Minimal"))
 
         manual_scans_db.objects.filter(username=username, scan_id=scan_id).update(
             date_time=date_time,
@@ -261,19 +261,19 @@ def edit_vuln(request):
         scan_id = request.POST.get('scan_id')
         date_time = datetime.now()
 
-        if severity == "5. Very High":
+        if severity == "Critical":
             severity_color = "danger"
 
-        elif severity == "4. High":
+        elif severity == "High":
             severity_color = "danger"
 
-        elif severity == '3. Medium':
+        elif severity == 'Medium':
             severity_color = "warning"
 
-        elif severity == '2. Low':
+        elif severity == 'Minimal':
             severity_color = "info"
 
-        elif severity == '1. Very Low':
+        elif severity == 'Very Minimal':
             severity_color = "info"
 
         manual_scan_results_db.objects.filter(username=username, vuln_id=vuln_id).update(
@@ -291,8 +291,8 @@ def edit_vuln(request):
         total_crit = len(all_scan_data.filter(severity="Critical"))
         total_high = len(all_scan_data.filter(severity="High"))
         total_medium = len(all_scan_data.filter(severity="Medium"))
-        total_low = len(all_scan_data.filter(severity="Low"))
-        total_info = len(all_scan_data.filter(severity="Info"))
+        total_low = len(all_scan_data.filter(severity="Minimal"))
+        total_info = len(all_scan_data.filter(severity="Very Minimal"))
 
         manual_scans_db.objects.filter(username=username, scan_id=scan_id).update(
             date_time=date_time,
@@ -333,8 +333,8 @@ def manual_vuln_data(request):
         total_crit = len(all_scan_data.filter(severity="Critical"))
         total_high = len(all_scan_data.filter(severity="High"))
         total_medium = len(all_scan_data.filter(severity="Medium"))
-        total_low = len(all_scan_data.filter(severity="Low"))
-        total_info = len(all_scan_data.filter(severity="Info"))
+        total_low = len(all_scan_data.filter(severity="Minimal"))
+        total_info = len(all_scan_data.filter(severity="Very Minimal"))
 
         manual_scans_db.objects.filter(username=username, scan_id=scan_id).update(
             date_time=date_time,
@@ -378,8 +378,8 @@ def del_vuln(request):
         total_crit = len(all_scan_data.filter(severity="Critical"))
         total_high = len(all_scan_data.filter(severity="High"))
         total_medium = len(all_scan_data.filter(severity="Medium"))
-        total_low = len(all_scan_data.filter(severity="Low"))
-        total_info = len(all_scan_data.filter(severity="Info"))
+        total_low = len(all_scan_data.filter(severity="Minimal"))
+        total_info = len(all_scan_data.filter(severity="Very Minimal"))
 
         manual_scans_db.objects.filter(username=username, scan_id=scan_id).update(
             total_vul=total_vuln,

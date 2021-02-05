@@ -67,8 +67,8 @@ def whitesource_report_json(data, project_id, scan_id, username):
         elif severity == 'medium':
             severity = 'Medium'
             vul_col = "warning"
-        elif severity == 'low':
-            severity = 'Low'
+        elif severity == 'minimal':
+            severity = 'Minimal'
             vul_col = "info"
         vul_id = uuid.uuid4()
         dup_data = str(name) + str(severity) + str(project)
@@ -167,7 +167,7 @@ def whitesource_report_json(data, project_id, scan_id, username):
     total_vul = len(all_findbugs_data)
     total_high = len(all_findbugs_data.filter(severity="High"))
     total_medium = len(all_findbugs_data.filter(severity="Medium"))
-    total_low = len(all_findbugs_data.filter(severity="Low"))
+    total_low = len(all_findbugs_data.filter(severity="Minimal"))
     total_duplicate = len(duplicate_count.filter(vuln_duplicate='Yes'))
 
     whitesource_scan_db.objects.filter(username=username, scan_id=scan_id).update(
@@ -182,6 +182,6 @@ def whitesource_report_json(data, project_id, scan_id, username):
     subject = 'Archery Tool Scan Status - whitesource Report Uploaded'
     message = 'whitesource Scanner has completed the scan ' \
               '  %s <br> Total: %s <br>High: %s <br>' \
-              'Medium: %s <br>Low %s' % ("whitesource", total_vul, total_high, total_medium, total_low)
+              'Medium: %s <br>Minimal %s' % ("whitesource", total_vul, total_high, total_medium, total_low)
 
     email_sch_notify(subject=subject, message=message)

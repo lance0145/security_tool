@@ -105,7 +105,7 @@ def nodejsscan_vuln_data(request):
         total_vul = len(all_nodejsscan_data)
         total_high = len(all_nodejsscan_data.filter(severity='High'))
         total_medium = len(all_nodejsscan_data.filter(severity='Medium'))
-        total_low = len(all_nodejsscan_data.filter(severity='Low'))
+        total_low = len(all_nodejsscan_data.filter(severity='Minimal'))
         total_duplicate = len(all_nodejsscan_data.filter(vuln_duplicate='Yes'))
 
         nodejsscan_scan_db.objects.filter(username=username, scan_id=scan_id).update(
@@ -203,7 +203,7 @@ def nodejsscan_del_vuln(request):
         total_vul = len(all_nodejsscan_data)
         total_high = len(all_nodejsscan_data.filter(severity="High"))
         total_medium = len(all_nodejsscan_data.filter(severity="Medium"))
-        total_low = len(all_nodejsscan_data.filter(severity="Low"))
+        total_low = len(all_nodejsscan_data.filter(severity="Minimal"))
         total_duplicate = len(all_nodejsscan_data.filter(vuln_duplicate='Yes'))
 
         nodejsscan_scan_db.objects.filter(username=username, scan_id=scan_id).update(

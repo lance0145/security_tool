@@ -126,7 +126,7 @@ def bandit_report_json(data, project_id, scan_id, username):
                 elif issue_severity == "MEDIUM":
                     vul_col = 'warning'
 
-                elif issue_severity == "LOW":
+                elif issue_severity == "MINIMAL":
                     vul_col = "info"
 
                 dup_data = test_name + filename + issue_severity
@@ -210,7 +210,7 @@ def bandit_report_json(data, project_id, scan_id, username):
         total_vul = len(all_bandit_data)
         total_high = len(all_bandit_data.filter(issue_severity="HIGH"))
         total_medium = len(all_bandit_data.filter(issue_severity="MEDIUM"))
-        total_low = len(all_bandit_data.filter(issue_severity="LOW"))
+        total_low = len(all_bandit_data.filter(issue_severity="MINIMAL"))
         total_duplicate = len(duplicate_count.filter(vuln_duplicate='Yes'))
 
         bandit_scan_db.objects.filter(username=username, scan_id=scan_id).update(
@@ -224,6 +224,6 @@ def bandit_report_json(data, project_id, scan_id, username):
     subject = 'Archery Tool Scan Status - Bandit Report Uploaded'
     message = 'Bandit Scanner has completed the scan ' \
               '  %s <br> Total: %s <br>High: %s <br>' \
-              'Medium: %s <br>Low %s' % (scan_id, total_vul, total_high, total_medium, total_low)
+              'Medium: %s <br>Minimal %s' % (scan_id, total_vul, total_high, total_medium, total_low)
 
     email_sch_notify(subject=subject, message=message)

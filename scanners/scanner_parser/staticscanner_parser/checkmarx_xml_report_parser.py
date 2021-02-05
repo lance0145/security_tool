@@ -69,10 +69,10 @@ def checkmarx_report_xml(data, project_id, scan_id, username):
             vul_col = "danger"
         elif severity == 'Medium':
             vul_col = "warning"
-        elif severity == 'Low':
+        elif severity == 'Minimal':
             vul_col = "info"
         else:
-            severity = 'Low'
+            severity = 'Minimal'
             vul_col = "info"
         vul_id = uuid.uuid4()
 
@@ -144,9 +144,9 @@ def checkmarx_report_xml(data, project_id, scan_id, username):
                                                                vuln_duplicate='Yes')
 
 
-    total_high = len(all_findbugs_data.filter(severity="High"))
+    total_high = len(all_findbugs_data.filter(severity="High")) + len(all_findbugs_data.filter(severity="Critical"))
     total_medium = len(all_findbugs_data.filter(severity="Medium"))
-    total_low = len(all_findbugs_data.filter(severity="Low"))
+    total_low = len(all_findbugs_data.filter(severity="Minimal")) + len(all_findbugs_data.filter(severity="Very Minimal"))
     total_vul = len(all_findbugs_data)
     total_duplicate = len(duplicate_count.filter(vuln_duplicate='Yes'))
 
@@ -162,6 +162,6 @@ def checkmarx_report_xml(data, project_id, scan_id, username):
     subject = 'Archery Tool Scan Status - checkmarx Report Uploaded'
     message = 'checkmarx Scanner has completed the scan ' \
               '  %s <br> Total: %s <br>High: %s <br>' \
-              'Medium: %s <br>Low %s' % ("checkmarx", total_vul, total_high, total_medium, total_low)
+              'Medium: %s <br>Minimal %s' % ("checkmarx", total_vul, total_high, total_medium, total_low)
 
     email_sch_notify(subject=subject, message=message)

@@ -101,12 +101,12 @@ def trivy_report_json(data, project_id, scan_id, username):
                 Severity = 'Medium'
                 vul_col = "warning"
 
-            if Severity == 'LOW':
-                Severity = 'Low'
+            if Severity == 'MINIMAL':
+                Severity = 'Minimal'
                 vul_col = "info"
 
             if Severity == 'UNKNOWN':
-                Severity = 'Low'
+                Severity = 'Minimal'
                 vul_col = "info"
 
             vul_id = uuid.uuid4()
@@ -187,7 +187,7 @@ def trivy_report_json(data, project_id, scan_id, username):
         total_vul = len(all_findbugs_data)
         total_high = len(all_findbugs_data.filter(Severity="High"))
         total_medium = len(all_findbugs_data.filter(Severity="Medium"))
-        total_low = len(all_findbugs_data.filter(Severity="Low"))
+        total_low = len(all_findbugs_data.filter(Severity="Minimal"))
         total_duplicate = len(duplicate_count.filter(vuln_duplicate='Yes'))
 
         trivy_scan_db.objects.filter(scan_id=scan_id).update(username=username,
@@ -201,6 +201,6 @@ def trivy_report_json(data, project_id, scan_id, username):
     subject = 'Archery Tool Scan Status - Trivy Report Uploaded'
     message = 'Trivy Scanner has completed the scan ' \
               '  %s <br> Total: %s <br>High: %s <br>' \
-              'Medium: %s <br>Low %s' % (Target, total_vul, total_high, total_medium, total_low)
+              'Medium: %s <br>Minimal %s' % (Target, total_vul, total_high, total_medium, total_low)
 
     email_sch_notify(subject=subject, message=message)

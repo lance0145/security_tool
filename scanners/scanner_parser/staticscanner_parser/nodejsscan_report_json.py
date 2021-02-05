@@ -59,7 +59,7 @@ def nodejsscan_report_json(data, project_id, scan_id, username):
             elif severity == 'Medium':
                 vul_col = "warning"
 
-            elif severity == 'Low':
+            elif severity == 'Minimal':
                 vul_col = "info"
 
             vul_id = uuid.uuid4()
@@ -144,7 +144,7 @@ def nodejsscan_report_json(data, project_id, scan_id, username):
         total_vul = len(all_findbugs_data)
         total_high = len(all_findbugs_data.filter(severity="High"))
         total_medium = len(all_findbugs_data.filter(severity="Medium"))
-        total_low = len(all_findbugs_data.filter(severity="Low"))
+        total_low = len(all_findbugs_data.filter(severity="Minimal"))
         total_duplicate = len(duplicate_count.filter(vuln_duplicate='Yes'))
 
         nodejsscan_scan_db.objects.filter(username=username, scan_id=scan_id).update(
@@ -158,6 +158,6 @@ def nodejsscan_report_json(data, project_id, scan_id, username):
         subject = 'Archery Tool Scan Status - Trivy Report Uploaded'
         message = 'Trivy Scanner has completed the scan ' \
                   '  %s <br> Total: %s <br>High: %s <br>' \
-                  'Medium: %s <br>Low %s' % ("Nodejsscan", total_vul, total_high, total_medium, total_low)
+                  'Medium: %s <br>Minimal %s' % ("Nodejsscan", total_vul, total_high, total_medium, total_low)
 
         email_sch_notify(subject=subject, message=message)

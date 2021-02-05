@@ -98,12 +98,12 @@ def npmaudit_report_json(data, project_id, scan_id, username):
             severity = 'Medium'
             vul_col = "warning"
 
-        elif severity == 'low':
-            severity = 'Low'
+        elif severity == 'minimal':
+            severity = 'Minimal'
             vul_col = "info"
 
-        elif severity == 'info':
-            severity = 'Low'
+        elif severity == 'very minimal':
+            severity = 'Minimal'
             vul_col = "info"
 
         vul_id = uuid.uuid4()
@@ -197,7 +197,7 @@ def npmaudit_report_json(data, project_id, scan_id, username):
     total_vul = len(all_findbugs_data)
     total_high = len(all_findbugs_data.filter(severity="High"))
     total_medium = len(all_findbugs_data.filter(severity="Medium"))
-    total_low = len(all_findbugs_data.filter(severity="Low"))
+    total_low = len(all_findbugs_data.filter(severity="Minimal"))
     total_duplicate = len(duplicate_count.filter(vuln_duplicate='Yes'))
 
     npmaudit_scan_db.objects.filter(username=username, scan_id=scan_id).update(
@@ -211,6 +211,6 @@ def npmaudit_report_json(data, project_id, scan_id, username):
     subject = 'Archery Tool Scan Status - Trivy Report Uploaded'
     message = 'Trivy Scanner has completed the scan ' \
               '  %s <br> Total: %s <br>High: %s <br>' \
-              'Medium: %s <br>Low %s' % ("npm-audit", total_vul, total_high, total_medium, total_low)
+              'Medium: %s <br>Minimal %s' % ("npm-audit", total_vul, total_high, total_medium, total_low)
 
     email_sch_notify(subject=subject, message=message)

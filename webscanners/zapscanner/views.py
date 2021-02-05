@@ -183,7 +183,7 @@ def launch_zap_scan(target_url, project_id, rescan_id, rescan, scan_id, user):
     subject = 'Archery Tool Scan Status - ZAP Scan Completed'
     message = 'ZAP Scanner has completed the scan ' \
               '  %s <br> Total: %s <br>High: %s <br>' \
-              'Medium: %s <br>Low %s' % (target_url, total_vuln, total_high, total_medium, total_low)
+              'Medium: %s <br>Minimal %s' % (target_url, total_vuln, total_high, total_medium, total_low)
 
     email_notify(user=user, subject=subject, message=message)
 
@@ -268,7 +268,7 @@ def launch_schudle_zap_scan(target_url, project_id, rescan_id, rescan, scan_id):
     subject = 'Archery Tool Scan Status - ZAP Scan Completed'
     message = 'ZAP Scanner has completed the scan ' \
               '  %s <br> Total: %s <br>High: %s <br>' \
-              'Medium: %s <br>Low %s' % (target_url, total_vuln, total_high, total_medium, total_low)
+              'Medium: %s <br>Minimal %s' % (target_url, total_vuln, total_high, total_medium, total_low)
 
     email_sch_notify(subject=subject, message=message)
 
@@ -435,8 +435,8 @@ def zap_vuln_details(request):
 
         total_high = len(zap_all_vul.filter(risk="High"))
         total_medium = len(zap_all_vul.filter(risk="Medium"))
-        total_low = len(zap_all_vul.filter(risk="Low"))
-        total_info = len(zap_all_vul.filter(risk="Informational"))
+        total_low = len(zap_all_vul.filter(risk="Minimal"))
+        total_info = len(zap_all_vul.filter(risk="Very Minimal"))
         total_duplicate = len(zap_all_vul.filter(vuln_duplicate='Yes'))
         total_vul = total_high + total_medium + total_low + total_info
 
@@ -743,7 +743,7 @@ def del_zap_vuln(request):
         total_vul = len(zap_all_vul)
         total_high = len(zap_all_vul.filter(risk="High"))
         total_medium = len(zap_all_vul.filter(risk="Medium"))
-        total_low = len(zap_all_vul.filter(risk="Low"))
+        total_low = len(zap_all_vul.filter(risk="Minimal"))
 
         zap_scans_db.objects.filter(username=username, scan_scanid=un_scanid).update(total_vul=total_vul,
                                                                                      high_vul=total_high,

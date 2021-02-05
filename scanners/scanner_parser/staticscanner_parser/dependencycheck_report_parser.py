@@ -84,8 +84,8 @@ def xml_parser(data, project_id, scan_id, username):
                                             severity = 'High'
                                         elif severity_dat == 'MEDIUM':
                                             severity = 'Medium'
-                                        elif severity_dat == 'LOW':
-                                            severity = 'Low'
+                                        elif severity_dat == 'MINIMAL':
+                                            severity = 'Minimal'
 
                         elif pt == 'https://jeremylong.github.io/DependencyCheck/dependency-check.2.2.xsd':
                             for dc22 in vuln:
@@ -112,8 +112,8 @@ def xml_parser(data, project_id, scan_id, username):
                                             severity = 'High'
                                         elif severity_dat == 'MEDIUM':
                                             severity = 'Medium'
-                                        elif severity_dat == 'LOW':
-                                            severity = 'Low'
+                                        elif severity_dat == 'MINIMAL':
+                                            severity = 'Minimal'
                         elif pt == 'https://jeremylong.github.io/DependencyCheck/dependency-check.2.3.xsd':
                             for dc22 in vuln:
 
@@ -139,8 +139,8 @@ def xml_parser(data, project_id, scan_id, username):
                                             severity = 'High'
                                         elif severity_dat == 'MEDIUM':
                                             severity = 'Medium'
-                                        elif severity_dat == 'LOW':
-                                            severity = 'Low'
+                                        elif severity_dat == 'MINIMAL':
+                                            severity = 'Minimal'
                         elif pt == 'https://jeremylong.github.io/DependencyCheck/dependency-check.2.4.xsd':
                             for dc22 in vuln:
 
@@ -166,8 +166,8 @@ def xml_parser(data, project_id, scan_id, username):
                                             severity = 'High'
                                         elif severity_dat == 'MEDIUM':
                                             severity = 'Medium'
-                                        elif severity_dat == 'LOW':
-                                            severity = 'Low'
+                                        elif severity_dat == 'MINIMAL':
+                                            severity = 'Minimal'
                         elif pt == 'https://jeremylong.github.io/DependencyCheck/dependency-check.2.5.xsd':
                             for dc22 in vuln:
 
@@ -193,8 +193,8 @@ def xml_parser(data, project_id, scan_id, username):
                                             severity = 'High'
                                         elif severity_dat == 'MEDIUM':
                                             severity = 'Medium'
-                                        elif severity_dat == 'LOW':
-                                            severity = 'Low'
+                                        elif severity_dat == 'MINIMAL':
+                                            severity = 'Minimal'
 
                         else:
                             for vulner in vuln:
@@ -234,7 +234,7 @@ def xml_parser(data, project_id, scan_id, username):
                         elif severity == 'Medium':
                             vul_col = "warning"
 
-                        elif severity == 'Low':
+                        elif severity == 'Minimal':
                             vul_col = "info"
 
                         dup_data = name + fileName + severity
@@ -343,9 +343,9 @@ def xml_parser(data, project_id, scan_id, username):
                                                                              vuln_duplicate='Yes')
 
         total_vul = len(all_dependency_data)
-        total_high = len(all_dependency_data.filter(severity="High"))
+        total_high = len(all_dependency_data.filter(severity="High")) + len(all_dependency_data.filter(severity="Critical"))
         total_medium = len(all_dependency_data.filter(severity="Medium"))
-        total_low = len(all_dependency_data.filter(severity="Low"))
+        total_low = len(all_dependency_data.filter(severity="Minimal")) + len(all_dependency_data.filter(severity="Very Minimal"))
         total_duplicate = len(duplicate_count.filter(vuln_duplicate='Yes'))
 
         dependencycheck_scan_db.objects.filter(username=username, scan_id=scan_id).update(
@@ -360,7 +360,7 @@ def xml_parser(data, project_id, scan_id, username):
     subject = 'Archery Tool Scan Status - DependencyCheck Report Uploaded'
     message = 'DependencyCheck Scanner has completed the scan ' \
               '  %s <br> Total: %s <br>High: %s <br>' \
-              'Medium: %s <br>Low %s' % (name, total_vul, total_high, total_medium, total_low)
+              'Medium: %s <br>Minimal %s' % (name, total_vul, total_high, total_medium, total_low)
 
     email_sch_notify(subject=subject, message=message)
 
