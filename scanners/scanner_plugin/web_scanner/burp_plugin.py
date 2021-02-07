@@ -308,9 +308,9 @@ class burp_scans(object):
                                                           scan_id=self.scan_id).values('name', 'severity'
                                                                                        ).distinct()
         total_vul = len(burp_all_vul)
-        total_high = len(burp_all_vul.filter(severity="High"))
+        total_high = len(burp_all_vul.filter(severity="High")) + len(burp_all_vul.filter(severity="High"))
         total_medium = len(burp_all_vul.filter(severity="Medium"))
-        total_low = len(burp_all_vul.filter(severity="Minimal"))
+        total_low = len(burp_all_vul.filter(severity="Minimal")) + len(burp_all_vul.filter(severity="Very Minimal"))
         total_info = len(burp_all_vul.filter(severity="Info"))
         total_duplicate = len(burp_all_vul.filter(vuln_duplicate='Yes'))
         burp_scan_db.objects.filter(username=self.user.username, scan_id=self.scan_id).update(

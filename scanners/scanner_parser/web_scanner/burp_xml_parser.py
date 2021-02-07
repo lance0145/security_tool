@@ -289,7 +289,7 @@ def burp_scan_data(root, project_id, scan_id, username):
     total_high = len(burp_all_vul.filter(severity="High"))
     total_medium = len(burp_all_vul.filter(severity="Medium"))
     total_low = len(burp_all_vul.filter(severity="Minimal"))
-    total_info = len(burp_all_vul.filter(severity="Information"))
+    total_info = len(burp_all_vul.filter(severity="Very Minimal"))
     total_duplicate = len(duplicate_count.filter(vuln_duplicate='Yes'))
     burp_scan_db.objects.filter(username=username,
                                 scan_id=scan_id).update(

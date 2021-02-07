@@ -100,9 +100,9 @@ def npmaudit_vuln_data(request):
                                                                     vuln_status='Open')
 
         total_vul = len(all_npmaudit_data)
-        total_high = len(all_npmaudit_data.filter(severity='High'))
+        total_high = len(all_npmaudit_data.filter(severity='High')) + len(all_npmaudit_data.filter(severity='Critical'))
         total_medium = len(all_npmaudit_data.filter(severity='Medium'))
-        total_low = len(all_npmaudit_data.filter(severity='Minimal'))
+        total_low = len(all_npmaudit_data.filter(severity='Minimal')) + len(all_npmaudit_data.filter(severity='Very Minimal'))
         total_duplicate = len(all_npmaudit_data.filter(vuln_duplicate='Yes'))
 
         npmaudit_scan_db.objects.filter(username=username, scan_id=scan_id).update(
@@ -196,9 +196,9 @@ def npmaudit_del_vuln(request):
         all_npmaudit_data = npmaudit_scan_results_db.objects.filter(username=username, scan_id=scan_id)
 
         total_vul = len(all_npmaudit_data)
-        total_high = len(all_npmaudit_data.filter(severity="High"))
+        total_high = len(all_npmaudit_data.filter(severity="High")) + len(all_npmaudit_data.filter(severity='Critical'))
         total_medium = len(all_npmaudit_data.filter(severity="Medium"))
-        total_low = len(all_npmaudit_data.filter(severity="Minimal"))
+        total_low = len(all_npmaudit_data.filter(severity="Minimal")) + len(all_npmaudit_data.filter(severity='Very Minimal'))
         total_duplicate = len(all_npmaudit_data.filter(vuln_duplicate='Yes'))
 
         npmaudit_scan_db.objects.filter(username=username, scan_id=scan_id).update(

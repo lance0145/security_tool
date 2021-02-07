@@ -223,7 +223,7 @@ def xml_parser(root,
     total_high = len(netsparker_all_vul.filter(severity="High"))
     total_medium = len(netsparker_all_vul.filter(severity="Medium"))
     total_low = len(netsparker_all_vul.filter(severity="Minimal"))
-    total_info = len(netsparker_all_vul.filter(severity="Information"))
+    total_info = len(netsparker_all_vul.filter(severity="Very Minimal"))
     total_duplicate = len(duplicate_count.filter(vuln_duplicate='Yes'))
     total_vul = total_critical + total_high + total_medium + total_low + total_info
 

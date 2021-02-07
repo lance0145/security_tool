@@ -315,9 +315,9 @@ def updated_nessus_parser(root, project_id, scan_id, username):
                                                                        scan_id=scan_id,
                                                                        vuln_duplicate='Yes')
         total_vuln = len(ov_all_vul)
-        total_high = len(ov_all_vul.filter(risk_factor="High"))
+        total_high = len(ov_all_vul.filter(risk_factor="High")) + len(ov_all_vul.filter(risk_factor="Critical"))
         total_medium = len(ov_all_vul.filter(risk_factor="Medium"))
-        total_low = len(ov_all_vul.filter(risk_factor="Minimal"))
+        total_low = len(ov_all_vul.filter(risk_factor="Minimal")) + len(ov_all_vul.filter(risk_factor=" Very Minimal"))
         total_duplicate = len(duplicate_count_report.filter(vuln_duplicate='Yes'))
 
         nessus_scan_db.objects.filter(username=username, scan_id=scan_id) \

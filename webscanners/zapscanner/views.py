@@ -741,9 +741,9 @@ def del_zap_vuln(request):
         zap_all_vul = zap_scan_results_db.objects.filter(username=username, scan_id=un_scanid).values('name', 'risk',
                                                                                                       'vuln_color').distinct()
         total_vul = len(zap_all_vul)
-        total_high = len(zap_all_vul.filter(risk="High"))
+        total_high = len(zap_all_vul.filter(risk="High")) + len(zap_all_vul.filter(risk="Critical"))
         total_medium = len(zap_all_vul.filter(risk="Medium"))
-        total_low = len(zap_all_vul.filter(risk="Minimal"))
+        total_low = len(zap_all_vul.filter(risk="Minimal")) + len(zap_all_vul.filter(risk="Very Minimal"))
 
         zap_scans_db.objects.filter(username=username, scan_scanid=un_scanid).update(total_vul=total_vul,
                                                                                      high_vul=total_high,

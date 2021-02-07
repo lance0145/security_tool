@@ -306,9 +306,9 @@ def vuln_an_id(scan_id, project_id, username):
 
         openvas_vul = ov_scan_result_db.objects.filter(username=username, scan_id=scan_id)
 
-        total_high = len(openvas_vul.filter(threat="High"))
+        total_high = len(openvas_vul.filter(threat="High")) + len(openvas_vul.filter(threat="High"))
         total_medium = len(openvas_vul.filter(threat="Medium"))
-        total_low = len(openvas_vul.filter(threat="Minimal"))
+        total_low = len(openvas_vul.filter(threat="Minimal")) + len(openvas_vul.filter(threat="Very Minimal"))
         log_total = len(openvas_vul.filter(threat="Log"))
         total_duplicate = len(openvas_vul.filter(vuln_duplicate='Yes'))
         total_vul = total_high + total_medium + total_low

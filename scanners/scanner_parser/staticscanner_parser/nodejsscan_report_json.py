@@ -142,9 +142,9 @@ def nodejsscan_report_json(data, project_id, scan_id, username):
                                                                              vuln_duplicate='Yes')
 
         total_vul = len(all_findbugs_data)
-        total_high = len(all_findbugs_data.filter(severity="High"))
+        total_high = len(all_findbugs_data.filter(severity="High")) + len(all_findbugs_data.filter(severity="High"))
         total_medium = len(all_findbugs_data.filter(severity="Medium"))
-        total_low = len(all_findbugs_data.filter(severity="Minimal"))
+        total_low = len(all_findbugs_data.filter(severity="Minimal")) + len(all_findbugs_data.filter(severity="Very Minimal"))
         total_duplicate = len(duplicate_count.filter(vuln_duplicate='Yes'))
 
         nodejsscan_scan_db.objects.filter(username=username, scan_id=scan_id).update(

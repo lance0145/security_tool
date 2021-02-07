@@ -99,9 +99,9 @@ def retirejsscan_vuln_data(request):
                                                                     vuln_status='Open')
 
         total_vul = len(all_retirejs_data)
-        total_high = len(all_retirejs_data.filter(severity='High'))
+        total_high = len(all_retirejs_data.filter(severity='High')) + len(all_retirejs_data.filter(severity='Critical'))
         total_medium = len(all_retirejs_data.filter(severity='Medium'))
-        total_low = len(all_retirejs_data.filter(severity='Minimal'))
+        total_low = len(all_retirejs_data.filter(severity='Minimal')) + len(all_retirejs_data.filter(severity='Very Minimal'))
         total_duplicate = len(all_retirejs_data.filter(vuln_duplicate='Yes'))
 
         retirejs_scan_db.objects.filter(username=username, scan_id=scan_id).update(

@@ -193,9 +193,9 @@ def gitlabsca_report_json(data, project_id, scan_id, username):
                                                                vuln_duplicate='Yes')
 
     total_vul = len(all_findbugs_data)
-    total_high = len(all_findbugs_data.filter(Severity="High"))
+    total_high = len(all_findbugs_data.filter(Severity="High")) + len(all_findbugs_data.filter(Severity="Critical"))
     total_medium = len(all_findbugs_data.filter(Severity="Medium"))
-    total_low = len(all_findbugs_data.filter(Severity="Minimal"))
+    total_low = len(all_findbugs_data.filter(Severity="Minimal")) + len(all_findbugs_data.filter(Severity="Very Minimal"))
     total_duplicate = len(duplicate_count.filter(vuln_duplicate='Yes'))
 
     gitlabsca_scan_db.objects.filter(scan_id=scan_id).update(username=username,
