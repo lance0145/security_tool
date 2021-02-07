@@ -344,9 +344,9 @@ def del_burp_vuln(request):
                                                                                                        'severity',
                                                                                                        'severity_color').distinct()
         total_vul = len(burp_all_vul)
-        total_high = len(burp_all_vul.filter(severity="High")) + total_high = len(burp_all_vul.filter(severity="Critical"))
+        total_high = len(burp_all_vul.filter(severity="High")) + len(burp_all_vul.filter(severity="Critical"))
         total_medium = len(burp_all_vul.filter(severity="Medium"))
-        total_low = len(burp_all_vul.filter(severity="Minimal")) + total_high = len(burp_all_vul.filter(severity="Very Minimal"))
+        total_low = len(burp_all_vul.filter(severity="Minimal")) + len(burp_all_vul.filter(severity="Very Minimal"))
 
         burp_scan_db.objects.filter(username=username, scan_id=un_scanid).update(total_vul=total_vul,
                                                                                  high_vul=total_high,
