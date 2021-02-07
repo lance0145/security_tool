@@ -1193,6 +1193,17 @@ def all_manual_scan(username, project_id, query):
             else:
                 all_manual_scan = value
 
+    elif query == 'critical':
+
+        all_manual_scan_high = manual_scans_db.objects.filter(username=username, project_id=project_id). \
+            aggregate(Sum('high_vul'))
+
+        for key, value in all_manual_scan_high.items():
+            if value is None:
+                all_manual_scan = '0'
+            else:
+                all_manual_scan = value
+
     elif query == 'high':
 
         all_manual_scan_high = manual_scans_db.objects.filter(username=username, project_id=project_id). \
@@ -1215,6 +1226,16 @@ def all_manual_scan(username, project_id, query):
                 all_manual_scan = value
 
     elif query == 'minimal':
+        all_manual_scan_low = manual_scans_db.objects.filter(username=username, project_id=project_id). \
+            aggregate(Sum('low_vul'))
+
+        for key, value in all_manual_scan_low.items():
+            if value is None:
+                all_manual_scan = '0'
+            else:
+                all_manual_scan = value
+
+    elif query == 'very minimal':
         all_manual_scan_low = manual_scans_db.objects.filter(username=username, project_id=project_id). \
             aggregate(Sum('low_vul'))
 
@@ -1354,6 +1375,8 @@ def all_vuln(username, project_id, query):
                    int(all_checkmarx(username=username, project_id=project_id, query=query)) + \
                    int(all_bandit(username=username, project_id=project_id, query=query)) + \
                    int(all_manual_scan(username=username, project_id=project_id, query=query))
+    elif query == 'critical':
+        all_vuln = int(all_manual_scan(username=username, project_id=project_id, query=query))
     elif query == 'high':
         all_vuln = int(all_zap(username=username, project_id=project_id, query=query)) + \
                    int(all_burp(username=username, project_id=project_id, query=query)) + \
@@ -1426,6 +1449,8 @@ def all_vuln(username, project_id, query):
                    int(all_checkmarx(username=username, project_id=project_id, query=query)) + \
                    int(all_bandit(username=username, project_id=project_id, query=query)) + \
                    int(all_manual_scan(username=username, project_id=project_id, query=query))
+    elif query == 'very minimal':
+        all_vuln = int(all_manual_scan(username=username, project_id=project_id, query=query))
 
     return all_vuln
 

@@ -193,11 +193,9 @@ def add_vuln(request):
         all_scan_data = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id)
 
         total_vuln = len(all_scan_data)
-        total_very_high = len(all_scan_data.filter(severity="Critical"))
-        total_high = len(all_scan_data.filter(severity="High"))
+        total_high = len(all_scan_data.filter(severity="High")) + len(all_scan_data.filter(severity="Critical"))
         total_medium = len(all_scan_data.filter(severity="Medium"))
-        total_low = len(all_scan_data.filter(severity="Minimal"))
-        total_very_low = len(all_scan_data.filter(severity="Very Minimal"))
+        total_low = len(all_scan_data.filter(severity="Minimal")) + len(all_scan_data.filter(severity="Very Minimal"))
 
         manual_scans_db.objects.filter(username=username, scan_id=scan_id).update(
             date_time=date_time,

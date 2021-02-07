@@ -336,9 +336,9 @@ def proj_data(request):
 
     all_notify = Notification.objects.unread()
 
-    all_high = scans_query.all_vuln(username=username, project_id=project_id, query='high')
+    all_high = scans_query.all_vuln(username=username, project_id=project_id, query='high')#, scans_query.all_vuln(username=username, project_id=project_id, query='critical')
     all_medium = scans_query.all_vuln(username=username, project_id=project_id, query='medium')
-    all_low = scans_query.all_vuln(username=username, project_id=project_id, query='minimal')
+    all_low = scans_query.all_vuln(username=username, project_id=project_id, query='minimal')#, scans_query.all_vuln(username=username, project_id=project_id, query='very minimal')
 
     total = all_high, all_medium, all_low
 
