@@ -106,7 +106,7 @@ def vuln_list(request):
     if request.method == 'GET':
         scan_id = request.GET['scan_id']
         project_id = request.GET['project_id']
-        all_vuln = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id)
+        all_vuln = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id).order_by('severity')
 
     return render(request,
                   'manual_vuln_list.html',
