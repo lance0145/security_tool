@@ -3,18 +3,23 @@
 {% block body %}
     {% for data in vuln_detail %}
         <div class="page-wrapper">
-            <div><a href="{% url 'manual_scan:edit_vuln' %}?vuln_id={{data.vuln_id}}&project_id={{project_id}}"
-                class="btn btn-primary"
-                data-original-title="Edit"><i class="fas fa-edit"></i></a>
+            <br>
+            <div style="display: flex; justify-content: flex-end">
+                <div><a href="{% url 'manual_scan:edit_vuln' %}?vuln_id={{data.vuln_id}}&project_id={{project_id}}"
+                    class="btn btn-primary"
+                    data-original-title="Edit"><i class="fas fa-edit"></i></a>
+                </div>
+                &nbsp;&nbsp;
+                <form action="{% url 'manual_scan:del_vuln' %}" method="POST"
+                        class="form-horizontal">
+                    {% csrf_token %}
+                    <input type="hidden" name="vuln_id" value="{{data.vuln_id}}">
+                    <input type="hidden" name="scan_id" value="{{data.scan_id}}">
+                    <input type="hidden" name="project_id" value="{{project_id}}">
+                    <button class="btn btn-warning"><i class="fas fa-trash"></i></button>
+                </form>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
             </div>
-            <form action="{% url 'manual_scan:del_vuln' %}" method="POST"
-                    class="form-horizontal">
-                {% csrf_token %}
-                <input type="hidden" name="vuln_id" value="{{data.vuln_id}}">
-                <input type="hidden" name="scan_id" value="{{data.scan_id}}">
-                <input type="hidden" name="project_id" value="{{project_id}}">
-                <button class="btn btn-warning"><i class="fas fa-trash"></i></button>
-            </form>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
