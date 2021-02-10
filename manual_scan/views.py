@@ -27,7 +27,25 @@ from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 from .forms import *
+from django.http import JsonResponse
 
+def ajax_vuln(request):
+    username = request.user.username
+    vuln_id = request.GET.get('id')
+    status = request.GET.get('status')
+    date_time = datetime.now()
+    if vuln_id and status:
+        edit_status = manual_scan_results_db.objects.filter(username=username, vuln_id=vuln_id).update(
+            vuln_status=status,
+            date_time=date_time,
+        )
+
+    print("*******************************************************************************")
+    print(vuln_id, status, edit_status)
+    response = {
+        'status': edit_status
+    }
+    return JsonResponse(response)
 
 def list_scan(request):
     """

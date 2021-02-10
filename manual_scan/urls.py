@@ -25,6 +25,9 @@ urlpatterns = [
     url(r'^$',
         views.list_scan,
         name='list_scan'),
+    url(r'^ajax_vuln/',
+        views.ajax_vuln,
+        name='ajax_vuln'),
     url(r'^add_vuln/',
         views.add_vuln,
         name='add_vuln'),
@@ -49,11 +52,9 @@ urlpatterns = [
     url(r'^add_list_scan/',
         views.add_list_scan,
         name='add_list_scan'),
-
     url(r'^add_vuln_data/',
         views.add_vuln_data,
         name='add_vuln_data'),
-
     url(r'^add_new_vuln/',
         views.add_new_vuln,
         name='add_new_vuln'),
