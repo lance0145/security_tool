@@ -56,9 +56,11 @@
                     }
                     status_field = $("#span").text();
                     if ( status_field == 'Open'){
-                        $("#span").text('Closed')
+                        $("#span").text('Closed');
+                        $("#span").removeClass("badge badge-pill badge-danger").addClass("badge badge-pill badge-success");
                     } else{
-                        $("#span").text('Open')
+                        $("#span").text('Open');
+                        $("#span").removeClass("badge badge-pill badge-success").addClass("badge badge-pill badge-danger");
                     }
                     //console.log("Eto lumabas " + status + status_field);
                 }
@@ -154,7 +156,7 @@
                                         <td><span id="span" class="badge badge-pill badge-success">{{ data.vuln_status }}</span></td>
                                         {% endif %}
                                         {% if data.vuln_status == 'Open' %}
-                                        <td><span id="span" class="badge badge-pill badge-info">{{ data.vuln_status }}</span></td>
+                                        <td><span id="span" class="badge badge-pill badge-danger">{{ data.vuln_status }}</span></td>
                                         {% endif %}
                                         <td>
                                             <a href="{% url 'manual_scan:vuln_details' %}?vuln_id={{data.vuln_id}}">{{data.vuln_name}}</a>
