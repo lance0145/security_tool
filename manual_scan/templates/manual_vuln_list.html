@@ -38,34 +38,40 @@
     });
 
     $(document).ready(function(){
-        $('#button').click(function(){    
-            var self = this;    
-            var status = $(this).text();
-            var id = $(this).val();
-            $.ajax({
-                url: '{% url "manual_scan:ajax_vuln" %}',
-                data: {
-                    'id': id,
-                    'status': status
-                },
-                success: function (response) {
-                    if (status == 'Open'){
-                        $(self).text('Closed');
-                    } else{
-                        $(self).text('Open');
+        var buttons = document.getElementsByName("button");
+        for (var i=0 ; i < buttons.length ; i++){
+            (function(index){
+            buttons[index].onclick = function(){
+                var self = this;
+                var status = $(this).text();
+                var id = $(this).val();
+                $.ajax({
+                    url: '{% url "manual_scan:ajax_vuln" %}',
+                    data: {
+                        'id': id,
+                        'status': status
+                    },
+                    success: function (response) {
+                        if (status == 'Open'){
+                            $(self).text('Closed');
+                        } else{
+                            $(self).text('Open');
+                        }
+                        status_field = $("span[value = "+id+"]");
+                        if ( status_field.text() == 'Open'){
+                            status_field.text('Closed');
+                            status_field.removeClass("badge badge-pill badge-danger").addClass("badge badge-pill badge-success");
+                        } else{
+                            status_field.text('Open');
+                            status_field.removeClass("badge badge-pill badge-success").addClass("badge badge-pill badge-danger");
+                        }
                     }
-                    status_field = $("#span").text();
-                    if ( status_field == 'Open'){
-                        $("#span").text('Closed');
-                        $("#span").removeClass("badge badge-pill badge-danger").addClass("badge badge-pill badge-success");
-                    } else{
-                        $("#span").text('Open');
-                        $("#span").removeClass("badge badge-pill badge-success").addClass("badge badge-pill badge-danger");
-                    }
-                    //console.log("Eto lumabas " + status + status_field);
-                }
-            });
-        });
+                });
+            };
+            })(i)
+        }
+        //$('#button').click(function(){     
+        //});
     });
 
 // $(document).ready(function() {
@@ -136,7 +142,7 @@
                                             <input type="hidden" name="status" value="Closed"> -->
                                             <input type="hidden" name="project_id" value="{{data.project_id}}">
                                             <input type="hidden" name="scan_id" value="{{data.scan_id}}">
-                                            <button id="button" class="btn btn-info btn-mini" value="{{data.vuln_id}}">Closed</button>
+                                            <button name ="button" class="btn btn-info btn-mini" value="{{data.vuln_id}}">Closed</button>
                                         <!-- </form> -->
                                         </td>
                                         {% endif %}
@@ -148,15 +154,15 @@
                                             <input type="hidden" name="status" value="Open"> -->
                                             <input type="hidden" name="project_id" value="{{data.project_id}}">
                                             <input type="hidden" name="scan_id" value="{{data.scan_id}}">
-                                            <button id="button" class="btn btn-info btn-mini" value="{{data.vuln_id}}">Open</button>
+                                            <button name ="button" class="btn btn-info btn-mini" value="{{data.vuln_id}}">Open</button>
                                         <!-- </form> -->
                                         </td>
                                         {% endif %}
                                         {% if data.vuln_status == 'Closed' %}
-                                        <td><span id="span" class="badge badge-pill badge-success">{{ data.vuln_status }}</span></td>
+                                        <td><span value="{{data.vuln_id}}" class="badge badge-pill badge-success">{{ data.vuln_status }}</span></td>
                                         {% endif %}
                                         {% if data.vuln_status == 'Open' %}
-                                        <td><span id="span" class="badge badge-pill badge-danger">{{ data.vuln_status }}</span></td>
+                                        <td><span value="{{data.vuln_id}}" class="badge badge-pill badge-danger">{{ data.vuln_status }}</span></td>
                                         {% endif %}
                                         <td>
                                             <a href="{% url 'manual_scan:vuln_details' %}?vuln_id={{data.vuln_id}}">{{data.vuln_name}}</a>

@@ -1,18 +1,9 @@
 # -*- coding: utf-8 -*-
-#                    _
-#     /\            | |
-#    /  \   _ __ ___| |__   ___ _ __ _   _
-#   / /\ \ | '__/ __| '_ \ / _ \ '__| | | |
-#  / ____ \| | | (__| | | |  __/ |  | |_| |
-# /_/    \_\_|  \___|_| |_|\___|_|   \__, |
-#                                     __/ |
-#                                    |___/
-# Copyright (C) 2017 Anand Tiwari
+# Copyright (C) 20210125 Allan Abendanio
 #
-# Email:   anandtiwarics@gmail.com
-# Twitter: @anandtiwarics
+# Email:   lance0145@gmail.com
 #
-# This file is part of ArcherySec Project.
+# This file is part of Afovos Project.
 
 """ Author: Anand Tiwari """
 
@@ -40,8 +31,8 @@ def ajax_vuln(request):
             date_time=date_time,
         )
 
-    print("*******************************************************************************")
-    print(vuln_id, status, edit_status)
+    # print("*******************************************************************************")
+    # print(vuln_id, status, edit_status)
     response = {
         'status': edit_status
     }
