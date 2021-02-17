@@ -26,60 +26,6 @@
             <div class="span12">
             <div class="widget-box">
                 <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
-                    <h5>Client List</h5>
-                    <div class="buttons"><a data-toggle="modal" href="/projects/create_client_form/"
-                                            class="btn btn-primary btn-mini"><i
-                            class="icon-plus icon-white"></i> Add new Client</a>
-                    </div>
-                </div>
-                <div class="widget-content nopadding">
-                    <table class="table table-bordered data-table">
-                        <thead>
-                            <th>Client</th>
-                            <th>Address</th>
-                            <th>Phone</th>                            
-                            <th>Email</th>
-                            <th>Website</th>
-                            <th>Ip</th>
-                            <th>Note</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>{% for data in all_clients %}
-                            <td>{{data.client_name}}</td>
-                            <td>{{data.client_address}}</td>
-                            <td>{{data.client_phone}}</td>
-                            <td>{{data.client_email}}</td>
-                            <td>{{data.client_website}}</td>
-                            <td>{{data.client_ip}}</td>
-                            <td>{{data.client_note}}</td>
-                            <td class="confirm-delete">
-                                <form action="/projects/clients" method="GET">
-                                    <input type="hidden" name="client_id" value="{{data.client_id}}"/>{% csrf_token %}
-                                    <button class="btn btn-warning"><i class="icon-pencil"></i></button>
-                                </form>
-                            </td>
-                            <td class="confirm-delete">
-                                <form action="/projects/clients" method="POST">
-                                    <input type="hidden" name="client_id" value="{{data.client_id}}"/>{% csrf_token %}
-                                    <button class="btn btn-danger"><i class="icon-remove"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        </div>
-    </div>
-
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span12">
-            <div class="widget-box">
-                <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
                     <h5>Project List</h5>
                     <div class="buttons"><a data-toggle="modal" href="/projects/create_form/"
                                             class="btn btn-primary btn-mini"><i

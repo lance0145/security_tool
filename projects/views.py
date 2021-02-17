@@ -44,20 +44,24 @@ from dashboard.scans_data import scans_query
 
 project_dat = None
 
+def list_clients(request):
+
+    username = request.user.username
+    all_clients = client_db.objects.filter(username=username)
+
+    return render(request,
+                  'clients.html',
+                  {'all_clients': all_clients}
+                  )
 
 def list_projects(request):
 
     username = request.user.username
     all_projects = project_db.objects.filter(username=username)
-    all_clients = client_db.objects.filter(username=username)
-
-    all_projects = project_db.objects.filter(username=username)
-    all_clients = client_db.objects.filter(username=username)
 
     return render(request,
                   'projects.html',
-                  {'all_projects': all_projects,
-                  'all_clients': all_clients}
+                  {'all_projects': all_projects}
                   )
 
 def create_form(request):

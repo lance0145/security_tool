@@ -8,17 +8,20 @@
 
                 <!-- Manual Scans -->
                 <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                            href="{% url 'projects:list_projects' %}" aria-expanded="false"><i
-                        class="fas fa-list-alt"></i><span class="hide-menu">Projects</span></a></li>
+                                            href="{% url 'projects:list_clients' %}" aria-expanded="false"><i
+                        class="fas fa-address-book"></i><span class="hide-menu">Clients</span></a></li>
 
                 <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                            href="{% url 'manual_scan:list_scan' %}" aria-expanded="false"><i
-                        class="fas fa-laptop"></i><span class="hide-menu">Pentest Activity</span></a></li>
+                                            href="{% url 'projects:list_projects' %}" aria-expanded="false"><i
+                        class="fas fa-list-alt"></i><span class="hide-menu">Projects</span></a></li>
                 
                 <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
                                             href="{% url 'manual_scan:scan_list' %}" aria-expanded="false"><i
-                        class="fas fa-hdd"></i><span class="hide-menu">Scan Activity</span></a></li>
+                        class="fas fa-eye"></i><span class="hide-menu">Scans</span></a></li>
 
+                <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                            href="{% url 'manual_scan:list_scan' %}" aria-expanded="false"><i
+                        class="fas fa-user-secret"></i><span class="hide-menu">Vulnerabilities</span></a></li>
 
                 <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
                                             href="#" aria-expanded="false"><i
@@ -77,7 +80,7 @@
                 <!--Static Scan-->
                 <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
                                             href="javascript:void(0)" aria-expanded="false"><i
-                        class="fas fa-file-code"></i><span class="hide-menu">Static Scan</span></a>
+                        class="fas fa-file-code"></i><span class="hide-menu">Static Scans</span></a>
                     <ul aria-expanded="false" class="collapse first-level">
                         <li class="sidebar-item"><a href="{% url 'banditscanner:banditscans_list' %}"
                                                     class="sidebar-link"><i
