@@ -388,7 +388,8 @@ def nmap(request):
 
     return render(request,
                   'nmap_list.html',
-                  {'all_nmap': all_nmap}
+                  {'all_nmap': all_nmap,
+                   'ip': ip_address}
 
                   )
 

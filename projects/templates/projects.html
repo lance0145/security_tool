@@ -19,6 +19,23 @@
                 href="#" class="current">Projects</a></div>
 
         <h1>Projects</h1>
+        <br>
+        <div class="container-fluid">
+            <form class="form-horizontal" method="POST" action="{% url 'manual_scan:list_scan' %}">
+            {% csrf_token %}
+                <label class="col-sm-4 col-form-label">Clients</label>
+                <div class="col-sm-6">
+                    <select name="proj_id" onChange="form.submit();" class="select2 form-control custom-select"
+                            style="width: 25%; height:36px;" >
+                            <option value="" disabled selected>{{proj_name}}</option>
+                        {% for data in all_projects %}
+                            <option value="{{data.project_id}}">{{data.project_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </form>
+        </div>
+        <br>
     </div>
 
     <div class="container-fluid">

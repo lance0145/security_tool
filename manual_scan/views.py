@@ -127,13 +127,15 @@ def vuln_list(request):
         scan_id = request.GET['scan_id']
         project_id = request.GET['project_id']
         all_vuln = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id)#.order_by('severity')
+        scan_url = manual_scans_db.objects.filter(scan_id=scan_id)
 
     return render(request,
                   'manual_vuln_list.html',
                   {'all_vuln': all_vuln,
                    'scan_id': scan_id,
                    'vuln_data': vuln_id,
-                   'project_id': project_id
+                   'project_id': project_id,
+                   'scan_url': scan_url[0].scan_url
                    }
                   )
 
