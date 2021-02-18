@@ -99,7 +99,7 @@ def create_client(request):
             client_note=client_note,
         )
 
-        return HttpResponseRedirect(reverse('projects:list_projects'))
+        return HttpResponseRedirect(reverse('projects:list_clients'))
 
     if request.method == 'POST':
         client_id = uuid.uuid4()
@@ -123,7 +123,7 @@ def create_client(request):
                                   )
         save_client.save()
 
-        return HttpResponseRedirect(reverse('projects:list_projects'))
+        return HttpResponseRedirect(reverse('projects:list_clients'))
 
 def create(request):
 
@@ -389,4 +389,4 @@ def clients(request):
 
         # messages.success(request, "Deleted Client")
 
-    return HttpResponseRedirect(reverse('projects:list_projects'))
+    return HttpResponseRedirect(reverse('projects:list_clients'))

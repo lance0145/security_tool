@@ -415,19 +415,24 @@ def del_scan(request):
     username = request.user.username
     if request.method == 'POST':
         get_scan_id = request.POST.get('scan_id')
+        del_scan = manual_scan_results_db.objects.filter(username=username, scan_id=get_scan_id)
+        del_scan.delete()
 
-        scan_item = str(get_scan_id)
-        value = scan_item.replace(" ", "")
-        value_split = value.split(',')
-        split_length = value_split.__len__()
-        for i in range(0, split_length):
-            scan_id = value_split.__getitem__(i)
+        del_scan_info = manual_scans_db.objects.filter(username=username, scan_id=get_scan_id)
+        del_scan_info.delete()
 
-            del_scan = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id)
-            del_scan.delete()
+        # scan_item = str(get_scan_id)
+        # value = scan_item.replace(" ", "")
+        # value_split = value.split(',')
+        # split_length = value_split.__len__()
+        # for i in range(0, split_length):
+        #     scan_id = value_split.__getitem__(i)
 
-            del_scan_info = manual_scans_db.objects.filter(username=username, scan_id=scan_id)
-            del_scan_info.delete()
+        #     del_scan = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id)
+        #     del_scan.delete()
+
+        #     del_scan_info = manual_scans_db.objects.filter(username=username, scan_id=scan_id)
+        #     del_scan_info.delete()
 
         return HttpResponseRedirect(reverse('manual_scan:list_scan'))
 
