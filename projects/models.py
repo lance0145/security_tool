@@ -58,6 +58,7 @@ class project_db(models.Model):
     username = models.CharField(max_length=256, null=True)
     project_note = models.TextField(blank=True, null=True)
     client = models.TextField(blank=True, null=True)
+    client_id = models.UUIDField(null=True)
     #client = models.ForeignKey(client_db, null=True, on_delete=models.SET_NULL)
 
 class project_scan_db(models.Model):

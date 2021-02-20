@@ -51,11 +51,6 @@ def ajax_vuln(request):
     return JsonResponse(response)
 
 def list_scan(request):
-    """
-
-    :param request:
-    :return:
-    """
     username = request.user.username
     if request.method == 'POST':
         project_id = request.POST.get('proj_id', )
@@ -74,11 +69,6 @@ def list_scan(request):
                   )
 
 def add_list_scan(request):
-    """
-
-    :param request:
-    :return:
-    """
     username = request.user.username
     all_projects = project_db.objects.filter(username=username)
 

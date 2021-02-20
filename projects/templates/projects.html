@@ -28,15 +28,15 @@
                             <h1 class="card-title">Project List</h1>
                         </div>
                         <br>
-                        <form class="form-horizontal" method="POST" action="{% url 'manual_scan:list_scan' %}">
+                        <form class="form-horizontal" method="POST" action="{% url 'projects:list_projects' %}">
                         {% csrf_token %}
                             <label class="col-sm-4 col-form-label">Clients</label>
                             <div class="col-sm-6">
-                                <select name="proj_id" onChange="form.submit();" class="select2 form-control custom-select"
+                                <select name="cli_id" onChange="form.submit();" class="select2 form-control custom-select"
                                         style="width: 50%; height:36px;" >
-                                        <option value="" disabled selected>{{proj_name}}</option>
-                                    {% for data in all_projects %}
-                                        <option value="{{data.project_id}}">{{data.project_name}}</option>
+                                        <option value="" disabled selected>{{cli_name}}</option>
+                                    {% for data in all_clients %}
+                                        <option value="{{data.client_id}}">{{data.client_name}}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -83,7 +83,7 @@
                                         <td>{{data.project_end}}</td>
                                         <td>{{data.project_owner}}</td>
                                         <td>{{data.pentester}}</td>
-                                        <td>{{data.client}}</td>
+                                        <td>{{data.client_id}}</td>
                                         <td>{{data.project_note}}</td>
                                         <td>
                                             <form action="/projects/" method="GET">

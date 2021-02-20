@@ -57,12 +57,38 @@ def list_clients(request):
 def list_projects(request):
 
     username = request.user.username
-    all_projects = project_db.objects.filter(username=username)
+    if request.method == 'POST':
+        client_id = request.POST.get('cli_id', )
+        all_projects = project_db.objects.filter(username=username, client_id=client_id)
+        cli_name = client_db.objects.filter(username=username, client_id=client_id)
+    else:
+        all_projects = project_db.objects.filter(username=username)
+        cli_name = client_db.objects.filter(username=username)
+    all_clients = client_db.objects.filter(username=username)
 
     return render(request,
                   'projects.html',
-                  {'all_projects': all_projects}
+                  {'all_clients': all_clients,
+                   'cli_name': cli_name[0].client_name,
+                   'all_projects': all_projects}
                   )
+    
+    # username = request.user.username
+    # if request.method == 'POST':
+    #     project_id = request.POST.get('proj_id', )
+    #     all_scans = manual_scans_db.objects.filter(username=username, project_id=project_id)
+    #     proj_name = project_db.objects.filter(username=username, project_id=project_id)
+    # else:
+    #     all_scans = manual_scans_db.objects.filter(username=username)
+    #     proj_name = project_db.objects.filter(username=username)
+    # all_projects = project_db.objects.filter(username=username)
+
+    # return render(request,
+    #               'list_scan.html',
+    #               {'all_projects': all_projects,
+    #                'proj_name': proj_name[0].project_name,
+    #                'all_scans': all_scans}
+    #               )
 
 def create_form(request):
 
@@ -138,7 +164,7 @@ def create(request):
         project_disc = request.POST.get("project_disc")
         project_note = request.POST.get("project_note")
         pentester = request.POST.get("pentester")
-        client = request.POST.get("client", )
+        client_id = request.POST.get("client_id", )
 
         project_db.objects.filter(project_id=project_id
         ).update(
@@ -149,7 +175,7 @@ def create(request):
             project_disc=project_disc,
             project_note=project_note,
             pentester=pentester,
-            client=client
+            client_id=client_id
         )
 
         return HttpResponseRedirect(reverse('projects:list_projects'))
@@ -162,7 +188,7 @@ def create(request):
         project_owner = request.POST.get("projectowner", )
         project_disc = request.POST.get("project_disc", )
         date_time = datetime.datetime.now()
-        client = request.POST.get("client", )
+        client_id = request.POST.get("client_id", )
         project_note = request.POST.get("project_note", )
         pentester = request.POST.get("pentester", )
 
@@ -173,7 +199,7 @@ def create(request):
                                   project_end=project_end,
                                   project_owner=project_owner,
                                   project_disc=project_disc,
-                                  client=client,
+                                  client_id=client_id,
                                   project_note=project_note,
                                   pentester=pentester,
                                   date_time=date_time,
@@ -196,6 +222,8 @@ def create(request):
                                   low_net=0,
                                   low_web=0,
                                   low_static=0)
+        print("************************************************************")
+        print(client_id)
         save_project.save()
 
         # messages.success(request, "Project Created")

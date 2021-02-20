@@ -63,10 +63,10 @@
                                         <div class="form-group row">
                                             <label class="col-sm-4 col-form-label">Client :</label>
                                                 <div class="col-sm-6">
-                                                    <select name="client" class="select2 form-control custom-select"
+                                                    <select name="client_id" class="select2 form-control custom-select"
                                                             style="width: 50%; height:36px;">
                                                         {% for data in all_clients %}
-                                                            <option value="{{data.client_name}}">{{data.client_name}}</option>
+                                                            <option value="{{data.client_id}}">{{data.client_name}}</option>
                                                         {% endfor %}
                                                     </select>
                                                     <!-- <div class="btn-group"><a
