@@ -65,6 +65,7 @@
                                                 <div class="col-sm-6">
                                                     <select name="client_id" class="select2 form-control custom-select"
                                                             style="width: 50%; height:36px;">
+                                                            <option value="" disabled selected>{{cli_name}}</option>
                                                         {% for data in all_clients %}
                                                             <option value="{{data.client_id}}">{{data.client_name}}</option>
                                                         {% endfor %}

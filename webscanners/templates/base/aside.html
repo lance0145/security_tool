@@ -22,6 +22,10 @@
                 <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
                                             href="{% url 'manual_scan:list_scan' %}" aria-expanded="false"><i
                         class="fas fa-user-secret"></i><span class="hide-menu">Vulnerabilities</span></a></li>
+                
+                <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                            href="{% url 'networkscanners:ip_scan' %}" aria-expanded="false"><i
+                        class="fas fa-cubes"></i><span class="hide-menu">NMAP Scans</span></a></li>
 
                 <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
                                             href="#" aria-expanded="false"><i
@@ -30,8 +34,8 @@
                         <li class="sidebar-item"><a href="{% url 'webscanners:index' %}" class="sidebar-link"><i
                                 class=" fas fa-play"></i><span class="hide-menu"> Dynamic Scans </span></a>
                         </li>
-                        <li class="sidebar-item"><a href="{% url 'networkscanners:ip_scan' %}" class="sidebar-link"><i
-                                class="fas fa-cubes"></i><span class="hide-menu"> Infrastructure Scans </span></a></li>
+                        <!-- <li class="sidebar-item"><a href="{% url 'networkscanners:ip_scan' %}" class="sidebar-link"><i
+                                class="fas fa-cubes"></i><span class="hide-menu"> Infrastructure Scans </span></a></li> -->
                     </ul>
                 </li>
 

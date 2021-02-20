@@ -25,7 +25,7 @@
                         <br>
                         <br>
                         <div class="d-md-flex align-items-center">
-                            <h1 class="card-title">Project List</h1>
+                            <h1 class="card-title">{{cli_name}} Project List</h1>
                         </div>
                         <br>
                         <form class="form-horizontal" method="POST" action="{% url 'projects:list_projects' %}">
@@ -58,7 +58,7 @@
                                         <th>Project End Date</th>
                                         <th>Project Owner</th>
                                         <th>Pentester</th>
-                                        <th>Client</th>
+                                        <!-- <th>Client</th> -->
                                         <th>Note</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
@@ -83,7 +83,7 @@
                                         <td>{{data.project_end}}</td>
                                         <td>{{data.project_owner}}</td>
                                         <td>{{data.pentester}}</td>
-                                        <td>{{data.client_id}}</td>
+                                        <!-- <td>{{data.client_id}}</td> -->
                                         <td>{{data.project_note}}</td>
                                         <td>
                                             <form action="/projects/" method="GET">

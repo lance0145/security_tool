@@ -25,10 +25,12 @@ from django.http import JsonResponse
 def scan_list(request):
     username = request.user.username
     all_nmap = nmap_scan_db.objects.filter(username=username)
+    all_projects = project_db.objects.filter(username=username)
 
     return render(request,
                   'scan_list.html',
-                  {'all_nmap': all_nmap}
+                  {'all_nmap': all_nmap,
+                  'all_projects': all_projects,}
 
                   )
 
