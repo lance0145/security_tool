@@ -1,60 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE nmaprun>
 <?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
-<!-- Nmap 7.91 scan initiated Sat Feb 20 21:58:08 2021 as: nmap -v -sV -Pn -p 1-65535 -oX output.xml 170.178.188.91 -->
-<nmaprun scanner="nmap" args="nmap -v -sV -Pn -p 1-65535 -oX output.xml 170.178.188.91" start="1613858288" startstr="Sat Feb 20 21:58:08 2021" version="7.91" xmloutputversion="1.05">
+<!-- Nmap 7.91 scan initiated Sun Feb 21 06:13:53 2021 as: nmap -v -sV -Pn -p 1-65535 -oX output.xml 170.178.188.91 -->
+<nmaprun scanner="nmap" args="nmap -v -sV -Pn -p 1-65535 -oX output.xml 170.178.188.91" start="1613888033" startstr="Sun Feb 21 06:13:53 2021" version="7.91" xmloutputversion="1.05">
 <scaninfo type="syn" protocol="tcp" numservices="65535" services="1-65535"/>
 <verbose level="1"/>
 <debugging level="0"/>
-<taskbegin task="Parallel DNS resolution of 1 host." time="1613858288"/>
-<taskend task="Parallel DNS resolution of 1 host." time="1613858289"/>
-<taskbegin task="SYN Stealth Scan" time="1613858289"/>
-<taskprogress task="SYN Stealth Scan" time="1613858320" percent="16.05" remaining="163" etc="1613858482"/>
-<taskprogress task="SYN Stealth Scan" time="1613858350" percent="20.40" remaining="239" etc="1613858588"/>
-<taskprogress task="SYN Stealth Scan" time="1613858389" percent="28.12" remaining="256" etc="1613858645"/>
-<taskprogress task="SYN Stealth Scan" time="1613858437" percent="38.49" remaining="237" etc="1613858674"/>
-<taskprogress task="SYN Stealth Scan" time="1613858482" percent="47.68" remaining="212" etc="1613858694"/>
-<taskprogress task="SYN Stealth Scan" time="1613858512" percent="54.02" remaining="190" etc="1613858702"/>
-<taskprogress task="SYN Stealth Scan" time="1613858542" percent="60.13" remaining="168" etc="1613858710"/>
-<taskprogress task="SYN Stealth Scan" time="1613858587" percent="67.22" remaining="146" etc="1613858732"/>
-<taskprogress task="SYN Stealth Scan" time="1613858626" percent="73.59" remaining="121" etc="1613858747"/>
-taskprogress task="SYN Stealth Scan" time="1613858404" percent="68.07" remaining="168" etc="1613858572"/>
-<taskprogress task="SYN Stealth Scan" time="1613858434" percent="75.15" remaining="129" etc="1613858562"/>
-<taskprogress task="SYN Stealth Scan" time="1613858464" percent="80.89" remaining="99" etc="1613858563"/>
-<taskprogress task="SYN Stealth Scan" time="1613858494" percent="87.21" remaining="66" etc="1613858560"/>
-<taskprogress task="SYN Stealth Scan" time="1613858530" percent="92.84" remaining="38" etc="1613858567"/>
-<taskend task="SYN Stealth Scan" time="1613858576" extrainfo="65535 total ports"/>
-<taskbegin task="Service scan" time="1613858576"/>
-<taskend task="Service scan" time="1613858583" extrainfo="4 services on 1 host"/>
-<taskbegin task="NSE" time="1613858583"/>
-<taskend task="NSE" time="1613858584"/>
-<taskbegin task="NSE" time="1613858584"/>
-<taskend task="NSE" time="1613858585"/>
-<host starttime="1613858046" endtime="1613858585"><status state="up" reason="user-set" reason_ttl="0"/>
-<address addr="170.178.188.91" addrtype="ipv4"/>
-<hostnames>
-</hostnames>
-<ports><extraports state="closed" count="65520">
-<extrareasons reason="resets" count="65520"/>
-</extraports>
-<port protocol="tcp" portid="21"><state state="filtered" reason="no-response" reason_ttl="0"/><service name="ftp" method="table" conf="3"/></port>
-<port protocol="tcp" portid="22"><state state="open" reason="syn-ack" reason_ttl="49"/><service name="ssh" product="OpenSSH" version="8.2p1 Ubuntu 4ubuntu0.1" extrainfo="Ubuntu Linux; protocol 2.0" ostype="Linux" method="probed" conf="10"><cpe>cpe:/a:openbsd:openssh:8.2p1</cpe><cpe>cpe:/o:linux:linux_kernel</cpe></service></port>
-<port protocol="tcp" portid="25"><state state="filtered" reason="no-response" reason_ttl="0"/><service name="smtp" method="table" conf="3"/></port>
-<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="49"/><service name="http" product="Apache httpd" version="2.4.41" extrainfo="(Ubuntu)" method="probed" conf="10"><cpe>cpe:/a:apache:http_server:2.4.41</cpe></service></port>
-<port protocol="tcp" portid="111"><state state="filtered" reason="no-response" reason_ttl="0"/><service name="rpcbind" method="table" conf="3"/></port>
-<port protocol="tcp" portid="135"><state state="filtered" reason="no-response" reason_ttl="0"/><service name="msrpc" method="table" conf="3"/></port>
-<port protocol="tcp" portid="517"><state state="filtered" reason="no-response" reason_ttl="0"/><service name="talk" method="table" conf="3"/></port>
-<port protocol="tcp" portid="518"><state state="filtered" reason="no-response" reason_ttl="0"/><service name="ntalk" method="table" conf="3"/></port>
-<port protocol="tcp" portid="554"><state state="filtered" reason="no-response" reason_ttl="0"/><service name="rtsp" method="table" conf="3"/></port>
-<port protocol="tcp" portid="1720"><state state="filtered" reason="no-response" reason_ttl="0"/><service name="h323q931" method="table" conf="3"/></port>
-<port protocol="tcp" portid="1723"><state state="filtered" reason="no-response" reason_ttl="0"/><service name="pptp" method="table" conf="3"/></port>
-<port protocol="tcp" portid="2000"><state state="filtered" reason="no-response" reason_ttl="0"/><service name="cisco-sccp" method="table" conf="3"/></port>
-<port protocol="tcp" portid="5060"><state state="filtered" reason="no-response" reason_ttl="0"/><service name="sip" method="table" conf="3"/></port>
-<port protocol="tcp" portid="5432"><state state="open" reason="syn-ack" reason_ttl="49"/><service name="postgresql" product="PostgreSQL DB" version="9.6.0 or later" servicefp="SF-Port5432-TCP:V=7.91%I=7%D=2/20%Time=60318717%P=x86_64-pc-linux-gnu%r(SMBProgNeg,8C,&quot;E\0\0\0\x8bSFATAL\0VFATAL\0C0A000\0Munsupported\x20frontend\x20protocol\x2065363\.19778:\x20server\x20supports\x202\.0\x20to\x203\.0\0Fpostmaster\.c\0L2087\0RProcessStartupPacket\0\0&quot;);" method="probed" conf="10"><cpe>cpe:/a:postgresql:postgresql</cpe></service></port>
-<port protocol="tcp" portid="7073"><state state="open" reason="syn-ack" reason_ttl="49"/><service name="http" product="Werkzeug httpd" version="0.11.15" extrainfo="Python 3.8.5" method="probed" conf="10"><cpe>cpe:/a:python:python:3.8.5</cpe></service></port>
-</ports>
-<times srtt="162851" rttvar="1174" to="167547"/>
-</host>
-<runstats><finished time="1613858585" timestr="Sat Feb 20 22:03:05 2021" summary="Nmap done at Sat Feb 20 22:03:05 2021; 1 IP address (1 host up) scanned in 541.26 seconds" elapsed="541.26" exit="success"/><hosts up="1" down="0" total="1"/>
-</runstats>
-</nmaprun>
+<taskbegin task="Parallel DNS resolution of 1 host." time="1613888034"/>
+<taskend task="Parallel DNS resolution of 1 host." time="1613888038"/>
+<taskbegin task="SYN Stealth Scan" time="1613888038"/>
+<taskprogress task="SYN Stealth Scan" time="1613888069" percent="1.13" remaining="2703" etc="1613890772"/>
+<taskprogress task="SYN Stealth Scan" time="1613888303" percent="8.52" remaining="2845" etc="1613891147"/>
+<taskprogress task="SYN Stealth Scan" time="1613888354" percent="9.50" remaining="3012" etc="1613891366"/>
+<taskprogress task="SYN Stealth Scan" time="1613888663" percent="18.06" remaining="2837" etc="1613891499"/>
+<taskprogress task="SYN Stealth Scan" time="1613888852" percent="23.41" remaining="2663" etc="1613891515"/>
+<taskprogress task="SYN Stealth Scan" time="1613888939" percent="26.64" remaining="2482" etc="1613891420"/>
+<taskprogress task="SYN Stealth Scan" time="1613889065" percent="30.77" remaining="2312" etc="1613891376"/>
+<taskprogress task="SYN Stealth Scan" time="1613889197" percent="35.14" remaining="2140" etc="1613891336"/>
+<taskprogress task="SYN Stealth Scan" time="1613922400" percent="37.04" remaining="58404" etc="1613980804"/>

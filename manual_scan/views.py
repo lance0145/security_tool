@@ -24,12 +24,19 @@ from django.http import JsonResponse
 
 def scan_list(request):
     username = request.user.username
-    all_nmap = nmap_scan_db.objects.filter(username=username)
+    if request.method == 'POST':
+        project_id = request.POST.get('proj_id', )
+        all_nmap = nmap_scan_db.objects.filter(username=username, project_id=project_id)
+        proj_name = project_db.objects.filter(username=username, project_id=project_id)
+    else:
+        all_nmap = nmap_scan_db.objects.filter(username=username)
+        proj_name = project_db.objects.filter(username=username)
     all_projects = project_db.objects.filter(username=username)
 
     return render(request,
                   'scan_list.html',
                   {'all_nmap': all_nmap,
+                  'proj_name': proj_name[0].project_name,
                   'all_projects': all_projects,}
 
                   )

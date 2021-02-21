@@ -62,7 +62,7 @@
                             <h1 class="card-title">Scan Summary</h1>
                         </div>
                         <br>
-                        <form class="form-horizontal" method="POST" action="{% url 'manual_scan:list_scan' %}">
+                        <form class="form-horizontal" method="POST" action="{% url 'manual_scan:scan_list' %}">
                         {% csrf_token %}
                             <label class="col-sm-4 col-form-label">Projects</label>
                             <div class="col-sm-6">
