@@ -511,7 +511,7 @@ def OpenVAS_xml_upload(request):
                                    project_id=project_id,
                                    username=username,
                                    )
-            return HttpResponseRedirect(reverse('tools:nmap_scan'))
+            return HttpResponseRedirect(reverse('manual_scan:scan_list'))
 
     return render(request,
                   'net_upload_xml.html',
