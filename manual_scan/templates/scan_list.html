@@ -121,9 +121,15 @@
                                             <form action="/tools/nmap_scan_del/" method="post" class="forms-sample">
 
                                                 {% csrf_token %}
-                                                <input type="hidden" name="ip_address" value="{{data.scan_ip}}"/>
+                                                <input type="hidden" name="scn_id" value="{{data.scan_id}}"/>
                                                 <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                             </form>
+
+                                            <!-- <form action="/projects/" method="POST">
+                                                <input type="hidden" name="proj_id" value="{{data.project_id}}"/>{% csrf_token %}
+                                                <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                            </form> -->
+
                                         </td>
                                         {% endfor %}
                                     </tr>
