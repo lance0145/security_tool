@@ -333,6 +333,23 @@ def ip_scan(request):
                    'message': all_notify,
                    })
 
+def open_vas(request):
+    username = request.user.username
+    """
+    List all network scan IP's.
+    :param request:
+    :return:
+    """
+    all_scans = openvas_scan_db.objects.filter(username=username)
+    all_proj = project_db.objects.filter(username=username)
+
+    all_notify = Notification.objects.unread()
+    return render(request,
+                  'ipscan_vas.html',
+                  {'all_scans': all_scans,
+                   'all_proj': all_proj,
+                   'message': all_notify,
+                   })
 
 def openvas_details(request):
     username = request.user.username

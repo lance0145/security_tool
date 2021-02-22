@@ -1,0 +1,116 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block body %}
+
+<script src="{% static 'matrix-admin-bt4/dist/js/jquery-1.9.1.min.js' %}"></script>
+
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-md-flex align-items-center">
+                            <h1 class="card-title">OpenVAS Scans</h1>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <form id="start_scan" class="form-horizontal">{% csrf_token %}
+                                        <div class="card-body">
+                                            <h4 class="card-title"></h4>
+
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 text-right control-label col-form-label">IP's</label>
+                                                <div class="col-sm-9">
+                                                    <textarea class="form-control" name="ip" id="ip" value="{{ ip }}"
+                                                              placeholder="Place IP's here (comma seperated)...."></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title"></h5>
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 m-t-15">Projects</label>
+                                                    <div class="col-md-9">
+                                                        <select id="project_id" name="project_id"
+                                                                class="select2 form-control custom-select"
+                                                                style="width: 100%; height:36px;">
+                                                            {% for data in all_proj %}
+                                                            <option value="{{data.project_id}}">{{data.project_name}}
+                                                            </option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="controls">
+                                                    <input type="submit" class="btn btn-primary" value="Launch">
+                                                    <!-- <a href="{% url 'networkscanners:net_scan_schedule' %}"
+                                                       class="btn btn-success">Scan
+                                                        Schedule</a> -->
+                                                </div>
+                                                <div id='status'></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="card">
+                    <div class="card-body">
+                        <div class="d-md-flex align-items-center">
+                            <h5 class="card-title">Scanners </h5>
+                        </div>
+                        <br>
+                        <p>Select your scanner(s) from the ones available:</p>
+                        <div class="custom-control custom-control-inline">
+                            <div class="checkbox inline checkbox-slider--b-flat checkbox-slider--b"
+                                 style="width: 200px;">
+                                <label>
+                                    <input name="optradio1" type="checkbox"><span>OpenVAS</span>
+                                </label>
+                            </div>
+                            <div class="checkbox inline checkbox-slider--b-flat checkbox-slider--b"
+                                 style="width: 200px;">
+                                <label>
+                                    <input name="optradio2" type="checkbox"><span>NMAP</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    setInterval('autoRefresh_div()', 10000);
+    $(document).on('submit', '#start_scan', function(e){
+        $('#status').text('Scan started.....').css ({'color': '#5bb75b', 'margin-left': '200px'});
+        e.preventDefault();
+        opt = true;
+        $.ajax({
+            type: 'POST',
+            url: '{% url "tools:nmap" %}',
+            data: {
+                ip: $('#ip').val(),
+                project_id: $('#project_id').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            // success:function(){
+            // }
+        }); 
+    });
+</script>
+
+{% endblock %}

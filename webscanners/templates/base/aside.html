@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 <aside class="left-sidebar" data-sidebarbg="skin5">
     <div class="scroll-sidebar">
         <nav class="sidebar-nav">
@@ -46,6 +47,19 @@
                     </ul>
                 </li>
 
+                <!--Infrastructure Scan-->
+                <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
+                                            href="#" aria-expanded="false"><i
+                        class="fas fa-dog"></i><span class="hide-menu">OpenVAS</span></a>
+                    <ul aria-expanded="false" class="collapse  first-level">
+                        <li class="sidebar-item"><a href="{% url 'networkscanners:open_vas' %}" class="sidebar-link"><i
+                                class="far fa-paper-plane"></i><span class="hide-menu">OpenVAS Scan</span></a></li>
+                        <li class="sidebar-item"><a href="{% url 'networkscanners:index' %}" class="sidebar-link"><i
+                                class="fas fa-user-secret"></i><span class="hide-menu">OpenVAS Vulnerability</span></a>
+                        </li>
+                    </ul>
+                </li>
+
                 <!-- Launch Scans -->
                 <!-- <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
                                             href="#" aria-expanded="false"><i
@@ -84,22 +98,7 @@
                                                     class="sidebar-link"><i
                                 class="fas fa-list"></i><span class="hide-menu"> Acunetix </span></a></li>
                     </ul>
-                </li> -->
-
-                <!--Infrastructure Scan-->
-                <!-- <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
-                                            href="javascript:void(0)" aria-expanded="false"><i
-                        class="fas fa-sitemap"></i><span class="hide-menu">Infrastructure Scans</span></a>
-                    <ul aria-expanded="false" class="collapse  first-level">
-                        <li class="sidebar-item"><a href="{% url 'networkscanners:index' %}" class="sidebar-link"><i
-                                class="fas fa-server"></i><span class="hide-menu"> OpenVAS Scans </span></a>
-                        </li>
-                        <li class="sidebar-item"><a href="{% url 'nessus:nessus_list' %}" class="sidebar-link"><i
-                                class="fas fa-assistive-listening-systems"></i><span
-                                class="hide-menu"> Nessus Scans </span></a>
-                        </li>
-                    </ul>
-                </li> -->
+                </li> -->                
 
                 <!--Static Scan-->
                 <!-- <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"

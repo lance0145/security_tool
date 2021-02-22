@@ -354,9 +354,7 @@ def nmap(request):
         ip_address = request.GET['ip']
 
         all_nmap = nmap_result_db.objects.filter(username=username, ip_address=ip_address)
-    if request.method == 'POST':
-        print("pumasok ako di2")
-    
+    if request.method == 'POST':    
         ip_address = request.POST.get('ip')
         project_id = request.POST.get('project_id')
         scan_id = uuid.uuid4()
