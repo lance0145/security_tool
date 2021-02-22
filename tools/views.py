@@ -368,7 +368,7 @@ def nmap(request):
             print('Completed nmap scan')
 
         except Exception as e:
-            print('Eerror in nmap scan:', e)
+            print('Error in nmap scan:', e)
 
         try:
             tree = ET.parse('output.xml')

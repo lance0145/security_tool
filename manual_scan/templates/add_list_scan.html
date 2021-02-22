@@ -15,11 +15,23 @@
                             <div class="form-group">
                                 <form class="form-horizontal" method="POST" action="{% url 'manual_scan:add_list_scan' %}">
                                     {% csrf_token %}
-                                    <div class="form-group row">
-                                        <label class="col-md-3 m-t-5">Target</label>
+                                    <!-- <div class="form-group row">
+                                        <label class="col-md-3 m-t-5">Client</label>
                                         <div class="col-sm-9">
                                             <input type="text" name="scan_url" class="form-control"
                                                    value="" placeholder="Target URL or Host">
+                                        </div>
+                                    </div> -->
+                                    <div class="form-group row">
+                                        <label class="col-md-3 m-t-5">Client</label>
+                                        <div class="col-md-9">
+                                            <select name="scan_url" id="client_id"
+                                                    class="select2 form-control custom-select"
+                                                    style="width: 100%; height:36px;">
+                                                {% for data in all_clients %}
+                                                <option value="{{data.client_name}}">{{data.client_name}}</option>
+                                                {% endfor %}
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
