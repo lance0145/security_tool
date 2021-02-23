@@ -50,11 +50,9 @@
                                             <div class="card-body">
                                                 <div class="controls">
                                                     <input type="submit" class="btn btn-primary" value="Launch">
-                                                    <!-- <a href="{% url 'networkscanners:net_scan_schedule' %}"
-                                                       class="btn btn-success">Scan
-                                                        Schedule</a> -->
+                                                    <label class="col-md-3 m-t-15" id="label" for="file"></label>
+                                                    <progress id="progress" value ="0" max="100"></progress>
                                                 </div>
-                                                <div id='status'></div>
                                             </div>
                                         </div>
                                     </form>
@@ -63,30 +61,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- <div class="card">
-                    <div class="card-body">
-                        <div class="d-md-flex align-items-center">
-                            <h5 class="card-title">Scanners </h5>
-                        </div>
-                        <br>
-                        <p>Select your scanner(s) from the ones available:</p>
-                        <div class="custom-control custom-control-inline">
-                            <div class="checkbox inline checkbox-slider--b-flat checkbox-slider--b"
-                                 style="width: 200px;">
-                                <label>
-                                    <input name="optradio1" type="checkbox"><span>OpenVAS</span>
-                                </label>
-                            </div>
-                            <div class="checkbox inline checkbox-slider--b-flat checkbox-slider--b"
-                                 style="width: 200px;">
-                                <label>
-                                    <input name="optradio2" type="checkbox"><span>NMAP</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
@@ -94,9 +68,8 @@
 
 
 <script type="text/javascript">
-    setInterval('autoRefresh_div()', 10000);
+    // setInterval('autoRefresh_div()', 10000);
     $(document).on('submit', '#start_scan', function(e){
-        $('#status').text('Scan started.....').css ({'color': '#5bb75b', 'margin-left': '200px'});
         e.preventDefault();
         opt = true;
         $.ajax({
@@ -107,8 +80,24 @@
                 project_id: $('#project_id').val(),
                 csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
             },
-            // success:function(){
-            // }
+            beforeSend:function(){
+                //$('#label').show;
+                $('#label').text('Scan Started:');
+                //$('#progress').val(35);
+                var progression = 0,
+                progress = setInterval(function() 
+                {
+                    $('#progress').val(progression);
+                    if(progression == 100) {
+                        $('#label').text('Please wait:');
+                    } else
+                        progression += 10;
+                    
+                }, 1000);
+            },
+            success:function(){
+                //$('#label').text('Done, data saved');
+            }
         }); 
     });
 </script>
