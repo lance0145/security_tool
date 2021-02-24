@@ -68,49 +68,53 @@
 
 
 <script type="text/javascript">
-    $(document).on('submit', '#start_scan', function(e){
+    $(document).on('submit', '#start_scan', function(e){        
         e.preventDefault();
-        opt = true;
-        $.ajax({
-            type: 'POST',
-            url: '{% url "tools:nmap" %}',
-            data: {
-                ip: $('#ip').val(),
-                project_id: $('#project_id').val(),
-                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
-            },
-            beforeSend:function(){
-                $('#label').text('Server started scanning...');
-                $('#progress').show();
-                var progression = 0,
-                progress = setInterval(function() 
-                {
-                    $('#progress').val(progression);
-                    if(progression == 100) {
-                        $('#label').text('Please wait, will prompt...');
-                    } else
-                        progression += 10;
-                    
-                }, 1000);
-            },
-            success:function(){
-                $('#label').text('Done, scan result saved...');
-                $('#progress').hide();
-            },
-            // xhr:function () {
-            //     xhr = jQuery.ajaxSettings.xhr()
-            //     interval = setInterval(function() 
-            //     {
-            //         console.log(xhr.responseText.length);
-            //         if (xhr.readyState > 2){
-            //             total = parseInt(xhr.getResponseHeader('Content-length'));
-            //             completed = parseInt(xhr.responseText.length);
-            //             percentage = (100.0 / total * completed).toFixed(2);
-            //             console.log("Completed #{percentage}%");
-            //         }
-            //     }, 50);
-            // }
-        }); 
+        IpAddr=$('#ip').val();
+        var ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;  
+        if(IpAddr.match(ipformat))
+            $.ajax({
+                type: 'POST',
+                url: '{% url "tools:nmap" %}',
+                data: {
+                    ip: $('#ip').val(),
+                    project_id: $('#project_id').val(),
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                },
+                beforeSend:function(){
+                    $('#label').text('Server started scanning...');
+                    $('#progress').show();
+                    var progression = 0,
+                    progress = setInterval(function() 
+                    {
+                        $('#progress').val(progression);
+                        if(progression == 100) {
+                            $('#label').text('Please wait, will prompt...');
+                        } else
+                            progression += 10;
+                        
+                    }, 1000);
+                },
+                success:function(){
+                    $('#label').text('Done, scan result saved...');
+                    $('#progress').hide();
+                },
+                // xhr:function () {
+                //     xhr = jQuery.ajaxSettings.xhr()
+                //     interval = setInterval(function() 
+                //     {
+                //         console.log(xhr.responseText.length);
+                //         if (xhr.readyState > 2){
+                //             total = parseInt(xhr.getResponseHeader('Content-length'));
+                //             completed = parseInt(xhr.responseText.length);
+                //             percentage = (100.0 / total * completed).toFixed(2);
+                //             console.log("Completed #{percentage}%");
+                //         }
+                //     }, 50);
+                // }
+            });
+        else
+            $('#label').text('Invalid IPs, try again...');
     });
 
     $(document).ready(function() {
