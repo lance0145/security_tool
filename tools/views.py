@@ -357,13 +357,19 @@ def nmap(request):
     if request.method == 'POST':    
         ip_address = request.POST.get('ip')
         project_id = request.POST.get('project_id')
+        command = request.POST.get('command')
         scan_id = uuid.uuid4()
 
         try:
             print('Start Nmap scan')
-            subprocess.check_output(
-                ['nmap', '-v', '-sV', '-Pn', '-p', '1-65535', ip_address, '-oX', 'output.xml']
-            )
+            if command:
+                print("scanning ", command)
+                reruns = command.split()
+                subprocess.run(reruns)
+            else:
+                subprocess.check_output(
+                    ['nmap', '-v', '-sV', '-Pn', '-p', '1-65535', ip_address, '-oX', 'output.xml']
+                )
 
             print('Completed nmap scan')
 

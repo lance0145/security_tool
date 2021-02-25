@@ -45,154 +45,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 m-t-15">NMAP default command</label>
+                                                    <label class="col-md-3 m-t-15">NMAP command</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" name="pentester"
+                                                        <input id="command" type="text" name="pentester"
                                                                class="form-control"
                                                                placeholder="nmap -v -sV -Pn -p 1-65535 ip_address -oX output.xml"/>
                                                     </div>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <label class="col-md-3 m-t-15">HOST DISCOVERY</label>
-                                                    <div class="col-md-9">
-                                                        <select name="project_id"
-                                                                class="select2 form-control custom-select"
-                                                                style="width: 100%; height:36px;">
-                                                                <option value="-sL">-sL</option>
-                                                                <option value="-sn">-sn</option>
-                                                                <option value="-Pn">-Pn</option>
-                                                                <option value="-PS">-PS</option>
-                                                                <option value="-PA">-PA</option>
-                                                                <option value="-PU">-PU</option>
-                                                                <option value="-PY">-PY</option>
-                                                                <option value="-PE">-PE</option>
-                                                                <option value="-PP">-PP</option>
-                                                                <option value="-PM">-PM</option>
-                                                                <option value="-PO">-PO</option>
-                                                                <option value="-n">-n</option>
-                                                                <option value="-R">-R</option>
-                                                                <option value="--system-dns">--system-dns</option>
-                                                                <option value="--traceroute">--traceroute</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-md-3 m-t-15">SCAN TECHNIQUES</label>
-                                                    <div class="col-md-9">
-                                                        <select name="project_id"
-                                                                class="select2 form-control custom-select"
-                                                                style="width: 100%; height:36px;">
-                                                                <option value="-sS">-sS</option>
-                                                                <option value="-sT">-sT</option>
-                                                                <option value="-sA">-sA</option>
-                                                                <option value="-sW">-sW</option>
-                                                                <option value="-sM">-sM</option>
-                                                                <option value="-sU">-sU</option>
-                                                                <option value="-sN">-sN</option>
-                                                                <option value="-sF">-sF</option>
-                                                                <option value="-sY">-sY</option>
-                                                                <option value="-sZ">-sZ</option>
-                                                                <option value="-sO">-sO</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-md-3 m-t-15">PORT SPECIFICATION AND SCAN ORDER</label>
-                                                    <div class="col-md-9">
-                                                        <select name="project_id"
-                                                                class="select2 form-control custom-select"
-                                                                style="width: 100%; height:36px;">
-                                                                <option value="-F">-F</option>
-                                                                <option value="-r">-r</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-md-3 m-t-15">SERVICE/VERSION DETECTION</label>
-                                                    <div class="col-md-9">
-                                                        <select name="project_id"
-                                                                class="select2 form-control custom-select"
-                                                                style="width: 100%; height:36px;">
-                                                                <option value="-sV">-sV</option>
-                                                                <option value="--version-light">--version-light</option>
-                                                                <option value="--version-all">--version-all</option>
-                                                                <option value="--version-trace">--version-trace</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-md-3 m-t-15">SCRIPT SCAN</label>
-                                                    <div class="col-md-9">
-                                                        <select name="project_id"
-                                                                class="select2 form-control custom-select"
-                                                                style="width: 100%; height:36px;">
-                                                                <option value="-sC">-sC</option>
-                                                                <option value="--script-trace">--script-trace</option>
-                                                                <option value="--script-updatedb">--script-updatedb</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-md-3 m-t-15">OS DETECTION</label>
-                                                    <div class="col-md-9">
-                                                        <select name="project_id"
-                                                                class="select2 form-control custom-select"
-                                                                style="width: 100%; height:36px;">
-                                                                <option value="-O">-O</option>
-                                                                <option value="--osscan-limit">--osscan-limit</option>
-                                                                <option value="--osscan-guess">--osscan-guess</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-md-3 m-t-15">FIREWALL/IDS EVASION AND SPOOFING</label>
-                                                    <div class="col-md-9">
-                                                        <select name="project_id"
-                                                                class="select2 form-control custom-select"
-                                                                style="width: 100%; height:36px;">
-                                                                <option value="--f">--f</option>
-                                                                <option value="--badsum">--badsum</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-md-3 m-t-15">OUTPUT</label>
-                                                    <div class="col-md-9">
-                                                        <select name="project_id"
-                                                                class="select2 form-control custom-select"
-                                                                style="width: 100%; height:36px;">
-                                                                <option value="-v">-v</option>
-                                                                <option value="-vv">-vv</option>
-                                                                <option value="-d">-d</option>
-                                                                <option value="-dd">-dd</option>
-                                                                <option value="--reason">--reason</option>
-                                                                <option value="--open">--open</option>
-                                                                <option value="--packet-trace">--packet-trace"</option>
-                                                                <option value="--iflist">--iflist</option>
-                                                                <option value="--append-output">--append-output</option>
-                                                                <option value="--webxml">--webxml</option>
-                                                                <option value="--no-stylesheet">--no-stylesheet</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-md-3 m-t-15">MISC</label>
-                                                    <div class="col-md-9">
-                                                        <select name="project_id"
-                                                                class="select2 form-control custom-select"
-                                                                style="width: 100%; height:36px;">
-                                                                <option value="-6">-6</option>
-                                                                <option value="-A">-A</option>
-                                                                <option value="-d">-d</option>
-                                                                <option value="-dd">-dd</option>
-                                                                <option value="--send-eth">--send-eth</option>
-                                                                <option value="--send-ip">--send-ip</option>
-                                                                <option value="--privileged">--privileged"</option>
-                                                                <option value="--unprivileged">--unprivileged"</option>
-                                                        </select>
-                                                    </div>
-                                                </div>                                                
-                                            </div>
                                             <div class="card-body">
                                                 <div class="controls">
                                                     <input type="submit" class="btn btn-primary" value="Launch">
@@ -220,13 +79,14 @@
         var ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/; 
         var ipformat1 = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
         var ipformat2 = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\-(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-        if(IpAddr.match(ipformat) || IpAddr.match(ipformat1) || IpAddr.match(ipformat2))
+        if($('#command').val() || IpAddr.match(ipformat) || IpAddr.match(ipformat1) || IpAddr.match(ipformat2))
             $.ajax({
                 type: 'POST',
                 url: '{% url "tools:nmap" %}',
                 data: {
                     ip: $('#ip').val(),
                     project_id: $('#project_id').val(),
+                    command:  $('#command').val(),
                     csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
                 },
                 beforeSend:function(){
