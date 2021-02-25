@@ -363,8 +363,10 @@ def nmap(request):
         try:
             print('Start Nmap scan')
             if command:
-                print("scanning ", command)
                 reruns = command.split()
+                reruns.append('-oX')
+                reruns.append('output.xml')
+                print(*reruns)
                 subprocess.run(reruns)
             else:
                 subprocess.check_output(
