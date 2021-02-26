@@ -24,7 +24,7 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3 m-t-15">IP/s</label>
                                                 <div class="col-sm-9">
-                                                    <textarea class="form-control" name="ip" id="ip" value="{{ ip }}"
+                                                    <textarea class="form-control" name="ip" id="ip"
                                                               placeholder="Place IP/s here..."></textarea>
                                                 </div>
                                             </div>
@@ -45,11 +45,11 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 m-t-15">NMAP command</label>
+                                                    <label class="col-md-3 m-t-15">NMAP custom command</label>
                                                     <div class="col-sm-9">
                                                         <input id="command" type="text" name="pentester"
-                                                               class="form-control"
-                                                               placeholder="nmap -v -sV -Pn -p 1-65535 ip_address -oX output.xml"/>
+                                                            class="form-control" value="nmap "/>
+                                                            <!-- placeholder="Place custom command here..."/> -->
                                                     </div>
                                                 </div>
                                             <div class="card-body">
@@ -127,6 +127,17 @@
 
     $(document).ready(function() {
         $('#progress').hide();
+        $('#command').val("nmap ");
+        $("#command").keyup(function() {
+            $( "#ip" ).prop( "disabled", true );
+            if(!$('#command').val())
+                $( "#ip" ).prop( "disabled", false );
+        });
+        $("#ip").keyup(function() {
+            $("#command").prop( "disabled", true );
+            if(!$('#ip').val())
+                $( "#command" ).prop( "disabled", false );
+        });
     });
 </script>
 
