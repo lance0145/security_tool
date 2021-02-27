@@ -19,13 +19,11 @@
                                 <div class="card">
                                     <form id="start_scan" class="form-horizontal">{% csrf_token %}
                                         <div class="card-body">
-                                            <h4 class="card-title"></h4>
-
                                             <div class="form-group row">
                                                 <label class="col-md-3 m-t-15">IP/s</label>
                                                 <div class="col-sm-9">
                                                     <textarea class="form-control" name="ip" id="ip"
-                                                              placeholder="Place IP/s here..."></textarea>
+                                                        placeholder="Place IP/s here..."></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -48,8 +46,8 @@
                                                     <label class="col-md-3 m-t-15">NMAP custom command</label>
                                                     <div class="col-sm-9">
                                                         <input id="command" type="text" name="pentester"
-                                                            class="form-control" value="nmap "/>
-                                                            <!-- placeholder="Place custom command here..."/> -->
+                                                            class="form-control"                                                             
+                                                            placeholder="Place custom command here..."/>
                                                     </div>
                                                 </div>
                                             <div class="card-body">
@@ -79,7 +77,7 @@
         var ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/; 
         var ipformat1 = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
         var ipformat2 = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\-(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-        if($('#command').val() !== "nmap " || IpAddr.match(ipformat) || IpAddr.match(ipformat1) || IpAddr.match(ipformat2)){
+        if($('#command').val() || IpAddr.match(ipformat) || IpAddr.match(ipformat1) || IpAddr.match(ipformat2)){
             $('#label').text('Server started scanning...');
             $("#ip").prop( "disabled", true );
             $("#command").prop( "disabled", true );
@@ -113,7 +111,12 @@
                     $("#project_id").prop( "disabled", false );
                     $('#progress').hide();
                     $('#label').text('');
+                    $('#ip').val('');
+                    $('#command').val('');
                 },
+                // error:function(error){
+                //     alert(error.responseText);
+                // },
             });
         }
         else{
@@ -123,7 +126,7 @@
 
     $(document).ready(function() {
         $('#progress').hide();
-        $('#command').val("nmap ");
+        // $('#command').val("nmap ");
         $("#command").keyup(function() {
             $( "#ip" ).prop( "disabled", true );
             if(!$('#command').val())
