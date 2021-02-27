@@ -54,7 +54,7 @@
                                                 </div>
                                             <div class="card-body">
                                                 <div class="controls">
-                                                    <input type="submit" class="btn btn-primary" value="Launch">
+                                                    <input id="launch" type="submit" class="btn btn-primary" value="Launch">
                                                     <label class="col-md-3 m-t-15" id="label" for="file"></label>
                                                     <progress id="progress" value ="0" max="100" style="width: 300px;"></progress>
                                                 </div>
@@ -79,7 +79,23 @@
         var ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/; 
         var ipformat1 = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
         var ipformat2 = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\-(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-        if($('#command').val() || IpAddr.match(ipformat) || IpAddr.match(ipformat1) || IpAddr.match(ipformat2))
+        if($('#command').val() !== "nmap " || IpAddr.match(ipformat) || IpAddr.match(ipformat1) || IpAddr.match(ipformat2)){
+            $('#label').text('Server started scanning...');
+            $("#ip").prop( "disabled", true );
+            $("#command").prop( "disabled", true );
+            $("#launch").prop( "disabled", true );
+            $("#project_id").prop( "disabled", true );
+            $('#progress').show();
+            var progression = 0,
+            progress = setInterval(function() 
+            {
+                $('#progress').val(progression);
+                if(progression == 100) {
+                    // $('#label').text('Please wait, will prompt...');
+                } else
+                    progression += 10;
+                
+            }, 1000);
             $.ajax({
                 type: 'POST',
                 url: '{% url "tools:nmap" %}',
@@ -89,40 +105,20 @@
                     command:  $('#command').val(),
                     csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
                 },
-                beforeSend:function(){
-                    $('#label').text('Server started scanning...');
-                    $('#progress').show();
-                    var progression = 0,
-                    progress = setInterval(function() 
-                    {
-                        $('#progress').val(progression);
-                        if(progression == 100) {
-                            $('#label').text('Please wait, will prompt...');
-                        } else
-                            progression += 10;
-                        
-                    }, 1000);
-                },
                 success:function(){
-                    $('#label').text('Done, scan result saved...');
+                    alert('Done, scan result saved on NMAP Vulnerability.')                    
+                    $("#ip").prop( "disabled", false );
+                    $("#command").prop( "disabled", false );
+                    $("#launch").prop( "disabled", false );
+                    $("#project_id").prop( "disabled", false );
                     $('#progress').hide();
+                    $('#label').text('');
                 },
-                // xhr:function () {
-                //     xhr = jQuery.ajaxSettings.xhr()
-                //     interval = setInterval(function() 
-                //     {
-                //         console.log(xhr.responseText.length);
-                //         if (xhr.readyState > 2){
-                //             total = parseInt(xhr.getResponseHeader('Content-length'));
-                //             completed = parseInt(xhr.responseText.length);
-                //             percentage = (100.0 / total * completed).toFixed(2);
-                //             console.log("Completed #{percentage}%");
-                //         }
-                //     }, 50);
-                // }
             });
-        else
-            $('#label').text('Invalid IPs, try again...');
+        }
+        else{
+            $('#label').text('Invalid IP/s or command, try again...');
+        }
     });
 
     $(document).ready(function() {
@@ -134,6 +130,16 @@
                 $( "#ip" ).prop( "disabled", false );
         });
         $("#ip").keyup(function() {
+            $("#command").prop( "disabled", true );
+            if(!$('#ip').val())
+                $( "#command" ).prop( "disabled", false );
+        });
+        $("#command").on("change", function() {
+            $( "#ip" ).prop( "disabled", true );
+            if(!$('#command').val())
+                $( "#ip" ).prop( "disabled", false );
+        });
+        $("#ip").on("change", function() {
             $("#command").prop( "disabled", true );
             if(!$('#ip').val())
                 $( "#command" ).prop( "disabled", false );
