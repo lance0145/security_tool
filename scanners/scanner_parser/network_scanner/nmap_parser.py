@@ -138,7 +138,7 @@ def xml_parser(root, project_id, scan_id, username):
                     for sss in ss:
                         cpe = sss.text
                 # print(ip_address)
-                print("------")
+                # print("------")
 
                 dump_data = nmap_result_db(
                     scan_id=scan_id,
@@ -164,7 +164,8 @@ def xml_parser(root, project_id, scan_id, username):
                     username=username
                 )
                 dump_data.save()
-
+    
+    ip_address = ""
     for nmap in root:
         for scaninfo in nmap:
             # print scaninfo.tag, scaninfo.attrib
@@ -175,32 +176,33 @@ def xml_parser(root, project_id, scan_id, username):
                         if value == 'ipv4':
                             for key, value in ip.items():
                                 if key == 'addr':
-                                    ip_address = value
+                                    if ip_address != value:
+                                        ip_address = value
 
-                                    all_data = nmap_result_db.objects.filter(ip_address=ip_address, username=username)
-                                    # for a in all_data:
-                                    #     global total_ports, ports_p
-                                    #     ports_p = a.port
-                                    total_ports = len(all_data)
-                                    # print(total_ports)
+                                        all_data = nmap_result_db.objects.filter(ip_address=ip_address, username=username)
+                                        # for a in all_data:
+                                        #     global total_ports, ports_p
+                                        #     ports_p = a.port
+                                        total_ports = len(all_data)
+                                        # print(total_ports)
 
-                                    all_open_p = nmap_result_db.objects.filter(username=username, ip_address=ip_address,
-                                                                               state='open')
-                                    # for p in all_open_p:
-                                    #     global total_open_p
-                                    total_open_p = len(all_open_p)
-                                    # print(total_open_p)
+                                        all_open_p = nmap_result_db.objects.filter(username=username, ip_address=ip_address,
+                                                                                state='open')
+                                        # for p in all_open_p:
+                                        #     global total_open_p
+                                        total_open_p = len(all_open_p)
+                                        # print(total_open_p)
 
-                                    all_close_p = nmap_result_db.objects.filter(username=username, ip_address=ip_address,
-                                                                                state='closed')
-                                    total_close_p = len(all_close_p)
+                                        all_close_p = nmap_result_db.objects.filter(username=username, ip_address=ip_address,
+                                                                                    state='closed')
+                                        total_close_p = len(all_close_p)
 
-                                    save_scan = nmap_scan_db(scan_id=scan_id,
-                                                             project_id=project_id,
-                                                             scan_ip=ip_address,
-                                                             total_ports=total_ports,
-                                                             total_open_ports=total_open_p,
-                                                             total_close_ports=total_close_p,
-                                                             username=username
-                                                             )
-                                    save_scan.save()
+                                        save_scan = nmap_scan_db(scan_id=scan_id,
+                                                                project_id=project_id,
+                                                                scan_ip=ip_address,
+                                                                total_ports=total_ports,
+                                                                total_open_ports=total_open_p,
+                                                                total_close_ports=total_close_p,
+                                                                username=username
+                                                                )
+                                        save_scan.save()
