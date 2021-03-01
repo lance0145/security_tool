@@ -61,7 +61,9 @@ urlpatterns = [
     url(r'^nmap_scan_del/$',
         views.nmap_scan_del,
         name='nmap_scan_del'),
-
+    url(r'^nmap_del/$',
+        views.nmap_del,
+        name='nmap_del'),
     #Nmap_Vulners
     url(r'^nmap_vulners_scan/$',
         views.nmap_vulners_scan,

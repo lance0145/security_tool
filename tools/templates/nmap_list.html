@@ -3,86 +3,6 @@
 
 {% block body %}
 
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script type="text/javascript">
-
-    $("#checkAll").change(function () {
-        $("input:checkbox").prop('checked', $(this).prop("checked"));
-    });
-    $(document).ready(function() {
-        $('.btn-danger').click(function(){
-            if (confirm('Are you sure you want to delete this?')) {
-                var scan_id = ['a7af5b68-b661-45ad-90fd-ffa27526cdce'];
-                $.each($("input[name='del_vuln_id']:checked"), function(){
-                    scan_id.push($(this).val());
-                });
-
-                var json_scanid = scan_id.join(", ");
-                $.ajax({
-                    type:'POST',
-                    //contentType: 'application/json; charset=utf-8',
-                    url:'{% url "manual_scan:del_vuln" %}',
-                    data:{
-                       vuln_id: json_scanid,
-                       scan_id: $('input[name=scan_id]').val(),
-                       project_id: $('input[name=project_id]').val(),
-                       csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
-                    },
-                    sucess:function(){
-                    }
-                });
-                setTimeout(function(){location.reload();},1000);
-            }
-        });
-
-    });
-
-    $(document).ready(function(){
-        var buttons = document.getElementsByName("button");
-        for (var i=0 ; i < buttons.length ; i++){
-            (function(index){
-            buttons[index].onclick = function(){
-                var self = this;
-                var status = $(this).text();
-                var id = $(this).val();
-                $.ajax({
-                    url: '{% url "manual_scan:ajax_vuln" %}',
-                    data: {
-                        'id': id,
-                        'status': status
-                    },
-                    success: function (response) {
-                        if (status == 'Open'){
-                            $(self).text('Closed');
-                        } else{
-                            $(self).text('Open');
-                        }
-                        status_field = $("span[value = "+id+"]");
-                        if ( status_field.text() == 'Open'){
-                            status_field.text('Closed');
-                            status_field.removeClass("badge badge-pill badge-danger").addClass("badge badge-pill badge-success");
-                        } else{
-                            status_field.text('Open');
-                            status_field.removeClass("badge badge-pill badge-success").addClass("badge badge-pill badge-danger");
-                        }
-                    }
-                });
-            };
-            })(i)
-        }
-        //$('#button').click(function(){     
-        //});
-    });
-
-// $(document).ready(function() {
-//     $('#manual_scans_list').DataTable({
-//         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
-//     });
-// });
-
-
-</script>
-
 <div class="page-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -161,7 +81,7 @@
                                             <form action="/tools/nmap_del/" method="post" class="forms-sample">
         
                                                 {% csrf_token %}
-                                                <input type="hidden" name="scan_id" value="{{data.scan_id}}"/>
+                                                <input type="hidden" name="id" value="{{data.id}}"/>
                                                 <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                             </form>
                                         </td>
@@ -217,9 +137,9 @@
     //     });
     // });
 
-$(document).on('click', '.confirm-delete', function(){
-    return confirm('Are you sure you want to delete this?');
-})
+    $(document).on('click', '.confirm-delete', function(){
+        return confirm('Are you sure you want to delete this?');
+    })
 </script>
 
 {% endblock %}

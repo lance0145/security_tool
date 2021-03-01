@@ -47,7 +47,7 @@
                                                     <div class="col-sm-9">
                                                         <input id="command" type="text" name="pentester"
                                                             class="form-control"                                                             
-                                                            placeholder="Place custom command here..."/>
+                                                            placeholder="Place nmap custom command here..."/>
                                                     </div>
                                                 </div>
                                             <div class="card-body">
@@ -77,8 +77,10 @@
         var ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/; 
         var ipformat1 = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
         var ipformat2 = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\-(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-        if($('#command').val() || IpAddr.match(ipformat) || IpAddr.match(ipformat1) || IpAddr.match(ipformat2)){
-            $('#label').text('Server started scanning...');
+        var Command = $('#command').val();
+        var cmdformat = "^nmap";
+        if(Command.match(cmdformat) || IpAddr.match(ipformat) || IpAddr.match(ipformat1) || IpAddr.match(ipformat2)){
+            $('#label').text('Scanning, please wait will prompt...');
             $("#ip").prop( "disabled", true );
             $("#command").prop( "disabled", true );
             $("#launch").prop( "disabled", true );
@@ -114,12 +116,13 @@
                     $('#ip').val('');
                     $('#command').val('');
                 },
-                // error:function(error){
-                //     alert(error.responseText);
-                // },
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                }
             });
         }
-        else{
+        else {
             $('#label').text('Invalid IP/s or command, try again...');
         }
     });

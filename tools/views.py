@@ -429,7 +429,6 @@ def nmap_scan_del(request):
     username = request.user.username
     if request.method == 'POST':
         scan_id = request.POST.get('scn_id')
-        print(scan_id)
         del_scan = nmap_scan_db.objects.filter(username=username, scan_id=scan_id)
         del_scan.delete()
         # ip_address = request.POST.get('ip_address')
@@ -448,3 +447,13 @@ def nmap_scan_del(request):
         #     del_scan.delete()
 
     return HttpResponseRedirect('/manual_scan/scan_list/')
+
+def nmap_del(request):
+    username = request.user.username
+    if request.method == 'POST':
+        id = request.POST.get('id')
+        del_scan = nmap_result_db.objects.filter(username=username, id=id)
+        ip = del_scan[0].ip_address
+        del_scan.delete()
+
+    return HttpResponseRedirect("/tools/nmap/?ip=%s" % ip)
