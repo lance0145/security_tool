@@ -29,7 +29,7 @@
                         class="fas fa-user"></i><span class="hide-menu">Manual</span></a>
                     <ul aria-expanded="false" class="collapse  first-level">                        
                         <li class="sidebar-item"><a href="{% url 'manual_scan:add_list_scan' %}" class="sidebar-link"><i
-                                class="far fa-paper-plane"></i><span class="hide-menu">Manual Scan</span></a></li>
+                                class="fas fa-rocket"></i><span class="hide-menu">Manual Scan</span></a></li>
                         <li class="sidebar-item"><a href="{% url 'manual_scan:list_scan' %}" class="sidebar-link"><i
                                 class="fas fa-user-secret"></i><span class="hide-menu">Manual Vulnerability</span></a>
                     </ul>
@@ -40,30 +40,53 @@
                         class="fas fa-eye"></i><span class="hide-menu">NMAP</span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item"><a href="{% url 'networkscanners:ip_scan' %}" class="sidebar-link"><i
-                                class="far fa-paper-plane"></i><span class="hide-menu">NMAP Scan</span></a></li>
+                                class="fas fa-rocket"></i><span class="hide-menu">NMAP Scan</span></a></li>
                         <li class="sidebar-item"><a href="{% url 'manual_scan:scan_list' %}" class="sidebar-link"><i
                                 class="fas fa-user-secret"></i><span class="hide-menu">NMAP Vulnerability</span></a>
                         </li>                        
                     </ul>
                 </li>
 
-                <!--Infrastructure Scan-->
                 <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
                                             href="#" aria-expanded="false"><i
                         class="fas fa-dog"></i><span class="hide-menu">OpenVAS</span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item"><a href="{% url 'networkscanners:open_vas' %}" class="sidebar-link"><i
-                                class="far fa-paper-plane"></i><span class="hide-menu">OpenVAS Scan</span></a></li>
+                                class="fas fa-rocket"></i><span class="hide-menu">OpenVAS Scan</span></a></li>
                         <li class="sidebar-item"><a href="{% url 'networkscanners:index' %}" class="sidebar-link"><i
                                 class="fas fa-user-secret"></i><span class="hide-menu">OpenVAS Vulnerability</span></a>
                         </li>
                     </ul>
                 </li>
+                
+                <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
+                        href="#" aria-expanded="false"><i
+    class="fas fa-skull-crossbones"></i><span class="hide-menu">Nikto</span></a>
+<ul aria-expanded="false" class="collapse  first-level">
+    <li class="sidebar-item"><a href="{% url 'networkscanners:nikto' %}" class="sidebar-link"><i
+            class="fas fa-rocket"></i><span class="hide-menu">Nikto Scan</span></a></li>
+    <li class="sidebar-item"><a href="{% url 'tools:nikto_result' %}" class="sidebar-link"><i
+            class="fas fa-user-secret"></i><span class="hide-menu">Nikto Vulnerability</span></a>
+    </li>                        
+</ul>
+</li>
+
+<li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
+                        href="#" aria-expanded="false"><i
+    class="fas fa-search"></i><span class="hide-menu">Dirsearch</span></a>
+<ul aria-expanded="false" class="collapse  first-level">
+    <li class="sidebar-item"><a href="{% url 'networkscanners:open_vas' %}" class="sidebar-link"><i
+            class="fas fa-rocket"></i><span class="hide-menu">Dirsearch Scan</span></a></li>
+    <li class="sidebar-item"><a href="{% url 'networkscanners:index' %}" class="sidebar-link"><i
+            class="fas fa-user-secret"></i><span class="hide-menu">Dirsearch Vulnerability</span></a>
+    </li>
+</ul>
+</li>
 
                 <!-- Launch Scans -->
                 <!-- <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
                                             href="#" aria-expanded="false"><i
-                        class="far fa-paper-plane"></i><span class="hide-menu">Launch Scans</span></a>
+                        class="fas fa-rocket"></i><span class="hide-menu">Launch Scans</span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item"><a href="{% url 'webscanners:index' %}" class="sidebar-link"><i
                                 class=" fas fa-play"></i><span class="hide-menu"> Dynamic Scans </span></a>

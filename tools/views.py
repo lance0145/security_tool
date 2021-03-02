@@ -59,16 +59,16 @@ def sslscan(request):
         split_length = value_split.__len__()
         for i in range(0, split_length):
             scan_id = uuid.uuid4()
-            scans_url = value_split.__getitem__(i)
+            scan_url = value_split.__getitem__(i)
 
             try:
-                sslscan_output = subprocess.check_output(['sslscan', '--no-colour', scans_url])
+                sslscan_output = subprocess.check_output(['sslscan', '--no-colour', scan_url])
                 notify.send(user, recipient=user, verb='SSLScan Completed')
 
             except Exception as e:
                 print(e)
 
-            dump_scans = sslscan_result_db(scan_url=scans_url,
+            dump_scans = sslscan_result_db(scan_url=scan_url,
                                            scan_id=scan_id,
                                            project_id=project_id,
                                            sslscan_output=sslscan_output,
@@ -139,57 +139,56 @@ def nikto(request):
     user = request.user
 
     if request.method == 'POST':
-        scan_url = request.POST.get('scan_url')
+        ip = request.POST.get('ip')
         project_id = request.POST.get('project_id')
 
-        scan_item = str(scan_url)
-        value = scan_item.replace(" ", "")
-        value_split = value.split(',')
-        split_length = value_split.__len__()
-        for i in range(0, split_length):
-            date_time = datetime.now()
-            scan_id = uuid.uuid4()
-            scans_url = value_split.__getitem__(i)
+        # scan_item = str(scan_url)
+        # value = scan_item.replace(" ", "")
+        # value_split = value.split(',')
+        # split_length = value_split.__len__()s
+        # for i in range(0, split_length):
+        date_time = datetime.now()
+        scan_id = uuid.uuid4()
 
-            nikto_res_path = os.getcwd() + '/nikto_result/' + str(scan_id) + '.html'
-            print(nikto_res_path)
+        nikto_res_path = str(scan_id) + '.html'
+        print(nikto_res_path)
+
+        try:
+
+            nikto_output = subprocess.check_output(['nikto', '-o', nikto_res_path,
+                                                    '-Format', 'htm', '-Tuning', '123bde',
+                                                    '-host', ip])
+            print(nikto_output)
+            f = codecs.open(nikto_res_path, 'r')
+            data = f.read()
+            try:
+                nikto_html_parser(data, project_id, scan_id, username)
+            except Exception as e:
+                print(e)
+
+        except Exception as e:
+            print(e)
 
             try:
-
+                print("New command running......")
+                print(ip)
                 nikto_output = subprocess.check_output(['nikto', '-o', nikto_res_path,
                                                         '-Format', 'htm', '-Tuning', '123bde',
-                                                        '-host', scans_url])
+                                                        '-host', ip])
                 print(nikto_output)
                 f = codecs.open(nikto_res_path, 'r')
                 data = f.read()
                 try:
-                    nikto_html_parser(data, project_id, scan_id)
+                    nikto_html_parser(data, project_id, scan_id, username)
+                    notify.send(user, recipient=user, verb='Nikto Scan Completed')
                 except Exception as e:
                     print(e)
+
 
             except Exception as e:
                 print(e)
 
-                try:
-                    print("New command running......")
-                    print(scans_url)
-                    nikto_output = subprocess.check_output(['nikto.pl', '-o', nikto_res_path,
-                                                            '-Format', 'htm', '-Tuning', '123bde',
-                                                            '-host', scans_url])
-                    print(nikto_output)
-                    f = codecs.open(nikto_res_path, 'r')
-                    data = f.read()
-                    try:
-                        nikto_html_parser(data, project_id, scan_id)
-                        notify.send(user, recipient=user, verb='Nikto Scan Completed')
-                    except Exception as e:
-                        print(e)
-
-
-                except Exception as e:
-                    print(e)
-
-            dump_scans = nikto_result_db(scan_url=scan_url,
+            dump_scans = nikto_result_db(scan_url=ip,
                                          scan_id=scan_id,
                                          project_id=project_id,
                                          date_time=date_time,
@@ -214,12 +213,12 @@ def nikto_result(request):
     """
     username = request.user.username
     if request.method == 'GET':
-        scan_id = request.GET['scan_id']
-        scan_result = nikto_result_db.objects.filter(username=username, scan_id=scan_id)
+        # scan_id = request.GET['scan_id']
+        all_nikto = nikto_result_db.objects.filter(username=username)#, scan_id=scan_id)
 
     return render(request,
-                  'nikto_scan_result.html',
-                  {'scan_result': scan_result}
+                  'nikto_scan_list.html',
+                  {'all_nikto': all_nikto}
                   )
 
 
@@ -365,12 +364,11 @@ def nmap(request):
             if command:
                 reruns = command.split()
                 reruns.append('-oX')
-                reruns.append('output.xml')
-                print(*reruns)
+                reruns.append('nmap.xml')
                 subprocess.run(reruns)
             else:
                 subprocess.check_output(
-                    ['nmap', '-v', '-sV', '-Pn', '-p', '1-65535', ip_address, '-oX', 'output.xml']
+                    ['nmap', '-v', '-sV', '-Pn', '-p', '1-65535', ip_address, '-oX', 'nmap.xml']
                 )
 
             print('Completed nmap scan')
@@ -379,7 +377,7 @@ def nmap(request):
             print('Error in nmap scan:', e)
 
         try:
-            tree = ET.parse('output.xml')
+            tree = ET.parse('nmap.xml')
             root_xml = tree.getroot()
 
             nmap_parser.xml_parser(root=root_xml,
