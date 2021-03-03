@@ -131,13 +131,15 @@ def dirsearch(request):
 
     :return:
     """
-    global all_nmap
+    # global all_nmap
     username = request.user.username
+    all_nikto = nikto_result_db.objects.filter(username=username)
 
-    if request.method == 'GET':
-        ip_address = request.GET['ip']
+    # if request.method == 'GET':
+    #     ip_address = request.GET['ip']
 
-        all_nmap = nmap_result_db.objects.filter(username=username, ip_address=ip_address)
+    #     all_nmap = nmap_result_db.objects.filter(username=username, ip_address=ip_address)
+
     if request.method == 'POST':    
         ip_address = request.POST.get('ip')
         project_id = request.POST.get('project_id')
@@ -145,41 +147,40 @@ def dirsearch(request):
         scan_id = uuid.uuid4()
 
         try:
-            print('Start Nmap scan')
+            print('Start dirsearch scan')
             if command:
                 reruns = command.split()
-                reruns.append('-oX')
-                reruns.append('nmap.xml')
+                # reruns.append('-w')
+                # reruns.append('ds_wordlist.txt')
                 subprocess.run(reruns)
             else:
                 subprocess.check_output(
-                    ['nmap', '-v', '-sV', '-Pn', '-p', '1-65535', ip_address, '-oX', 'nmap.xml']
+                    ['python3', '/opt/dirsearch/dirsearch.py', '-u', ip_address, '-e', 'html,php,txt', '-x', '400,403,404,503', '-w', 'ds_wordlist.txt']
                 )
 
-            print('Completed nmap scan')
+            print('Completed dirsearch scan')
 
         except Exception as e:
-            print('Error in nmap scan:', e)
+            print('Error in dirsearch scan:', e)
 
-        try:
-            tree = ET.parse('nmap.xml')
-            root_xml = tree.getroot()
+        # try:
+        #     tree = ET.parse('nmap.xml')
+        #     root_xml = tree.getroot()
 
-            nmap_parser.xml_parser(root=root_xml,
-                                   scan_id=scan_id,
-                                   project_id=project_id,
-                                   username=username
-                                   )
+        #     nmap_parser.xml_parser(root=root_xml,
+        #                            scan_id=scan_id,
+        #                            project_id=project_id,
+        #                            username=username
+        #                            )
 
-        except Exception as e:
-            print('Error in xml parser:', e)
+        # except Exception as e:
+        #     print('Error in xml parser:', e)
 
-        return HttpResponseRedirect('/tools/nmap_scan/')
+        return HttpResponseRedirect('/tools/dirsearch/')
 
     return render(request,
-                  'nmap_list.html',
-                  {'all_nmap': all_nmap,
-                   'ip': ip_address}
+                  'nikto_scan_list.html',
+                  {'all_nikto': all_nikto}
 
                   )
 
@@ -206,8 +207,8 @@ def nikto(request):
         date_time = datetime.now()
         scan_id = uuid.uuid4()
 
-        nikto_res_path = '/nikto/' + str(scan_id) + '.html'
-        os.makedirs(os.path.dirname(nikto_res_path), exist_ok=True)
+        nikto_res_path = 'nikto/' + str(scan_id) + '.html'
+        os.makedirs(os.path.dirname(nikto_res_path), 0o777, True)
 
         command = request.POST.get('command')
 

@@ -29,8 +29,9 @@ urlpatterns = [
     url(r'^sslcan_del/$',
         views.sslcan_del,
         name='sslcan_del'),
-
-    # Nikto requests
+    url(r'^dirsearch',
+        views.dirsearch,
+        name='dirsearch'),
     url(r'^nikto/$',
         views.nikto,
         name='nikto'),
