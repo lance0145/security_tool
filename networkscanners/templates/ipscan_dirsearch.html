@@ -79,7 +79,7 @@
         var ipformat2 = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\-(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
         var Command = $('#command').val();
         var cmdformat = "^dirsearch";
-        if(Command.match(cmdformat) || IpAddr.match(ipformat) || IpAddr.match(ipformat1) || IpAddr.match(ipformat2)){
+        if($('#ip').val()){
             $('#label').text('Scanning, please wait will prompt...');
             $("#ip").prop( "disabled", true );
             $("#command").prop( "disabled", true );
