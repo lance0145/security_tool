@@ -126,6 +126,62 @@ def sslcan_del(request):
 
     return HttpResponseRedirect('/tools/sslscan/')
 
+def dirsearch(request):
+    """
+
+    :return:
+    """
+    global all_nmap
+    username = request.user.username
+
+    if request.method == 'GET':
+        ip_address = request.GET['ip']
+
+        all_nmap = nmap_result_db.objects.filter(username=username, ip_address=ip_address)
+    if request.method == 'POST':    
+        ip_address = request.POST.get('ip')
+        project_id = request.POST.get('project_id')
+        command = request.POST.get('command')
+        scan_id = uuid.uuid4()
+
+        try:
+            print('Start Nmap scan')
+            if command:
+                reruns = command.split()
+                reruns.append('-oX')
+                reruns.append('nmap.xml')
+                subprocess.run(reruns)
+            else:
+                subprocess.check_output(
+                    ['nmap', '-v', '-sV', '-Pn', '-p', '1-65535', ip_address, '-oX', 'nmap.xml']
+                )
+
+            print('Completed nmap scan')
+
+        except Exception as e:
+            print('Error in nmap scan:', e)
+
+        try:
+            tree = ET.parse('nmap.xml')
+            root_xml = tree.getroot()
+
+            nmap_parser.xml_parser(root=root_xml,
+                                   scan_id=scan_id,
+                                   project_id=project_id,
+                                   username=username
+                                   )
+
+        except Exception as e:
+            print('Error in xml parser:', e)
+
+        return HttpResponseRedirect('/tools/nmap_scan/')
+
+    return render(request,
+                  'nmap_list.html',
+                  {'all_nmap': all_nmap,
+                   'ip': ip_address}
+
+                  )
 
 def nikto(request):
     """
@@ -150,14 +206,16 @@ def nikto(request):
         date_time = datetime.now()
         scan_id = uuid.uuid4()
 
-        nikto_res_path = str(scan_id) + '.html'
-        print(nikto_res_path)
+        nikto_res_path = '/nikto/' + str(scan_id) + '.html'
+        os.makedirs(os.path.dirname(nikto_res_path), exist_ok=True)
 
-        try:
+        command = request.POST.get('command')
 
-            nikto_output = subprocess.check_output(['nikto', '-o', nikto_res_path,
-                                                    '-Format', 'htm', '-Tuning', '123bde',
-                                                    '-host', ip])
+        if command:
+            reruns = command.split()
+            reruns.append('-o')
+            reruns.append(nikto_res_path)
+            nikto_output = subprocess.run(reruns)
             print(nikto_output)
             f = codecs.open(nikto_res_path, 'r')
             data = f.read()
@@ -165,13 +223,9 @@ def nikto(request):
                 nikto_html_parser(data, project_id, scan_id, username)
             except Exception as e:
                 print(e)
-
-        except Exception as e:
-            print(e)
-
+        else:
             try:
-                print("New command running......")
-                print(ip)
+
                 nikto_output = subprocess.check_output(['nikto', '-o', nikto_res_path,
                                                         '-Format', 'htm', '-Tuning', '123bde',
                                                         '-host', ip])
@@ -180,13 +234,30 @@ def nikto(request):
                 data = f.read()
                 try:
                     nikto_html_parser(data, project_id, scan_id, username)
-                    notify.send(user, recipient=user, verb='Nikto Scan Completed')
                 except Exception as e:
                     print(e)
 
-
             except Exception as e:
                 print(e)
+
+                try:
+                    print("New command running......")
+                    print(ip)
+                    nikto_output = subprocess.check_output(['nikto', '-o', nikto_res_path,
+                                                            '-Format', 'htm', '-Tuning', '123bde',
+                                                            '-host', ip])
+                    print(nikto_output)
+                    f = codecs.open(nikto_res_path, 'r')
+                    data = f.read()
+                    try:
+                        nikto_html_parser(data, project_id, scan_id, username)
+                        notify.send(user, recipient=user, verb='Nikto Scan Completed')
+                    except Exception as e:
+                        print(e)
+
+
+                except Exception as e:
+                    print(e)
 
             dump_scans = nikto_result_db(scan_url=ip,
                                          scan_id=scan_id,

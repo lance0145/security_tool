@@ -48,6 +48,30 @@
                 </li>
 
                 <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
+                        href="#" aria-expanded="false"><i
+                class="fas fa-skull-crossbones"></i><span class="hide-menu">Nikto</span></a>
+                <ul aria-expanded="false" class="collapse  first-level">
+                <li class="sidebar-item"><a href="{% url 'networkscanners:nikto' %}" class="sidebar-link"><i
+                        class="fas fa-rocket"></i><span class="hide-menu">Nikto Scan</span></a></li>
+                <li class="sidebar-item"><a href="{% url 'tools:nikto_result' %}" class="sidebar-link"><i
+                        class="fas fa-user-secret"></i><span class="hide-menu">Nikto Vulnerability</span></a>
+                </li>                        
+                </ul>
+                </li>
+
+                <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
+                                        href="#" aria-expanded="false"><i
+                class="fas fa-search"></i><span class="hide-menu">Dirsearch</span></a>
+                <ul aria-expanded="false" class="collapse  first-level">
+                <li class="sidebar-item"><a href="{% url 'networkscanners:dirsearch' %}" class="sidebar-link"><i
+                        class="fas fa-rocket"></i><span class="hide-menu">Dirsearch Scan</span></a></li>
+                <li class="sidebar-item"><a href="{% url 'networkscanners:index' %}" class="sidebar-link"><i
+                        class="fas fa-user-secret"></i><span class="hide-menu">Dirsearch Vulnerability</span></a>
+                </li>
+                </ul>
+                </li>
+
+                <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
                                             href="#" aria-expanded="false"><i
                         class="fas fa-dog"></i><span class="hide-menu">OpenVAS</span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
@@ -59,30 +83,6 @@
                     </ul>
                 </li>
                 
-                <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
-                        href="#" aria-expanded="false"><i
-    class="fas fa-skull-crossbones"></i><span class="hide-menu">Nikto</span></a>
-<ul aria-expanded="false" class="collapse  first-level">
-    <li class="sidebar-item"><a href="{% url 'networkscanners:nikto' %}" class="sidebar-link"><i
-            class="fas fa-rocket"></i><span class="hide-menu">Nikto Scan</span></a></li>
-    <li class="sidebar-item"><a href="{% url 'tools:nikto_result' %}" class="sidebar-link"><i
-            class="fas fa-user-secret"></i><span class="hide-menu">Nikto Vulnerability</span></a>
-    </li>                        
-</ul>
-</li>
-
-<li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
-                        href="#" aria-expanded="false"><i
-    class="fas fa-search"></i><span class="hide-menu">Dirsearch</span></a>
-<ul aria-expanded="false" class="collapse  first-level">
-    <li class="sidebar-item"><a href="{% url 'networkscanners:open_vas' %}" class="sidebar-link"><i
-            class="fas fa-rocket"></i><span class="hide-menu">Dirsearch Scan</span></a></li>
-    <li class="sidebar-item"><a href="{% url 'networkscanners:index' %}" class="sidebar-link"><i
-            class="fas fa-user-secret"></i><span class="hide-menu">Dirsearch Vulnerability</span></a>
-    </li>
-</ul>
-</li>
-
                 <!-- Launch Scans -->
                 <!-- <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
                                             href="#" aria-expanded="false"><i

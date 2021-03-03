@@ -1,0 +1,156 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block body %}
+
+<script src="{% static 'matrix-admin-bt4/dist/js/jquery-1.9.1.min.js' %}"></script>
+
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-md-flex align-items-center">
+                            <h1 class="card-title">dirsearch Scans</h1>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <form id="start_scan" class="form-horizontal">{% csrf_token %}
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 m-t-15">IP/s</label>
+                                                <div class="col-sm-9">
+                                                    <textarea class="form-control" name="ip" id="ip"
+                                                        placeholder="Place IP/s here..."></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 m-t-15">Projects</label>
+                                                    <div class="col-md-9">
+                                                        <select id="project_id" name="project_id"
+                                                                class="select2 form-control custom-select"
+                                                                style="width: 100%; height:36px;">
+                                                            {% for data in all_proj %}
+                                                            <option value="{{data.project_id}}">{{data.project_name}}
+                                                            </option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 m-t-15">dirsearch custom command</label>
+                                                    <div class="col-sm-9">
+                                                        <input id="command" type="text" name="pentester"
+                                                            class="form-control"                                                             
+                                                            placeholder="Place dirsearch custom command here..."/>
+                                                    </div>
+                                                </div>
+                                            <div class="card-body">
+                                                <div class="controls">
+                                                    <input id="launch" type="submit" class="btn btn-primary" value="Launch">
+                                                    <label class="col-md-3 m-t-15" id="label" for="file"></label>
+                                                    <progress id="progress" value ="0" max="100" style="width: 300px;"></progress>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).on('submit', '#start_scan', function(e){        
+        e.preventDefault();
+        IpAddr=$('#ip').val();
+        var ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/; 
+        var ipformat1 = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+        var ipformat2 = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\-(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+        var Command = $('#command').val();
+        var cmdformat = "^dirsearch";
+        if(Command.match(cmdformat) || IpAddr.match(ipformat) || IpAddr.match(ipformat1) || IpAddr.match(ipformat2)){
+            $('#label').text('Scanning, please wait will prompt...');
+            $("#ip").prop( "disabled", true );
+            $("#command").prop( "disabled", true );
+            $("#launch").prop( "disabled", true );
+            $("#project_id").prop( "disabled", true );
+            $('#progress').show();
+            var progression = 0,
+            progress = setInterval(function() 
+            {
+                $('#progress').val(progression);
+                if(progression == 100) {
+                    // $('#label').text('Please wait, will prompt...');
+                } else
+                    progression += 10;
+                
+            }, 1000);
+            $.ajax({
+                type: 'POST',
+                url: '{% url "tools:nikto" %}',
+                data: {
+                    ip: $('#ip').val(),
+                    project_id: $('#project_id').val(),
+                    command:  $('#command').val(),
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                },
+                success:function(){
+                    alert('Done, scan result saved on dirsearch Vulnerability.')                    
+                    $("#ip").prop( "disabled", false );
+                    $("#command").prop( "disabled", false );
+                    $("#launch").prop( "disabled", false );
+                    $("#project_id").prop( "disabled", false );
+                    $('#progress').hide();
+                    $('#label').text('');
+                    $('#ip').val('');
+                    $('#command').val('');
+                },
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                }
+            });
+        }
+        else {
+            $('#label').text('Invalid IP/s or command, try again...');
+        }
+    });
+
+    $(document).ready(function() {
+        $('#progress').hide();
+        // $('#command').val("dirsearch ");
+        $("#command").keyup(function() {
+            $( "#ip" ).prop( "disabled", true );
+            if(!$('#command').val())
+                $( "#ip" ).prop( "disabled", false );
+        });
+        $("#ip").keyup(function() {
+            $("#command").prop( "disabled", true );
+            if(!$('#ip').val())
+                $( "#command" ).prop( "disabled", false );
+        });
+        $("#command").on("change", function() {
+            $( "#ip" ).prop( "disabled", true );
+            if(!$('#command').val())
+                $( "#ip" ).prop( "disabled", false );
+        });
+        $("#ip").on("change", function() {
+            $("#command").prop( "disabled", true );
+            if(!$('#ip').val())
+                $( "#command" ).prop( "disabled", false );
+        });
+    });
+</script>
+
+{% endblock %}
