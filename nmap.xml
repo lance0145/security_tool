@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.91 scan initiated Fri Mar  5 01:05:57 2021 as: nmap -v -sV -Pn -p 1-65535 -oX nmap.xml google.com -->
+<nmaprun scanner="nmap" args="nmap -v -sV -Pn -p 1-65535 -oX nmap.xml google.com" start="1614906357" startstr="Fri Mar  5 01:05:57 2021" version="7.91" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="65535" services="1-65535"/>
+<verbose level="1"/>
+<debugging level="0"/>
+<taskbegin task="Parallel DNS resolution of 1 host." time="1614906357"/>
+<taskend task="Parallel DNS resolution of 1 host." time="1614906357"/>
+<taskbegin task="SYN Stealth Scan" time="1614906357"/>
+<taskprogress task="SYN Stealth Scan" time="1614906388" percent="15.90" remaining="164" etc="1614906552"/>
+<taskprogress task="SYN Stealth Scan" time="1614906418" percent="38.75" remaining="97" etc="1614906514"/>
+<taskprogress task="SYN Stealth Scan" time="1614906448" percent="68.48" remaining="42" etc="1614906490"/>
+<taskend task="SYN Stealth Scan" time="1614906475" extrainfo="65535 total ports"/>
+<taskbegin task="Service scan" time="1614906475"/>
+<taskprogress task="Service scan" time="1614906534" percent="50.00" remaining="60" etc="1614906593"/>
+<taskend task="Service scan" time="1614906541" extrainfo="2 services on 1 host"/>
+<taskbegin task="NSE" time="1614906541"/>
+<taskend task="NSE" time="1614906541"/>
+<taskbegin task="NSE" time="1614906541"/>
+<taskend task="NSE" time="1614906542"/>
+<host starttime="1614906357" endtime="1614906542"><status state="up" reason="user-set" reason_ttl="0"/>
+<address addr="216.58.200.14" addrtype="ipv4"/>
+<hostnames>
+<hostname name="google.com" type="user"/>
+<hostname name="hkg12s11-in-f14.1e100.net" type="PTR"/>
+</hostnames>
+<ports><extraports state="filtered" count="65533">
+<extrareasons reason="no-responses" count="65533"/>
+</extraports>
+<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="56"/><service name="http" product="gws" servicefp="SF-Port80-TCP:V=7.91%I=7%D=3/5%Time=60418471%P=x86_64-pc-linux-gnu%r(GetRequest,1B1C,&quot;HTTP/1\.0\x20200\x20OK\r\nDate:\x20Fri,\x2005\x20Mar\x202021\x2001:08:02\x20GMT\r\nExpires:\x20-1\r\nCache-Control:\x20private,\x20max-age=0\r\nContent-Type:\x20text/html;\x20charset=ISO-8859-1\r\nP3P:\x20CP=\&quot;This\x20is\x20not\x20a\x20P3P\x20policy!\x20See\x20g\.co/p3phelp\x20for\x20more\x20info\.\&quot;\r\nServer:\x20gws\r\nX-XSS-Protection:\x200\r\nX-Frame-Options:\x20SAMEORIGIN\r\nSet-Cookie:\x201P_JAR=2021-03-05-01;\x20expires=Sun,\x2004-Apr-2021\x2001:08:02\x20GMT;\x20path=/;\x20domain=\.google\.com;\x20Secure\r\nSet-Cookie:\x20NID=210=RMM7J40KrXnjM3KkFtPECY3MayXKV_kaXhjCDeDEsXHnfvnlNzN2BhaUy6sj7vZjDaQ8Ls_qd5m-WmkWlvuXOdm7vRdzJWawEBUjPkph9nOTHKM_QTbXf6Z3niaFm4o-l3tIW7bboOstR-uiOSklqd9VS5Ql2RqzjZRxqFLG6Xw;\x20expires=Sat,\x2004-Sep-2021\x2001:08:02\x20GMT;\x20path=/;\x20domain=\.google\.com;\x20HttpOnly\r\nAccept-Ranges:\x20none\r\nVary:\x20Accept-Encoding\r\n\r\n&lt;!doctype\x20html&gt;&lt;html\x20itemscope=\&quot;\&quot;\x20itemtype=\&quot;http://schema\.org/WebPage\&quot;\x20lang=\&quot;en-PH\&quot;&gt;&lt;head&gt;&lt;meta\x20content=\&quot;text/html;\x20charset=UTF-8\&quot;\x20http-equiv=\&quot;Content-Type\&quot;&gt;&lt;meta\x20content=\&quot;/images/branding/googleg&quot;)%r(HTTPOptions,70F,&quot;HTTP/1\.0\x20405\x20Method\x20Not\x20Allowed\r\nAllow:\x20GET,\x20HEAD\r\nDate:\x20Fri,\x2005\x20Mar\x202021\x2001:08:02\x20GMT\r\nContent-Type:\x20text/html;\x20charset=UTF-8\r\nServer:\x20gws\r\nContent-Length:\x201592\r\nX-XSS-Protection:\x200\r\nX-Frame-Options:\x20SAMEORIGIN\r\n\r\n&lt;!DOCTYPE\x20html&gt;\n&lt;html\x20lang=en&gt;\n\x20\x20&lt;meta\x20charset=utf-8&gt;\n\x20\x20&lt;meta\x20name=viewport\x20content=\&quot;initial-scale=1,\x20minimum-scale=1,\x20width=device-width\&quot;&gt;\n\x20\x20&lt;title&gt;Error\x20405\x20\(Method\x20Not\x20Allowed\)!!1&lt;/title&gt;\n\x20\x20&lt;style&gt;\n\x20\x20\x20\x20\*{margin:0;padding:0}html,code{font:15px/22px\x20arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7%\x20auto\x200;max-width:390px;min-height:180px;padding:30px\x200\x2015px}\*\x20&gt;\x20body{background:url\(//www\.google\.com/images/errors/robot\.png\)\x20100%\x205px\x20no-repeat;padding-right:205px}p{margin:11px\x200\x2022px;overflow:hidden}ins{color:#777;text-decoration:none}a\x20img{border:0}@media\x20screen\x20and\x20\(max-width:772px\){body{background:none;margin-top:0;max-width:none;padding-right:0}}#l&quot;);" method="probed" conf="10"/></port>
+<port protocol="tcp" portid="443"><state state="open" reason="syn-ack" reason_ttl="56"/><service name="https" product="gws" servicefp="SF-Port443-TCP:V=7.91%T=SSL%I=7%D=3/5%Time=60418477%P=x86_64-pc-linux-gnu%r(GetRequest,3AB2,&quot;HTTP/1\.0\x20200\x20OK\r\nDate:\x20Fri,\x2005\x20Mar\x202021\x2001:08:08\x20GMT\r\nExpires:\x20-1\r\nCache-Control:\x20private,\x20max-age=0\r\nContent-Type:\x20text/html;\x20charset=ISO-8859-1\r\nP3P:\x20CP=\&quot;This\x20is\x20not\x20a\x20P3P\x20policy!\x20See\x20g\.co/p3phelp\x20for\x20more\x20info\.\&quot;\r\nServer:\x20gws\r\nX-XSS-Protection:\x200\r\nX-Frame-Options:\x20SAMEORIGIN\r\nSet-Cookie:\x201P_JAR=2021-03-05-01;\x20expires=Sun,\x2004-Apr-2021\x2001:08:08\x20GMT;\x20path=/;\x20domain=\.google\.com;\x20Secure\r\nSet-Cookie:\x20NID=210=wlMUcxT3FUVdVRGVWlEzS1W_ucIDpRf-7yo3QI_BsT3IjTE6F84LCnZKg3qyHaXyAu5IWCkaOaRxF8s7hPkIHiOSIRx_tFgNzCpd1rpUqgTJh0_rKWwmpRGSpwAhcONcPdVYX_FHlgOMdMP-v2ehSvsiCTXeyH9Xie5LNj1rYwE;\x20expires=Sat,\x2004-Sep-2021\x2001:08:08\x20GMT;\x20path=/;\x20domain=\.google\.com;\x20HttpOnly\r\nAlt-Svc:\x20h3-29=\&quot;:443\&quot;;\x20ma=2592000,h3-T051=\&quot;:443\&quot;;\x20ma=2592000,h3-Q050=\&quot;:443\&quot;;\x20ma=2592000,h3-Q046=\&quot;:443\&quot;;\x20ma=2592000,h3-Q043=\&quot;:443\&quot;;\x20ma=2592000,quic=\&quot;:443\&quot;;\x20ma=2592000;\x20v=\&quot;46,43\&quot;\r\nAccept-Ranges:\x20none\r\nVary:\x20Accept-Encoding\r\n\r\n&lt;!doctype\x20html&gt;&lt;ht&quot;)%r(HTTPOptions,7C1,&quot;HTTP/1\.0\x20405\x20Method\x20Not\x20Allowed\r\nAllow:\x20GET,\x20HEAD\r\nDate:\x20Fri,\x2005\x20Mar\x202021\x2001:08:09\x20GMT\r\nContent-Type:\x20text/html;\x20charset=UTF-8\r\nServer:\x20gws\r\nContent-Length:\x201592\r\nX-XSS-Protection:\x200\r\nX-Frame-Options:\x20SAMEORIGIN\r\nAlt-Svc:\x20h3-29=\&quot;:443\&quot;;\x20ma=2592000,h3-T051=\&quot;:443\&quot;;\x20ma=2592000,h3-Q050=\&quot;:443\&quot;;\x20ma=2592000,h3-Q046=\&quot;:443\&quot;;\x20ma=2592000,h3-Q043=\&quot;:443\&quot;;\x20ma=2592000,quic=\&quot;:443\&quot;;\x20ma=2592000;\x20v=\&quot;46,43\&quot;\r\n\r\n&lt;!DOCTYPE\x20html&gt;\n&lt;html\x20lang=en&gt;\n\x20\x20&lt;meta\x20charset=utf-8&gt;\n\x20\x20&lt;meta\x20name=viewport\x20content=\&quot;initial-scale=1,\x20minimum-scale=1,\x20width=device-width\&quot;&gt;\n\x20\x20&lt;title&gt;Error\x20405\x20\(Method\x20Not\x20Allowed\)!!1&lt;/title&gt;\n\x20\x20&lt;style&gt;\n\x20\x20\x20\x20\*{margin:0;padding:0}html,code{font:15px/22px\x20arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7%\x20auto\x200;max-width:390px;min-height:180px;padding:30px\x200\x2015px}\*\x20&gt;\x20body{background:url\(//www\.google\.com/images/errors/robot\.png\)\x20100%\x205px\x20no-repeat;padding-right:205px}p{margin:11px\x20&quot;);" tunnel="ssl" method="probed" conf="10"/></port>
+</ports>
+<times srtt="28707" rttvar="3291" to="100000"/>
+</host>
+<runstats><finished time="1614906542" timestr="Fri Mar  5 01:09:02 2021" summary="Nmap done at Fri Mar  5 01:09:02 2021; 1 IP address (1 host up) scanned in 185.38 seconds" elapsed="185.38" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

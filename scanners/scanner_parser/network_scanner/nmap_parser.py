@@ -17,7 +17,7 @@
 from __future__ import print_function
 from __future__ import print_function
 import hashlib
-import datetime
+from datetime import datetime
 import uuid
 from tools.models import nmap_result_db, nmap_scan_db
 
@@ -139,6 +139,7 @@ def xml_parser(root, project_id, scan_id, username):
                         cpe = sss.text
                 # print(ip_address)
                 # print("------")
+                date_time = datetime.now()
 
                 dump_data = nmap_result_db(
                     scan_id=scan_id,
@@ -161,7 +162,8 @@ def xml_parser(root, project_id, scan_id, username):
                     used_state=used_state,
                     used_portid=used_portid,
                     used_proto=used_proto,
-                    username=username
+                    username=username,
+                    date_time=date_time
                 )
                 dump_data.save()
     
@@ -197,12 +199,15 @@ def xml_parser(root, project_id, scan_id, username):
                                                                                     state='closed')
                                         total_close_p = len(all_close_p)
 
+                                        date_time = datetime.now()
+
                                         save_scan = nmap_scan_db(scan_id=scan_id,
                                                                 project_id=project_id,
                                                                 scan_ip=ip_address,
                                                                 total_ports=total_ports,
                                                                 total_open_ports=total_open_p,
                                                                 total_close_ports=total_close_p,
-                                                                username=username
+                                                                username=username,
+                                                                date_time=date_time
                                                                 )
                                         save_scan.save()

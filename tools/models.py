@@ -71,6 +71,7 @@ class nmap_scan_db(models.Model):
     total_open_ports = models.TextField(blank=True, null=True)
     total_close_ports = models.TextField(blank=True, null=True)
     username = models.CharField(max_length=256, null=True)
+    date_time = models.TextField(null=True, blank=True)
 
 
 class nmap_result_db(models.Model):
@@ -97,6 +98,7 @@ class nmap_result_db(models.Model):
     used_portid = models.TextField(blank=True, null=True)
     used_proto = models.TextField(blank=True, null=True)
     username = models.CharField(max_length=256, null=True)
+    date_time = models.TextField(null=True, blank=True)
 
 # NOTE[gmedian]: just base on the previous existing table in order not to make anything non-working
 class nmap_vulners_port_result_db(nmap_result_db):
