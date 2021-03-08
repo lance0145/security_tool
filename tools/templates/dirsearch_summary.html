@@ -21,7 +21,7 @@
                         <br>
                         <br>
                         <div class="d-md-flex align-items-center">
-                            <h1 class="card-title">NMAP Vulnerability Summary</h1>
+                            <h1 class="card-title">dirsearch Scan Summary</h1>
                         </div>
                         <br>
                         <div id="myModal" class="modal">
@@ -40,24 +40,16 @@
                                         <tr>
                                             <th>Ip</th>
                                             <th>Date</th>
-                                            <th>Total Ports</th>
-                                            <th>Total Open Ports</th>
-                                            <th>Total Close Ports</th>
+                                            <th>Total DIR</th>
                                         </tr>
                                     </thead>
-                                    <tbody>{% for data in all_nmap %}
+                                    <tbody>{% for data in all_dirs %}
                                         <tr data-target="#">
                                             <td>
-                                                {% if is_vulners %}
-                                                <a href="/tools/nmap_vulners/?ip={{data.scan_ip}}">{{data.scan_ip}}</a>
-                                                {% else %}
-                                                <a href="/tools/nmap/?ip={{data.scan_ip}}">{{data.scan_ip}}</a>
-                                                {% endif %}
+                                                <a href="/tools/dirsearch_list/?ip={{data.ip_address}}">{{data.ip_address}}</a>
                                             </td>
                                             <td>{{data.date_time}}</td>
-                                            <td>{{data.total_ports}}</td>
-                                            <td>{{data.total_open_ports}}</td>
-                                            <td>{{data.total_close_ports}}</td>
+                                            <td>{{data.total_dirs}}</td>
                                             {% endfor %}
                                         </tr>
                                     </tbody>
@@ -91,13 +83,10 @@
                                         </label></th>
                                         <th>Ip</th>
                                         <th>Date</th>
-                                        <th>Total Ports</th>
-                                        <th>Total Open Ports</th>
-                                        <th>Total Close Ports</th>
-                                        <th>Delete</th>
+                                        <th>Total DIR</th>
                                     </tr>
                                     </thead>
-                                    <tbody>{% for data in all_nmap %}
+                                    <tbody>{% for data in all_dirs %}
                                     <tr data-target="#">
                                         <td>
                                             <form>
@@ -111,16 +100,10 @@
                                             </form>
                                         </td>
                                         <td>
-                                            {% if is_vulners %}
-                                            <a href="/tools/nmap_vulners/?ip={{data.scan_ip}}">{{data.scan_ip}}</a>
-                                            {% else %}
-                                            <a href="/tools/nmap/?ip={{data.scan_ip}}">{{data.scan_ip}}</a>
-                                            {% endif %}
+                                            <a href="/tools/dirsearch/?ip={{data.ip_address}}">{{data.ip_address}}</a>
                                         </td>
                                         <td>{{data.date_time}}</td>
-                                        <td>{{data.total_ports}}</td>
-                                        <td>{{data.total_open_ports}}</td>
-                                        <td>{{data.total_close_ports}}</td>
+                                        <td>{{data.total_dirs}}</td>
                                         <td class="confirm-delete">
                                             <form action="/tools/nmap_scan_del/" method="post" class="forms-sample">
                                                 <input type="hidden" name="scn_id" value="{{data.scan_id}}"/>{% csrf_token %}

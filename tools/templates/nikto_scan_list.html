@@ -19,7 +19,6 @@
             var json_scanid = scan_id.join(", ");
             $.ajax({
                 type:'POST',
-                <!--contentType: 'application/json; charset=utf-8',-->
                 url:'/tools/nikto_scan_del/',
                 data:{
                    scan_id: json_scanid,
@@ -56,7 +55,7 @@ $(document).on('click', '.confirm-delete', function(){
                         <br>
                         <br>
                         <div class="d-md-flex align-items-center">
-                            <h1 class="card-title">Nikto Scan Summary</h1>
+                            <h1 class="card-title">Nikto Vulnerability Summary</h1>
                         </div>
                         <br>
                         <div class="row">
@@ -70,7 +69,7 @@ $(document).on('click', '.confirm-delete', function(){
                                         </label></th>
                                         <th>URL</th>
                                         <th>Date</th>
-                                        <th>Action</th>
+                                        <th>Delete</th>
                                     </tr>
                                     </thead>
                                     <tbody>{% for data in all_nikto %}

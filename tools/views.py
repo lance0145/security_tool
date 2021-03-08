@@ -15,7 +15,7 @@
 # This file is part of ArcherySec Project.
 
 from __future__ import unicode_literals
-from tools.models import sslscan_result_db, nikto_result_db, nmap_result_db, nmap_scan_db, nikto_vuln_db
+from tools.models import sslscan_result_db, nikto_result_db, nmap_result_db, nmap_scan_db, nikto_vuln_db, dirsearch_result_db, dirsearch_scan_db
 from django.shortcuts import render, HttpResponseRedirect
 import subprocess
 import defusedxml.ElementTree as ET
@@ -25,6 +25,7 @@ import codecs
 from scanners.scanner_parser.tools.nikto_htm_parser import nikto_html_parser
 import hashlib
 import os
+import csv
 from datetime import datetime
 from notifications.signals import notify
 from django.urls import reverse
@@ -37,6 +38,108 @@ nikto_output = ''
 scan_result = ''
 all_nmap = ''
 
+def dirsearch(request):
+    def parse_ds(username, project_id, scan_id, ip_address):
+        date_time = datetime.now()
+        with open('dirsearch.csv', 'r', encoding='utf-8') as csv_file:
+            csv_reader = csv.DictReader(csv_file)
+            for row in csv_reader:
+                print(username, project_id, scan_id, ip_address, row['Time'])
+                dump_data = dirsearch_result_db(
+                    username=username,
+                    project_id=project_id,
+                    scan_id=scan_id,
+                    ip_address=ip_address,
+                    date_time=row['Time'],
+                    url=row['URL'],
+                    status=row['Status'],
+                    size=row['Size'],
+                    redirection=row['Redirection'],
+                )
+                dump_data.save()
+        csv_file.close()
+
+        all_dir = dirsearch_result_db.objects.filter(scan_id=scan_id)
+        dump_data = dirsearch_scan_db(
+            username=username,
+            project_id=project_id,
+            scan_id=scan_id,
+            total_dirs=len(all_dir),
+            ip_address=ip_address,
+            date_time=date_time,
+        )
+        dump_data.save()
+        print("Finish parsing and saving...")
+
+
+    username = request.user.username
+    all_dirs = dirsearch_scan_db.objects.filter(username=username)#, scan_id=scan_id)
+    ip_address = request.GET.get('ip', )
+
+    if request.method == 'POST':    
+        ip_address = request.POST.get('ip')
+        project_id = request.POST.get('project_id')
+        command = request.POST.get('command')
+        scan_id = uuid.uuid4()
+
+        try:
+            print('Start dirsearch scan')
+            if command:
+                reruns = command.split()
+                reruns.append('--csv-report=dirsearch.csv')
+                subprocess.run(reruns)
+                parse_ds(username, project_id, scan_id, ip_address)
+
+            else:
+                subprocess.check_output(
+                    ['python3', '/opt/dirsearch/dirsearch.py', '-u', ip_address, '-e', 'html,php,txt', '-x', '400,403,404,503', '-w', 'ds_wordlist.txt', '--csv-report=dirsearch.csv']
+                )
+                parse_ds(username, project_id, scan_id, ip_address)
+
+            print('Completed dirsearch scan')
+
+        except Exception as e:
+            print('Error in dirsearch scan:', e)
+
+        return HttpResponseRedirect('/tools/dirsearch/')
+    if request.method == 'GET' and ip_address:        
+        all_dirs = dirsearch_result_db.objects.filter(username=username, ip_address=ip_address)
+
+        return render(request,
+                    'dirsearch_list.html',
+                    {'all_dirs': all_dirs,
+                    'ip': ip_address}
+                    )
+
+    return render(request,
+                  'dirsearch_summary.html',
+                  {'all_dirs': all_dirs,}
+                    # 'ip': ip_address}
+
+                  )
+
+def dirsearch_summary(request):
+
+    username = request.user.username
+    if request.method == 'GET':
+        # scan_id = request.GET['scan_id']
+        all_dirs = dirsearch_scan_db.objects.filter(username=username)#, scan_id=scan_id)
+
+    return render(request,
+                  'dirsearch_summary.html',
+                  {'all_dirs': all_dirs}
+                  )
+
+def dirsearch_list(request):
+    username = request.user.username
+    ip_address = request.POST.get('ip', )
+    all_dirs = dirsearch_result_db.objects.filter(username=username, ip_address=ip_address)
+
+    return render(request,
+                  'dirsearch_list.html',
+                  {'all_dirs': all_dirs,
+                   'ip': ip_address}
+                  )
 
 def sslscan(request):
     """
@@ -125,64 +228,6 @@ def sslcan_del(request):
             del_scan.delete()
 
     return HttpResponseRedirect('/tools/sslscan/')
-
-def dirsearch(request):
-    """
-
-    :return:
-    """
-    # global all_nmap
-    username = request.user.username
-    all_nikto = nikto_result_db.objects.filter(username=username)
-
-    # if request.method == 'GET':
-    #     ip_address = request.GET['ip']
-
-    #     all_nmap = nmap_result_db.objects.filter(username=username, ip_address=ip_address)
-
-    if request.method == 'POST':    
-        ip_address = request.POST.get('ip')
-        project_id = request.POST.get('project_id')
-        command = request.POST.get('command')
-        scan_id = uuid.uuid4()
-
-        try:
-            print('Start dirsearch scan')
-            if command:
-                reruns = command.split()
-                # reruns.append('-w')
-                # reruns.append('ds_wordlist.txt')
-                subprocess.run(reruns)
-            else:
-                subprocess.check_output(
-                    ['python3', '/opt/dirsearch/dirsearch.py', '-u', ip_address, '-e', 'html,php,txt', '-x', '400,403,404,503', '-w', 'ds_wordlist.txt']
-                )
-
-            print('Completed dirsearch scan')
-
-        except Exception as e:
-            print('Error in dirsearch scan:', e)
-
-        # try:
-        #     tree = ET.parse('nmap.xml')
-        #     root_xml = tree.getroot()
-
-        #     nmap_parser.xml_parser(root=root_xml,
-        #                            scan_id=scan_id,
-        #                            project_id=project_id,
-        #                            username=username
-        #                            )
-
-        # except Exception as e:
-        #     print('Error in xml parser:', e)
-
-        return HttpResponseRedirect('/tools/dirsearch/')
-
-    return render(request,
-                  'nikto_scan_list.html',
-                  {'all_nikto': all_nikto}
-
-                  )
 
 def nikto(request):
     """
