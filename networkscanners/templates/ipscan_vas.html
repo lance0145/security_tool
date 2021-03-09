@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-md-flex align-items-center">
-                            <h1 class="card-title">OpenVAS Scans</h1>
+                            <h1 class="card-title">OpenVas Scans</h1>
                         </div>
                         <br>
                         <div class="row">
@@ -19,13 +19,11 @@
                                 <div class="card">
                                     <form id="start_scan" class="form-horizontal">{% csrf_token %}
                                         <div class="card-body">
-                                            <h4 class="card-title"></h4>
-
                                             <div class="form-group row">
                                                 <label class="col-md-3 m-t-15">IP/s</label>
                                                 <div class="col-sm-9">
-                                                    <textarea class="form-control" name="ip" id="ip" value="{{ ip }}"
-                                                              placeholder="Place IP/s here..."></textarea>
+                                                    <textarea class="form-control" name="ip" id="ip"
+                                                        placeholder="Place IP/s here..."></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -45,16 +43,16 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 m-t-15">OpenVAS command</label>
+                                                    <label class="col-md-3 m-t-15">openvas custom command</label>
                                                     <div class="col-sm-9">
                                                         <input id="command" type="text" name="pentester"
-                                                               class="form-control"
-                                                               placeholder="omp --username foobar --get-tasks"/>
+                                                            class="form-control"                                                             
+                                                            placeholder="Place openvas custom command here..."/>
                                                     </div>
                                                 </div>
                                             <div class="card-body">
                                                 <div class="controls">
-                                                    <input type="submit" class="btn btn-primary" value="Launch">
+                                                    <input id="launch" type="submit" class="btn btn-primary" value="Launch">
                                                     <label class="col-md-3 m-t-15" id="label" for="file"></label>
                                                     <progress id="progress" value ="0" max="100" style="width: 300px;"></progress>
                                                 </div>
@@ -79,7 +77,25 @@
         var ipformat =  /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?|^((http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/; 
         var ipformat1 = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?|^((http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\/(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
         var ipformat2 = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?|^((http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\-(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-        if($('#command').val() || IpAddr.match(ipformat) || IpAddr.match(ipformat1) || IpAddr.match(ipformat2))
+        var Command = $('#command').val();
+        var cmdformat = "^openvas";
+        if($('#ip').val()){
+            $('#label').text('Scanning, please wait will prompt...');
+            $("#ip").prop( "disabled", true );
+            $("#command").prop( "disabled", true );
+            $("#launch").prop( "disabled", true );
+            $("#project_id").prop( "disabled", true );
+            $('#progress').show();
+            var progression = 0,
+            progress = setInterval(function() 
+            {
+                $('#progress').val(progression);
+                if(progression == 100) {
+                    // $('#label').text('Please wait, will prompt...');
+                } else
+                    progression += 10;
+                
+            }, 1000);
             $.ajax({
                 type: 'POST',
                 url: '{% url "tools:openvas" %}',
@@ -89,31 +105,51 @@
                     command:  $('#command').val(),
                     csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
                 },
-                beforeSend:function(){
-                    $('#label').text('Server started scanning...');
-                    $('#progress').show();
-                    var progression = 0,
-                    progress = setInterval(function() 
-                    {
-                        $('#progress').val(progression);
-                        if(progression == 100) {
-                            $('#label').text('Please wait, will prompt...');
-                        } else
-                            progression += 10;
-                        
-                    }, 1000);
-                },
                 success:function(){
-                    $('#label').text('Done, scan result saved...');
+                    alert('Done, scan result saved on openvas Vulnerability.')                    
+                    $("#ip").prop( "disabled", false );
+                    $("#command").prop( "disabled", false );
+                    $("#launch").prop( "disabled", false );
+                    $("#project_id").prop( "disabled", false );
                     $('#progress').hide();
+                    $('#label').text('');
+                    $('#ip').val('');
+                    $('#command').val('');
                 },
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                }
             });
-        else
-            $('#label').text('Invalid IPs, try again...');
+        }
+        else {
+            $('#label').text('Invalid IP/s or command, try again...');
+        }
     });
 
     $(document).ready(function() {
         $('#progress').hide();
+        // $('#command').val("openvas ");
+        $("#command").keyup(function() {
+            $( "#ip" ).prop( "disabled", true );
+            if(!$('#command').val())
+                $( "#ip" ).prop( "disabled", false );
+        });
+        $("#ip").keyup(function() {
+            $("#command").prop( "disabled", true );
+            if(!$('#ip').val())
+                $( "#command" ).prop( "disabled", false );
+        });
+        $("#command").on("change", function() {
+            $( "#ip" ).prop( "disabled", true );
+            if(!$('#command').val())
+                $( "#ip" ).prop( "disabled", false );
+        });
+        $("#ip").on("change", function() {
+            $("#command").prop( "disabled", true );
+            if(!$('#ip').val())
+                $( "#command" ).prop( "disabled", false );
+        });
     });
 </script>
 

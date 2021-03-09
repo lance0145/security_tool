@@ -57,31 +57,12 @@ def openvas(request):
 
         try:
             print('Start OpenVas scan')
-            print(ip_address)
             if command:
-                reruns = command.split()
-                reruns.append('-oX')
-                reruns.append('openvas.xml')
-                subprocess.run(reruns)
+                cmd = str(command) + ' -oX OpenVas.xml'
+                subprocess.Popen("ssh {user}@{host} {cmd}".format(user='root', host='10.254.10.18', cmd=cmd), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
             else:
-                print("pumasok d2******************************")
-                # com = "nmap -v -A scanme.nmap.org"
-                # subprocess.run(["ssh", "-t", "root@10.254.10.18", com])
-                subprocess.Popen("ssh {user}@{host} {cmd}".format(user='root', host='10.254.10.18', cmd='nmap -v -A scanme.nmap.org -oX OpenVas.xml'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()               
-                # ssh = subprocess.Popen(["ssh", "root@10.254.10.18"],
-                #     shell=False,
-                #     stdout=subprocess.PIPE,
-                #     stderr=subprocess.PIPE)
-                # result = ssh.stdout.readlines()
-                # if result == []:
-                #     error = ssh.stderr.readlines()
-                #     print(sys.stderr, "ERROR: %s" % error)
-                # else:
-                #     print(result)                
-                # subprocess.run(
-                #     ['nmap', '-v', '-sV', '-Pn', '-p', '1-65535', ip_address, '-oX', 'nmap.xml']
-                # )
-                print("lumabas d2******************************")
+                cmd = 'nmap -v -A ' + str(ip_address) + ' -oX OpenVas.xml'
+                subprocess.Popen("ssh {user}@{host} {cmd}".format(user='root', host='10.254.10.18', cmd=cmd), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
             print('Completed OpenVas scan')
         except Exception as e:
             print('Error in OpenVas scan:', e)
