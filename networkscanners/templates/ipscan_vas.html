@@ -82,7 +82,7 @@
         if($('#command').val() || IpAddr.match(ipformat) || IpAddr.match(ipformat1) || IpAddr.match(ipformat2))
             $.ajax({
                 type: 'POST',
-                url: '{% url "tools:nmap" %}',
+                url: '{% url "tools:openvas" %}',
                 data: {
                     ip: $('#ip').val(),
                     project_id: $('#project_id').val(),
@@ -107,19 +107,6 @@
                     $('#label').text('Done, scan result saved...');
                     $('#progress').hide();
                 },
-                // xhr:function () {
-                //     xhr = jQuery.ajaxSettings.xhr()
-                //     interval = setInterval(function() 
-                //     {
-                //         console.log(xhr.responseText.length);
-                //         if (xhr.readyState > 2){
-                //             total = parseInt(xhr.getResponseHeader('Content-length'));
-                //             completed = parseInt(xhr.responseText.length);
-                //             percentage = (100.0 / total * completed).toFixed(2);
-                //             console.log("Completed #{percentage}%");
-                //         }
-                //     }, 50);
-                // }
             });
         else
             $('#label').text('Invalid IPs, try again...');

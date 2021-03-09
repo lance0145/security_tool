@@ -38,6 +38,59 @@ nikto_output = ''
 scan_result = ''
 all_nmap = ''
 
+def openvas(request):
+
+    username = request.user.username
+
+    if request.method == 'GET':
+        ip_address = request.GET['ip']
+        all_openvas = openvas_result_db.objects.filter(username=username, ip_address=ip_address)
+    
+    if request.method == 'POST':    
+        ip_address = request.POST.get('ip')
+        project_id = request.POST.get('project_id')
+        command = request.POST.get('command')
+        scan_id = uuid.uuid4()
+
+        try:
+            print('Start OpenVas scan')
+            if command:
+                reruns = command.split()
+                reruns.append('-oX')
+                reruns.append('nmap.xml')
+                subprocess.run(reruns)
+            else:
+                subprocess.check_output(
+                    ['nmap', '-v', '-sV', '-Pn', '-p', '1-65535', ip_address, '-oX', 'nmap.xml']
+                )
+
+            print('Completed OpenVas scan')
+
+        except Exception as e:
+            print('Error in OpenVas scan:', e)
+
+        try:
+            tree = ET.parse('OpenVas.xml')
+            root_xml = tree.getroot()
+
+            nmap_parser.xml_parser(root=root_xml,
+                                   scan_id=scan_id,
+                                   project_id=project_id,
+                                   username=username
+                                   )
+
+        except Exception as e:
+            print('Error in xml parser:', e)
+
+        return HttpResponseRedirect('/tools/openvas/')
+
+    return render(request,
+                  'openvas.html',
+                  {'all_openvas': all_nmap,
+                   'ip': ip_address}
+
+                  )
+
 def dirsearch(request):
     def parse_ds(username, project_id, scan_id, ip_address):
         date_time = datetime.now()
@@ -102,6 +155,7 @@ def dirsearch(request):
             print('Error in dirsearch scan:', e)
 
         return HttpResponseRedirect('/tools/dirsearch/')
+
     if request.method == 'GET' and ip_address:        
         all_dirs = dirsearch_result_db.objects.filter(username=username, ip_address=ip_address)
 
