@@ -15,7 +15,7 @@
 # This file is part of ArcherySec Project.
 
 from __future__ import unicode_literals
-from tools.models import sslscan_result_db, nikto_result_db, nmap_result_db, nmap_scan_db, nikto_vuln_db, dirsearch_result_db, dirsearch_scan_db
+from tools.models import sslscan_result_db, nikto_result_db, nmap_result_db, nmap_scan_db, nikto_vuln_db, dirsearch_result_db, dirsearch_scan_db, openvas_result_db, openvas_scan_db
 from django.shortcuts import render, HttpResponseRedirect
 import subprocess
 import defusedxml.ElementTree as ET
@@ -25,6 +25,7 @@ import codecs
 from scanners.scanner_parser.tools.nikto_htm_parser import nikto_html_parser
 import hashlib
 import os
+import sys
 import csv
 from datetime import datetime
 from notifications.signals import notify
@@ -41,9 +42,11 @@ all_nmap = ''
 def openvas(request):
 
     username = request.user.username
+    all_openvas = openvas_scan_db.objects.filter(username=username)#, scan_id=scan_id)
+    ip_address = request.GET.get('ip', )
 
-    if request.method == 'GET':
-        ip_address = request.GET['ip']
+    if request.method == 'GET' and ip_address:
+        ip_address = request.GET.get('ip', )
         all_openvas = openvas_result_db.objects.filter(username=username, ip_address=ip_address)
     
     if request.method == 'POST':    
@@ -54,18 +57,32 @@ def openvas(request):
 
         try:
             print('Start OpenVas scan')
+            print(ip_address)
             if command:
                 reruns = command.split()
                 reruns.append('-oX')
-                reruns.append('nmap.xml')
+                reruns.append('openvas.xml')
                 subprocess.run(reruns)
             else:
-                subprocess.check_output(
-                    ['nmap', '-v', '-sV', '-Pn', '-p', '1-65535', ip_address, '-oX', 'nmap.xml']
-                )
-
+                print("pumasok d2******************************")
+                # com = "nmap -v -A scanme.nmap.org"
+                # subprocess.run(["ssh", "-t", "root@10.254.10.18", com])
+                subprocess.Popen("ssh {user}@{host} {cmd}".format(user='root', host='10.254.10.18', cmd='nmap -v -A scanme.nmap.org -oX OpenVas.xml'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()               
+                # ssh = subprocess.Popen(["ssh", "root@10.254.10.18"],
+                #     shell=False,
+                #     stdout=subprocess.PIPE,
+                #     stderr=subprocess.PIPE)
+                # result = ssh.stdout.readlines()
+                # if result == []:
+                #     error = ssh.stderr.readlines()
+                #     print(sys.stderr, "ERROR: %s" % error)
+                # else:
+                #     print(result)                
+                # subprocess.run(
+                #     ['nmap', '-v', '-sV', '-Pn', '-p', '1-65535', ip_address, '-oX', 'nmap.xml']
+                # )
+                print("lumabas d2******************************")
             print('Completed OpenVas scan')
-
         except Exception as e:
             print('Error in OpenVas scan:', e)
 
@@ -85,10 +102,22 @@ def openvas(request):
         return HttpResponseRedirect('/tools/openvas/')
 
     return render(request,
-                  'openvas.html',
-                  {'all_openvas': all_nmap,
+                  'openvas_summary.html',
+                  {'all_openvas': all_openvas,
                    'ip': ip_address}
 
+                  )
+
+def openvas_summary(request):
+
+    username = request.user.username
+    if request.method == 'GET':
+        # scan_id = request.GET['scan_id']
+        all_openvas = openvas_scan_db.objects.filter(username=username)#, scan_id=scan_id)
+
+    return render(request,
+                  'openvas_summary.html',
+                  {'all_openvas': all_openvas}
                   )
 
 def dirsearch(request):

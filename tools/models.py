@@ -165,6 +165,7 @@ class openvas_result_db(models.Model):
     false_positive_hash = models.TextField(null=True, blank=True)
     scanner = models.TextField( default='OpenVAS', editable=False)
     username = models.CharField(max_length=256, null=True)
+    ip_address = models.TextField(blank=True, null=True)
 
 class openvas_scan_db(models.Model):
     scan_id = models.TextField(blank=True)
@@ -181,3 +182,4 @@ class openvas_scan_db(models.Model):
     date_time = models.DateTimeField(null=True)
     total_dup = models.IntegerField(blank=True, null=True)
     username = models.CharField(max_length=256, null=True)
+    ip_address = models.TextField(blank=True, null=True)
