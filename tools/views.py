@@ -58,11 +58,28 @@ def openvas(request):
         try:
             print('Start OpenVas scan')
             if command:
-                cmd = str(command) + ' -oX OpenVas.xml'
-                subprocess.Popen("ssh {user}@{host} {cmd}".format(user='root', host='10.254.10.18', cmd=cmd), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
+                cmd = 'export jailbreak="yes";' + str(command)
+                subprocess.run(
+                    ['ssh', '-t', 'root@10.254.10.45', cmd, ';exit;/bin/bash']
+                )
+                report = 'Report_for_' + str(ip_address) + ".txt"
+                remote = 'root@10.254.10.45:/root/' + report
+                distination = os.getcwd() + '/openvas/' + report
+                subprocess.run(
+                    ['scp', remote, distination]
+                )
             else:
-                cmd = 'nmap -v -A ' + str(ip_address) + ' -oX OpenVas.xml'
-                subprocess.Popen("ssh {user}@{host} {cmd}".format(user='root', host='10.254.10.18', cmd=cmd), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
+                print(ip_address)
+                cmd = 'export jailbreak="yes";openvas ' + str(ip_address)
+                subprocess.run(
+                    ['ssh', '-t', 'root@10.254.10.45', cmd, ';exit;/bin/bash']
+                )
+                report = 'Report_for_' + str(ip_address) + ".txt"
+                remote = 'root@10.254.10.45:/root/' + report
+                distination = os.getcwd() + '/openvas/' + report
+                subprocess.run(
+                    ['scp', remote, distination]
+                )
             print('Completed OpenVas scan')
         except Exception as e:
             print('Error in OpenVas scan:', e)

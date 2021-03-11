@@ -1,0 +1,1042 @@
+IP,Hostname,OS,Scan Start,Scan End,CVSS,Severity,High,Medium,Low,Log,False Positive,Total
+98.137.11.163,yahoo.com,cpe:/o:freebsd:freebsd,2021-03-10T12:34:31Z,2021-03-10T12:59:12Z,2.6,Low,0,0,1,25,0,26
+
+*****************************************************************************************
+
+I Summary
+=========
+
+This document reports on the results of an automatic security scan.
+The report first summarises the results found.
+Then, for each host, the report describes every issue found.
+Please consider the advice given in each description, in order to rectify
+the issue.
+
+All dates are displayed using the timezone "Coordinated Universal Time",
+which is abbreviated "UTC".
+
+Vendor security updates are not trusted.
+
+Overrides are off.  Even when a result has an override, this report uses
+the actual threat of the result.
+
+Notes are included in the report.Information on overrides is included in the report.
+
+This report might not show details of all issues that were found.
+Issues with the threat level "High" are not shown.
+Issues with the threat level "Medium" are not shown.
+Issues with the threat level "Low" are not shown.
+Issues with the threat level "Log" are not shown.
+Issues with the threat level "Debug" are not shown.
+Issues with the threat level "False Positive" are not shown.
+Only results with a minimum QoD of 70 are shown.
+
+This report contains all 26 results selected by the
+filtering described above.  Before filtering there were 26 results.
+
+Scan started: Wed Mar 10 12:33:51 2021 UTC
+Scan ended:   Wed Mar 10 12:59:12 2021 UTC
+Task:         yahoo.com
+
+Host Summary
+************
+
+Host            High  Medium  Low  Log  False Positive
+98.137.11.163      0       0    1   25               0    yahoo.com
+Total: 1           0       0    1   25               0
+
+
+II Results per Host
+===================
+
+Host 98.137.11.163
+******************
+
+Scanning of this host started at: Wed Mar 10 12:34:31 2021 UTC
+Number of results: 26
+
+Port Summary for Host 98.137.11.163
+-----------------------------------
+
+Service (Port)          Threat Level
+443/tcp                 Log
+80/tcp                  Log
+general/CPE-T           Log
+general/tcp             Low
+
+Security Issues for Host 98.137.11.163
+--------------------------------------
+
+Issue
+-----
+NVT:    CGI Scanning Consolidation
+OID:    1.3.6.1.4.1.25623.1.0.111038
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+The script consolidates various information for CGI scanning.
+  This information is based on the following scripts / settings:
+  - HTTP-Version Detection (OID: 1.3.6.1.4.1.25623.1.0.100034)
+  - No 404 check (OID: 1.3.6.1.4.1.25623.1.0.10386)
+  - Web mirroring / webmirror.nasl (OID: 1.3.6.1.4.1.25623.1.0.10662)
+  - Directory Scanner / DDI_Directory_Scanner.nasl (OID: 1.3.6.1.4.1.25623.1.0.1!
+1032)
+  - The configured 'cgi_path' within the 'Scanner Preferences' of the scan confi!
+g in use
+  - The configured 'Enable CGI scanning', 'Enable generic web application scanni!
+ng' and
+    'Add historic /scripts and /cgi-bin to directories for CGI scanning' within !
+the
+    'Global variable settings' of the scan config in use
+  If you think any of this information is wrong please report it to the referenc!
+ed community portal.
+
+Vulnerability Detection Result:
+The Hostname/IP "yahoo.com" was used to access the remote host.
+Generic web application scanning is disabled for this host via the "Enable gener!
+ic web application scanning" option within the "Global variable settings" of the!
+ scan config in use.
+Requests to this service are done via HTTP/1.1.
+This service seems to be able to host PHP scripts.
+This service seems to be able to host ASP scripts.
+The User-Agent "Mozilla/5.0 [en] (X11, U; OpenVAS-VT 9.0.3)" was used to access !
+the remote host.
+Historic /scripts and /cgi-bin are not added to the directories used for CGI sca!
+nning. You can enable this again with the "Add historic /scripts and /cgi-bin to!
+ directories for CGI scanning" option within the "Global variable settings" of t!
+he scan config in use.
+The following directories were used for CGI scanning:
+https://yahoo.com/
+While this is not, in and of itself, a bug, you should manually inspect these di!
+rectories to ensure that they are in compliance with company security standards
+
+Log Method:
+Details:
+CGI Scanning Consolidation
+(OID: 1.3.6.1.4.1.25623.1.0.111038)
+Version used: $Revision: 13679 $
+
+References:
+Other:
+    https://community.greenbone.net/c/vulnerability-tests
+
+
+Issue
+-----
+NVT:    CGI Scanning Consolidation
+OID:    1.3.6.1.4.1.25623.1.0.111038
+Threat: Log (CVSS: 0.0)
+Port:   80/tcp
+
+Summary:
+The script consolidates various information for CGI scanning.
+  This information is based on the following scripts / settings:
+  - HTTP-Version Detection (OID: 1.3.6.1.4.1.25623.1.0.100034)
+  - No 404 check (OID: 1.3.6.1.4.1.25623.1.0.10386)
+  - Web mirroring / webmirror.nasl (OID: 1.3.6.1.4.1.25623.1.0.10662)
+  - Directory Scanner / DDI_Directory_Scanner.nasl (OID: 1.3.6.1.4.1.25623.1.0.1!
+1032)
+  - The configured 'cgi_path' within the 'Scanner Preferences' of the scan confi!
+g in use
+  - The configured 'Enable CGI scanning', 'Enable generic web application scanni!
+ng' and
+    'Add historic /scripts and /cgi-bin to directories for CGI scanning' within !
+the
+    'Global variable settings' of the scan config in use
+  If you think any of this information is wrong please report it to the referenc!
+ed community portal.
+
+Vulnerability Detection Result:
+The Hostname/IP "yahoo.com" was used to access the remote host.
+Generic web application scanning is disabled for this host via the "Enable gener!
+ic web application scanning" option within the "Global variable settings" of the!
+ scan config in use.
+Requests to this service are done via HTTP/1.1.
+This service seems to be able to host PHP scripts.
+This service seems to be able to host ASP scripts.
+The User-Agent "Mozilla/5.0 [en] (X11, U; OpenVAS-VT 9.0.3)" was used to access !
+the remote host.
+Historic /scripts and /cgi-bin are not added to the directories used for CGI sca!
+nning. You can enable this again with the "Add historic /scripts and /cgi-bin to!
+ directories for CGI scanning" option within the "Global variable settings" of t!
+he scan config in use.
+The following directories were used for CGI scanning:
+http://yahoo.com/
+While this is not, in and of itself, a bug, you should manually inspect these di!
+rectories to ensure that they are in compliance with company security standards
+
+Log Method:
+Details:
+CGI Scanning Consolidation
+(OID: 1.3.6.1.4.1.25623.1.0.111038)
+Version used: $Revision: 13679 $
+
+References:
+Other:
+    https://community.greenbone.net/c/vulnerability-tests
+
+
+Issue
+-----
+NVT:    CPE Inventory
+OID:    1.3.6.1.4.1.25623.1.0.810002
+Threat: Log (CVSS: 0.0)
+Port:   general/CPE-T
+
+Summary:
+This routine uses information collected by other routines about
+  CPE identities of operating systems, services and
+  applications detected during the scan.
+
+Vulnerability Detection Result:
+98.137.11.163|cpe:/o:freebsd:freebsd
+
+Log Method:
+Details:
+CPE Inventory
+(OID: 1.3.6.1.4.1.25623.1.0.810002)
+Version used: $Revision: 14324 $
+
+References:
+Other:
+    http://cpe.mitre.org/
+
+
+Issue
+-----
+NVT:    HTTP Security Headers Detection
+OID:    1.3.6.1.4.1.25623.1.0.112081
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+All known security headers are being checked on the host. On completion a report!
+ will hand back whether a specific security header
+      has been implemented (including its value) or is missing on the target.
+
+Vulnerability Detection Result:
+Header Name               | Header Value
+--------------------------------------------------------------
+Expect-CT                 | max-age=31536000, report-uri="http
+Referrer-Policy           | no-referrer-when-downgrade
+Strict-Transport-Security | max-age=31536000
+X-Content-Type-Options    | nosniff
+X-Frame-Options           | SAMEORIGIN
+X-XSS-Protection          | 1; mode=block
+Missing Headers                   | More Information
+--------------------------------------------------------------------------------!
+--------------------------------------------------------------------------------!
+--------------------------------------------------------------------------------!
+------
+Content-Security-Policy           | https://owasp.org/www-project-secure-headers!
+/#content-security-policy
+Document-Policy                   | https://w3c.github.io/webappsec-feature-poli!
+cy/document-policy#document-policy-http-header
+Feature-Policy                    | https://owasp.org/www-project-secure-headers!
+/#feature-policy, Note: The Feature Policy header has been renamed to Permission!
+s Policy
+Permissions-Policy                | https://w3c.github.io/webappsec-feature-poli!
+cy/#permissions-policy-http-header-field
+Public-Key-Pins                   | Please check the output of the VTs including!
+ 'SSL/TLS:' and 'HPKP' in their name for more information and configuration help!
+. Note: Most major browsers have dropped / deprecated support for this header in!
+ 2020.
+X-Permitted-Cross-Domain-Policies | https://owasp.org/www-project-secure-headers!
+/#x-permitted-cross-domain-policies
+
+Log Method:
+Details:
+HTTP Security Headers Detection
+(OID: 1.3.6.1.4.1.25623.1.0.112081)
+Version used: $Revision: 10899 $
+
+References:
+Other:
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project#tab=Headers
+    https://securityheaders.io/
+
+
+Issue
+-----
+NVT:    HTTP Security Headers Detection
+OID:    1.3.6.1.4.1.25623.1.0.112081
+Threat: Log (CVSS: 0.0)
+Port:   80/tcp
+
+Summary:
+All known security headers are being checked on the host. On completion a report!
+ will hand back whether a specific security header
+      has been implemented (including its value) or is missing on the target.
+
+Vulnerability Detection Result:
+Header Name     | Header Value
+------------------------------
+X-Frame-Options | SAMEORIGIN
+Missing Headers                   | More Information
+--------------------------------------------------------------------------------!
+--------------------------------------------------------------------------------!
+------------------------
+Content-Security-Policy           | https://owasp.org/www-project-secure-headers!
+/#content-security-policy
+Document-Policy                   | https://w3c.github.io/webappsec-feature-poli!
+cy/document-policy#document-policy-http-header
+Feature-Policy                    | https://owasp.org/www-project-secure-headers!
+/#feature-policy, Note: The Feature Policy header has been renamed to Permission!
+s Policy
+Permissions-Policy                | https://w3c.github.io/webappsec-feature-poli!
+cy/#permissions-policy-http-header-field
+Referrer-Policy                   | https://owasp.org/www-project-secure-headers!
+/#referrer-policy
+X-Content-Type-Options            | https://owasp.org/www-project-secure-headers!
+/#x-content-type-options
+X-Permitted-Cross-Domain-Policies | https://owasp.org/www-project-secure-headers!
+/#x-permitted-cross-domain-policies
+X-XSS-Protection                  | https://owasp.org/www-project-secure-headers!
+/#x-xss-protection, Note: Most major browsers have dropped / deprecated support !
+for this header in 2020.
+
+Log Method:
+Details:
+HTTP Security Headers Detection
+(OID: 1.3.6.1.4.1.25623.1.0.112081)
+Version used: $Revision: 10899 $
+
+References:
+Other:
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project#tab=Headers
+    https://securityheaders.io/
+
+
+Issue
+-----
+NVT:    HTTP Server Banner Enumeration
+OID:    1.3.6.1.4.1.25623.1.0.108708
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+This script tries to detect / enumerate different HTTP server banner (e.g. from !
+a
+  frontend, backend or proxy server) by sending various different HTTP requests !
+(valid and invalid ones).
+
+Vulnerability Detection Result:
+It was possible to enumerate the following HTTP server banner(s):
+Server banner | Enumeration technique
+------------------------------------------------------------
+Server: ATS   | Valid HTTP 0.9 HEAD request to '/index.html'
+
+Log Method:
+Details:
+HTTP Server Banner Enumeration
+(OID: 1.3.6.1.4.1.25623.1.0.108708)
+Version used: 2021-01-11T11:29:35+0000
+
+
+Issue
+-----
+NVT:    HTTP Server Banner Enumeration
+OID:    1.3.6.1.4.1.25623.1.0.108708
+Threat: Log (CVSS: 0.0)
+Port:   80/tcp
+
+Summary:
+This script tries to detect / enumerate different HTTP server banner (e.g. from !
+a
+  frontend, backend or proxy server) by sending various different HTTP requests !
+(valid and invalid ones).
+
+Vulnerability Detection Result:
+It was possible to enumerate the following HTTP server banner(s):
+Server banner | Enumeration technique
+------------------------------------------------------------
+Server: ATS   | Valid HTTP 0.9 HEAD request to '/index.html'
+
+Log Method:
+Details:
+HTTP Server Banner Enumeration
+(OID: 1.3.6.1.4.1.25623.1.0.108708)
+Version used: 2021-01-11T11:29:35+0000
+
+
+Issue
+-----
+NVT:    HTTP Server type and version
+OID:    1.3.6.1.4.1.25623.1.0.10107
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+This detects the HTTP Server's type and version.
+
+Vulnerability Detection Result:
+The remote HTTP Server banner is:
+Server: ATS
+
+Solution:
+- Configure your server to use an alternate name like
+  'Wintendo httpD w/Dotmatrix display'
+  - Be sure to remove common logos like apache_pb.gif.
+  - With Apache, you can set the directive 'ServerTokens Prod' to limit
+  the information emanating from the server in its response headers.
+
+Log Method:
+Details:
+HTTP Server type and version
+(OID: 1.3.6.1.4.1.25623.1.0.10107)
+Version used: $Revision: 11585 $
+
+
+Issue
+-----
+NVT:    HTTP Server type and version
+OID:    1.3.6.1.4.1.25623.1.0.10107
+Threat: Log (CVSS: 0.0)
+Port:   80/tcp
+
+Summary:
+This detects the HTTP Server's type and version.
+
+Vulnerability Detection Result:
+The remote HTTP Server banner is:
+Server: ATS
+
+Solution:
+- Configure your server to use an alternate name like
+  'Wintendo httpD w/Dotmatrix display'
+  - Be sure to remove common logos like apache_pb.gif.
+  - With Apache, you can set the directive 'ServerTokens Prod' to limit
+  the information emanating from the server in its response headers.
+
+Log Method:
+Details:
+HTTP Server type and version
+(OID: 1.3.6.1.4.1.25623.1.0.10107)
+Version used: $Revision: 11585 $
+
+
+Issue
+-----
+NVT:    No 404 check
+OID:    1.3.6.1.4.1.25623.1.0.10386
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+Remote web server does not reply with 404 error code.
+
+Vulnerability Detection Result:
+The host returns a 30x (e.g. 301) error code when a non-existent file is request!
+ed. Some HTTP-related checks have been disabled.
+
+Vulnerability Insight:
+This web server is [mis]configured in that it does not return
+  '404 Not Found' error codes when a non-existent file is requested, perhaps ret!
+urning a site map,
+  search page or authentication page instead.
+  The Scanner enabled some counter measures for that, however they might be insu!
+fficient. If a great
+  number of security holes are produced for this port, they might not all be acc!
+urate
+
+Log Method:
+Details:
+No 404 check
+(OID: 1.3.6.1.4.1.25623.1.0.10386)
+Version used: $Revision: 13679 $
+
+
+Issue
+-----
+NVT:    No 404 check
+OID:    1.3.6.1.4.1.25623.1.0.10386
+Threat: Log (CVSS: 0.0)
+Port:   80/tcp
+
+Summary:
+Remote web server does not reply with 404 error code.
+
+Vulnerability Detection Result:
+The host returns a 30x (e.g. 301) error code when a non-existent file is request!
+ed. Some HTTP-related checks have been disabled.
+
+Vulnerability Insight:
+This web server is [mis]configured in that it does not return
+  '404 Not Found' error codes when a non-existent file is requested, perhaps ret!
+urning a site map,
+  search page or authentication page instead.
+  The Scanner enabled some counter measures for that, however they might be insu!
+fficient. If a great
+  number of security holes are produced for this port, they might not all be acc!
+urate
+
+Log Method:
+Details:
+No 404 check
+(OID: 1.3.6.1.4.1.25623.1.0.10386)
+Version used: $Revision: 13679 $
+
+
+Issue
+-----
+NVT:    OS Detection Consolidation and Reporting
+OID:    1.3.6.1.4.1.25623.1.0.105937
+Threat: Log (CVSS: 0.0)
+Port:   general/tcp
+
+Summary:
+This script consolidates the OS information detected by several NVTs and tries t!
+o find the best matching OS.
+  Furthermore it reports all previously collected information leading to this be!
+st matching OS. It also reports possible additional information
+  which might help to improve the OS detection.
+  If any of this information is wrong or could be improved please consider to re!
+port these to the referenced community portal.
+
+Vulnerability Detection Result:
+Best matching OS:
+OS:           FreeBSD
+CPE:          cpe:/o:freebsd:freebsd
+Found by NVT: 1.3.6.1.4.1.25623.1.0.102002 (ICMP based OS Fingerprinting)
+Concluded from ICMP based OS fingerprint
+Setting key "Host/runs_unixoide" based on this information
+Other OS detections (in order of reliability):
+OS:           HP UX
+CPE:          cpe:/o:hp:hp-ux
+Found by NVT: 1.3.6.1.4.1.25623.1.0.102002 (ICMP based OS Fingerprinting)
+Concluded from ICMP based OS fingerprint
+OS:           Apple Mac OS X
+CPE:          cpe:/o:apple:mac_os_x
+Found by NVT: 1.3.6.1.4.1.25623.1.0.102002 (ICMP based OS Fingerprinting)
+Concluded from ICMP based OS fingerprint
+OS:           HP JetDirect
+CPE:          cpe:/h:hp:jetdirect
+Found by NVT: 1.3.6.1.4.1.25623.1.0.102002 (ICMP based OS Fingerprinting)
+Concluded from ICMP based OS fingerprint
+
+Log Method:
+Details:
+OS Detection Consolidation and Reporting
+(OID: 1.3.6.1.4.1.25623.1.0.105937)
+Version used: 2019-06-01T08:20:43+0000
+
+References:
+Other:
+    https://community.greenbone.net/c/vulnerability-tests
+
+
+Issue
+-----
+NVT:    Services
+OID:    1.3.6.1.4.1.25623.1.0.10330
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+This routine attempts to guess which service is running on the
+  remote ports. For instance, it searches for a web server which could listen on!
+ another port than
+  80 or 443 and makes this information available for other check routines.
+
+Vulnerability Detection Result:
+A TLScustom server answered on this port
+
+Log Method:
+Details:
+Services
+(OID: 1.3.6.1.4.1.25623.1.0.10330)
+Version used: $Revision: 13541 $
+
+
+Issue
+-----
+NVT:    Services
+OID:    1.3.6.1.4.1.25623.1.0.10330
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+This routine attempts to guess which service is running on the
+  remote ports. For instance, it searches for a web server which could listen on!
+ another port than
+  80 or 443 and makes this information available for other check routines.
+
+Vulnerability Detection Result:
+A web server is running on this port through SSL
+
+Log Method:
+Details:
+Services
+(OID: 1.3.6.1.4.1.25623.1.0.10330)
+Version used: $Revision: 13541 $
+
+
+Issue
+-----
+NVT:    Services
+OID:    1.3.6.1.4.1.25623.1.0.10330
+Threat: Log (CVSS: 0.0)
+Port:   80/tcp
+
+Summary:
+This routine attempts to guess which service is running on the
+  remote ports. For instance, it searches for a web server which could listen on!
+ another port than
+  80 or 443 and makes this information available for other check routines.
+
+Vulnerability Detection Result:
+A web server is running on this port
+
+Log Method:
+Details:
+Services
+(OID: 1.3.6.1.4.1.25623.1.0.10330)
+Version used: $Revision: 13541 $
+
+
+Issue
+-----
+NVT:    SSL/TLS: `includeSubDomains` Missing in HSTS Header
+OID:    1.3.6.1.4.1.25623.1.0.105877
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+The remote HTTPS Server is missing the 'includeSubDomains' attribute in the HSTS!
+ header.
+
+Vulnerability Detection Result:
+The remote web server is missing the "includeSubDomains" attribute in the HSTS h!
+eader.
+HSTS Header:
+Strict-Transport-Security: max-age=31536000
+
+Solution:
+Solution type: Workaround
+Add the 'includeSubDomains' attribute to the HSTS header.
+
+Log Method:
+Details:
+SSL/TLS: `includeSubDomains` Missing in HSTS Header
+(OID: 1.3.6.1.4.1.25623.1.0.105877)
+Version used: $Revision: 7385 $
+
+References:
+Other:
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project
+    https://www.owasp.org/index.php/HTTP_Strict_Transport_Security_Cheat_Sheet
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project#hsts
+    https://tools.ietf.org/html/rfc6797
+    https://securityheaders.io/
+
+
+Issue
+-----
+NVT:    SSL/TLS: `preload` Missing in HSTS Header
+OID:    1.3.6.1.4.1.25623.1.0.105878
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+The remote HTTPS Server is missing the 'preload' attribute in the HSTS header.
+
+Vulnerability Detection Result:
+The remote web server is missing the "preload" attribute in the HSTS header.
+HSTS Header:
+Strict-Transport-Security: max-age=31536000
+
+Solution:
+Solution type: Workaround
+Submit the domain to the 'HSTS preload list' and add the 'preload' attribute to !
+the HSTS header.
+
+Log Method:
+Details:
+SSL/TLS: `preload` Missing in HSTS Header
+(OID: 1.3.6.1.4.1.25623.1.0.105878)
+Version used: $Revision: 7385 $
+
+References:
+Other:
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project
+    https://www.owasp.org/index.php/HTTP_Strict_Transport_Security_Cheat_Sheet
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project#hsts
+    https://tools.ietf.org/html/rfc6797
+    https://hstspreload.appspot.com/
+    https://securityheaders.io/
+
+
+Issue
+-----
+NVT:    SSL/TLS: Collect and Report Certificate Details
+OID:    1.3.6.1.4.1.25623.1.0.103692
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+This script collects and reports the details of all SSL/TLS certificates.
+  This data will be used by other tests to verify server certificates.
+
+Vulnerability Detection Result:
+The following certificate details of the remote service were collected.
+Certificate details:
+subject ...: CN=*.www.yahoo.com,O=Oath Inc,L=Sunnyvale,ST=California,C=US
+subject alternative names (SAN):
+*.amp.yimg.com, mbp.yimg.com, *.yahoo.com, tw.rd.yahoo.com, add.my.yahoo.com, ya!
+hoo.com, ca.my.yahoo.com, ca.rogers.yahoo.com, *.att.yahoo.com, ddl.fp.yahoo.com!
+, brb.yahoo.net, fr-ca.rogers.yahoo.com, *.media.yahoo.com, *.global.vespa.oath.!
+cloud, hk.rd.yahoo.com, s.yimg.com, *.www.yahoo.com
+issued by .: CN=DigiCert SHA2 High Assurance Server CA,OU=www.digicert.com,O=Dig!
+iCert Inc,C=US
+serial ....: 0756ADCCF6960058160F79B8D944A409
+valid from : 2021-03-01 00:00:00 UTC
+valid until: 2021-08-24 23:59:59 UTC
+fingerprint (SHA-1): 69F948E46DB5F8AE04B2F6C415774986D31B2533
+fingerprint (SHA-256): 6C8D2B6E7F8E66BF4C44AAF2F2F35F0D3869A37C57328083815F4327B!
+21CCFAB
+
+Log Method:
+Details:
+SSL/TLS: Collect and Report Certificate Details
+(OID: 1.3.6.1.4.1.25623.1.0.103692)
+Version used: 2019-04-04T13:38:03+0000
+
+
+Issue
+-----
+NVT:    SSL/TLS: Expect Certificate Transparency (Expect-CT) Detection
+OID:    1.3.6.1.4.1.25623.1.0.113045
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+This script checks if the HTTP Server has Expect-CT enabled.
+
+Vulnerability Detection Result:
+The remote web server is sending the "Expect Certificate Transparency" header.
+ECT-Header:
+Expect-CT: max-age=31536000, report-uri="http://csp.yahoo.com/beacon/csp?src=yah!
+oocom-expect-ct-report-only"
+
+Log Method:
+Details:
+SSL/TLS: Expect Certificate Transparency (Expect-CT) Detection
+(OID: 1.3.6.1.4.1.25623.1.0.113045)
+Version used: $Revision: 14334 $
+
+References:
+Other:
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project#ect
+    https://scotthelme.co.uk/a-new-security-header-expect-ct/
+    http://httpwg.org/http-extensions/expect-ct.html
+
+
+Issue
+-----
+NVT:    SSL/TLS: Hostname discovery from server certificate
+OID:    1.3.6.1.4.1.25623.1.0.111010
+Threat: Log (CVSS: 0.0)
+Port:   general/tcp
+
+Summary:
+It was possible to discover an additional hostname
+  of this server from its certificate Common or Subject Alt Name.
+
+Vulnerability Detection Result:
+The following additional and resolvable hostnames pointing to a different host i!
+p were detected:
+add.my.yahoo.com
+brb.yahoo.net
+ca.my.yahoo.com
+ca.rogers.yahoo.com
+ddl.fp.yahoo.com
+fr-ca.rogers.yahoo.com
+mbp.yimg.com
+s.yimg.com
+The following additional but not resolvable hostnames were detected:
+hk.rd.yahoo.com
+tw.rd.yahoo.com
+
+Log Method:
+Details:
+SSL/TLS: Hostname discovery from server certificate
+(OID: 1.3.6.1.4.1.25623.1.0.111010)
+Version used: $Revision: 13774 $
+
+
+Issue
+-----
+NVT:    SSL/TLS: HTTP Public Key Pinning (HPKP) Missing
+OID:    1.3.6.1.4.1.25623.1.0.108247
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+The remote web server is not enforcing HPKP.
+
+Vulnerability Detection Result:
+The remote web server is not enforcing HPKP.
+HTTP-Banner:
+HTTP/1.1 301 Moved Permanently 
+Date: ***replaced*** 
+Connection: keep-alive 
+Strict-Transport-Security: max-age=31536000 
+Server: ATS 
+Cache-Control: no-store, no-cache 
+Content-Type: text/html 
+Content-Language: en 
+X-Frame-Options: SAMEORIGIN 
+Expect-CT: max-age=31536000, report-uri="http://csp.yahoo.com/beacon/csp?src=yah!
+oocom-expect-ct-report-only" 
+Referrer-Policy: no-referrer-when-downgrade 
+X-Content-Type-Options: nosniff 
+X-XSS-Protection: 1; mode=block 
+Location: https://www.yahoo.com/ 
+Content-Length: ***replaced***
+
+Solution:
+Solution type: Workaround
+Enable HPKP or add / configure the required directives correctly following the
+  guides linked in the references.
+
+Log Method:
+Details:
+SSL/TLS: HTTP Public Key Pinning (HPKP) Missing
+(OID: 1.3.6.1.4.1.25623.1.0.108247)
+Version used: $Revision: 7391 $
+
+References:
+Other:
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project#hpkp
+    https://tools.ietf.org/html/rfc7469
+    https://securityheaders.io/
+
+
+Issue
+-----
+NVT:    SSL/TLS: HTTP Strict Transport Security (HSTS) Detection
+OID:    1.3.6.1.4.1.25623.1.0.105876
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+This script checks if the remote HTTPS server has HSTS enabled.
+
+Vulnerability Detection Result:
+The remote web server is sending the "HTTP Strict-Transport-Security" header.
+HSTS-Header:
+Strict-Transport-Security: max-age=31536000
+
+Log Method:
+Details:
+SSL/TLS: HTTP Strict Transport Security (HSTS) Detection
+(OID: 1.3.6.1.4.1.25623.1.0.105876)
+Version used: $Revision: 10896 $
+
+References:
+Other:
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project
+    https://www.owasp.org/index.php/HTTP_Strict_Transport_Security_Cheat_Sheet
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project#hsts
+    https://tools.ietf.org/html/rfc6797
+    https://securityheaders.io/
+
+
+Issue
+-----
+NVT:    SSL/TLS: NPN / ALPN Extension and Protocol Support Detection
+OID:    1.3.6.1.4.1.25623.1.0.108099
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+This routine identifies services supporting the following extensions to TLS:
+  - Application-Layer Protocol Negotiation (ALPN)
+  - Next Protocol Negotiation (NPN).
+  Based on the availability of this extensions the supported Network Protocols b!
+y this service are gathered and reported.
+
+Vulnerability Detection Result:
+The remote service advertises support for the following Network Protocol(s) via !
+the NPN extension:
+SSL/TLS Protocol:Network Protocol
+TLSv1.0:HTTP/1.0
+TLSv1.0:HTTP/1.1
+TLSv1.0:HTTP/2
+TLSv1.1:HTTP/1.0
+TLSv1.1:HTTP/1.1
+TLSv1.1:HTTP/2
+TLSv1.2:HTTP/1.0
+TLSv1.2:HTTP/1.1
+TLSv1.2:HTTP/2
+The remote service advertises support for the following Network Protocol(s) via !
+the ALPN extension:
+SSL/TLS Protocol:Network Protocol
+TLSv1.0:HTTP/1.1
+TLSv1.0:HTTP/2
+TLSv1.1:HTTP/1.1
+TLSv1.1:HTTP/2
+TLSv1.2:HTTP/1.1
+TLSv1.2:HTTP/2
+
+Log Method:
+Details:
+SSL/TLS: NPN / ALPN Extension and Protocol Support Detection
+(OID: 1.3.6.1.4.1.25623.1.0.108099)
+Version used: $Revision: 11638 $
+
+References:
+Other:
+    https://tools.ietf.org/html/rfc7301
+    https://tools.ietf.org/html/draft-agl-tls-nextprotoneg-04
+
+
+Issue
+-----
+NVT:    TCP timestamps
+OID:    1.3.6.1.4.1.25623.1.0.80091
+Threat: Low (CVSS: 2.6)
+Port:   general/tcp
+
+Summary:
+The remote host implements TCP timestamps and therefore allows to compute
+  the uptime.
+
+Vulnerability Detection Result:
+It was detected that the host implements RFC1323/RFC7323.
+The following timestamps were retrieved with a delay of 1 seconds in-between:
+Packet 1: 3398875054
+Packet 2: 3409636148
+
+Impact:
+A side effect of this feature is that the uptime of the remote
+  host can sometimes be computed.
+
+Solution:
+Solution type: Mitigation
+To disable TCP timestamps on linux add the line 'net.ipv4.tcp_timestamps = 0' to
+  /etc/sysctl.conf. Execute 'sysctl -p' to apply the settings at runtime.
+  To disable TCP timestamps on Windows execute 'netsh int tcp set global timesta!
+mps=disabled'
+  Starting with Windows Server 2008 and Vista, the timestamp can not be complete!
+ly disabled.
+  The default behavior of the TCP/IP stack on this Systems is to not use the
+  Timestamp options when initiating TCP connections, but use them if the TCP pee!
+r
+  that is initiating communication includes them in their synchronize (SYN) segm!
+ent.
+  See the references for more information.
+
+Affected Software/OS:
+TCP/IPv4 implementations that implement RFC1323.
+
+Vulnerability Insight:
+The remote host implements TCP timestamps, as defined by RFC1323.
+
+Vulnerability Detection Method:
+Special IP packets are forged and sent with a little delay in between to the
+  target IP. The responses are searched for a timestamps. If found, the timestam!
+ps are reported.
+Details:
+TCP timestamps
+(OID: 1.3.6.1.4.1.25623.1.0.80091)
+Version used: $Revision: 14310 $
+
+References:
+Other:
+    http://www.ietf.org/rfc/rfc1323.txt
+    http://www.microsoft.com/en-us/download/details.aspx?id=9152
+
+
+Issue
+-----
+NVT:    Traceroute
+OID:    1.3.6.1.4.1.25623.1.0.51662
+Threat: Log (CVSS: 0.0)
+Port:   general/tcp
+
+Summary:
+A traceroute from the scanning server to the target system was
+  conducted. This traceroute is provided primarily for informational value only.!
+ In the vast
+  majority of cases, it does not represent a vulnerability. However, if the disp!
+layed traceroute
+  contains any private addresses that should not have been publicly visible, the!
+n you have an
+  issue you need to correct.
+
+Vulnerability Detection Result:
+Here is the route from 10.254.10.45 to 98.137.11.163:
+10.254.10.45
+192.168.88.198
+10.12.112.1
+143.244.50.253
+185.229.188.58
+38.142.33.185
+80.239.160.64
+62.115.125.162
+62.115.119.90
+62.115.116.40
+62.115.118.168
+62.115.36.197
+209.191.65.51
+66.196.67.101
+67.195.37.71
+68.180.235.9
+98.136.159.241
+98.136.158.193
+98.137.11.163
+
+Solution:
+Block unwanted packets from escaping your network.
+
+Log Method:
+Details:
+Traceroute
+(OID: 1.3.6.1.4.1.25623.1.0.51662)
+Version used: $Revision: 10411 $
+
+
+Issue
+-----
+NVT:    Unknown OS and Service Banner Reporting
+OID:    1.3.6.1.4.1.25623.1.0.108441
+Threat: Log (CVSS: 0.0)
+Port:   general/tcp
+
+Summary:
+This NVT consolidates and reports the information collected by
+  the following NVTs:
+  - Collect banner of unknown services (OID: 1.3.6.1.4.1.25623.1.0.11154)
+  - Service Detection (unknown) with nmap (OID: 1.3.6.1.4.1.25623.1.0.66286)
+  - Service Detection (wrapped) with nmap (OID: 1.3.6.1.4.1.25623.1.0.108525)
+  - OS Detection Consolidation and Reporting (OID: 1.3.6.1.4.1.25623.1.0.105937)
+  If you know any of the information reported here, please send the full output !
+to
+  the referenced community portal.
+
+Vulnerability Detection Result:
+Unknown banners have been collected which might help to identify the OS running !
+on this host. If these banners containing information about the host OS please r!
+eport the following information to https://community.greenbone.net/c/vulnerabili!
+ty-tests:
+Banner: Server: ATS
+Identified from: HTTP Server banner on port 443/tcp
+Banner: Server: ATS
+Identified from: HTTP Server banner on port 80/tcp
+
+Log Method:
+Details:
+Unknown OS and Service Banner Reporting
+(OID: 1.3.6.1.4.1.25623.1.0.108441)
+Version used: $Revision: 12934 $
+
+References:
+Other:
+    https://community.greenbone.net/c/vulnerability-tests
+
+
