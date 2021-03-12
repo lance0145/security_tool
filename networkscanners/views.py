@@ -123,6 +123,7 @@ def scan_vul_details(request):
     """
     jira_url = None
     jira = jirasetting.objects.filter(username=username)
+    ip_address = request.GET.get('ip', )
     for d in jira:
         jira_url = d.jira_server
     scanid = ""
@@ -191,8 +192,7 @@ def scan_vul_details(request):
                   {'all_vuln': all_vuln,
                    'scan_id': scanid,
                    'jira_url': jira_url,
-
-                   })
+                   'ip': ip_address})
 
 
 def openvas_scanner(scan_ip, project_id, sel_profile, user):

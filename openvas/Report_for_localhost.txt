@@ -1,0 +1,1926 @@
+IP,Hostname,OS,Scan Start,Scan End,CVSS,Severity,High,Medium,Low,Log,False Positive,Total
+127.0.0.1,localhost,cpe:/o:linux:kernel,2021-03-11T00:10:16Z,2021-03-11T00:25:11Z,7.5,High,1,1,0,53,0,55
+127.0.0.1,localhost,443,tcp,7.5,High,"VendorFix","AlienVault OSSIM/USM Multiple Vulnerabilities","AlienVault OSSIM and USM are prone to multiple vulnerabilities.","Vulnerable URL: https://localhost/ossim/dashboard/sections/widgets/data/gauge.php?type=alarm&wtype=foo&asset=ALL_ASSETS&height=1&value=a%3a1%3a%7bs%3a4%3a%22type%22%3bs%3a69%3a%221%20AND%20extractvalue%28rand%28%29%2cconcat%280x3a%2c%28SELECT%20%27WcupyNLiJzCctIS%27%29%29%29--%20%22%3b%7d",1.3.6.1.4.1.25623.1.0.106617,"CVE-2016-7955",a2b95443-c015-404a-97f8-88a8aa4be2cc,"localhost",2021-03-11T00:10:16Z,b7a76956-d502-4c48-a3ec-6d94f23c9e8a,"","Update to 5.3.5 or newer versions.","","Multiple vulnerabilities like object injection, authentication bypass and
+127.0.0.1,localhost,443,tcp,5.0,Medium,"Mitigation","Apache /server-status accessible","Requesting the URI /server-status provides information
+
+*****************************************************************************************
+
+I Summary
+=========
+
+This document reports on the results of an automatic security scan.
+The report first summarises the results found.
+Then, for each host, the report describes every issue found.
+Please consider the advice given in each description, in order to rectify
+the issue.
+
+All dates are displayed using the timezone "Coordinated Universal Time",
+which is abbreviated "UTC".
+
+Vendor security updates are not trusted.
+
+Overrides are off.  Even when a result has an override, this report uses
+the actual threat of the result.
+
+Notes are included in the report.Information on overrides is included in the report.
+
+This report might not show details of all issues that were found.
+Issues with the threat level "High" are not shown.
+Issues with the threat level "Medium" are not shown.
+Issues with the threat level "Low" are not shown.
+Issues with the threat level "Log" are not shown.
+Issues with the threat level "Debug" are not shown.
+Issues with the threat level "False Positive" are not shown.
+Only results with a minimum QoD of 70 are shown.
+
+This report contains all 55 results selected by the
+filtering described above.  Before filtering there were 132 results.
+
+Scan started: Thu Mar 11 00:09:37 2021 UTC
+Scan ended:   Thu Mar 11 00:25:11 2021 UTC
+Task:         localhost
+
+Host Summary
+************
+
+Host            High  Medium  Low  Log  False Positive
+127.0.0.1          1       1    0   53               0    localhost
+Total: 1           1       1    0   53               0
+
+
+II Results per Host
+===================
+
+Host 127.0.0.1
+**************
+
+Scanning of this host started at: Thu Mar 11 00:10:16 2021 UTC
+Number of results: 55
+
+Port Summary for Host 127.0.0.1
+-------------------------------
+
+Service (Port)          Threat Level
+25/tcp                  Log
+general/tcp             Log
+9390/tcp                Log
+514/tcp                 Log
+general/CPE-T           Log
+22/tcp                  Log
+80/tcp                  Log
+443/tcp                 High
+4369/tcp                Log
+3128/tcp                Log
+3306/tcp                Log
+
+Security Issues for Host 127.0.0.1
+----------------------------------
+
+Issue
+-----
+NVT:    AlienVault OSSIM Detection
+OID:    1.3.6.1.4.1.25623.1.0.100543
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+Detects the installed version of AlienVault OSSIM (Open Source Security
+  Information Management) and USM (Unified Security Management)
+  This script sends HTTP GET request and try to get the version from the
+  response, and sets the result in KB.
+
+Vulnerability Detection Result:
+Detected AlienVault OSSIM
+Version:       unknown
+Location:      /ossim
+CPE:           cpe:/a:alienvault:open_source_security_information_management
+
+Log Method:
+Details:
+AlienVault OSSIM Detection
+(OID: 1.3.6.1.4.1.25623.1.0.100543)
+Version used: $Revision: 10915 $
+
+References:
+Other:
+    http://www.alienvault.com
+
+
+Issue
+-----
+NVT:    AlienVault OSSIM/USM Multiple Vulnerabilities
+OID:    1.3.6.1.4.1.25623.1.0.106617
+Threat: High (CVSS: 7.5)
+Port:   443/tcp
+
+Product detection result: cpe:/a:alienvault:open_source_security_information_management
+Detected by: AlienVault OSSIM Detection (OID: 1.3.6.1.4.1.25623.1.0.100543)
+
+Summary:
+AlienVault OSSIM and USM are prone to multiple vulnerabilities.
+
+Vulnerability Detection Result:
+Vulnerable URL: https://localhost/ossim/dashboard/sections/widgets/data/gauge.ph!
+p?type=alarm&wtype=foo&asset=ALL_ASSETS&height=1&value=a%3a1%3a%7bs%3a4%3a%22typ!
+e%22%3bs%3a69%3a%221%20AND%20extractvalue%28rand%28%29%2cconcat%280x3a%2c%28SELE!
+CT%20%27WcupyNLiJzCctIS%27%29%29%29--%20%22%3b%7d
+
+Solution:
+Solution type: VendorFix
+Update to 5.3.5 or newer versions.
+
+Vulnerability Insight:
+Multiple vulnerabilities like object injection, authentication bypass and
+  IP spoofing, have been found in AlienVault OSSIM and AlienVault USM.
+
+Vulnerability Detection Method:
+Sends a crafted HTTP request and checks the response.
+Details:
+AlienVault OSSIM/USM Multiple Vulnerabilities
+(OID: 1.3.6.1.4.1.25623.1.0.106617)
+Version used: $Revision: 12986 $
+
+Product Detection Result:
+Product:cpe:/a:alienvault:open_source_security_information_management
+
+Method:AlienVault OSSIM Detection
+(OID: 1.3.6.1.4.1.25623.1.0.100543)
+
+References:
+CVE: CVE-2016-7955
+Other:
+    https://www.exploit-db.com/exploits/41424/
+    https://pentest.blog/unexpected-journey-into-the-alienvault-ossimusm-during-engagement/
+
+
+Issue
+-----
+NVT:    Apache /server-status accessible
+OID:    1.3.6.1.4.1.25623.1.0.10677
+Threat: Medium (CVSS: 5.0)
+Port:   443/tcp
+
+Summary:
+Requesting the URI /server-status provides information
+  on the server activity and performance.
+
+Vulnerability Detection Result:
+Vulnerable URL: https://localhost/server-status
+
+Impact:
+Requesting the URI /server-status gives throughout information about
+  the currently running Apache to an attacker.
+
+Solution:
+Solution type: Mitigation
+- If this feature is unused commenting out the appropriate section in
+  the web servers configuration is recommended.
+  - If this feature is used restricting access to trusted clients is recommended!
+.
+
+Affected Software/OS:
+All Apache installations with an enabled 'mod_status' module.
+
+Vulnerability Insight:
+server-status is a Apache HTTP Server handler provided by the
+  'mod_status' module and used to retrieve the server's activity and performance!
+.
+
+Vulnerability Detection Method:
+Checks if the /server-status page of Apache is accessible.
+Details:
+Apache /server-status accessible
+(OID: 1.3.6.1.4.1.25623.1.0.10677)
+Version used: 2019-04-26T12:19:11+0000
+
+References:
+Other:
+    https://httpd.apache.org/docs/current/mod/mod_status.html
+
+
+Issue
+-----
+NVT:    Apache Web Server Detection
+OID:    1.3.6.1.4.1.25623.1.0.900498
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+Detects the installed version of Apache Web Server
+  The script detects the version of Apache HTTP Server on remote host and sets t!
+he KB.
+
+Vulnerability Detection Result:
+Detected Apache HTTP/Web Server
+Version:       unknown
+Location:      443/tcp
+CPE:           cpe:/a:apache:http_server
+
+Log Method:
+Details:
+Apache Web Server Detection
+(OID: 1.3.6.1.4.1.25623.1.0.900498)
+Version used: $Revision: 10290 $
+
+
+Issue
+-----
+NVT:    Apache Web Server Detection
+OID:    1.3.6.1.4.1.25623.1.0.900498
+Threat: Log (CVSS: 0.0)
+Port:   80/tcp
+
+Summary:
+Detects the installed version of Apache Web Server
+  The script detects the version of Apache HTTP Server on remote host and sets t!
+he KB.
+
+Vulnerability Detection Result:
+Detected Apache HTTP/Web Server
+Version:       unknown
+Location:      80/tcp
+CPE:           cpe:/a:apache:http_server
+
+Log Method:
+Details:
+Apache Web Server Detection
+(OID: 1.3.6.1.4.1.25623.1.0.900498)
+Version used: $Revision: 10290 $
+
+
+Issue
+-----
+NVT:    CGI Scanning Consolidation
+OID:    1.3.6.1.4.1.25623.1.0.111038
+Threat: Log (CVSS: 0.0)
+Port:   3128/tcp
+
+Summary:
+The script consolidates various information for CGI scanning.
+  This information is based on the following scripts / settings:
+  - HTTP-Version Detection (OID: 1.3.6.1.4.1.25623.1.0.100034)
+  - No 404 check (OID: 1.3.6.1.4.1.25623.1.0.10386)
+  - Web mirroring / webmirror.nasl (OID: 1.3.6.1.4.1.25623.1.0.10662)
+  - Directory Scanner / DDI_Directory_Scanner.nasl (OID: 1.3.6.1.4.1.25623.1.0.1!
+1032)
+  - The configured 'cgi_path' within the 'Scanner Preferences' of the scan confi!
+g in use
+  - The configured 'Enable CGI scanning', 'Enable generic web application scanni!
+ng' and
+    'Add historic /scripts and /cgi-bin to directories for CGI scanning' within !
+the
+    'Global variable settings' of the scan config in use
+  If you think any of this information is wrong please report it to the referenc!
+ed community portal.
+
+Vulnerability Detection Result:
+The Hostname/IP "localhost" was used to access the remote host.
+Generic web application scanning is disabled for this host via the "Enable gener!
+ic web application scanning" option within the "Global variable settings" of the!
+ scan config in use.
+Requests to this service are done via HTTP/1.1.
+This service seems to be able to host PHP scripts.
+This service seems to be able to host ASP scripts.
+The User-Agent "Mozilla/5.0 [en] (X11, U; OpenVAS-VT 9.0.3)" was used to access !
+the remote host.
+Historic /scripts and /cgi-bin are not added to the directories used for CGI sca!
+nning. You can enable this again with the "Add historic /scripts and /cgi-bin to!
+ directories for CGI scanning" option within the "Global variable settings" of t!
+he scan config in use.
+The following directories were used for CGI scanning:
+http://localhost:3128/
+While this is not, in and of itself, a bug, you should manually inspect these di!
+rectories to ensure that they are in compliance with company security standards
+
+Log Method:
+Details:
+CGI Scanning Consolidation
+(OID: 1.3.6.1.4.1.25623.1.0.111038)
+Version used: $Revision: 13679 $
+
+References:
+Other:
+    https://community.greenbone.net/c/vulnerability-tests
+
+
+Issue
+-----
+NVT:    CGI Scanning Consolidation
+OID:    1.3.6.1.4.1.25623.1.0.111038
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+The script consolidates various information for CGI scanning.
+  This information is based on the following scripts / settings:
+  - HTTP-Version Detection (OID: 1.3.6.1.4.1.25623.1.0.100034)
+  - No 404 check (OID: 1.3.6.1.4.1.25623.1.0.10386)
+  - Web mirroring / webmirror.nasl (OID: 1.3.6.1.4.1.25623.1.0.10662)
+  - Directory Scanner / DDI_Directory_Scanner.nasl (OID: 1.3.6.1.4.1.25623.1.0.1!
+1032)
+  - The configured 'cgi_path' within the 'Scanner Preferences' of the scan confi!
+g in use
+  - The configured 'Enable CGI scanning', 'Enable generic web application scanni!
+ng' and
+    'Add historic /scripts and /cgi-bin to directories for CGI scanning' within !
+the
+    'Global variable settings' of the scan config in use
+  If you think any of this information is wrong please report it to the referenc!
+ed community portal.
+
+Vulnerability Detection Result:
+The Hostname/IP "localhost" was used to access the remote host.
+Generic web application scanning is disabled for this host via the "Enable gener!
+ic web application scanning" option within the "Global variable settings" of the!
+ scan config in use.
+Requests to this service are done via HTTP/1.1.
+This service seems to be able to host PHP scripts.
+This service seems to be NOT able to host ASP scripts.
+The User-Agent "Mozilla/5.0 [en] (X11, U; OpenVAS-VT 9.0.3)" was used to access !
+the remote host.
+Historic /scripts and /cgi-bin are not added to the directories used for CGI sca!
+nning. You can enable this again with the "Add historic /scripts and /cgi-bin to!
+ directories for CGI scanning" option within the "Global variable settings" of t!
+he scan config in use.
+The following directories were used for CGI scanning:
+https://localhost/
+https://localhost/cgi-bin
+https://localhost/html
+https://localhost/ossim
+https://localhost/server-status
+https://localhost/session
+While this is not, in and of itself, a bug, you should manually inspect these di!
+rectories to ensure that they are in compliance with company security standards
+The following directories were excluded from CGI scanning because the "Regex pat!
+tern to exclude directories from CGI scanning" setting of the NVT "Global variab!
+le settings" (OID: 1.3.6.1.4.1.25623.1.0.12288) for this scan was: "/(index\.php!
+|image|img|css|js$|js/|javascript|style|theme|icon|jquery|graphic|grafik|picture!
+|bilder|thumbnail|media/|skins?/)"
+https://localhost/icons
+
+Log Method:
+Details:
+CGI Scanning Consolidation
+(OID: 1.3.6.1.4.1.25623.1.0.111038)
+Version used: $Revision: 13679 $
+
+References:
+Other:
+    https://community.greenbone.net/c/vulnerability-tests
+
+
+Issue
+-----
+NVT:    CGI Scanning Consolidation
+OID:    1.3.6.1.4.1.25623.1.0.111038
+Threat: Log (CVSS: 0.0)
+Port:   80/tcp
+
+Summary:
+The script consolidates various information for CGI scanning.
+  This information is based on the following scripts / settings:
+  - HTTP-Version Detection (OID: 1.3.6.1.4.1.25623.1.0.100034)
+  - No 404 check (OID: 1.3.6.1.4.1.25623.1.0.10386)
+  - Web mirroring / webmirror.nasl (OID: 1.3.6.1.4.1.25623.1.0.10662)
+  - Directory Scanner / DDI_Directory_Scanner.nasl (OID: 1.3.6.1.4.1.25623.1.0.1!
+1032)
+  - The configured 'cgi_path' within the 'Scanner Preferences' of the scan confi!
+g in use
+  - The configured 'Enable CGI scanning', 'Enable generic web application scanni!
+ng' and
+    'Add historic /scripts and /cgi-bin to directories for CGI scanning' within !
+the
+    'Global variable settings' of the scan config in use
+  If you think any of this information is wrong please report it to the referenc!
+ed community portal.
+
+Vulnerability Detection Result:
+The Hostname/IP "localhost" was used to access the remote host.
+Generic web application scanning is disabled for this host via the "Enable gener!
+ic web application scanning" option within the "Global variable settings" of the!
+ scan config in use.
+Requests to this service are done via HTTP/1.1.
+This service seems to be able to host PHP scripts.
+This service seems to be NOT able to host ASP scripts.
+The User-Agent "Mozilla/5.0 [en] (X11, U; OpenVAS-VT 9.0.3)" was used to access !
+the remote host.
+Historic /scripts and /cgi-bin are not added to the directories used for CGI sca!
+nning. You can enable this again with the "Add historic /scripts and /cgi-bin to!
+ directories for CGI scanning" option within the "Global variable settings" of t!
+he scan config in use.
+The following directories were used for CGI scanning:
+http://localhost/
+While this is not, in and of itself, a bug, you should manually inspect these di!
+rectories to ensure that they are in compliance with company security standards
+
+Log Method:
+Details:
+CGI Scanning Consolidation
+(OID: 1.3.6.1.4.1.25623.1.0.111038)
+Version used: $Revision: 13679 $
+
+References:
+Other:
+    https://community.greenbone.net/c/vulnerability-tests
+
+
+Issue
+-----
+NVT:    CPE Inventory
+OID:    1.3.6.1.4.1.25623.1.0.810002
+Threat: Log (CVSS: 0.0)
+Port:   general/CPE-T
+
+Summary:
+This routine uses information collected by other routines about
+  CPE identities of operating systems, services and
+  applications detected during the scan.
+
+Vulnerability Detection Result:
+127.0.0.1|cpe:/a:alienvault:open_source_security_information_management
+127.0.0.1|cpe:/a:apache:http_server
+127.0.0.1|cpe:/a:mysql:mysql:5.6.36-
+127.0.0.1|cpe:/a:openbsd:openssh:6.7p1
+127.0.0.1|cpe:/a:openvas:openvas_manager:7.0
+127.0.0.1|cpe:/a:oracle:mysql:5.6.36
+127.0.0.1|cpe:/a:php:php
+127.0.0.1|cpe:/a:postfix:postfix
+127.0.0.1|cpe:/a:squid-cache:squid:3.4.8
+127.0.0.1|cpe:/o:linux:kernel
+
+Log Method:
+Details:
+CPE Inventory
+(OID: 1.3.6.1.4.1.25623.1.0.810002)
+Version used: $Revision: 14324 $
+
+References:
+Other:
+    http://cpe.mitre.org/
+
+
+Issue
+-----
+NVT:    Database Open Access Vulnerability
+OID:    1.3.6.1.4.1.25623.1.0.902799
+Threat: Log (CVSS: 0.0)
+Port:   3306/tcp
+
+Summary:
+The host is running a Database server and is prone to information
+  disclosure vulnerability.
+
+Vulnerability Detection Result:
+Oracle MySQL can be accessed by remote attackers
+
+Impact:
+Successful exploitation could allow an attacker to obtain the sensitive
+  information of the database.
+
+Solution:
+Solution type: Workaround
+Restrict Database access to remote systems.
+
+Affected Software/OS:
+- MySQL/MariaDB
+  - IBM DB2
+  - PostgreSQL
+  - IBM solidDB
+  - Oracle Database
+  - Microsoft SQL Server
+
+Vulnerability Insight:
+Do not restricting direct access of databases to the remote systems.
+
+Log Method:
+Details:
+Database Open Access Vulnerability
+(OID: 1.3.6.1.4.1.25623.1.0.902799)
+Version used: $Revision: 11374 $
+
+References:
+Other:
+    https://www.pcisecuritystandards.org/security_standards/index.php?id=pci_dss_v1-2.pdf
+
+
+Issue
+-----
+NVT:    HTTP Security Headers Detection
+OID:    1.3.6.1.4.1.25623.1.0.112081
+Threat: Log (CVSS: 0.0)
+Port:   3128/tcp
+
+Summary:
+All known security headers are being checked on the host. On completion a report!
+ will hand back whether a specific security header
+      has been implemented (including its value) or is missing on the target.
+
+Vulnerability Detection Result:
+Missing Headers                   | More Information
+--------------------------------------------------------------------------------!
+--------------------------------------------------------------------------------!
+------------------------
+Content-Security-Policy           | https://owasp.org/www-project-secure-headers!
+/#content-security-policy
+Document-Policy                   | https://w3c.github.io/webappsec-feature-poli!
+cy/document-policy#document-policy-http-header
+Feature-Policy                    | https://owasp.org/www-project-secure-headers!
+/#feature-policy, Note: The Feature Policy header has been renamed to Permission!
+s Policy
+Permissions-Policy                | https://w3c.github.io/webappsec-feature-poli!
+cy/#permissions-policy-http-header-field
+Referrer-Policy                   | https://owasp.org/www-project-secure-headers!
+/#referrer-policy
+X-Content-Type-Options            | https://owasp.org/www-project-secure-headers!
+/#x-content-type-options
+X-Frame-Options                   | https://owasp.org/www-project-secure-headers!
+/#x-frame-options
+X-Permitted-Cross-Domain-Policies | https://owasp.org/www-project-secure-headers!
+/#x-permitted-cross-domain-policies
+X-XSS-Protection                  | https://owasp.org/www-project-secure-headers!
+/#x-xss-protection, Note: Most major browsers have dropped / deprecated support !
+for this header in 2020.
+
+Log Method:
+Details:
+HTTP Security Headers Detection
+(OID: 1.3.6.1.4.1.25623.1.0.112081)
+Version used: $Revision: 10899 $
+
+References:
+Other:
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project#tab=Headers
+    https://securityheaders.io/
+
+
+Issue
+-----
+NVT:    HTTP Security Headers Detection
+OID:    1.3.6.1.4.1.25623.1.0.112081
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+All known security headers are being checked on the host. On completion a report!
+ will hand back whether a specific security header
+      has been implemented (including its value) or is missing on the target.
+
+Vulnerability Detection Result:
+Header Name     | Header Value
+------------------------------
+X-Frame-Options | SAMEORIGIN
+Missing Headers                   | More Information
+--------------------------------------------------------------------------------!
+--------------------------------------------------------------------------------!
+--------------------------------------------------------------------------------!
+------
+Content-Security-Policy           | https://owasp.org/www-project-secure-headers!
+/#content-security-policy
+Document-Policy                   | https://w3c.github.io/webappsec-feature-poli!
+cy/document-policy#document-policy-http-header
+Expect-CT                         | https://owasp.org/www-project-secure-headers!
+/#expect-ct
+Feature-Policy                    | https://owasp.org/www-project-secure-headers!
+/#feature-policy, Note: The Feature Policy header has been renamed to Permission!
+s Policy
+Permissions-Policy                | https://w3c.github.io/webappsec-feature-poli!
+cy/#permissions-policy-http-header-field
+Public-Key-Pins                   | Please check the output of the VTs including!
+ 'SSL/TLS:' and 'HPKP' in their name for more information and configuration help!
+. Note: Most major browsers have dropped / deprecated support for this header in!
+ 2020.
+Referrer-Policy                   | https://owasp.org/www-project-secure-headers!
+/#referrer-policy
+Strict-Transport-Security         | Please check the output of the VTs including!
+ 'SSL/TLS:' and 'HSTS' in their name for more information and configuration help!
+.
+X-Content-Type-Options            | https://owasp.org/www-project-secure-headers!
+/#x-content-type-options
+X-Permitted-Cross-Domain-Policies | https://owasp.org/www-project-secure-headers!
+/#x-permitted-cross-domain-policies
+X-XSS-Protection                  | https://owasp.org/www-project-secure-headers!
+/#x-xss-protection, Note: Most major browsers have dropped / deprecated support !
+for this header in 2020.
+
+Log Method:
+Details:
+HTTP Security Headers Detection
+(OID: 1.3.6.1.4.1.25623.1.0.112081)
+Version used: $Revision: 10899 $
+
+References:
+Other:
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project#tab=Headers
+    https://securityheaders.io/
+
+
+Issue
+-----
+NVT:    HTTP Security Headers Detection
+OID:    1.3.6.1.4.1.25623.1.0.112081
+Threat: Log (CVSS: 0.0)
+Port:   80/tcp
+
+Summary:
+All known security headers are being checked on the host. On completion a report!
+ will hand back whether a specific security header
+      has been implemented (including its value) or is missing on the target.
+
+Vulnerability Detection Result:
+Header Name     | Header Value
+------------------------------
+X-Frame-Options | SAMEORIGIN
+Missing Headers                   | More Information
+--------------------------------------------------------------------------------!
+--------------------------------------------------------------------------------!
+------------------------
+Content-Security-Policy           | https://owasp.org/www-project-secure-headers!
+/#content-security-policy
+Document-Policy                   | https://w3c.github.io/webappsec-feature-poli!
+cy/document-policy#document-policy-http-header
+Feature-Policy                    | https://owasp.org/www-project-secure-headers!
+/#feature-policy, Note: The Feature Policy header has been renamed to Permission!
+s Policy
+Permissions-Policy                | https://w3c.github.io/webappsec-feature-poli!
+cy/#permissions-policy-http-header-field
+Referrer-Policy                   | https://owasp.org/www-project-secure-headers!
+/#referrer-policy
+X-Content-Type-Options            | https://owasp.org/www-project-secure-headers!
+/#x-content-type-options
+X-Permitted-Cross-Domain-Policies | https://owasp.org/www-project-secure-headers!
+/#x-permitted-cross-domain-policies
+X-XSS-Protection                  | https://owasp.org/www-project-secure-headers!
+/#x-xss-protection, Note: Most major browsers have dropped / deprecated support !
+for this header in 2020.
+
+Log Method:
+Details:
+HTTP Security Headers Detection
+(OID: 1.3.6.1.4.1.25623.1.0.112081)
+Version used: $Revision: 10899 $
+
+References:
+Other:
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project#tab=Headers
+    https://securityheaders.io/
+
+
+Issue
+-----
+NVT:    HTTP Server Banner Enumeration
+OID:    1.3.6.1.4.1.25623.1.0.108708
+Threat: Log (CVSS: 0.0)
+Port:   3128/tcp
+
+Summary:
+This script tries to detect / enumerate different HTTP server banner (e.g. from !
+a
+  frontend, backend or proxy server) by sending various different HTTP requests !
+(valid and invalid ones).
+
+Vulnerability Detection Result:
+It was possible to enumerate the following HTTP server banner(s):
+Server banner       | Enumeration technique
+-----------------------------------------------------------------
+Server: squid/3.4.8 | Valid HTTP 0.9 GET request to '/index.html'
+
+Log Method:
+Details:
+HTTP Server Banner Enumeration
+(OID: 1.3.6.1.4.1.25623.1.0.108708)
+Version used: 2021-01-11T11:29:35+0000
+
+
+Issue
+-----
+NVT:    HTTP Server Banner Enumeration
+OID:    1.3.6.1.4.1.25623.1.0.108708
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+This script tries to detect / enumerate different HTTP server banner (e.g. from !
+a
+  frontend, backend or proxy server) by sending various different HTTP requests !
+(valid and invalid ones).
+
+Vulnerability Detection Result:
+It was possible to enumerate the following HTTP server banner(s):
+Server banner  | Enumeration technique
+------------------------------------------------------------
+Server: Apache | Valid HTTP 0.9 GET request to '/index.html'
+
+Log Method:
+Details:
+HTTP Server Banner Enumeration
+(OID: 1.3.6.1.4.1.25623.1.0.108708)
+Version used: 2021-01-11T11:29:35+0000
+
+
+Issue
+-----
+NVT:    HTTP Server Banner Enumeration
+OID:    1.3.6.1.4.1.25623.1.0.108708
+Threat: Log (CVSS: 0.0)
+Port:   80/tcp
+
+Summary:
+This script tries to detect / enumerate different HTTP server banner (e.g. from !
+a
+  frontend, backend or proxy server) by sending various different HTTP requests !
+(valid and invalid ones).
+
+Vulnerability Detection Result:
+It was possible to enumerate the following HTTP server banner(s):
+Server banner  | Enumeration technique
+------------------------------------------------------------
+Server: Apache | Valid HTTP 0.9 GET request to '/index.html'
+
+Log Method:
+Details:
+HTTP Server Banner Enumeration
+(OID: 1.3.6.1.4.1.25623.1.0.108708)
+Version used: 2021-01-11T11:29:35+0000
+
+
+Issue
+-----
+NVT:    HTTP Server type and version
+OID:    1.3.6.1.4.1.25623.1.0.10107
+Threat: Log (CVSS: 0.0)
+Port:   3128/tcp
+
+Summary:
+This detects the HTTP Server's type and version.
+
+Vulnerability Detection Result:
+The remote HTTP Server banner is:
+Server: squid/3.4.8
+
+Solution:
+- Configure your server to use an alternate name like
+  'Wintendo httpD w/Dotmatrix display'
+  - Be sure to remove common logos like apache_pb.gif.
+  - With Apache, you can set the directive 'ServerTokens Prod' to limit
+  the information emanating from the server in its response headers.
+
+Log Method:
+Details:
+HTTP Server type and version
+(OID: 1.3.6.1.4.1.25623.1.0.10107)
+Version used: $Revision: 11585 $
+
+
+Issue
+-----
+NVT:    HTTP Server type and version
+OID:    1.3.6.1.4.1.25623.1.0.10107
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+This detects the HTTP Server's type and version.
+
+Vulnerability Detection Result:
+The remote HTTP Server banner is:
+Server: Apache
+
+Solution:
+- Configure your server to use an alternate name like
+  'Wintendo httpD w/Dotmatrix display'
+  - Be sure to remove common logos like apache_pb.gif.
+  - With Apache, you can set the directive 'ServerTokens Prod' to limit
+  the information emanating from the server in its response headers.
+
+Log Method:
+Details:
+HTTP Server type and version
+(OID: 1.3.6.1.4.1.25623.1.0.10107)
+Version used: $Revision: 11585 $
+
+
+Issue
+-----
+NVT:    HTTP Server type and version
+OID:    1.3.6.1.4.1.25623.1.0.10107
+Threat: Log (CVSS: 0.0)
+Port:   80/tcp
+
+Summary:
+This detects the HTTP Server's type and version.
+
+Vulnerability Detection Result:
+The remote HTTP Server banner is:
+Server: Apache
+
+Solution:
+- Configure your server to use an alternate name like
+  'Wintendo httpD w/Dotmatrix display'
+  - Be sure to remove common logos like apache_pb.gif.
+  - With Apache, you can set the directive 'ServerTokens Prod' to limit
+  the information emanating from the server in its response headers.
+
+Log Method:
+Details:
+HTTP Server type and version
+(OID: 1.3.6.1.4.1.25623.1.0.10107)
+Version used: $Revision: 11585 $
+
+
+Issue
+-----
+NVT:    HTTP TRACE
+OID:    1.3.6.1.4.1.25623.1.0.11040
+Threat: Log (CVSS: 0.0)
+Port:   3128/tcp
+
+Summary:
+Transparent or reverse HTTP proxies may be implement on some sites.
+
+Vulnerability Detection Result:
+The GET method revealed those proxies on the way to this web server :
+HTTP/1.1     alienvault (squid/3.4.8)
+
+Log Method:
+Details:
+HTTP TRACE
+(OID: 1.3.6.1.4.1.25623.1.0.11040)
+Version used: $Revision: 13660 $
+
+
+Issue
+-----
+NVT:    MySQL/MariaDB Detection
+OID:    1.3.6.1.4.1.25623.1.0.100152
+Threat: Log (CVSS: 0.0)
+Port:   3306/tcp
+
+Summary:
+Detects the installed version of
+  MySQL/MariaDB.
+  Detect a running MySQL/MariaDB by getting the banner, extract the version
+  from the banner and store the information in KB.
+
+Vulnerability Detection Result:
+Detected Oracle MySQL
+Version:       5.6.36-82.1
+Location:      3306/tcp
+CPE:           cpe:/a:oracle:mysql:5.6.36
+Concluded from version/product identification result:
+5.6.36-82.1
+
+Log Method:
+Details:
+MySQL/MariaDB Detection
+(OID: 1.3.6.1.4.1.25623.1.0.100152)
+Version used: $Revision: 10929 $
+
+
+Issue
+-----
+NVT:    No 404 check
+OID:    1.3.6.1.4.1.25623.1.0.10386
+Threat: Log (CVSS: 0.0)
+Port:   80/tcp
+
+Summary:
+Remote web server does not reply with 404 error code.
+
+Vulnerability Detection Result:
+The host returns a 30x (e.g. 301) error code when a non-existent file is request!
+ed. Some HTTP-related checks have been disabled.
+
+Vulnerability Insight:
+This web server is [mis]configured in that it does not return
+  '404 Not Found' error codes when a non-existent file is requested, perhaps ret!
+urning a site map,
+  search page or authentication page instead.
+  The Scanner enabled some counter measures for that, however they might be insu!
+fficient. If a great
+  number of security holes are produced for this port, they might not all be acc!
+urate
+
+Log Method:
+Details:
+No 404 check
+(OID: 1.3.6.1.4.1.25623.1.0.10386)
+Version used: $Revision: 13679 $
+
+
+Issue
+-----
+NVT:    OpenSSH Detection Consolidation
+OID:    1.3.6.1.4.1.25623.1.0.108577
+Threat: Log (CVSS: 0.0)
+Port:   general/tcp
+
+Summary:
+The script reports a detected OpenSSH including the
+  version number.
+
+Vulnerability Detection Result:
+Detected OpenSSH Server
+Version:       6.7p1
+Location:      22/tcp
+CPE:           cpe:/a:openbsd:openssh:6.7p1
+Concluded from version/product identification result:
+SSH-2.0-OpenSSH_6.7p1
+
+Log Method:
+Details:
+OpenSSH Detection Consolidation
+(OID: 1.3.6.1.4.1.25623.1.0.108577)
+Version used: 2019-05-23T06:42:35+0000
+
+References:
+Other:
+    https://www.openssh.com/
+
+
+Issue
+-----
+NVT:    OpenVAS / Greenbone Vulnerability Manager Detection
+OID:    1.3.6.1.4.1.25623.1.0.103825
+Threat: Log (CVSS: 0.0)
+Port:   9390/tcp
+
+Summary:
+The script sends a connection request to the server and attempts to
+  determine if it is a OpenVAS Manager (openvasmd) or Greebone Vulnerability Man!
+ager (gmvd).
+
+Vulnerability Detection Result:
+Detected OpenVAS Manager
+Version:       7.0
+Location:      9390/tcp
+CPE:           cpe:/a:openvas:openvas_manager:7.0
+Concluded from version/product identification result:
+ - OMP protocol version request:  <get_version/>
+ - OMP protocol version response: <get_version_response status="200" status_text!
+="OK"><version>7.0</version>
+
+Log Method:
+Details:
+OpenVAS / Greenbone Vulnerability Manager Detection
+(OID: 1.3.6.1.4.1.25623.1.0.103825)
+Version used: $Revision: 13874 $
+
+
+Issue
+-----
+NVT:    OS Detection Consolidation and Reporting
+OID:    1.3.6.1.4.1.25623.1.0.105937
+Threat: Log (CVSS: 0.0)
+Port:   general/tcp
+
+Summary:
+This script consolidates the OS information detected by several NVTs and tries t!
+o find the best matching OS.
+  Furthermore it reports all previously collected information leading to this be!
+st matching OS. It also reports possible additional information
+  which might help to improve the OS detection.
+  If any of this information is wrong or could be improved please consider to re!
+port these to the referenced community portal.
+
+Vulnerability Detection Result:
+Best matching OS:
+OS:           Linux/Unix
+CPE:          cpe:/o:linux:kernel
+Found by NVT: 1.3.6.1.4.1.25623.1.0.103825 (OpenVAS / Greenbone Vulnerability Ma!
+nager Detection)
+Setting key "Host/runs_unixoide" based on this information
+Other OS detections (in order of reliability):
+OS:           Linux Kernel
+CPE:          cpe:/o:linux:kernel
+Found by NVT: 1.3.6.1.4.1.25623.1.0.102002 (ICMP based OS Fingerprinting)
+Concluded from ICMP based OS fingerprint
+
+Log Method:
+Details:
+OS Detection Consolidation and Reporting
+(OID: 1.3.6.1.4.1.25623.1.0.105937)
+Version used: 2019-06-01T08:20:43+0000
+
+References:
+Other:
+    https://community.greenbone.net/c/vulnerability-tests
+
+
+Issue
+-----
+NVT:    PHP Version Detection (Remote)
+OID:    1.3.6.1.4.1.25623.1.0.800109
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+Detects the installed version of PHP.
+  This script sends HTTP GET request and try to get the version from the
+  response, and sets the result in KB.
+
+Vulnerability Detection Result:
+Detected PHP
+Version:       unknown
+Location:      443/tcp
+CPE:           cpe:/a:php:php
+Concluded from version/product identification result:
+PHPSESSID Session-Cookie
+
+Log Method:
+Details:
+PHP Version Detection (Remote)
+(OID: 1.3.6.1.4.1.25623.1.0.800109)
+Version used: $Revision: 13811 $
+
+
+Issue
+-----
+NVT:    Postfix SMTP Server Detection
+OID:    1.3.6.1.4.1.25623.1.0.111086
+Threat: Log (CVSS: 0.0)
+Port:   25/tcp
+
+Summary:
+The script checks the SMTP server
+  banner for the presence of Postfix.
+
+Vulnerability Detection Result:
+Detected Postfix
+Version:       unknown
+Location:      25/tcp
+CPE:           cpe:/a:postfix:postfix
+Concluded from version/product identification result:
+220 alienvault ESMTP Postfix (Alienvault/OSSIM)
+
+Log Method:
+Details:
+Postfix SMTP Server Detection
+(OID: 1.3.6.1.4.1.25623.1.0.111086)
+Version used: $Revision: 13461 $
+
+
+Issue
+-----
+NVT:    Service Detection with '<xml/>' Request
+OID:    1.3.6.1.4.1.25623.1.0.108198
+Threat: Log (CVSS: 0.0)
+Port:   9390/tcp
+
+Summary:
+This plugin performs service detection.
+  This plugin is a complement of find_service.nasl. It sends a '<xml/>'
+  request to the remaining unknown services and tries to identify them.
+
+Vulnerability Detection Result:
+A OpenVAS / Greenbone Vulnerability Manager supporting the OMP/GMP protocol seem!
+s to be running on this port.
+
+Log Method:
+Details:
+Service Detection with '<xml/>' Request
+(OID: 1.3.6.1.4.1.25623.1.0.108198)
+Version used: $Revision: 13874 $
+
+
+Issue
+-----
+NVT:    Services
+OID:    1.3.6.1.4.1.25623.1.0.10330
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+This routine attempts to guess which service is running on the
+  remote ports. For instance, it searches for a web server which could listen on!
+ another port than
+  80 or 443 and makes this information available for other check routines.
+
+Vulnerability Detection Result:
+A TLScustom server answered on this port
+
+Log Method:
+Details:
+Services
+(OID: 1.3.6.1.4.1.25623.1.0.10330)
+Version used: $Revision: 13541 $
+
+
+Issue
+-----
+NVT:    Services
+OID:    1.3.6.1.4.1.25623.1.0.10330
+Threat: Log (CVSS: 0.0)
+Port:   3306/tcp
+
+Summary:
+This routine attempts to guess which service is running on the
+  remote ports. For instance, it searches for a web server which could listen on!
+ another port than
+  80 or 443 and makes this information available for other check routines.
+
+Vulnerability Detection Result:
+A MySQL server is running on this port
+
+Log Method:
+Details:
+Services
+(OID: 1.3.6.1.4.1.25623.1.0.10330)
+Version used: $Revision: 13541 $
+
+
+Issue
+-----
+NVT:    Services
+OID:    1.3.6.1.4.1.25623.1.0.10330
+Threat: Log (CVSS: 0.0)
+Port:   3128/tcp
+
+Summary:
+This routine attempts to guess which service is running on the
+  remote ports. For instance, it searches for a web server which could listen on!
+ another port than
+  80 or 443 and makes this information available for other check routines.
+
+Vulnerability Detection Result:
+A web server is running on this port
+
+Log Method:
+Details:
+Services
+(OID: 1.3.6.1.4.1.25623.1.0.10330)
+Version used: $Revision: 13541 $
+
+
+Issue
+-----
+NVT:    Services
+OID:    1.3.6.1.4.1.25623.1.0.10330
+Threat: Log (CVSS: 0.0)
+Port:   80/tcp
+
+Summary:
+This routine attempts to guess which service is running on the
+  remote ports. For instance, it searches for a web server which could listen on!
+ another port than
+  80 or 443 and makes this information available for other check routines.
+
+Vulnerability Detection Result:
+A web server is running on this port
+
+Log Method:
+Details:
+Services
+(OID: 1.3.6.1.4.1.25623.1.0.10330)
+Version used: $Revision: 13541 $
+
+
+Issue
+-----
+NVT:    Services
+OID:    1.3.6.1.4.1.25623.1.0.10330
+Threat: Log (CVSS: 0.0)
+Port:   3128/tcp
+
+Summary:
+This routine attempts to guess which service is running on the
+  remote ports. For instance, it searches for a web server which could listen on!
+ another port than
+  80 or 443 and makes this information available for other check routines.
+
+Vulnerability Detection Result:
+An HTTP proxy is running on this port
+
+Log Method:
+Details:
+Services
+(OID: 1.3.6.1.4.1.25623.1.0.10330)
+Version used: $Revision: 13541 $
+
+
+Issue
+-----
+NVT:    Services
+OID:    1.3.6.1.4.1.25623.1.0.10330
+Threat: Log (CVSS: 0.0)
+Port:   25/tcp
+
+Summary:
+This routine attempts to guess which service is running on the
+  remote ports. For instance, it searches for a web server which could listen on!
+ another port than
+  80 or 443 and makes this information available for other check routines.
+
+Vulnerability Detection Result:
+An SMTP server is running on this port
+Here is its banner : 
+220 alienvault ESMTP Postfix (Alienvault/OSSIM) 
+
+Log Method:
+Details:
+Services
+(OID: 1.3.6.1.4.1.25623.1.0.10330)
+Version used: $Revision: 13541 $
+
+
+Issue
+-----
+NVT:    Services
+OID:    1.3.6.1.4.1.25623.1.0.10330
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+This routine attempts to guess which service is running on the
+  remote ports. For instance, it searches for a web server which could listen on!
+ another port than
+  80 or 443 and makes this information available for other check routines.
+
+Vulnerability Detection Result:
+A web server is running on this port through SSL
+
+Log Method:
+Details:
+Services
+(OID: 1.3.6.1.4.1.25623.1.0.10330)
+Version used: $Revision: 13541 $
+
+
+Issue
+-----
+NVT:    Services
+OID:    1.3.6.1.4.1.25623.1.0.10330
+Threat: Log (CVSS: 0.0)
+Port:   22/tcp
+
+Summary:
+This routine attempts to guess which service is running on the
+  remote ports. For instance, it searches for a web server which could listen on!
+ another port than
+  80 or 443 and makes this information available for other check routines.
+
+Vulnerability Detection Result:
+An ssh server is running on this port
+
+Log Method:
+Details:
+Services
+(OID: 1.3.6.1.4.1.25623.1.0.10330)
+Version used: $Revision: 13541 $
+
+
+Issue
+-----
+NVT:    Services
+OID:    1.3.6.1.4.1.25623.1.0.10330
+Threat: Log (CVSS: 0.0)
+Port:   9390/tcp
+
+Summary:
+This routine attempts to guess which service is running on the
+  remote ports. For instance, it searches for a web server which could listen on!
+ another port than
+  80 or 443 and makes this information available for other check routines.
+
+Vulnerability Detection Result:
+A TLScustom server answered on this port
+
+Log Method:
+Details:
+Services
+(OID: 1.3.6.1.4.1.25623.1.0.10330)
+Version used: $Revision: 13541 $
+
+
+Issue
+-----
+NVT:    SMTP Server type and version
+OID:    1.3.6.1.4.1.25623.1.0.10263
+Threat: Log (CVSS: 0.0)
+Port:   25/tcp
+
+Summary:
+This detects the SMTP Server's type and version by connecting to
+  the server and processing the buffer received.
+
+Vulnerability Detection Result:
+Remote SMTP server banner:
+220 alienvault ESMTP Postfix (Alienvault/OSSIM)
+The remote SMTP server is announcing the following available ESMTP commands (EHL!
+O response) via an unencrypted connection:
+8BITMIME, DSN, ENHANCEDSTATUSCODES, ETRN, PIPELINING, SIZE 10240000, STARTTLS
+
+Log Method:
+Details:
+SMTP Server type and version
+(OID: 1.3.6.1.4.1.25623.1.0.10263)
+Version used: $Revision: 14004 $
+
+
+Issue
+-----
+NVT:    Squid Proxy Server Detection
+OID:    1.3.6.1.4.1.25623.1.0.900611
+Threat: Log (CVSS: 0.0)
+Port:   3128/tcp
+
+Summary:
+Detects the installed version of squid.
+  This script sends HTTP GET request and try to get the version from the
+  response, and sets the result in KB.
+
+Vulnerability Detection Result:
+Detected Squid Proxy Server
+Version:       3.4.8
+Location:      3128/tcp
+CPE:           cpe:/a:squid-cache:squid:3.4.8
+Concluded from version/product identification result:
+Server: squid/3.4.8
+
+Log Method:
+Details:
+Squid Proxy Server Detection
+(OID: 1.3.6.1.4.1.25623.1.0.900611)
+Version used: $Revision: 10898 $
+
+
+Issue
+-----
+NVT:    SSH Protocol Algorithms Supported
+OID:    1.3.6.1.4.1.25623.1.0.105565
+Threat: Log (CVSS: 0.0)
+Port:   22/tcp
+
+Summary:
+This script detects which algorithms and languages are supported by the remote S!
+SH Service
+
+Vulnerability Detection Result:
+The following options are supported by the remote ssh service:
+kex_algorithms:
+curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nis!
+tp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1
+server_host_key_algorithms:
+ssh-rsa
+encryption_algorithms_client_to_server:
+aes256-ctr,aes128-ctr
+encryption_algorithms_server_to_client:
+aes256-ctr,aes128-ctr
+mac_algorithms_client_to_server:
+hmac-sha1,hmac-sha2-256,hmac-sha2-512
+mac_algorithms_server_to_client:
+hmac-sha1,hmac-sha2-256,hmac-sha2-512
+compression_algorithms_client_to_server:
+none,zlib@openssh.com
+compression_algorithms_server_to_client:
+none,zlib@openssh.com
+
+Log Method:
+Details:
+SSH Protocol Algorithms Supported
+(OID: 1.3.6.1.4.1.25623.1.0.105565)
+Version used: $Revision: 13581 $
+
+
+Issue
+-----
+NVT:    SSH Protocol Versions Supported
+OID:    1.3.6.1.4.1.25623.1.0.100259
+Threat: Log (CVSS: 0.0)
+Port:   22/tcp
+
+Summary:
+Identification of SSH protocol versions supported by the remote
+  SSH Server. Also reads the corresponding fingerprints from the service.
+  The following versions are tried: 1.33, 1.5, 1.99 and 2.0
+
+Vulnerability Detection Result:
+The remote SSH Server supports the following SSH Protocol Versions:
+1.99
+2.0
+SSHv2 Fingerprint(s):
+ssh-rsa: b8:96:95:ea:fb:90:06:a2:81:19:90:bd:1e:3a:1c:65
+
+Log Method:
+Details:
+SSH Protocol Versions Supported
+(OID: 1.3.6.1.4.1.25623.1.0.100259)
+Version used: $Revision: 13594 $
+
+
+Issue
+-----
+NVT:    SSH Server type and version
+OID:    1.3.6.1.4.1.25623.1.0.10267
+Threat: Log (CVSS: 0.0)
+Port:   22/tcp
+
+Summary:
+This detects the SSH Server's type and version by connecting to the server
+  and processing the buffer received.
+  This information gives potential attackers additional information about the sy!
+stem they are attacking.
+  Versions and Types should be omitted where possible.
+
+Vulnerability Detection Result:
+Remote SSH server banner: SSH-2.0-OpenSSH_6.7p1
+Remote SSH supported authentication: password,publickey
+Remote SSH text/login banner: (not available)
+This is probably:
+- OpenSSH
+Concluded from remote connection attempt with credentials:
+Login:    OpenVASVT
+Password: OpenVASVT
+
+Log Method:
+Details:
+SSH Server type and version
+(OID: 1.3.6.1.4.1.25623.1.0.10267)
+Version used: 2019-06-05T03:32:14+0000
+
+
+Issue
+-----
+NVT:    SSL/TLS: Certificate - Self-Signed Certificate Detection
+OID:    1.3.6.1.4.1.25623.1.0.103140
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+The SSL/TLS certificate on this port is self-signed.
+
+Vulnerability Detection Result:
+The certificate of the remote service is self signed.
+Certificate details:
+subject ...: CN=alienvault
+subject alternative names (SAN):
+None
+issued by .: CN=alienvault
+serial ....: 00B49E897D7B81A937
+valid from : 2021-03-07 13:21:05 UTC
+valid until: 2031-03-05 13:21:05 UTC
+fingerprint (SHA-1): D680FEB9A5BFEE6BB1B0E6710C93B5FEE1B41A5D
+fingerprint (SHA-256): 2E1A3DC0D7DE8B1F979696D1116A743FFAFEE91CCDFFBAAED37AEAD5C!
+5A2F53D
+
+Log Method:
+Details:
+SSL/TLS: Certificate - Self-Signed Certificate Detection
+(OID: 1.3.6.1.4.1.25623.1.0.103140)
+Version used: $Revision: 8981 $
+
+References:
+Other:
+    http://en.wikipedia.org/wiki/Self-signed_certificate
+
+
+Issue
+-----
+NVT:    SSL/TLS: Certificate - Self-Signed Certificate Detection
+OID:    1.3.6.1.4.1.25623.1.0.103140
+Threat: Log (CVSS: 0.0)
+Port:   25/tcp
+
+Summary:
+The SSL/TLS certificate on this port is self-signed.
+
+Vulnerability Detection Result:
+The certificate of the remote service is self signed.
+Certificate details:
+subject ...: CN=alienvault.alienvault
+subject alternative names (SAN):
+None
+issued by .: CN=alienvault.alienvault
+serial ....: 00E2B49A282B4D55DE
+valid from : 2021-03-07 13:14:28 UTC
+valid until: 2031-03-05 13:14:28 UTC
+fingerprint (SHA-1): 4A79F517B03925777CD206A66653626B8E549A5A
+fingerprint (SHA-256): E26301CB92072B1C9876837FB1EA771906D819F1026F10F1E553D0F0F!
+F45C56C
+
+Log Method:
+Details:
+SSL/TLS: Certificate - Self-Signed Certificate Detection
+(OID: 1.3.6.1.4.1.25623.1.0.103140)
+Version used: $Revision: 8981 $
+
+References:
+Other:
+    http://en.wikipedia.org/wiki/Self-signed_certificate
+
+
+Issue
+-----
+NVT:    SSL/TLS: Collect and Report Certificate Details
+OID:    1.3.6.1.4.1.25623.1.0.103692
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+This script collects and reports the details of all SSL/TLS certificates.
+  This data will be used by other tests to verify server certificates.
+
+Vulnerability Detection Result:
+The following certificate details of the remote service were collected.
+Certificate details:
+subject ...: CN=alienvault.alienvault
+subject alternative names (SAN):
+None
+issued by .: CN=alienvault.alienvault
+serial ....: 00E2B49A282B4D55DE
+valid from : 2021-03-07 13:14:28 UTC
+valid until: 2031-03-05 13:14:28 UTC
+fingerprint (SHA-1): 4A79F517B03925777CD206A66653626B8E549A5A
+fingerprint (SHA-256): E26301CB92072B1C9876837FB1EA771906D819F1026F10F1E553D0F0F!
+F45C56C
+
+Log Method:
+Details:
+SSL/TLS: Collect and Report Certificate Details
+(OID: 1.3.6.1.4.1.25623.1.0.103692)
+Version used: 2019-04-04T13:38:03+0000
+
+
+Issue
+-----
+NVT:    SSL/TLS: Collect and Report Certificate Details
+OID:    1.3.6.1.4.1.25623.1.0.103692
+Threat: Log (CVSS: 0.0)
+Port:   9390/tcp
+
+Summary:
+This script collects and reports the details of all SSL/TLS certificates.
+  This data will be used by other tests to verify server certificates.
+
+Vulnerability Detection Result:
+The following certificate details of the remote service were collected.
+Certificate details:
+subject ...: CN=alienvault.alienvault
+subject alternative names (SAN):
+None
+issued by .: CN=alienvault.alienvault
+serial ....: 00E2B49A282B4D55DE
+valid from : 2021-03-07 13:14:28 UTC
+valid until: 2031-03-05 13:14:28 UTC
+fingerprint (SHA-1): 4A79F517B03925777CD206A66653626B8E549A5A
+fingerprint (SHA-256): E26301CB92072B1C9876837FB1EA771906D819F1026F10F1E553D0F0F!
+F45C56C
+
+Log Method:
+Details:
+SSL/TLS: Collect and Report Certificate Details
+(OID: 1.3.6.1.4.1.25623.1.0.103692)
+Version used: 2019-04-04T13:38:03+0000
+
+
+Issue
+-----
+NVT:    SSL/TLS: Collect and Report Certificate Details
+OID:    1.3.6.1.4.1.25623.1.0.103692
+Threat: Log (CVSS: 0.0)
+Port:   25/tcp
+
+Summary:
+This script collects and reports the details of all SSL/TLS certificates.
+  This data will be used by other tests to verify server certificates.
+
+Vulnerability Detection Result:
+The following certificate details of the remote service were collected.
+Certificate details:
+subject ...: CN=alienvault.alienvault
+subject alternative names (SAN):
+None
+issued by .: CN=alienvault.alienvault
+serial ....: 00E2B49A282B4D55DE
+valid from : 2021-03-07 13:14:28 UTC
+valid until: 2031-03-05 13:14:28 UTC
+fingerprint (SHA-1): 4A79F517B03925777CD206A66653626B8E549A5A
+fingerprint (SHA-256): E26301CB92072B1C9876837FB1EA771906D819F1026F10F1E553D0F0F!
+F45C56C
+
+Log Method:
+Details:
+SSL/TLS: Collect and Report Certificate Details
+(OID: 1.3.6.1.4.1.25623.1.0.103692)
+Version used: 2019-04-04T13:38:03+0000
+
+
+Issue
+-----
+NVT:    SSL/TLS: Hostname discovery from server certificate
+OID:    1.3.6.1.4.1.25623.1.0.111010
+Threat: Log (CVSS: 0.0)
+Port:   general/tcp
+
+Summary:
+It was possible to discover an additional hostname
+  of this server from its certificate Common or Subject Alt Name.
+
+Vulnerability Detection Result:
+The following additional and resolvable hostnames pointing to a different host i!
+p were detected:
+alienvault
+alienvault.alienvault
+
+Log Method:
+Details:
+SSL/TLS: Hostname discovery from server certificate
+(OID: 1.3.6.1.4.1.25623.1.0.111010)
+Version used: $Revision: 13774 $
+
+
+Issue
+-----
+NVT:    SSL/TLS: HTTP Public Key Pinning (HPKP) Missing
+OID:    1.3.6.1.4.1.25623.1.0.108247
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+The remote web server is not enforcing HPKP.
+
+Vulnerability Detection Result:
+The remote web server is not enforcing HPKP.
+HTTP-Banner:
+HTTP/1.1 302 Found 
+Date: ***replaced*** 
+Server: Apache 
+X-Frame-Options: SAMEORIGIN 
+Location: https://localhost/ossim/ 
+Content-Length: ***replaced*** 
+Connection: close 
+Content-Type: text/html; charset=iso-8859-1
+
+Solution:
+Solution type: Workaround
+Enable HPKP or add / configure the required directives correctly following the
+  guides linked in the references.
+
+Log Method:
+Details:
+SSL/TLS: HTTP Public Key Pinning (HPKP) Missing
+(OID: 1.3.6.1.4.1.25623.1.0.108247)
+Version used: $Revision: 7391 $
+
+References:
+Other:
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project#hpkp
+    https://tools.ietf.org/html/rfc7469
+    https://securityheaders.io/
+
+
+Issue
+-----
+NVT:    SSL/TLS: HTTP Strict Transport Security (HSTS) Missing
+OID:    1.3.6.1.4.1.25623.1.0.105879
+Threat: Log (CVSS: 0.0)
+Port:   443/tcp
+
+Summary:
+The remote web server is not enforcing HSTS.
+
+Vulnerability Detection Result:
+The remote web server is not enforcing HSTS.
+HTTP-Banner:
+HTTP/1.1 302 Found 
+Date: ***replaced*** 
+Server: Apache 
+X-Frame-Options: SAMEORIGIN 
+Location: https://localhost/ossim/ 
+Content-Length: ***replaced*** 
+Connection: close 
+Content-Type: text/html; charset=iso-8859-1
+
+Solution:
+Solution type: Workaround
+Enable HSTS or add / configure the required directives correctly following the
+  guides linked in the references.
+
+Log Method:
+Details:
+SSL/TLS: HTTP Strict Transport Security (HSTS) Missing
+(OID: 1.3.6.1.4.1.25623.1.0.105879)
+Version used: $Revision: 7391 $
+
+References:
+Other:
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project
+    https://www.owasp.org/index.php/HTTP_Strict_Transport_Security_Cheat_Sheet
+    https://www.owasp.org/index.php/OWASP_Secure_Headers_Project#hsts
+    https://tools.ietf.org/html/rfc6797
+    https://securityheaders.io/
+
+
+Issue
+-----
+NVT:    SSL/TLS: SMTP 'STARTTLS' Command Detection
+OID:    1.3.6.1.4.1.25623.1.0.103118
+Threat: Log (CVSS: 0.0)
+Port:   25/tcp
+
+Summary:
+Checks if the remote SMTP server supports SSL/TLS with the 'STARTTLS' command.
+
+Vulnerability Detection Result:
+The remote SMTP server supports SSL/TLS with the 'STARTTLS' command.
+The remote SMTP server is announcing the following available ESMTP commands (EHL!
+O response) before sending the 'STARTTLS' command:
+8BITMIME, DSN, ENHANCEDSTATUSCODES, ETRN, PIPELINING, SIZE 10240000, STARTTLS
+The remote SMTP server is announcing the following available ESMTP commands (EHL!
+O response) after sending the 'STARTTLS' command:
+8BITMIME, DSN, ENHANCEDSTATUSCODES, ETRN, PIPELINING, SIZE 10240000
+
+Log Method:
+Details:
+SSL/TLS: SMTP 'STARTTLS' Command Detection
+(OID: 1.3.6.1.4.1.25623.1.0.103118)
+Version used: $Revision: 13822 $
+
+References:
+Other:
+    https://tools.ietf.org/html/rfc3207
+
+
+Issue
+-----
+NVT:    Traceroute
+OID:    1.3.6.1.4.1.25623.1.0.51662
+Threat: Log (CVSS: 0.0)
+Port:   general/tcp
+
+Summary:
+A traceroute from the scanning server to the target system was
+  conducted. This traceroute is provided primarily for informational value only.!
+ In the vast
+  majority of cases, it does not represent a vulnerability. However, if the disp!
+layed traceroute
+  contains any private addresses that should not have been publicly visible, the!
+n you have an
+  issue you need to correct.
+
+Vulnerability Detection Result:
+Here is the route from 127.0.0.1 to 127.0.0.1:
+127.0.0.1
+
+Solution:
+Block unwanted packets from escaping your network.
+
+Log Method:
+Details:
+Traceroute
+(OID: 1.3.6.1.4.1.25623.1.0.51662)
+Version used: $Revision: 10411 $
+
+
+Issue
+-----
+NVT:    Unknown OS and Service Banner Reporting
+OID:    1.3.6.1.4.1.25623.1.0.108441
+Threat: Log (CVSS: 0.0)
+Port:   general/tcp
+
+Summary:
+This NVT consolidates and reports the information collected by
+  the following NVTs:
+  - Collect banner of unknown services (OID: 1.3.6.1.4.1.25623.1.0.11154)
+  - Service Detection (unknown) with nmap (OID: 1.3.6.1.4.1.25623.1.0.66286)
+  - Service Detection (wrapped) with nmap (OID: 1.3.6.1.4.1.25623.1.0.108525)
+  - OS Detection Consolidation and Reporting (OID: 1.3.6.1.4.1.25623.1.0.105937)
+  If you know any of the information reported here, please send the full output !
+to
+  the referenced community portal.
+
+Vulnerability Detection Result:
+Unknown banners have been collected which might help to identify the OS running !
+on this host. If these banners containing information about the host OS please r!
+eport the following information to https://community.greenbone.net/c/vulnerabili!
+ty-tests:
+Banner: # Nmap 7.30 scan initiated Thu Mar 11 00:14:13 2021 as: nmap -T3 -n -Pn !
+-sV -oN /tmp/nmap-127.0.0.1-453482937 -O --osscan-limit -p 9390,4369,3306,3128,5!
+14,443,80,25,22,21,135,139,445,16646,22946,35919 127.0.0.1
+Nmap scan report for 127.0.0.1
+Host is up (0.000069s latency).
+PORT      STATE  SERVICE      VERSION
+21/tcp    closed ftp
+22/tcp    open   ssh          OpenSSH 6.7p1 (protocol 2.0)
+25/tcp    open   smtp         Postfix smtpd
+80/tcp    open   http         Apache httpd
+135/tcp   closed msrpc
+139/tcp   closed netbios-ssn
+443/tcp   open   ssl/http     Apache httpd
+445/tcp   closed microsoft-ds
+514/tcp   open   shell?
+3128/tcp  open   http-proxy   Squid http proxy 3.4.8
+3306/tcp  open   mysql        MySQL 5.6.36-82.1
+4369/tcp  open   epmd         Erlang Port Mapper Daemon
+9390/tcp  open   otp?
+16646/tcp closed unknown
+22946/tcp closed unknown
+35919/tcp closed unknown
+No exact OS matches for host (If you know what OS is running on it, see https://!
+nmap.org/submit/ ).
+TCP/IP fingerprint:
+OS:SCAN(V=7.30%E=4%D=3/11%OT=22%CT=21%CU=32326%PV=N%DS=0%DC=L%G=Y%TM=604961
+OS:70%P=x86_64-unknown-linux-gnu)SEQ(SP=103%GCD=1%ISR=108%TI=Z%CI=Z%II=I%TS
+OS:=U)SEQ(CI=Z%II=I%TS=U)SEQ(SP=F6%GCD=1%ISR=104%TI=Z%CI=Z%TS=U)OPS(O1=MFFD
+OS:7NNSNWA%O2=MFFD7NNSNWA%O3=MFFD7NWA%O4=MFFD7NNSNWA%O5=MFFD7NNSNWA%O6=MFFD
+OS:7NNS)WIN(W1=AAAA%W2=AAAA%W3=AAAA%W4=AAAA%W5=AAAA%W6=AAAA)ECN(R=Y%DF=Y%T=
+OS:40%W=AAAA%O=MFFD7NNSNWA%CC=Y%Q=)T1(R=Y%DF=Y%T=40%S=O%A=S+%F=AS%RD=0%Q=)T
+OS:2(R=N)T3(R=N)T4(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T5(R=Y%DF=Y%T=4
+OS:0%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)T6(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%
+OS:Q=)T7(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%T=40%IPL=16
+OS:4%UN=0%RIPL=G%RID=G%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N%T=40%CD=S)
+Network Distance: 0 hops
+Service Info: Host:  alienvault
+OS and Service detection performed. Please report any incorrect results at https!
+://nmap.org/submit/ .
+# Nmap done at Thu Mar 11 00:16:48 2021 -- 1 IP address (1 host up) scanned in 1!
+56.08 seconds
+Identified from: Nmap TCP/IP fingerprinting
+Banner: 5.6.36-82.1
+Identified from: MySQL/MariaDB server banner on port 3306/tcp
+Banner: 220 alienvault ESMTP Postfix (Alienvault/OSSIM)
+Identified from: SMTP banner on port 25/tcp
+
+Log Method:
+Details:
+Unknown OS and Service Banner Reporting
+(OID: 1.3.6.1.4.1.25623.1.0.108441)
+Version used: $Revision: 12934 $
+
+References:
+Other:
+    https://community.greenbone.net/c/vulnerability-tests
+
+
+Issue
+-----
+NVT:    Unknown OS and Service Banner Reporting
+OID:    1.3.6.1.4.1.25623.1.0.108441
+Threat: Log (CVSS: 0.0)
+Port:   4369/tcp
+
+Summary:
+This NVT consolidates and reports the information collected by
+  the following NVTs:
+  - Collect banner of unknown services (OID: 1.3.6.1.4.1.25623.1.0.11154)
+  - Service Detection (unknown) with nmap (OID: 1.3.6.1.4.1.25623.1.0.66286)
+  - Service Detection (wrapped) with nmap (OID: 1.3.6.1.4.1.25623.1.0.108525)
+  - OS Detection Consolidation and Reporting (OID: 1.3.6.1.4.1.25623.1.0.105937)
+  If you know any of the information reported here, please send the full output !
+to
+  the referenced community portal.
+
+Vulnerability Detection Result:
+Nmap service detection (unknown) result for this port: epmd
+
+Log Method:
+Details:
+Unknown OS and Service Banner Reporting
+(OID: 1.3.6.1.4.1.25623.1.0.108441)
+Version used: $Revision: 12934 $
+
+References:
+Other:
+    https://community.greenbone.net/c/vulnerability-tests
+
+
+Issue
+-----
+NVT:    Unknown OS and Service Banner Reporting
+OID:    1.3.6.1.4.1.25623.1.0.108441
+Threat: Log (CVSS: 0.0)
+Port:   514/tcp
+
+Summary:
+This NVT consolidates and reports the information collected by
+  the following NVTs:
+  - Collect banner of unknown services (OID: 1.3.6.1.4.1.25623.1.0.11154)
+  - Service Detection (unknown) with nmap (OID: 1.3.6.1.4.1.25623.1.0.66286)
+  - Service Detection (wrapped) with nmap (OID: 1.3.6.1.4.1.25623.1.0.108525)
+  - OS Detection Consolidation and Reporting (OID: 1.3.6.1.4.1.25623.1.0.105937)
+  If you know any of the information reported here, please send the full output !
+to
+  the referenced community portal.
+
+Vulnerability Detection Result:
+Nmap service detection (unknown) result for this port: shell
+This is a guess. A confident identification of the service was not possible.
+Hint: If you're running a recent nmap version try to run nmap with the following!
+ command: 'nmap -sV -Pn -p 514 127.0.0.1' and submit a possible collected finger!
+print to the nmap database.
+
+Log Method:
+Details:
+Unknown OS and Service Banner Reporting
+(OID: 1.3.6.1.4.1.25623.1.0.108441)
+Version used: $Revision: 12934 $
+
+References:
+Other:
+    https://community.greenbone.net/c/vulnerability-tests
+
+

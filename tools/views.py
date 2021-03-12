@@ -16,10 +16,13 @@
 
 from __future__ import unicode_literals
 from tools.models import sslscan_result_db, nikto_result_db, nmap_result_db, nmap_scan_db, nikto_vuln_db, dirsearch_result_db, dirsearch_scan_db, openvas_result_db, openvas_scan_db
+from networkscanners.models import openvas_scan_db, \
+    ov_scan_result_db, \
+    task_schedule_db
 from django.shortcuts import render, HttpResponseRedirect
 import subprocess
 import defusedxml.ElementTree as ET
-from scanners.scanner_parser.network_scanner import nmap_parser
+from scanners.scanner_parser.network_scanner import nmap_parser, OpenVas_Parser
 import uuid
 import codecs
 from scanners.scanner_parser.tools.nikto_htm_parser import nikto_html_parser
@@ -43,13 +46,12 @@ def openvas(request):
 
     username = request.user.username
     all_openvas = openvas_scan_db.objects.filter(username=username)#, scan_id=scan_id)
-    ip_address = request.GET.get('ip', )
 
     if request.method == 'GET' and ip_address:
-        ip_address = request.GET.get('ip', )
+        ip_address = request.GET['ip']
         all_openvas = openvas_result_db.objects.filter(username=username, ip_address=ip_address)
     
-    if request.method == 'POST':    
+    if request.method == 'POST':
         ip_address = request.POST.get('ip')
         project_id = request.POST.get('project_id')
         command = request.POST.get('command')
@@ -62,37 +64,43 @@ def openvas(request):
                 subprocess.run(
                     ['ssh', '-t', 'root@10.254.10.45', cmd, ';exit;/bin/bash']
                 )
-                report = 'Report_for_' + str(ip_address) + ".txt"
-                remote = 'root@10.254.10.45:/root/' + report
-                distination = os.getcwd() + '/openvas/' + report
-                subprocess.run(
-                    ['scp', remote, distination]
-                )
             else:
-                print(ip_address)
                 cmd = 'export jailbreak="yes";openvas ' + str(ip_address)
                 subprocess.run(
                     ['ssh', '-t', 'root@10.254.10.45', cmd, ';exit;/bin/bash']
                 )
-                report = 'Report_for_' + str(ip_address) + ".txt"
-                remote = 'root@10.254.10.45:/root/' + report
-                distination = os.getcwd() + '/openvas/' + report
-                subprocess.run(
-                    ['scp', remote, distination]
-                )
+            report = 'Report_for_' + str(ip_address) + ".xml"
+            remote = 'root@10.254.10.45:/root/' + report
+            distination = os.getcwd() + '/openvas/' + report
+            subprocess.run(
+                ['scp', remote, distination]
+            )
             print('Completed OpenVas scan')
         except Exception as e:
             print('Error in OpenVas scan:', e)
 
         try:
-            tree = ET.parse('OpenVas.xml')
+            date_time = datetime.now()
+            scan_status = "100"
+            tree = ET.parse(distination)
             root_xml = tree.getroot()
-
-            nmap_parser.xml_parser(root=root_xml,
-                                   scan_id=scan_id,
-                                   project_id=project_id,
-                                   username=username
-                                   )
+            # tree = ET.fromstring(distination)
+            # notags = ET.tostring(tree, encoding='utf8', method='text')
+            hosts = OpenVas_Parser.get_hosts(root_xml)
+            for host in hosts:
+                scan_dump = openvas_scan_db(scan_ip=host,
+                                         scan_id=host,
+                                         date_time=date_time,
+                                         project_id=project_id,
+                                         scan_status=scan_status,
+                                         username=username
+                                         )
+                scan_dump.save()
+            OpenVas_Parser.updated_xml_parser(project_id=project_id,
+                                              scan_id=scan_id,
+                                              root=root_xml,
+                                              username=username
+                                              )
 
         except Exception as e:
             print('Error in xml parser:', e)
