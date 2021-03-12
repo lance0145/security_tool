@@ -46,9 +46,9 @@ def openvas(request):
 
     username = request.user.username
     all_openvas = openvas_scan_db.objects.filter(username=username)#, scan_id=scan_id)
+    ip_address = request.GET.get('ip', )
 
     if request.method == 'GET' and ip_address:
-        ip_address = request.GET['ip']
         all_openvas = openvas_result_db.objects.filter(username=username, ip_address=ip_address)
     
     if request.method == 'POST':
