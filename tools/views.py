@@ -71,10 +71,24 @@ def openvas(request):
                 )
             report = 'Report_for_' + str(ip_address) + ".xml"
             remote = 'root@10.254.10.45:/root/' + report
-            distination = os.getcwd() + '/openvas/' + report
+            destination = os.getcwd() + '/openvas/' + report
             subprocess.run(
-                ['scp', remote, distination]
+                ['scp', remote, destination]
             )
+            subprocess.run(
+                ['sed', '-i', '/<report id="/,$!d', destination]
+            )
+            # with open(destination, "r") as f:
+            #     lines = f.readlines()
+            # for l in range(len(lines)):
+            #     del lines[l]
+            #     ll = l + 1
+            #     if "<report id=" in lines[ll]:
+            #         break
+            # with open(destination, "w") as f:
+            #     print(len(lines))
+            #     for line in lines:
+            #         f.write(line)
             print('Completed OpenVas scan')
         except Exception as e:
             print('Error in OpenVas scan:', e)
@@ -82,9 +96,9 @@ def openvas(request):
         try:
             date_time = datetime.now()
             scan_status = "100"
-            tree = ET.parse(distination)
+            tree = ET.parse(destination)
             root_xml = tree.getroot()
-            # tree = ET.fromstring(distination)
+            # tree = ET.fromstring(destination)
             # notags = ET.tostring(tree, encoding='utf8', method='text')
             hosts = OpenVas_Parser.get_hosts(root_xml)
             for host in hosts:
@@ -101,7 +115,6 @@ def openvas(request):
                                               root=root_xml,
                                               username=username
                                               )
-
         except Exception as e:
             print('Error in xml parser:', e)
 
