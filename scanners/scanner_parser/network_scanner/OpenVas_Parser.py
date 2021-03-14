@@ -223,7 +223,8 @@ def get_hosts(root):
                 else:
                     host = r.text
                     if host in hosts:
-                        print("Already present " + host)
+                        # print("Already present " + host)
+                        pass
                     else:
                         hosts.append(host)
     return hosts
