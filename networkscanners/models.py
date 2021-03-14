@@ -69,15 +69,18 @@ class openvas_scan_db(models.Model):
     scan_ip = models.TextField(blank=True)
     target_id = models.TextField(blank=True)
     scan_status = models.TextField(blank=True)
-    total_vul = models.IntegerField(blank=True, null=True)
     high_vul = models.IntegerField(blank=True, null=True)
     medium_vul = models.IntegerField(blank=True, null=True)
     low_vul = models.IntegerField(blank=True, null=True)
-    log_total = models.IntegerField(blank=True, null=True)
     project_id = models.TextField(blank=True)
     date_time = models.DateTimeField(null=True)
-    total_dup = models.IntegerField(blank=True, null=True)
     username = models.CharField(max_length=256, null=True)
+    high_total = models.IntegerField(blank=True, null=True)
+    medium_total = models.IntegerField(blank=True, null=True)
+    low_total = models.IntegerField(blank=True, null=True)
+    log_total = models.IntegerField(blank=True, null=True)
+    total_dup = models.IntegerField(blank=True, null=True)
+    total_vul = models.IntegerField(blank=True, null=True)
 
 
 class task_schedule_db(models.Model):
