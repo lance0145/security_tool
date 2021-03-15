@@ -16,30 +16,30 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="card">
-                                        <form class="form-horizontal" method="POST" action="{% url 'jiraticketing:jira_setting' %}">{% csrf_token %}
+                                        <form class="form-horizontal" method="POST" action="{% url 'networkscanners:server_setting' %}">{% csrf_token %}
                                             <div class="card-body">
                                                     <div class="form-group row">
                                                         <label
                                                                 class="col-sm-4 col-form-label">Host IP</label>
                                                         <div class="col-sm-6">
-                                                            <input type="text" name="jira_url" value="{{ jira_server }}" class="form-control">
+                                                            <input type="text" name="server_ip" value="{{ server_ip }}" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label
                                                                 class="col-sm-4 col-form-label">Username</label>
                                                         <div class="col-sm-6">
-                                                            <input type="text" name="jira_username" class="form-control"
-                                                                   value="{{ jira_username }}">
+                                                            <input type="text" name="server_username" class="form-control"
+                                                                   value="{{ server_username }}">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label
                                                                 class="col-sm-4 col-form-label">Password</label>
                                                         <div class="col-sm-6">
-                                                            <input type="password" name="jira_password"
+                                                            <input type="password" name="server_password"
                                                                    class="form-control"
-                                                                   value="{{ jira_password }}">
+                                                                   value="{{ server_password }}">
                                                         </div>
                                                     </div>
                                                     <button type="submit" class="btn btn-success">Save</button>

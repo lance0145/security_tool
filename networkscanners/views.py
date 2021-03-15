@@ -29,7 +29,7 @@ from archerysettings import save_settings
 from archerysettings import load_settings
 from networkscanners.models import openvas_scan_db, \
     ov_scan_result_db, \
-    task_schedule_db
+    task_schedule_db, serversetting
 from projects.models import project_db
 from scanners.scanner_parser.network_scanner import OpenVas_Parser, Nessus_Parser, nmap_parser
 from scanners.scanner_plugin.network_scanner.openvas_plugin import OpenVAS_Plugin, vuln_an_id
@@ -122,11 +122,11 @@ def scan_vul_details(request):
     :param request:
     :return:
     """
-    jira_url = None
-    jira = jirasetting.objects.filter(username=username)
+    ip = None
+    server = jirasetting.objects.filter(username=username)
     ip_address = request.GET.get('ip', )
-    for d in jira:
-        jira_url = d.jira_server
+    for d in server:
+        ip = d.server_ip
     scanid = ""
     if request.method == 'GET':
         scanid = request.GET['scan_id']
@@ -192,7 +192,7 @@ def scan_vul_details(request):
                   'openvas_vuln_list.html',
                   {'all_vuln': all_vuln,
                    'scan_id': scanid,
-                   'jira_url': jira_url,
+                   'ip': ip,
                    'ip': ip_address})
 
 
@@ -457,34 +457,34 @@ def server_setting(request):
     :return:
     """
     username = request.user.username
-    all_jira_settings = jirasetting.objects.filter(username=username)
-    for jira in all_jira_settings:
-        global jira_url, j_username, password
-        jira_url = jira.jira_server
-        j_username = signing.loads(jira.jira_username)
-        password = signing.loads(jira.jira_password)
-    jira_server = jira_url
-    jira_username = j_username
-    jira_password = password
+    all_server_settings = serversetting.objects.filter(username=username)
+    for server in all_server_settings:
+        global ip, user, password
+        ip = server.server_ip
+        user = signing.loads(server.server_username)
+        password = signing.loads(server.server_password)
+    server_ip = ip
+    server_username = user
+    server_password = password
 
     if request.method == 'POST':
-        jira_url = request.POST.get('jira_url')
-        jira_username = request.POST.get('jira_username')
-        jira_password = request.POST.get('jira_password')
+        ip = request.POST.get('server_ip')
+        server_username = request.POST.get('server_username')
+        server_password = request.POST.get('server_password')
 
-        j_username = signing.dumps(jira_username)
-        password = signing.dumps(jira_password)
-        save_data = jirasetting(username=username,
-                                jira_server=jira_url,
-                                jira_username=j_username,
-                                jira_password=password)
+        user = signing.dumps(server_username)
+        password = signing.dumps(server_password)
+        save_data = serversetting(username=username,
+                                server_ip=ip,
+                                server_username=user,
+                                server_password=password)
         save_data.save()
 
         return HttpResponseRedirect(reverse('webscanners:setting'))
 
-    return render(request, 'server_setting_form.html', {'jira_server': jira_server,
-                                                      'jira_username': jira_username,
-                                                      'jira_password': jira_password,
+    return render(request, 'server_setting_form.html', {'server_ip': server_ip,
+                                                      'server_username': server_username,
+                                                      'server_password': server_password,
                                                       })
 
 def del_vuln(request):
