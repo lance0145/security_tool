@@ -205,3 +205,9 @@ class nessus_scan_results_db(models.Model):
     scanner = models.TextField(default='Nessus', editable=False)
     target = models.TextField(blank=True, null=True)
     username = models.CharField(max_length=256, null=True)
+
+class serversetting(models.Model):
+    server_ip = models.TextField(blank=True, null=True)
+    server_username = models.TextField(blank=True, null=True)
+    server_password = models.TextField(blank=True, null=True)
+    username = models.CharField(max_length=256, null=True)

@@ -39,6 +39,7 @@ from datetime import datetime
 from jiraticketing.models import jirasetting
 import hashlib
 import json
+from django.core import signing
 
 from django.contrib.auth.models import User
 from notifications.signals import notify
@@ -448,6 +449,43 @@ def openvas_setting(request):
                   }
                   )
 
+
+def server_setting(request):
+    """
+
+    :param request:
+    :return:
+    """
+    username = request.user.username
+    all_jira_settings = jirasetting.objects.filter(username=username)
+    for jira in all_jira_settings:
+        global jira_url, j_username, password
+        jira_url = jira.jira_server
+        j_username = signing.loads(jira.jira_username)
+        password = signing.loads(jira.jira_password)
+    jira_server = jira_url
+    jira_username = j_username
+    jira_password = password
+
+    if request.method == 'POST':
+        jira_url = request.POST.get('jira_url')
+        jira_username = request.POST.get('jira_username')
+        jira_password = request.POST.get('jira_password')
+
+        j_username = signing.dumps(jira_username)
+        password = signing.dumps(jira_password)
+        save_data = jirasetting(username=username,
+                                jira_server=jira_url,
+                                jira_username=j_username,
+                                jira_password=password)
+        save_data.save()
+
+        return HttpResponseRedirect(reverse('webscanners:setting'))
+
+    return render(request, 'server_setting_form.html', {'jira_server': jira_server,
+                                                      'jira_username': jira_username,
+                                                      'jira_password': jira_password,
+                                                      })
 
 def del_vuln(request):
     username = request.user.username
