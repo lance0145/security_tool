@@ -18,7 +18,7 @@ from __future__ import unicode_literals
 from tools.models import sslscan_result_db, nikto_result_db, nmap_result_db, nmap_scan_db, nikto_vuln_db, dirsearch_result_db, dirsearch_scan_db, openvas_result_db, openvas_scan_db
 from networkscanners.models import openvas_scan_db, \
     ov_scan_result_db, \
-    task_schedule_db
+    task_schedule_db, serversetting
 from django.shortcuts import render, HttpResponseRedirect
 import subprocess
 import defusedxml.ElementTree as ET
@@ -33,6 +33,7 @@ import csv
 from datetime import datetime
 from notifications.signals import notify
 from django.urls import reverse
+from django.core import signing
 
 # NOTE[gmedian]: in order to be more portable we just import everything rather than add anything in this very script
 from tools.nmap_vulners.nmap_vulners_view import nmap_vulners, nmap_vulners_port, nmap_vulners_scan
@@ -56,21 +57,24 @@ def openvas(request):
         project_id = request.POST.get('project_id')
         command = request.POST.get('command')
         scan_id = uuid.uuid4()
+        ss = serversetting.objects.filter(username=username).last()
+        user_ip = str(signing.loads(ss.server_username)) + "@" + str(ss.server_ip)
+        password = str(signing.loads(ss.server_password))
+        print(user_ip, password)
 
         try:
             print('Start OpenVas scan')
             if command:
                 cmd = 'export jailbreak="yes";' + str(command)
-                subprocess.run(
-                    ['ssh', '-t', 'root@10.254.10.45', cmd, ';exit;/bin/bash']
-                )
             else:
                 cmd = 'export jailbreak="yes";openvas ' + str(ip_address)
-                subprocess.run(
-                    ['ssh', '-t', 'root@10.254.10.45', cmd, ';exit;/bin/bash']
-                )
+            #root@10.254.10.45
+            subprocess.run(
+                ['sshpass ', '-p', password, 'ssh', '-t', user_ip, cmd, ';exit;/bin/bash']
+            )
             report = 'Report_for_' + str(ip_address) + ".xml"
-            remote = 'root@10.254.10.45:/root/' + report
+            #remote = 'root@10.254.10.45:/root/' + report
+            remote = user_ip + ':/root/' + report
             destination = os.getcwd() + '/openvas/' + report
             subprocess.run(
                 ['scp', remote, destination]
@@ -78,17 +82,6 @@ def openvas(request):
             subprocess.run(
                 ['sed', '-i', '/<report id="/,$!d', destination]
             )
-            # with open(destination, "r") as f:
-            #     lines = f.readlines()
-            # for l in range(len(lines)):
-            #     del lines[l]
-            #     ll = l + 1
-            #     if "<report id=" in lines[ll]:
-            #         break
-            # with open(destination, "w") as f:
-            #     print(len(lines))
-            #     for line in lines:
-            #         f.write(line)
             print('Completed OpenVas scan')
         except Exception as e:
             print('Error in OpenVas scan:', e)

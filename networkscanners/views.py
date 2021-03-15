@@ -126,7 +126,7 @@ def scan_vul_details(request):
     server = jirasetting.objects.filter(username=username)
     ip_address = request.GET.get('ip', )
     for d in server:
-        ip = d.server_ip
+        ip = d.jira_server
     scanid = ""
     if request.method == 'GET':
         scanid = request.GET['scan_id']
