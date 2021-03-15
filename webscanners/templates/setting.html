@@ -24,7 +24,7 @@
                                                                 class="col-sm-4 col-form-label">Host IP</label>
                                                         <div class="col-sm-6">
                                                             <input type="text" readonly class="form-control-plaintext"
-                                                                   value="{{ jira_server }}" placeholder="JIRA Endpoint">
+                                                                   value="{{ server_ip }}" placeholder="Scan Server IP">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -32,7 +32,7 @@
                                                                 class="col-sm-4 col-form-label">Username</label>
                                                         <div class="col-sm-6">
                                                             <input type="text" readonly class="form-control-plaintext"
-                                                                   value="{{ jira_username }}">
+                                                                   value="{{ server_username }}">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -41,7 +41,7 @@
                                                         <div class="col-sm-6">
                                                             <input type="password" readonly
                                                                    class="form-control-plaintext"
-                                                                   value="{{ jira_password }}">
+                                                                   value="{{ server_password }}">
                                                         </div>
                                                     </div>
                                                     <a class="btn btn-primary" href="{% url 'networkscanners:server_setting' %}"

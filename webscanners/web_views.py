@@ -65,6 +65,7 @@ import codecs
 from scanners.scanner_parser.tools.nikto_htm_parser import nikto_html_parser
 from notifications.models import Notification
 from django.urls import reverse
+from networkscanners.models import serversetting
 
 setting_file = os.getcwd() + '/' + 'apidata.json'
 
@@ -500,6 +501,23 @@ def setting(request):
         jira_password = None
     else:
         jira_password = signing.loads(password)
+    
+    # Load Server Setting
+    server_setting = serversetting.objects.filter(username=username)
+    for server in server_setting:
+        s_ip = server.server_ip
+        s_username = server.server_username
+        s_password = server.server_password
+    server_ip = s_ip
+    if s_username is None:
+        server_username = None
+    else:
+        server_username = signing.loads(s_username)
+
+    if s_password is None:
+        server_password = None
+    else:
+        server_password = signing.loads(s_password)
 
     return render(request, 'setting.html',
                   {'apikey': lod_apikey,
@@ -520,6 +538,9 @@ def setting(request):
                    'jira_server': jira_server,
                    'jira_username': jira_username,
                    'jira_password': jira_password,
+                   'server_ip': server_ip,
+                   'server_username': server_username,
+                   'server_password': server_password,
                    'nv_enabled': nv_enabled,
                    'nv_version': nv_version,
                    'nv_online': nv_online,

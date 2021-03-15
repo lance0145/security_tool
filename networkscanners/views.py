@@ -458,24 +458,24 @@ def server_setting(request):
     """
     username = request.user.username
     all_server_settings = serversetting.objects.filter(username=username)
+    server_ip = ""
+    server_username = ""
+    server_password = ""
     for server in all_server_settings:
-        global ip, user, password
-        ip = server.server_ip
-        user = signing.loads(server.server_username)
-        password = signing.loads(server.server_password)
-    server_ip = ip
-    server_username = user
-    server_password = password
+        # global ip, user, password
+        server_ip = server.server_ip
+        server_username = signing.loads(server.server_username)
+        server_password = signing.loads(server.server_password)
 
     if request.method == 'POST':
-        ip = request.POST.get('server_ip')
+        server_ip = request.POST.get('server_ip')
         server_username = request.POST.get('server_username')
         server_password = request.POST.get('server_password')
 
         user = signing.dumps(server_username)
         password = signing.dumps(server_password)
         save_data = serversetting(username=username,
-                                server_ip=ip,
+                                server_ip=server_ip,
                                 server_username=user,
                                 server_password=password)
         save_data.save()
