@@ -60,7 +60,6 @@ def openvas(request):
         ss = serversetting.objects.filter(username=username).last()
         user_ip = str(signing.loads(ss.server_username)) + "@" + str(ss.server_ip)
         password = str(signing.loads(ss.server_password))
-        print(user_ip, password)
 
         try:
             print('Start OpenVas scan')
@@ -70,7 +69,7 @@ def openvas(request):
                 cmd = 'export jailbreak="yes";openvas ' + str(ip_address)
             #root@10.254.10.45
             subprocess.run(
-                ['sshpass ', '-p', password, 'ssh', '-t', user_ip, cmd, ';exit;/bin/bash']
+                ['sshpass', '-p', password, 'ssh', '-t', user_ip, cmd, ';exit;/bin/bash']
             )
             report = 'Report_for_' + str(ip_address) + ".xml"
             #remote = 'root@10.254.10.45:/root/' + report
