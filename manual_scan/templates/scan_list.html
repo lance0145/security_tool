@@ -13,7 +13,7 @@
                             </a>
                             <button id="myBtn" class="btn btn-warning" title="View Report"><i class="fas fa-clipboard-check"></i></button>
                             <button id="download" class="btn btn-info" title="Download Report"><i class="fas fa-download"></i></button>
-                            <button class="btn btn-debug" title="Print Report"><i class="fas fa-print"></i></button>
+                            <button id="print" class="btn btn-success" title="Print Report"><i class="fas fa-print"></i></button>
                             <button class="btn btn-debug" title="Email Report"><i class="fas fa-envelope"></i></button>
                             <button class="btn btn-debug" title="Delete Selected"><i class="fas fa-trash-alt"></i></button>
                         </div>
@@ -236,6 +236,15 @@
             'elementHandlers': specialElementHandlers
         });
         doc.save('cecuri_report.pdf');
+    });
+
+    $('#print').click(function () {
+        doc.fromHTML($('#myModal').html(), 15, 15, {
+            'width': 170,
+            'elementHandlers': specialElementHandlers
+        });
+        doc.autoPrint();
+        doc.output('dataurlnewwindow');
     });
 
     $("#checkAll").change(function () {
