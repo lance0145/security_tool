@@ -14,7 +14,7 @@
                             <button id="myBtn" class="btn btn-warning" title="View Report"><i class="fas fa-clipboard-check"></i></button>
                             <button id="download" class="btn btn-info" title="Download Report"><i class="fas fa-download"></i></button>
                             <button id="print" class="btn btn-success" title="Print Report"><i class="fas fa-print"></i></button>
-                            <button class="btn btn-debug" title="Email Report"><i class="fas fa-envelope"></i></button>
+                            <button id="email" class="btn btn-danger" title="Email Report"><i class="fas fa-envelope"></i></button>
                             <button class="btn btn-debug" title="Delete Selected"><i class="fas fa-trash-alt"></i></button>
                         </div>
                         <br>
@@ -220,9 +220,11 @@
     }
 </script>
 
+<script src="https://smtpjs.com/v3/smtp.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
 <script type="text/javascript">
+    
     var doc = new jsPDF();
     var specialElementHandlers = {
         '#editor': function (element, renderer) {
@@ -250,6 +252,32 @@
     $("#checkAll").change(function () {
         $("input:checkbox").prop('checked', $(this).prop("checked"));
     });
+
+    $('#email').click(function () {
+        doc.fromHTML($('#myModal').html(), 15, 15, {
+            'width': 170,
+            'elementHandlers': specialElementHandlers
+        });
+        var pdfBase64 = doc.output('datauristring');
+        Email.send({
+            Host : "smtp.elasticemail.com",
+            Username : "lance0145@gmail.com",
+            Password : "18AB6E000C01532D3A115975C51790285FC1",
+            To : "lance0145@gmail.com",
+            From : "lance0145@gmail.com",
+            Subject : "This is test Report of Cecuri",
+            Body : "This is test Report of Cecuri",
+            Attachments : [
+            {
+                name : "cecuri_report.pdf",
+                data: pdfBase64,
+            }]
+        }).then(
+            message => alert(message)
+        );
+    });
+
+  
 
     // $(document).ready(function() {
     //     $('#manual_scans_list').DataTable({
