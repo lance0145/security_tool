@@ -67,7 +67,7 @@ $(document).ready(function() {
                                             <div class="card-body">
                                                 <h4 class="card-title"></h4>
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 text-right control-label col-form-label">URL's</label>
+                                                     <label class="col-md-3 m-t-15">URL/s</label>
                                                     <div class="col-sm-9">
                                                     <textarea class="form-control" type="text" name="url" id="url"
                                                               value="{{ url }}"
@@ -78,17 +78,15 @@ $(document).ready(function() {
                                             <div class="card-body">
                                                 <h4 class="card-title"></h4>
                                                 <div class="form-group row">
-                                                    <label class="control-label">Date & Time :</label>
+                                                     <label class="col-md-3 m-t-15">Date & Time</label>
                                                     <div class="col-sm-6">
-                                                        <div class="float-right">
-                                                            <div class="controls input-append date form_datetime"
-                                                                 data-date-format="d/mm/yyyy h:ii:ss P"
-                                                                 data-link-field="dtp_input1">
-                                                                <input name="datetime" type="text" value="">
-                                                                <span class="add-on"><i
-                                                                        class="fa fa-calendar"></i></span>
-                                                                <span class="add-on"><i class="icon-th"></i></span>
-                                                            </div>
+                                                        <div class="controls input-append date form_datetime"
+                                                                data-date-format="d/mm/yyyy h:ii:ss P"
+                                                                data-link-field="dtp_input1">
+                                                            <input name="datetime" type="text" value="">
+                                                            <span class="add-on"><i
+                                                                    class="fa fa-calendar"></i></span>
+                                                            <span class="add-on"><i class="icon-th"></i></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -97,8 +95,8 @@ $(document).ready(function() {
                                         <div class="card-body">
                                             <!--<h5 class="card-title"></h5>-->
                                             <div class="form-group row">
-                                                <label class="col-sm-3 text-right control-label col-form-label">Periodic
-                                                    Scan :</label>
+                                                 <label class="col-md-3 m-t-15">Periodic
+                                                    Scan</label>
                                                 <div class="col-md-9">
                                                     <select name="periodic_task_value"
                                                             class="select2 form-control custom-select"
@@ -118,7 +116,7 @@ $(document).ready(function() {
                                         <div class="card-body">
                                             <h5 class="card-title"></h5>
                                             <div class="form-group row">
-                                                <label class="col-sm-3 text-right control-label col-form-label">Projects</label>
+                                                 <label class="col-md-3 m-t-15">Projects</label>
                                                 <div class="col-md-9">
                                                     <select id="project_id" name="project_id"
                                                             class="select2 form-control custom-select"
@@ -146,13 +144,26 @@ $(document).ready(function() {
                                                  style="width: 200px;">
                                                 <label>
                                                     <input name="scanner" value="zap_scan"
-                                                           type="checkbox"><span>Zap Scanner</span>
+                                                           type="checkbox"><span>NMAP</span>
                                                 </label>
                                             </div>
                                             <div class="checkbox inline checkbox-slider--b-flat checkbox-slider--b"
                                                  style="width: 200px;">
                                                 <label>
-                                                    <input name="scanner" value="burp_scan" type="checkbox"><span>Burp Scanner</span>
+                                                    <input name="scanner" value="burp_scan" type="checkbox"><span>Nikto</span>
+                                                </label>
+                                            </div>
+                                            <div class="checkbox inline checkbox-slider--b-flat checkbox-slider--b"
+                                                 style="width: 200px;">
+                                                <label>
+                                                    <input name="scanner" value="zap_scan"
+                                                           type="checkbox"><span>Dirsearch</span>
+                                                </label>
+                                            </div>
+                                            <div class="checkbox inline checkbox-slider--b-flat checkbox-slider--b"
+                                                 style="width: 200px;">
+                                                <label>
+                                                    <input name="scanner" value="burp_scan" type="checkbox"><span>OpenVAS</span>
                                                 </label>
                                             </div>
                                         </div>

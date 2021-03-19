@@ -77,6 +77,24 @@ def list_scan(request):
                    'all_scans': all_scans}
                   )
 
+def list_scan_auto(request):
+    username = request.user.username
+    if request.method == 'POST':
+        project_id = request.POST.get('proj_id', )
+        all_scans = manual_scans_db.objects.filter(username=username, project_id=project_id)
+        proj_name = project_db.objects.filter(username=username, project_id=project_id)
+    else:
+        all_scans = manual_scans_db.objects.filter(username=username)
+        proj_name = project_db.objects.filter(username=username)
+    all_projects = project_db.objects.filter(username=username)
+
+    return render(request,
+                  'list_scan_auto.html',
+                  {'all_projects': all_projects,
+                   'proj_name': proj_name[0].project_name,
+                   'all_scans': all_scans}
+                  )
+
 def add_list_scan(request):
     username = request.user.username
     all_projects = project_db.objects.filter(username=username)
