@@ -442,6 +442,8 @@ def nikto_result_vul(request):
     username = request.user.username
     if request.method == 'GET':
         scan_id = request.GET['scan_id']
+        # scan_url = request.GET.get('scan_url',)
+        # print(scan_url)
 
     if request.method == "POST":
         false_positive = request.POST.get('false')
@@ -482,7 +484,8 @@ def nikto_result_vul(request):
                   {'scan_result': scan_result,
                    'vuln_data': vuln_data,
                    'vuln_data_close': vuln_data_close,
-                   'false_data': false_data
+                   'false_data': false_data,
+                #    'scan_url': scan_url
                    }
                   )
 

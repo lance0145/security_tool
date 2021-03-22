@@ -8,7 +8,7 @@
         $("input:checkbox").prop('checked', $(this).prop("checked"));
     });
     $(document).ready(function() {
-        $("button").click(function(){
+        $("#delete").click(function(){
             var scan_id = ['a7af5b68-b661-45ad-90fd-ffa27526cdce'];
             $.each($("input[name='del_vuln_id']:checked"), function(){
                 scan_id.push($(this).val());
@@ -17,7 +17,7 @@
             var json_scanid = scan_id.join(", ");
             $.ajax({
                 type:'POST',
-                <!--contentType: 'application/json; charset=utf-8',-->
+                // contentType: 'application/json; charset=utf-8',
                 url:'/tools/nikto_vuln_del/',
                 data:{
                    del_vuln: json_scanid,
@@ -45,8 +45,16 @@ $(document).on('click', '.confirm-delete', function(){
                 <div class="card">
                     <div class="card-body">
                         <div class="float-right">
-                            <button type="button" class="btn btn-danger btn-mini" onclick="">Delete Selected</button>
+                            <a href="{% url 'networkscanners:OpenVAS_xml_upload' %}">
+                                <button class="btn btn-dark" title="Upload XML"><i class="fas fa-upload"></i></button>
+                            </a>
+                            <button id="view" class="btn btn-warning" title="View Report"><i class="fas fa-clipboard-check"></i></button>
+                            <button id="download" class="btn btn-info" title="Download Report"><i class="fas fa-download"></i></button>
+                            <button id="print" class="btn btn-success" title="Print Report"><i class="fas fa-print"></i></button>
+                            <button id="email" class="btn btn-primary" title="Email Report"><i class="fas fa-envelope"></i></button>
+                            <button id="delete" class="btn btn-danger" title="Delete Selected"><i class="fas fa-trash-alt"></i></button>
                         </div>
+                        <br>
                         <br>
                         <div class="d-md-flex align-items-center">
                             <h5 class="card-title">Scan List</h5>
@@ -93,7 +101,7 @@ $(document).on('click', '.confirm-delete', function(){
                                             <input type="hidden" name="false" value="Yes">
                                             <input type="hidden" name="status" value="{{data.vuln_status}}">
                                             <input type="hidden" name="scan_id" value="{{data.scan_id}}">
-                                            <button class="btn btn-info btn-mini">Yes</button>
+                                            <button class="btn btn-success btn-mini">Yes</button>
                                         </form>
                                     </td>
                                     <td>
@@ -102,7 +110,7 @@ $(document).on('click', '.confirm-delete', function(){
                                                 {% csrf_token %}
                                                 <input type="hidden" name="del_vuln" value="{{data.vuln_id}}">
                                                 <input type="hidden" name="scan_id" value="{{data.scan_id}}">
-                                                <button class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                                <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                             </form>
                                         </div>
                                     </td>
@@ -112,7 +120,7 @@ $(document).on('click', '.confirm-delete', function(){
                                             <input type="hidden" name="false" value="No">
                                             <input type="hidden" name="status" value="Closed">
                                             <input type="hidden" name="scan_id" value="{{data.scan_id}}">
-                                            <button class="btn btn-danger btn-mini">Close</button>
+                                            <button class="btn btn-info btn-mini">Close</button>
                                         </form>
                                     </td>
                                     </tr>

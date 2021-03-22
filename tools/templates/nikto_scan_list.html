@@ -10,7 +10,7 @@
         $("input:checkbox").prop('checked', $(this).prop("checked"));
     });
     $(document).ready(function() {
-        $("button").click(function(){
+        $("#delete").click(function(){
             var scan_id = ['a7af5b68-b661-45ad-90fd-ffa27526cdce'];
             $.each($("input[name='del_scan_id']:checked"), function(){
                 scan_id.push($(this).val());
@@ -50,7 +50,14 @@ $(document).on('click', '.confirm-delete', function(){
                 <div class="card">
                     <div class="card-body">
                         <div class="float-right">
-                            <button type="button" class="btn btn-danger btn-mini" onclick="">Delete Selected</button>
+                            <a href="{% url 'networkscanners:OpenVAS_xml_upload' %}">
+                                <button class="btn btn-dark" title="Upload XML"><i class="fas fa-upload"></i></button>
+                            </a>
+                            <button id="view" class="btn btn-warning" title="View Report"><i class="fas fa-clipboard-check"></i></button>
+                            <button id="download" class="btn btn-info" title="Download Report"><i class="fas fa-download"></i></button>
+                            <button id="print" class="btn btn-success" title="Print Report"><i class="fas fa-print"></i></button>
+                            <button id="email" class="btn btn-primary" title="Email Report"><i class="fas fa-envelope"></i></button>
+                            <button id="delete" class="btn btn-danger" title="Delete Selected"><i class="fas fa-trash-alt"></i></button>
                         </div>
                         <br>
                         <br>
@@ -85,7 +92,7 @@ $(document).on('click', '.confirm-delete', function(){
                                                 </label>
                                             </form>
                                         </td>
-                                        <td><a href="/tools/nikto_result_vul/?scan_id={{data.scan_id}}">
+                                        <td><a href="/tools/nikto_result_vul/?scan_id={{data.scan_id}}&scan_url={{data.scan_url}}">
                                             {{ data.scan_url}}</a>
                                         </td>
                                         <td>{{data.date_time}}</td>

@@ -9,14 +9,14 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="float-right">
-                            <div class="btn-group"><a href="{% url 'manual_scan:add_list_scan' %}"
-                                                      class="btn btn-primary btn-mini"><i
-                                    class="icon-plus icon-white"></i> Add</a>
-                            </div>
-                            <button class="btn btn-debug"><i class="fas fa-download"></i></button>
-                            <button class="btn btn-debug"><i class="fas fa-print"></i></button>
-                            <button class="btn btn-debug"><i class="fas fa-envelope"></i></button>
-                            <button type="button" class="btn btn-danger btn-mini" onclick="">Delete Selected</button>
+                            <a href="{% url 'manual_scan:add_list_scan' %}">
+                                <button class="btn btn-dark" title="Add Scan"><i class="fas fa-plus"></i></button>
+                            </a>
+                            <button id="view" class="btn btn-warning" title="View Report"><i class="fas fa-clipboard-check"></i></button>
+                            <button id="download" class="btn btn-info" title="Download Report"><i class="fas fa-download"></i></button>
+                            <button id="print" class="btn btn-success" title="Print Report"><i class="fas fa-print"></i></button>
+                            <button id="email" class="btn btn-primary" title="Email Report"><i class="fas fa-envelope"></i></button>
+                            <button id="delete" class="btn btn-danger" title="Delete Selected"><i class="fas fa-trash-alt"></i></button>
                         </div>
                         <br>
                         <br>
