@@ -25,6 +25,45 @@
                             <h1>{{ip}} Scan List</h1>
                         </div>
                         <br>
+                        <div id="myModal" class="modal">
+                            <!-- Modal content -->
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <h1 style="color: red">CECURI<h1><h2> Security Auditing</h2>
+                                <h3>Key Accountants Risk Review</h3>                                
+                                <h4>{{ip}} Scan List</h4>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <table class="table table-bordered data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Ip</th>
+                                            <th>Port</th>
+                                            <th>State</th>
+                                            <th>Version</th>
+                                            <th>Service</th>
+                                            <th>OS Family</th>
+                                            <th>OS Gen</th>
+                                            <th>Cpe</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>{% for data in all_nmap %}
+                                        <tr data-target="#">
+                                            <td>{{ data.ip_address }}</td>
+                                            <td>{{data.port}}</td>
+                                            <td>{{data.state}}</td>
+                                            <td>{{data.version}}</td>
+                                            <td>{{data.name}}</td>
+                                            <td>{{data.osfamily}}</td>
+                                            <td>{{data.osgen}}</td>
+                                            <td>{{data.cpe}}</td>
+                                        </tr>
+                                    </tbody>{% endfor %}
+                                </table>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="table-responsive">
                                 <table id="manual_scans_list" class="table table-bordered data-table table-fixed">
@@ -47,15 +86,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>{% for data in all_nmap %}
-                                    <tr data-target="#">                                       
-                                        <!-- <td>
-                                            <form>
-                                                <label><input type="checkbox" value="{{data.scan_id}}" name="del_scan_id"
-                                                              onClick="reload">
-        
-                                                </label>
-                                            </form>
-                                        </td> -->
+                                    <tr data-target="#">
                                         <td>
                                             <form>
                                                 <label class="customcheckbox">
@@ -96,8 +127,133 @@
         </div>
     </div>
 </div>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    
+    /* Modal Content */
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+    
+    /* The Close Button */
+    .close {
+      color: #0a0000;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+</style>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    
+    // Get the button that opens the modal
+    var btn = document.getElementById("view");
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+      modal.style.display = "block";
+      document.getElementsByClassName("mdi mdi-menu font-24")[0].click();
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+      document.getElementsByClassName("mdi mdi-menu font-24")[0].click();
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+        document.getElementsByClassName("mdi mdi-menu font-24")[0].click();
+      }
+    }
+</script>
+
+<script src="https://smtpjs.com/v3/smtp.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
 <script type="text/javascript">
+    
+    var doc = new jsPDF();
+    var specialElementHandlers = {
+        '#editor': function (element, renderer) {
+            return true;
+        }
+    };
+
+    $('#download').click(function () {
+        doc.fromHTML($('#myModal').html(), 15, 15, {
+            'width': 170,
+            'elementHandlers': specialElementHandlers
+        });
+        doc.save('cecuri_report.pdf');
+    });
+
+    $('#print').click(function () {
+        doc.fromHTML($('#myModal').html(), 15, 15, {
+            'width': 170,
+            'elementHandlers': specialElementHandlers
+        });
+        doc.autoPrint();
+        doc.output('dataurlnewwindow');
+    });
+
+    $('#email').click(function () {
+        doc.fromHTML($('#myModal').html(), 15, 15, {
+            'width': 170,
+            'elementHandlers': specialElementHandlers
+        });
+        var pdfBase64 = doc.output('datauristring');
+        Email.send({
+            Host : "smtp.elasticemail.com",
+            Username : "lance0145@gmail.com",
+            Password : "18AB6E000C01532D3A115975C51790285FC1",
+            To : "lance0145@gmail.com",
+            From : "lance0145@gmail.com",
+            Subject : "This is test Report of Cecuri",
+            Body : "This is test Report of Cecuri",
+            Attachments : [
+            {
+                name : "cecuri_report.pdf",
+                data: pdfBase64,
+            }]
+        }).then(
+            message => alert(message)
+        );
+    });
 
     $("#checkAll").change(function () {
         $("input:checkbox").prop('checked', $(this).prop("checked"));
