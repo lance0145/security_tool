@@ -94,11 +94,29 @@ def index(request):
     :param request:
     :return:
     """
-    all_ip = openvas_scan_db.objects.filter(username=username)
+    # all_ip = openvas_scan_db.objects.filter(username=username)
 
-    all_notify = Notification.objects.unread()
+    # all_notify = Notification.objects.unread()
 
-    return render(request, 'openvas_scan.html', {'all_ip': all_ip, 'message': all_notify})
+    # return render(request, 'openvas_scan.html', {'all_ip': all_ip, 'message': all_notify})
+
+    username = request.user.username
+    if request.method == 'POST':
+        project_id = request.POST.get('proj_id', )
+        all_ip = openvas_scan_db.objects.filter(username=username, project_id=project_id)
+        proj_name = project_db.objects.filter(username=username, project_id=project_id) 
+    else:
+        all_ip = openvas_scan_db.objects.filter(username=username)
+        proj_name = project_db.objects.filter(username=username)
+    all_projects = project_db.objects.filter(username=username)
+
+    return render(request,
+                  'openvas_scan.html',
+                  {'all_ip': all_ip,
+                  'proj_name': proj_name[0].project_name,
+                  'all_projects': all_projects,}
+                  )
+
 
 
 def scan_status(request):

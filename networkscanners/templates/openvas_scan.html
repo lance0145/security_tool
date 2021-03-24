@@ -120,6 +120,20 @@
                                 </table>
                             </div>
                         </div>
+                        <form class="form-horizontal" method="POST" action="{% url 'networkscanners:index' %}">
+                        {% csrf_token %}
+                            <label class="col-sm-4 col-form-label">Projects</label>
+                            <div class="col-sm-6">
+                                <select name="proj_id" onChange="form.submit();" class="select2 form-control custom-select"
+                                        style="width: 50%; height:36px;" >
+                                        <option value="" disabled selected>{{proj_name}}</option>
+                                    {% for data in all_projects %}
+                                        <option value="{{data.project_id}}">{{data.project_name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </form>
+                        <br>
                         <div class="row">
                             <div class="table-responsive">
 

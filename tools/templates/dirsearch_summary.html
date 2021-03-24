@@ -55,7 +55,7 @@
                                 </table>
                             </div>
                         </div>                        
-                        <form class="form-horizontal" method="POST" action="{% url 'manual_scan:scan_list' %}">
+                        <form class="form-horizontal" method="POST" action="{% url 'tools:dirsearch' %}">
                         {% csrf_token %}
                             <label class="col-sm-4 col-form-label">Projects</label>
                             <div class="col-sm-6">

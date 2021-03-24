@@ -71,7 +71,7 @@ $(document).on('click', '.confirm-delete', function(){
                                 <span class="close">&times;</span>
                                 <h1 style="color: red">CECURI<h1><h2> Security Auditing</h2>
                                 <h3>Key Accountants Risk Review</h3>                                
-                                <h4>Manual Scan Summary</h4>
+                                <h4>Nikto Scan Summary</h4>
                                 <br>
                                 <br>
                                 <br>
@@ -95,6 +95,20 @@ $(document).on('click', '.confirm-delete', function(){
                                 </table>
                             </div>
                         </div>
+                        <form class="form-horizontal" method="POST" action="{% url 'tools:nikto_result' %}">
+                        {% csrf_token %}
+                            <label class="col-sm-4 col-form-label">Projects</label>
+                            <div class="col-sm-6">
+                                <select name="proj_id" onChange="form.submit();" class="select2 form-control custom-select"
+                                        style="width: 50%; height:36px;" >
+                                        <option value="" disabled selected>{{proj_name}}</option>
+                                    {% for data in all_projects %}
+                                        <option value="{{data.project_id}}">{{data.project_name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </form>
+                        <br>
                         <div class="row">
                             <div class="table-responsive">
                                 <table id="nikto_scan_list" class="table table-bordered data-table">

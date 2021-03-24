@@ -34,6 +34,7 @@ from datetime import datetime
 from notifications.signals import notify
 from django.urls import reverse
 from django.core import signing
+from projects.models import project_db, client_db
 
 # NOTE[gmedian]: in order to be more portable we just import everything rather than add anything in this very script
 from tools.nmap_vulners.nmap_vulners_view import nmap_vulners, nmap_vulners_port, nmap_vulners_scan
@@ -120,15 +121,25 @@ def openvas(request):
                   )
 
 def openvas_summary(request):
-
+    """
+    :param request:
+    :return:
+    """
     username = request.user.username
-    if request.method == 'GET':
-        # scan_id = request.GET['scan_id']
-        all_openvas = openvas_scan_db.objects.filter(username=username)#, scan_id=scan_id)
+    if request.method == 'POST':
+        project_id = request.POST.get('proj_id', )
+        all_openvas = openvas_scan_db.objects.filter(username=username, project_id=project_id)
+        proj_name = project_db.objects.filter(username=username, project_id=project_id) 
+    else:
+        all_openvas = openvas_scan_db.objects.filter(username=username)
+        proj_name = project_db.objects.filter(username=username)
+    all_projects = project_db.objects.filter(username=username)
 
     return render(request,
                   'openvas_summary.html',
-                  {'all_openvas': all_openvas}
+                  {'all_openvas': all_openvas,
+                  'proj_name': proj_name[0].project_name,
+                  'all_projects': all_projects,}
                   )
 
 def dirsearch(request):
@@ -213,15 +224,26 @@ def dirsearch(request):
                   )
 
 def dirsearch_summary(request):
-
+    """
+    :param request:
+    :return:
+    """
+    # TODO check further this why it is directing here rather than dirseach_summary
     username = request.user.username
-    if request.method == 'GET':
-        # scan_id = request.GET['scan_id']
-        all_dirs = dirsearch_scan_db.objects.filter(username=username)#, scan_id=scan_id)
+    if request.method == 'POST':
+        project_id = request.POST.get('proj_id', )
+        all_dirs = dirsearch_scan_db.objects.filter(username=username, project_id=project_id)
+        proj_name = project_db.objects.filter(username=username, project_id=project_id) 
+    else:
+        all_dirs = dirsearch_scan_db.objects.filter(username=username)
+        proj_name = project_db.objects.filter(username=username)
+    all_projects = project_db.objects.filter(username=username)
 
     return render(request,
                   'dirsearch_summary.html',
-                  {'all_dirs': all_dirs}
+                  {'all_dirs': all_dirs,
+                  'proj_name': proj_name[0].project_name,
+                  'all_projects': all_projects,}
                   )
 
 def dirsearch_list(request):
@@ -415,7 +437,6 @@ def nikto(request):
 
                   )
 
-
 def nikto_result(request):
     """
 
@@ -423,13 +444,20 @@ def nikto_result(request):
     :return:
     """
     username = request.user.username
-    if request.method == 'GET':
-        # scan_id = request.GET['scan_id']
-        all_nikto = nikto_result_db.objects.filter(username=username)#, scan_id=scan_id)
+    if request.method == 'POST':
+        project_id = request.POST.get('proj_id', )
+        all_nikto = nikto_result_db.objects.filter(username=username, project_id=project_id)
+        proj_name = project_db.objects.filter(username=username, project_id=project_id) 
+    else:
+        all_nikto = nikto_result_db.objects.filter(username=username)
+        proj_name = project_db.objects.filter(username=username)
+    all_projects = project_db.objects.filter(username=username)
 
     return render(request,
                   'nikto_scan_list.html',
-                  {'all_nikto': all_nikto}
+                  {'all_nikto': all_nikto,
+                  'proj_name': proj_name[0].project_name,
+                  'all_projects': all_projects,}
                   )
 
 
