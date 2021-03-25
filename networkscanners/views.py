@@ -318,7 +318,6 @@ def scan_del(request):
 
     if request.method == 'POST':
         scan_id = request.POST.get('scan_id')
-        print("dumaan d2")
         # scan_item = str(scan_id)
         # value = scan_item.replace(" ", "")
         # value_split = value.split(',')
