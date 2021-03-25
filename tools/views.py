@@ -195,7 +195,7 @@ def dirsearch(request):
                 parse_ds(username, project_id, scan_id, ip_address)
 
             else:
-                subprocess.check_output(
+                subprocess.run(
                     ['python3', '/opt/dirsearch/dirsearch.py', '-u', ip_address, '-e', 'html,php,txt', '-x', '400,403,404,503', '-w', 'ds_wordlist.txt', '--csv-report=dirsearch.csv']
                 )
                 parse_ds(username, project_id, scan_id, ip_address)
