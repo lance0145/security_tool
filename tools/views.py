@@ -142,7 +142,7 @@ def openvas_summary(request):
                   'all_projects': all_projects,}
                   )
 
-def dirsearch(request):
+def dirsearch_scan(request):
     def parse_ds(username, project_id, scan_id, ip_address):
         date_time = datetime.now()
         with open('dirsearch.csv', 'r', encoding='utf-8') as csv_file:
@@ -228,6 +228,7 @@ def dirsearch_summary(request):
     :param request:
     :return:
     """
+    print("************************************************************")
     # TODO check further this why it is directing here rather than dirseach_summary
     username = request.user.username
     if request.method == 'POST':
@@ -238,6 +239,7 @@ def dirsearch_summary(request):
         all_dirs = dirsearch_scan_db.objects.filter(username=username)
         proj_name = project_db.objects.filter(username=username)
     all_projects = project_db.objects.filter(username=username)
+    print(len(all_projects))
 
     return render(request,
                   'dirsearch_summary.html',
@@ -256,6 +258,20 @@ def dirsearch_list(request):
                   {'all_dirs': all_dirs,
                    'ip': ip_address}
                   )
+
+def dirsearch_del(request):
+    """
+
+    :param request:
+    :return:
+    """
+    username = request.user.username
+    if request.method == 'POST':
+        scan_id = request.POST.get('scan_id')
+        del_scan = dirsearch_scan_db.objects.filter(username=username, scan_id=scan_id)
+        del_scan.delete()
+
+    return HttpResponseRedirect('/tools/dirsearch_summary/')
 
 def sslscan(request):
     """

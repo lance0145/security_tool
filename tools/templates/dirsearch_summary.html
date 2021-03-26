@@ -55,7 +55,7 @@
                                 </table>
                             </div>
                         </div>                        
-                        <form class="form-horizontal" method="POST" action="{% url 'tools:dirsearch' %}">
+                        <form class="form-horizontal" method="POST" action="{% url 'tools:dirsearch_summary' %}">
                         {% csrf_token %}
                             <label class="col-sm-4 col-form-label">Projects</label>
                             <div class="col-sm-6">
@@ -83,6 +83,7 @@
                                         <th>Ip</th>
                                         <th>Date</th>
                                         <th>Total DIR</th>
+                                        <th>Delete</th>
                                     </tr>
                                     </thead>
                                     <tbody>{% for data in all_dirs %}
@@ -99,21 +100,16 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <a href="/tools/dirsearch/?ip={{data.ip_address}}">{{data.ip_address}}</a>
+                                            <a href="/tools/dirsearch_list/?ip={{data.ip_address}}">{{data.ip_address}}</a>
                                         </td>
                                         <td>{{data.date_time}}</td>
                                         <td>{{data.total_dirs}}</td>
                                         <td class="confirm-delete">
-                                            <form action="/tools/nmap_scan_del/" method="post" class="forms-sample">
-                                                <input type="hidden" name="scn_id" value="{{data.scan_id}}"/>{% csrf_token %}
-                                                <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                            <form action="/tools/dirsearch_del/" method="post" class="forms-sample">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="scan_id" value="{{data.scan_id}}"/>
+                                                <button class="btn btn-danger btn-mini"><i class="fas fa-trash"></i></button>
                                             </form>
-
-                                            <!-- <form action="/projects/" method="POST">
-                                                <input type="hidden" name="proj_id" value="{{data.project_id}}"/>{% csrf_token %}
-                                                <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                            </form> -->
-
                                         </td>
                                         {% endfor %}
                                     </tr>
