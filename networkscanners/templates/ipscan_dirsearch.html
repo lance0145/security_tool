@@ -98,7 +98,7 @@
             }, 1000);
             $.ajax({
                 type: 'POST',
-                url: '{% url "tools:dirsearch" %}',
+                url: '{% url "tools:dirsearch_scan" %}',
                 data: {
                     ip: $('#ip').val(),
                     project_id: $('#project_id').val(),
