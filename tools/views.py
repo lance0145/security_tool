@@ -205,7 +205,7 @@ def dirsearch_scan(request):
         except Exception as e:
             print('Error in dirsearch scan:', e)
 
-        return HttpResponseRedirect('/tools/dirsearch/')
+        return HttpResponseRedirect('/tools/dirsearch_scan/')
 
     if request.method == 'GET' and ip_address:        
         all_dirs = dirsearch_result_db.objects.filter(username=username, ip_address=ip_address)
@@ -228,7 +228,6 @@ def dirsearch_summary(request):
     :param request:
     :return:
     """
-    print("************************************************************")
     # TODO check further this why it is directing here rather than dirseach_summary
     username = request.user.username
     if request.method == 'POST':
@@ -239,7 +238,6 @@ def dirsearch_summary(request):
         all_dirs = dirsearch_scan_db.objects.filter(username=username)
         proj_name = project_db.objects.filter(username=username)
     all_projects = project_db.objects.filter(username=username)
-    print(len(all_projects))
 
     return render(request,
                   'dirsearch_summary.html',
@@ -250,9 +248,8 @@ def dirsearch_summary(request):
 
 def dirsearch_list(request):
     username = request.user.username
-    ip_address = request.POST.get('ip', )
+    ip_address = request.GET.get('ip', )
     all_dirs = dirsearch_result_db.objects.filter(username=username, ip_address=ip_address)
-
     return render(request,
                   'dirsearch_list.html',
                   {'all_dirs': all_dirs,
