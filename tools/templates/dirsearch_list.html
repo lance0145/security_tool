@@ -76,19 +76,11 @@
                                         <th>Status</th>
                                         <th>Size</th>
                                         <th>Redirection</th>
-                                        <th>Delete</th> 
+                                        <!-- <th>Delete</th>  -->
                                     </tr>
                                     </thead>
                                     <tbody>{% for data in all_dirs %}
                                     <tr data-target="#">                                       
-                                        <!-- <td>
-                                            <form>
-                                                <label><input type="checkbox" value="{{data.scan_id}}" name="del_scan_id"
-                                                              onClick="reload">
-        
-                                                </label>
-                                            </form>
-                                        </td> -->
                                         <td>
                                             <form>
                                                 <label class="customcheckbox">
@@ -106,14 +98,13 @@
                                         <td>{{data.status}}</td>
                                         <td>{{data.size}}</td>
                                         <td>{{data.redirection}}</td>
-                                        <td class="confirm-delete">
-                                            <form action="/tools/nmap_del/" method="post" class="forms-sample">
-        
+                                        <!-- <td class="confirm-delete">
+                                            <form action="/tools/dirsearch_delete/" method="post" class="forms-sample">
                                                 {% csrf_token %}
                                                 <input type="hidden" name="id" value="{{data.id}}"/>
-                                                <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                                <button class="btn btn-danger btn-mini"><i class="fas fa-trash"></i></button>
                                             </form>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                     {% endfor %}
                                     </tbody>

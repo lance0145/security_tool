@@ -207,14 +207,14 @@ def dirsearch_scan(request):
 
         return HttpResponseRedirect('/tools/dirsearch_scan/')
 
-    if request.method == 'GET' and ip_address:        
-        all_dirs = dirsearch_result_db.objects.filter(username=username, ip_address=ip_address)
+    # if request.method == 'GET' and ip_address:        
+    #     all_dirs = dirsearch_result_db.objects.filter(username=username, ip_address=ip_address)
 
-        return render(request,
-                    'dirsearch_list.html',
-                    {'all_dirs': all_dirs,
-                    'ip': ip_address}
-                    )
+    #     return render(request,
+    #                 'dirsearch_list.html',
+    #                 {'all_dirs': all_dirs,
+    #                 'ip': ip_address}
+    #                 )
 
     return render(request,
                   'dirsearch_summary.html',
@@ -269,6 +269,22 @@ def dirsearch_del(request):
         del_scan.delete()
 
     return HttpResponseRedirect('/tools/dirsearch_summary/')
+
+def dirsearch_delete(request):
+    """
+
+    :param request:
+    :return:
+    """
+    username = request.user.username
+    if request.method == 'POST':
+        id = request.POST.get('id')
+        del_scan = dirsearch_result_db.objects.filter(username=username, id=id)
+        ip = del_scan[0].ip_address
+        del_scan.delete()
+
+    return HttpResponseRedirect("/tools/dirsearch_list/?ip=%s" % ip)
+
 
 def sslscan(request):
     """
