@@ -195,7 +195,7 @@ def dirsearch_scan(request):
                 parse_ds(username, project_id, scan_id, ip_address)
 
             else:
-                subprocess.run(
+                subprocess.Popen(
                     ['python3', '/opt/dirsearch/dirsearch.py', '-u', ip_address, '-e', 'html,php,txt', '-x', '400,403,404,503', '-w', 'ds_wordlist.txt', '--csv-report=dirsearch.csv']
                 )
                 parse_ds(username, project_id, scan_id, ip_address)
@@ -206,15 +206,6 @@ def dirsearch_scan(request):
             print('Error in dirsearch scan:', e)
 
         return HttpResponseRedirect('/tools/dirsearch_scan/')
-
-    # if request.method == 'GET' and ip_address:        
-    #     all_dirs = dirsearch_result_db.objects.filter(username=username, ip_address=ip_address)
-
-    #     return render(request,
-    #                 'dirsearch_list.html',
-    #                 {'all_dirs': all_dirs,
-    #                 'ip': ip_address}
-    #                 )
 
     return render(request,
                   'dirsearch_summary.html',

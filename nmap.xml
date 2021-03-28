@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE nmaprun>
 <?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
-<!-- Nmap 7.91 scan initiated Tue Mar 23 13:29:19 2021 as: nmap -v -sV -Pn -p 1-65535 -oX nmap.xml 10.254.10.13 -->
-<nmaprun scanner="nmap" args="nmap -v -sV -Pn -p 1-65535 -oX nmap.xml 10.254.10.13" start="1616506159" startstr="Tue Mar 23 13:29:19 2021" version="7.91" xmloutputversion="1.05">
+<!-- Nmap 7.91 scan initiated Fri Mar 26 08:54:53 2021 as: nmap -v -sV -Pn -p 1-65535 -oX nmap.xml 10.254.10.12 -->
+<nmaprun scanner="nmap" args="nmap -v -sV -Pn -p 1-65535 -oX nmap.xml 10.254.10.12" start="1616748893" startstr="Fri Mar 26 08:54:53 2021" version="7.91" xmloutputversion="1.05">
 <scaninfo type="syn" protocol="tcp" numservices="65535" services="1-65535"/>
 <verbose level="1"/>
 <debugging level="0"/>
-<taskbegin task="Parallel DNS resolution of 1 host." time="1616506159"/>
-<taskend task="Parallel DNS resolution of 1 host." time="1616506160"/>
-<taskbegin task="SYN Stealth Scan" time="1616506160"/>
-<taskprogress task="SYN Stealth Scan" time="1616506191" percent="14.06" remaining="190" etc="1616506381"/>
-<taskprogress task="SYN Stealth Scan" time="1616506221" percent="16.85" remaining="302" etc="1616506522"/>
-<taskprogress task="SYN Stealth Scan" time="1616506251" percent="19.17" remaining="384" etc="1616506635"/>
-<taskprogress task="SYN Stealth Scan" time="1616506281" percent="21.72" remaining="437" etc="1616506717"/>
-<taskprogress task="SYN Stealth Scan" time="1616506311" percent="23.96" remaining="480" etc="1616506790"/>
-<taskprogress task="SYN Stealth Scan" time="1616506347" percent="26.73" remaining="513" etc="1616506860"/>
-<taskprogress task="SYN Stealth Scan" time="1616506647" percent="50.61" remaining="476" etc="1616507122"/>
-<taskprogress task="SYN Stealth Scan" time="1616506749" percent="58.00" remaining="427" etc="1616507176"/>
-<taskprogress task="SYN Stealth Scan" time="1616506830" percent="64.10" remaining="376" etc="1616507205"/>
-<taskprogress task="SYN Stealth Scan" time="1616506905" percent="69.77" remaining="323" etc="1616507228"/>
-<taskprogress task="SYN Stealth Scan" time="1616506974" percent="75.22" remaining="269" etc="1616507242"/>
-<taskprogress task="SYN Stealth Scan" time="1616507046" percent="80.62" remaining="213" etc="1616507259"/>
-<taskprogress task="SYN Stealth Scan" time="1616507124" percent="85.96" remaining="158" etc="1616507281"/>
-<taskprogress task="SYN Stealth Scan" time="1616507205" percent="91.31" remaining="100" etc="1616507304"/>
-<taskprogress task="SYN Stealth Scan" time="1616507274" percent="96.55" remaining="40" etc="1616507314"/>
-<taskend task="SYN Stealth Scan" time="1616507306" extrainfo="65535 total ports"/>
-<taskbegin task="Service scan" time="1616507307"/>
-<taskend task="Service scan" time="1616507320" extrainfo="6 services on 1 host"/>
-<taskbegin task="NSE" time="1616507320"/>
-<taskend task="NSE" time="1616507322"/>
-<taskbegin task="NSE" time="1616507322"/>
-<taskend task="NSE" time="1616507324"/>
-<host starttime="1616506160" endtime="1616507324"><status state="up" reason="user-set" reason_ttl="0"/>
-<address addr="10.254.10.13" addrtype="ipv4"/>
+<taskbegin task="Parallel DNS resolution of 1 host." time="1616748893"/>
+<taskend task="Parallel DNS resolution of 1 host." time="1616748894"/>
+<taskbegin task="SYN Stealth Scan" time="1616748895"/>
+<taskprogress task="SYN Stealth Scan" time="1616748926" percent="11.60" remaining="237" etc="1616749162"/>
+<taskprogress task="SYN Stealth Scan" time="1616748956" percent="13.71" remaining="384" etc="1616749340"/>
+<taskprogress task="SYN Stealth Scan" time="1616748986" percent="18.04" remaining="414" etc="1616749400"/>
+<taskprogress task="SYN Stealth Scan" time="1616749016" percent="21.50" remaining="442" etc="1616749458"/>
+<taskprogress task="SYN Stealth Scan" time="1616749085" percent="28.72" remaining="472" etc="1616749557"/>
+<taskprogress task="SYN Stealth Scan" time="1616749124" percent="31.19" remaining="506" etc="1616749629"/>
+<taskprogress task="SYN Stealth Scan" time="1616749154" percent="35.93" remaining="462" etc="1616749616"/>
+<taskprogress task="SYN Stealth Scan" time="1616749436" percent="56.02" remaining="425" etc="1616749861"/>
+<taskprogress task="SYN Stealth Scan" time="1616749550" percent="63.50" remaining="377" etc="1616749926"/>
+<taskprogress task="SYN Stealth Scan" time="1616749658" percent="70.28" remaining="323" etc="1616749981"/>
+<taskprogress task="SYN Stealth Scan" time="1616749739" percent="75.96" remaining="268" etc="1616750006"/>
+<taskprogress task="SYN Stealth Scan" time="1616749829" percent="81.76" remaining="209" etc="1616750037"/>
+<taskprogress task="SYN Stealth Scan" time="1616749913" percent="87.14" remaining="151" etc="1616750063"/>
+<taskprogress task="SYN Stealth Scan" time="1616750000" percent="92.51" remaining="90" etc="1616750089"/>
+<taskend task="SYN Stealth Scan" time="1616750116" extrainfo="65535 total ports"/>
+<taskbegin task="Service scan" time="1616750116"/>
+<taskend task="Service scan" time="1616750130" extrainfo="7 services on 1 host"/>
+<taskbegin task="NSE" time="1616750130"/>
+<taskend task="NSE" time="1616750134"/>
+<taskbegin task="NSE" time="1616750134"/>
+<taskend task="NSE" time="1616750136"/>
+<host starttime="1616748895" endtime="1616750136"><status state="up" reason="user-set" reason_ttl="0"/>
+<address addr="10.254.10.12" addrtype="ipv4"/>
 <hostnames>
 </hostnames>
-<ports><extraports state="closed" count="65529">
-<extrareasons reason="resets" count="65529"/>
+<ports><extraports state="closed" count="65528">
+<extrareasons reason="resets" count="65528"/>
 </extraports>
-<port protocol="tcp" portid="22"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="ssh" product="OpenSSH" version="2.9p2" extrainfo="protocol 1.99" method="probed" conf="10"><cpe>cpe:/a:openbsd:openssh:2.9p2</cpe></service></port>
-<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="http" product="Apache httpd" version="1.3.20" extrainfo="(Unix)  (Red-Hat/Linux) mod_ssl/2.8.4 OpenSSL/0.9.6b" method="probed" conf="10"><cpe>cpe:/a:apache:http_server:1.3.20</cpe></service></port>
+<port protocol="tcp" portid="22"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="ssh" product="OpenSSH" version="3.9p1" extrainfo="protocol 1.99" method="probed" conf="10"><cpe>cpe:/a:openbsd:openssh:3.9p1</cpe></service></port>
+<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="http" product="Apache httpd" version="2.0.52" extrainfo="(CentOS)" method="probed" conf="10"><cpe>cpe:/a:apache:http_server:2.0.52</cpe></service></port>
 <port protocol="tcp" portid="111"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="rpcbind" version="2" extrainfo="RPC #100000" method="probed" conf="10"/></port>
-<port protocol="tcp" portid="139"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="netbios-ssn" product="Samba smbd" extrainfo="workgroup: QMYGROUP" method="probed" conf="10"><cpe>cpe:/a:samba:samba</cpe></service></port>
-<port protocol="tcp" portid="443"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="https" product="Apache/1.3.20 (Unix)  (Red-Hat/Linux) mod_ssl/2.8.4 OpenSSL/0.9.6b" tunnel="ssl" method="probed" conf="10"/></port>
-<port protocol="tcp" portid="1024"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="status" version="1" extrainfo="RPC #100024" method="probed" conf="10"/></port>
+<port protocol="tcp" portid="443"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="https" tunnel="ssl" method="table" conf="3"/></port>
+<port protocol="tcp" portid="631"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="ipp" product="CUPS" version="1.1" method="probed" conf="10"><cpe>cpe:/a:apple:cups:1.1</cpe></service></port>
+<port protocol="tcp" portid="792"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="status" version="1" extrainfo="RPC #100024" method="probed" conf="10"/></port>
+<port protocol="tcp" portid="3306"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="mysql" product="MySQL" extrainfo="unauthorized" method="probed" conf="10"><cpe>cpe:/a:mysql:mysql</cpe></service></port>
 </ports>
-<times srtt="227705" rttvar="48851" to="423109"/>
+<times srtt="238817" rttvar="55849" to="462213"/>
 </host>
-<runstats><finished time="1616507324" timestr="Tue Mar 23 13:48:44 2021" summary="Nmap done at Tue Mar 23 13:48:44 2021; 1 IP address (1 host up) scanned in 1165.12 seconds" elapsed="1165.12" exit="success"/><hosts up="1" down="0" total="1"/>
+<runstats><finished time="1616750136" timestr="Fri Mar 26 09:15:36 2021" summary="Nmap done at Fri Mar 26 09:15:36 2021; 1 IP address (1 host up) scanned in 1243.33 seconds" elapsed="1243.33" exit="success"/><hosts up="1" down="0" total="1"/>
 </runstats>
 </nmaprun>
