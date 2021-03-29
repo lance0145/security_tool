@@ -193,15 +193,13 @@ def dirsearch_scan(request):
                 reruns.append('--csv-report=dirsearch.csv')
                 subprocess.run(reruns)
                 parse_ds(username, project_id, scan_id, ip_address)
-
             else:
-                subprocess.Popen(
+                print(ip_address)
+                subprocess.run(
                     ['python3', '/opt/dirsearch/dirsearch.py', '-u', ip_address, '-e', 'html,php,txt', '-x', '400,403,404,503', '-w', 'ds_wordlist.txt', '--csv-report=dirsearch.csv']
                 )
                 parse_ds(username, project_id, scan_id, ip_address)
-
             print('Completed dirsearch scan')
-
         except Exception as e:
             print('Error in dirsearch scan:', e)
 
