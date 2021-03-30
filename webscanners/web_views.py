@@ -66,6 +66,8 @@ from scanners.scanner_parser.tools.nikto_htm_parser import nikto_html_parser
 from notifications.models import Notification
 from django.urls import reverse
 from networkscanners.models import serversetting
+from crontab import CronTab
+from tools.views import nmap
 
 setting_file = os.getcwd() + '/' + 'apidata.json'
 
@@ -331,52 +333,29 @@ def web_scan_schedule(request):
         scan_schedule_time = request.POST.get('datetime')
         project_id = request.POST.get('project_id')
         scanner = request.POST.get('scanner')
-        # periodic_task = request.POST.get('periodic_task')
         periodic_task_value = request.POST.get('periodic_task_value')
-        # periodic_task = 'Yes'
+        print(scan_url, project_id, scanner, periodic_task_value)
+        cron = CronTab(user='root')
         if periodic_task_value == 'HOURLY':
-            periodic_time = Task.HOURLY
+            job = cron.new(command=nmap)
+            job.minute.every(1)
+            cron.write()
         elif periodic_task_value == 'DAILY':
-            periodic_time = Task.DAILY
+            job = cron.new(command=nmap)
+            job.hour.every(1)
+            cron.write()
         elif periodic_task_value == 'WEEKLY':
-            periodic_time = Task.WEEKLY
-        elif periodic_task_value == 'EVERY_2_WEEKS':
-            periodic_time = Task.EVERY_2_WEEKS
-        elif periodic_task_value == 'EVERY_4_WEEKS':
-            periodic_time = Task.EVERY_4_WEEKS
-        else:
-            periodic_time = None
-        dt_str = scan_schedule_time
-        dt_obj = datetime.strptime(dt_str, '%d/%m/%Y %H:%M:%S %p')
-        target__split = scan_url.split(',')
-        split_length = target__split.__len__()
-        for i in range(0, split_length):
-            target = target__split.__getitem__(i)
-
-            if scanner == 'zap_scan':
-                if periodic_task_value == 'None':
-                    my_task = task(target, project_id, scanner, schedule=dt_obj)
-                    task_id = my_task.id
-                    print("Savedddddd taskid", task_id)
-                else:
-
-                    my_task = task(target, project_id, scanner, repeat=periodic_time, repeat_until=None)
-                    task_id = my_task.id
-                    print("Savedddddd taskid", task_id)
-            elif scanner == 'burp_scan':
-                if periodic_task_value == 'None':
-                    my_task = task(target, project_id, scanner, schedule=dt_obj)
-                    task_id = my_task.id
-                else:
-                    my_task = task(target, project_id, scanner, repeat=periodic_time, repeat_until=None)
-                    task_id = my_task.id
-                    print("Savedddddd taskid", task_id)
-            save_scheadule = task_schedule_db(username=username, task_id=task_id, target=target,
-                                              schedule_time=scan_schedule_time,
-                                              project_id=project_id,
-                                              scanner=scanner,
-                                              periodic_task=periodic_task_value)
-            save_scheadule.save()
+            job = cron.new(command=nmap)
+            job.dow.on('MON')
+            cron.write()
+        
+        task_id = uuid.uuid4()
+        save_scheadule = task_schedule_db(username=username, task_id=task_id, target=scan_url,
+                                            schedule_time=scan_schedule_time,
+                                            project_id=project_id,
+                                            scanner=scanner,
+                                            periodic_task=periodic_task_value)
+        save_scheadule.save()
 
     return render(request, 'web_scan_schedule.html',
                   {'all_scans_db': all_scans_db,

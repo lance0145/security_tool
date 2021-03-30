@@ -196,7 +196,7 @@ def dirsearch_scan(request):
             else:
                 print(ip_address)
                 subprocess.run(
-                    ['python3', '/opt/dirsearch/dirsearch.py', '-u', ip_address, '-e', 'html,php,txt', '-x', '400,403,404,503', '-w', 'ds_wordlist.txt', '--csv-report=dirsearch.csv']
+                    ['./dirsearch', '-u', ip_address, '-e', 'html,php,txt', '-x', '400,403,404,503', '-w', 'ds_wordlist.txt', '--csv-report=dirsearch.csv']
                 )
                 parse_ds(username, project_id, scan_id, ip_address)
             print('Completed dirsearch scan')
