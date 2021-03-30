@@ -336,18 +336,18 @@ def web_scan_schedule(request):
         periodic_task_value = request.POST.get('periodic_task_value')
         print(scan_url, project_id, scanner, periodic_task_value)
         cron = CronTab(user='root')
-        if periodic_task_value == 'HOURLY':
-            job = cron.new(command=nmap)
-            job.minute.every(1)
-            cron.write()
-        elif periodic_task_value == 'DAILY':
-            job = cron.new(command=nmap)
-            job.hour.every(1)
-            cron.write()
-        elif periodic_task_value == 'WEEKLY':
-            job = cron.new(command=nmap)
-            job.dow.on('MON')
-            cron.write()
+        # if periodic_task_value == 'HOURLY':
+        #     job = cron.new(command=nmap)
+        #     job.minute.every(1)
+        #     cron.write()
+        # elif periodic_task_value == 'DAILY':
+        #     job = cron.new(command=nmap)
+        #     job.hour.every(1)
+        #     cron.write()
+        # elif periodic_task_value == 'WEEKLY':
+        #     job = cron.new(command=nmap)
+        #     job.dow.on('MON')
+        #     cron.write()
         
         task_id = uuid.uuid4()
         save_scheadule = task_schedule_db(username=username, task_id=task_id, target=scan_url,
