@@ -66,7 +66,7 @@ from scanners.scanner_parser.tools.nikto_htm_parser import nikto_html_parser
 from notifications.models import Notification
 from django.urls import reverse
 from networkscanners.models import serversetting
-from crontab import CronTab
+import schedule
 from tools.views import nmap
 
 setting_file = os.getcwd() + '/' + 'apidata.json'
@@ -324,30 +324,40 @@ def web_scan_schedule(request):
     :param request:
     :return:
     """
+
     username = request.user.username
     all_scans_db = project_db.objects.filter(username=username)
     all_scheduled_scans = task_schedule_db.objects.filter(username=username)
 
     if request.method == 'POST':
-        scan_url = request.POST.get('url')
+        scan_url = request.POST.get('ip')
         scan_schedule_time = request.POST.get('datetime')
         project_id = request.POST.get('project_id')
         scanner = request.POST.get('scanner')
         periodic_task_value = request.POST.get('periodic_task_value')
-        print(scan_url, project_id, scanner, periodic_task_value)
-        cron = CronTab(user='root')
-        # if periodic_task_value == 'HOURLY':
-        #     job = cron.new(command=nmap)
-        #     job.minute.every(1)
-        #     cron.write()
-        # elif periodic_task_value == 'DAILY':
-        #     job = cron.new(command=nmap)
-        #     job.hour.every(1)
-        #     cron.write()
-        # elif periodic_task_value == 'WEEKLY':
-        #     job = cron.new(command=nmap)
-        #     job.dow.on('MON')
-        #     cron.write()
+        print(scan_url, project_id, scanner, periodic_task_value, scan_schedule_time)
+        try:
+            if periodic_task_value == 'HOURLY':
+                schedule.every().minute.do(nmap, request=request)
+            elif periodic_task_value == 'DAILY':
+                schedule.every().day.do(nmap, request=request)
+            elif periodic_task_value == 'WEEKLY':
+                schedule.every().monday.do(nmap, request=request)
+            elif periodic_task_value == 'MONTHLY':
+                schedule.every(1).days.do(nmap, request=request)
+            if scan_schedule_time:
+                date = datetime.strptime(scan_schedule_time, '%d/%m/%Y %H:%M:%S %p')
+                if date.hour < 10:
+                    times  = "0" + str(date.hour) + ":" + str(date.minute)
+                else:
+                    times = str(date.hour) + ":" + str(date.minute)
+                schedule.every(date.day).days.at(times).do(nmap, request=request)
+            while True:
+                # run_pending
+                schedule.run_pending()
+                time.sleep(1)
+        except Exception as e:
+            print('Error in auto nmap scan:', e)
         
         task_id = uuid.uuid4()
         save_scheadule = task_schedule_db(username=username, task_id=task_id, target=scan_url,

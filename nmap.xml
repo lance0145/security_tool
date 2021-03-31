@@ -1,52 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE nmaprun>
 <?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
-<!-- Nmap 7.91 scan initiated Fri Mar 26 08:54:53 2021 as: nmap -v -sV -Pn -p 1-65535 -oX nmap.xml 10.254.10.12 -->
-<nmaprun scanner="nmap" args="nmap -v -sV -Pn -p 1-65535 -oX nmap.xml 10.254.10.12" start="1616748893" startstr="Fri Mar 26 08:54:53 2021" version="7.91" xmloutputversion="1.05">
+<!-- Nmap 7.91 scan initiated Wed Mar 31 02:01:12 2021 as: nmap -v -sV -Pn -p 1-65535 -oX nmap.xml youtube.com -->
+<nmaprun scanner="nmap" args="nmap -v -sV -Pn -p 1-65535 -oX nmap.xml youtube.com" start="1617156072" startstr="Wed Mar 31 02:01:12 2021" version="7.91" xmloutputversion="1.05">
 <scaninfo type="syn" protocol="tcp" numservices="65535" services="1-65535"/>
 <verbose level="1"/>
 <debugging level="0"/>
-<taskbegin task="Parallel DNS resolution of 1 host." time="1616748893"/>
-<taskend task="Parallel DNS resolution of 1 host." time="1616748894"/>
-<taskbegin task="SYN Stealth Scan" time="1616748895"/>
-<taskprogress task="SYN Stealth Scan" time="1616748926" percent="11.60" remaining="237" etc="1616749162"/>
-<taskprogress task="SYN Stealth Scan" time="1616748956" percent="13.71" remaining="384" etc="1616749340"/>
-<taskprogress task="SYN Stealth Scan" time="1616748986" percent="18.04" remaining="414" etc="1616749400"/>
-<taskprogress task="SYN Stealth Scan" time="1616749016" percent="21.50" remaining="442" etc="1616749458"/>
-<taskprogress task="SYN Stealth Scan" time="1616749085" percent="28.72" remaining="472" etc="1616749557"/>
-<taskprogress task="SYN Stealth Scan" time="1616749124" percent="31.19" remaining="506" etc="1616749629"/>
-<taskprogress task="SYN Stealth Scan" time="1616749154" percent="35.93" remaining="462" etc="1616749616"/>
-<taskprogress task="SYN Stealth Scan" time="1616749436" percent="56.02" remaining="425" etc="1616749861"/>
-<taskprogress task="SYN Stealth Scan" time="1616749550" percent="63.50" remaining="377" etc="1616749926"/>
-<taskprogress task="SYN Stealth Scan" time="1616749658" percent="70.28" remaining="323" etc="1616749981"/>
-<taskprogress task="SYN Stealth Scan" time="1616749739" percent="75.96" remaining="268" etc="1616750006"/>
-<taskprogress task="SYN Stealth Scan" time="1616749829" percent="81.76" remaining="209" etc="1616750037"/>
-<taskprogress task="SYN Stealth Scan" time="1616749913" percent="87.14" remaining="151" etc="1616750063"/>
-<taskprogress task="SYN Stealth Scan" time="1616750000" percent="92.51" remaining="90" etc="1616750089"/>
-<taskend task="SYN Stealth Scan" time="1616750116" extrainfo="65535 total ports"/>
-<taskbegin task="Service scan" time="1616750116"/>
-<taskend task="Service scan" time="1616750130" extrainfo="7 services on 1 host"/>
-<taskbegin task="NSE" time="1616750130"/>
-<taskend task="NSE" time="1616750134"/>
-<taskbegin task="NSE" time="1616750134"/>
-<taskend task="NSE" time="1616750136"/>
-<host starttime="1616748895" endtime="1616750136"><status state="up" reason="user-set" reason_ttl="0"/>
-<address addr="10.254.10.12" addrtype="ipv4"/>
+<taskbegin task="Parallel DNS resolution of 1 host." time="1617156073"/>
+<taskend task="Parallel DNS resolution of 1 host." time="1617156073"/>
+<taskbegin task="SYN Stealth Scan" time="1617156073"/>
+<taskprogress task="SYN Stealth Scan" time="1617156104" percent="14.77" remaining="179" etc="1617156283"/>
+<taskprogress task="SYN Stealth Scan" time="1617156134" percent="37.25" remaining="103" etc="1617156237"/>
+<taskprogress task="SYN Stealth Scan" time="1617156164" percent="66.71" remaining="46" etc="1617156209"/>
+<taskend task="SYN Stealth Scan" time="1617156192" extrainfo="65535 total ports"/>
+<taskbegin task="Service scan" time="1617156192"/>
+<taskprogress task="Service scan" time="1617156250" percent="50.00" remaining="58" etc="1617156308"/>
+<taskend task="Service scan" time="1617156259" extrainfo="2 services on 1 host"/>
+<taskbegin task="NSE" time="1617156259"/>
+<taskend task="NSE" time="1617156259"/>
+<taskbegin task="NSE" time="1617156259"/>
+<taskend task="NSE" time="1617156260"/>
+<host starttime="1617156073" endtime="1617156260"><status state="up" reason="user-set" reason_ttl="0"/>
+<address addr="216.58.221.238" addrtype="ipv4"/>
 <hostnames>
+<hostname name="youtube.com" type="user"/>
+<hostname name="hkg07s21-in-f14.1e100.net" type="PTR"/>
 </hostnames>
-<ports><extraports state="closed" count="65528">
-<extrareasons reason="resets" count="65528"/>
+<ports><extraports state="filtered" count="65533">
+<extrareasons reason="no-responses" count="65533"/>
 </extraports>
-<port protocol="tcp" portid="22"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="ssh" product="OpenSSH" version="3.9p1" extrainfo="protocol 1.99" method="probed" conf="10"><cpe>cpe:/a:openbsd:openssh:3.9p1</cpe></service></port>
-<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="http" product="Apache httpd" version="2.0.52" extrainfo="(CentOS)" method="probed" conf="10"><cpe>cpe:/a:apache:http_server:2.0.52</cpe></service></port>
-<port protocol="tcp" portid="111"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="rpcbind" version="2" extrainfo="RPC #100000" method="probed" conf="10"/></port>
-<port protocol="tcp" portid="443"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="https" tunnel="ssl" method="table" conf="3"/></port>
-<port protocol="tcp" portid="631"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="ipp" product="CUPS" version="1.1" method="probed" conf="10"><cpe>cpe:/a:apple:cups:1.1</cpe></service></port>
-<port protocol="tcp" portid="792"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="status" version="1" extrainfo="RPC #100024" method="probed" conf="10"/></port>
-<port protocol="tcp" portid="3306"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="mysql" product="MySQL" extrainfo="unauthorized" method="probed" conf="10"><cpe>cpe:/a:mysql:mysql</cpe></service></port>
+<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="56"/><service name="http" product="gws" servicefp="SF-Port80-TCP:V=7.91%I=7%D=3/31%Time=6063D867%P=x86_64-pc-linux-gnu%r(GetRequest,2B60,&quot;HTTP/1\.0\x20200\x20OK\r\nDate:\x20Wed,\x2031\x20Mar\x202021\x2002:03:19\x20GMT\r\nExpires:\x20-1\r\nCache-Control:\x20private,\x20max-age=0\r\nContent-Type:\x20text/html;\x20charset=ISO-8859-1\r\nP3P:\x20CP=\&quot;This\x20is\x20not\x20a\x20P3P\x20policy!\x20See\x20g\.co/p3phelp\x20for\x20more\x20info\.\&quot;\r\nServer:\x20gws\r\nX-XSS-Protection:\x200\r\nX-Frame-Options:\x20SAMEORIGIN\r\nSet-Cookie:\x201P_JAR=2021-03-31-02;\x20expires=Fri,\x2030-Apr-2021\x2002:03:20\x20GMT;\x20path=/;\x20domain=\.google\.com;\x20Secure\r\nSet-Cookie:\x20NID=212=ZLx3nvBP4L-HZ5XtoxpmPc5p57KiEuAY0VOp3GAEATgjDv_K6AE6oAtSmM0VzIoGi2TRjMCrdRmoJULjFzMbrJ7xQY-Bw2KMKcmYmyEEdkR-EaQO1WWB4E0OkhZaEFMxU5rEynKw6_wVgFcElKHkMDN9H2ezWeOlIlq9Ew8Yv84;\x20expires=Thu,\x2030-Sep-2021\x2002:03:19\x20GMT;\x20path=/;\x20domain=\.google\.com;\x20HttpOnly\r\nAccept-Ranges:\x20none\r\nVary:\x20Accept-Encoding\r\n\r\n&lt;!doctype\x20html&gt;&lt;html\x20itemscope=\&quot;\&quot;\x20itemtype=\&quot;http://schema\.org/WebPage\&quot;\x20lang=\&quot;en-PH\&quot;&gt;&lt;head&gt;&lt;meta\x20content=\&quot;text/html;\x20charset=UTF-8\&quot;\x20http-equiv=\&quot;Content-Type\&quot;&gt;&lt;meta\x20content=\&quot;/images/branding/googleg&quot;)%r(HTTPOptions,70F,&quot;HTTP/1\.0\x20405\x20Method\x20Not\x20Allowed\r\nAllow:\x20GET,\x20HEAD\r\nDate:\x20Wed,\x2031\x20Mar\x202021\x2002:03:20\x20GMT\r\nContent-Type:\x20text/html;\x20charset=UTF-8\r\nServer:\x20gws\r\nContent-Length:\x201592\r\nX-XSS-Protection:\x200\r\nX-Frame-Options:\x20SAMEORIGIN\r\n\r\n&lt;!DOCTYPE\x20html&gt;\n&lt;html\x20lang=en&gt;\n\x20\x20&lt;meta\x20charset=utf-8&gt;\n\x20\x20&lt;meta\x20name=viewport\x20content=\&quot;initial-scale=1,\x20minimum-scale=1,\x20width=device-width\&quot;&gt;\n\x20\x20&lt;title&gt;Error\x20405\x20\(Method\x20Not\x20Allowed\)!!1&lt;/title&gt;\n\x20\x20&lt;style&gt;\n\x20\x20\x20\x20\*{margin:0;padding:0}html,code{font:15px/22px\x20arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7%\x20auto\x200;max-width:390px;min-height:180px;padding:30px\x200\x2015px}\*\x20&gt;\x20body{background:url\(//www\.google\.com/images/errors/robot\.png\)\x20100%\x205px\x20no-repeat;padding-right:205px}p{margin:11px\x200\x2022px;overflow:hidden}ins{color:#777;text-decoration:none}a\x20img{border:0}@media\x20screen\x20and\x20\(max-width:772px\){body{background:none;margin-top:0;max-width:none;padding-right:0}}#l&quot;);" method="probed" conf="10"/></port>
+<port protocol="tcp" portid="443"><state state="open" reason="syn-ack" reason_ttl="56"/><service name="https" product="gws" servicefp="SF-Port443-TCP:V=7.91%T=SSL%I=7%D=3/31%Time=6063D86D%P=x86_64-pc-linux-gnu%r(GetRequest,355C,&quot;HTTP/1\.0\x20200\x20OK\r\nDate:\x20Wed,\x2031\x20Mar\x202021\x2002:03:26\x20GMT\r\nExpires:\x20-1\r\nCache-Control:\x20private,\x20max-age=0\r\nContent-Type:\x20text/html;\x20charset=ISO-8859-1\r\nP3P:\x20CP=\&quot;This\x20is\x20not\x20a\x20P3P\x20policy!\x20See\x20g\.co/p3phelp\x20for\x20more\x20info\.\&quot;\r\nServer:\x20gws\r\nX-XSS-Protection:\x200\r\nX-Frame-Options:\x20SAMEORIGIN\r\nSet-Cookie:\x201P_JAR=2021-03-31-02;\x20expires=Fri,\x2030-Apr-2021\x2002:03:26\x20GMT;\x20path=/;\x20domain=\.google\.com;\x20Secure\r\nSet-Cookie:\x20NID=212=vJxM0zz7tpQWwBRVTcw-6F0a6W1RUh5pZQkQCARFMUVqA4z18A4B5DqiXKIYEDa5GlxXVFfdt43YuxB6AT13gddisloEwJ9gzKb12BzWR6mRqWyRtFsPLRRbMq_FM68pRnrGUDfcji2OWOXSaB-04HzEZPcUAr-VTK1275eFHaw;\x20expires=Thu,\x2030-Sep-2021\x2002:03:26\x20GMT;\x20path=/;\x20domain=\.google\.com;\x20HttpOnly\r\nAlt-Svc:\x20h3-29=\&quot;:443\&quot;;\x20ma=2592000,h3-T051=\&quot;:443\&quot;;\x20ma=2592000,h3-Q050=\&quot;:443\&quot;;\x20ma=2592000,h3-Q046=\&quot;:443\&quot;;\x20ma=2592000,h3-Q043=\&quot;:443\&quot;;\x20ma=2592000,quic=\&quot;:443\&quot;;\x20ma=2592000;\x20v=\&quot;46,43\&quot;\r\nAccept-Ranges:\x20none\r\nVary:\x20Accept-Encoding\r\n\r\n&lt;!doctype\x20html&gt;&lt;ht&quot;)%r(HTTPOptions,7C1,&quot;HTTP/1\.0\x20405\x20Method\x20Not\x20Allowed\r\nAllow:\x20GET,\x20HEAD\r\nDate:\x20Wed,\x2031\x20Mar\x202021\x2002:03:26\x20GMT\r\nContent-Type:\x20text/html;\x20charset=UTF-8\r\nServer:\x20gws\r\nContent-Length:\x201592\r\nX-XSS-Protection:\x200\r\nX-Frame-Options:\x20SAMEORIGIN\r\nAlt-Svc:\x20h3-29=\&quot;:443\&quot;;\x20ma=2592000,h3-T051=\&quot;:443\&quot;;\x20ma=2592000,h3-Q050=\&quot;:443\&quot;;\x20ma=2592000,h3-Q046=\&quot;:443\&quot;;\x20ma=2592000,h3-Q043=\&quot;:443\&quot;;\x20ma=2592000,quic=\&quot;:443\&quot;;\x20ma=2592000;\x20v=\&quot;46,43\&quot;\r\n\r\n&lt;!DOCTYPE\x20html&gt;\n&lt;html\x20lang=en&gt;\n\x20\x20&lt;meta\x20charset=utf-8&gt;\n\x20\x20&lt;meta\x20name=viewport\x20content=\&quot;initial-scale=1,\x20minimum-scale=1,\x20width=device-width\&quot;&gt;\n\x20\x20&lt;title&gt;Error\x20405\x20\(Method\x20Not\x20Allowed\)!!1&lt;/title&gt;\n\x20\x20&lt;style&gt;\n\x20\x20\x20\x20\*{margin:0;padding:0}html,code{font:15px/22px\x20arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7%\x20auto\x200;max-width:390px;min-height:180px;padding:30px\x200\x2015px}\*\x20&gt;\x20body{background:url\(//www\.google\.com/images/errors/robot\.png\)\x20100%\x205px\x20no-repeat;padding-right:205px}p{margin:11px\x20&quot;);" tunnel="ssl" method="probed" conf="10"/></port>
 </ports>
-<times srtt="238817" rttvar="55849" to="462213"/>
+<times srtt="26461" rttvar="3863" to="100000"/>
 </host>
-<runstats><finished time="1616750136" timestr="Fri Mar 26 09:15:36 2021" summary="Nmap done at Fri Mar 26 09:15:36 2021; 1 IP address (1 host up) scanned in 1243.33 seconds" elapsed="1243.33" exit="success"/><hosts up="1" down="0" total="1"/>
+<runstats><finished time="1617156260" timestr="Wed Mar 31 02:04:20 2021" summary="Nmap done at Wed Mar 31 02:04:20 2021; 1 IP address (1 host up) scanned in 187.27 seconds" elapsed="187.27" exit="success"/><hosts up="1" down="0" total="1"/>
 </runstats>
 </nmaprun>
