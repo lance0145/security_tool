@@ -338,24 +338,27 @@ def web_scan_schedule(request):
         print(scan_url, project_id, scanner, periodic_task_value, scan_schedule_time)
         try:
             if periodic_task_value == 'HOURLY':
-                schedule.every().minute.do(nmap, request=request)
+                schedule.every().hour.do(nmap, request=request)
             elif periodic_task_value == 'DAILY':
                 schedule.every().day.do(nmap, request=request)
             elif periodic_task_value == 'WEEKLY':
                 schedule.every().monday.do(nmap, request=request)
-            elif periodic_task_value == 'MONTHLY':
-                schedule.every(1).days.do(nmap, request=request)
-            if scan_schedule_time:
-                date = datetime.strptime(scan_schedule_time, '%d/%m/%Y %H:%M:%S %p')
-                if date.hour < 10:
-                    times  = "0" + str(date.hour) + ":" + str(date.minute)
-                else:
-                    times = str(date.hour) + ":" + str(date.minute)
-                schedule.every(date.day).days.at(times).do(nmap, request=request)
+            # elif periodic_task_value == 'MONTHLY':
+            #     schedule.every(1).days.do(nmap, request=request)
+            # if scan_schedule_time:
+            #     date = datetime.strptime(scan_schedule_time, '%d/%m/%Y %H:%M:%S %p')
+            #     if date.hour < 10:
+            #         times  = "0" + str(date.hour) + ":" + str(date.minute)
+            #     else:
+            #         times = str(date.hour) + ":" + str(date.minute)
+            #     schedule.every().day.at(times).do(nmap, request=request)
             while True:
                 # run_pending
+                print(schedule.jobs)
                 schedule.run_pending()
                 time.sleep(1)
+                if schedule.jobs == []:
+                    break
         except Exception as e:
             print('Error in auto nmap scan:', e)
         

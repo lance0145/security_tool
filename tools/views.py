@@ -35,6 +35,7 @@ from notifications.signals import notify
 from django.urls import reverse
 from django.core import signing
 from projects.models import project_db, client_db
+import json
 
 # NOTE[gmedian]: in order to be more portable we just import everything rather than add anything in this very script
 from tools.nmap_vulners.nmap_vulners_view import nmap_vulners, nmap_vulners_port, nmap_vulners_scan
@@ -145,24 +146,24 @@ def openvas_summary(request):
 def dirsearch_scan(request):
     def parse_ds(username, project_id, scan_id, ip_address):
         date_time = datetime.now()
-        with open('dirsearch.csv', 'r', encoding='utf-8') as csv_file:
-            csv_reader = csv.DictReader(csv_file)
-            for row in csv_reader:
-                print(username, project_id, scan_id, ip_address, row['Time'])
-                dump_data = dirsearch_result_db(
-                    username=username,
-                    project_id=project_id,
-                    scan_id=scan_id,
-                    ip_address=ip_address,
-                    date_time=row['Time'],
-                    url=row['URL'],
-                    status=row['Status'],
-                    size=row['Size'],
-                    redirection=row['Redirection'],
-                )
-                dump_data.save()
-        csv_file.close()
-
+        with open('dirsearch.json', 'r') as f:
+            data = json.load(f)
+            for key, value in data.items():
+                if key != 'time':
+                    for row in value:
+                        dump_data = dirsearch_result_db(
+                            username=username,
+                            project_id=project_id,
+                            scan_id=scan_id,
+                            ip_address=ip_address,
+                            date_time=date_time,
+                            url=row['path'],
+                            status=row['status'],
+                            size=row['content-length'],
+                            redirection=row['redirect'],
+                        )
+                        dump_data.save()
+        f.close()
         all_dir = dirsearch_result_db.objects.filter(scan_id=scan_id)
         dump_data = dirsearch_scan_db(
             username=username,
@@ -190,13 +191,13 @@ def dirsearch_scan(request):
             print('Start dirsearch scan')
             if command:
                 reruns = command.split()
-                reruns.append('--csv-report=dirsearch.csv')
+                reruns.append('--json-report=dirsearch.json')
                 subprocess.run(reruns)
                 parse_ds(username, project_id, scan_id, ip_address)
             else:
                 print(ip_address)
                 subprocess.run(
-                    ['./dirsearch', '-u', ip_address, '-e', 'html,php,txt', '-x', '400,403,404,503', '-w', 'ds_wordlist.txt', '--csv-report=dirsearch.csv']
+                    ['python3', '/opt/dirsearch/dirsearch.py', '-u', ip_address, '-e', 'html,php,txt', '-x', '400,403,404,503', '-w', 'ds_wordlist.txt', '--json-report=dirsearch.json']
                 )
                 parse_ds(username, project_id, scan_id, ip_address)
             print('Completed dirsearch scan')
