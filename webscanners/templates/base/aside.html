@@ -28,22 +28,6 @@
                 </li>
 
                 <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
-                                                href="#" aria-expanded="false"><i
-                        class="fas fa-user-astronaut"></i><span class="hide-menu">Auto</span></a>
-                        <ul aria-expanded="false" class="collapse  first-level">                        
-                        <li class="sidebar-item"><a href="{% url 'webscanners:web_scan_schedule' %}" class="sidebar-link"><i
-                                class="fas fa-rocket"></i><span class="hide-menu">Auto Scan</span></a></li>
-                        <li class="sidebar-item"><a href="{% url 'manual_scan:list_scan_auto' %}" class="sidebar-link"><i
-                                class="fas fa-bug"></i><span class="hide-menu">Auto Result</span></a>
-                        </ul>
-                </li>
-
-
-                <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        aria-expanded="false"><i
-                class="fas fa-shield-alt"></i><span class="hide-menu">Guardian</span></a></li>
-
-                <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
                                             href="#" aria-expanded="false"><i
                         class="fas fa-eye"></i><span class="hide-menu">NMAP</span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
@@ -90,6 +74,21 @@
                         </li>
                     </ul>
                 </li>
+
+                <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
+                        href="#" aria-expanded="false"><i
+                class="fas fa-user-astronaut"></i><span class="hide-menu">Auto</span></a>
+                <ul aria-expanded="false" class="collapse  first-level">                        
+                <li class="sidebar-item"><a href="{% url 'webscanners:web_scan_schedule' %}" class="sidebar-link"><i
+                        class="fas fa-rocket"></i><span class="hide-menu">Auto Scan</span></a></li>
+                <li class="sidebar-item"><a href="{% url 'manual_scan:list_scan_auto' %}" class="sidebar-link"><i
+                        class="fas fa-bug"></i><span class="hide-menu">Auto Result</span></a>
+                </ul>
+                </li>
+
+                <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
+                aria-expanded="false"><i
+                class="fas fa-shield-alt"></i><span class="hide-menu">Guardian</span></a></li>
 
                 <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
                         aria-expanded="false"><i
