@@ -115,7 +115,7 @@
                     $('#label').text('');
                     $('#ip').val('');
                     $('#command').val('');
-                    window.location.href = "/tools/nmap/?ip="+IpAddr;
+                    window.location.href = "/networkscanners/vul_details/?scan_id="+IpAddr;
                 },
                 error: function(xhr, status, error) {
                     var err = eval("(" + xhr.responseText + ")");
