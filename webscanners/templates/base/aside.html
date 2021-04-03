@@ -2,7 +2,7 @@
 <aside class="left-sidebar" data-sidebarbg="skin5">
     <div class="scroll-sidebar">
         <nav class="sidebar-nav">
-            <ul id="sidebarnav" class="p-t-30">
+            <ul id="sidebarnav" class="testMenu p-t-30">
                 <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark"
                                             href="{% url 'dashboard:dashboard' %}" aria-expanded="false"><i
                         class="fas fa-tachometer-alt"></i><span class="hide-menu">Dashboard</span></a></li>
@@ -16,21 +16,19 @@
                                             href="{% url 'projects:list_projects' %}" aria-expanded="false"><i
                         class="fas fa-list-alt"></i><span class="hide-menu">Projects</span></a></li>
                 
-                <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
-                                            href="#" aria-expanded="false"><i
+                <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark panel-heading"
+                                            href="{% url 'manual_scan:list_scan' %}" aria-expanded="false"><i
                         class="fas fa-wrench"></i><span class="hide-menu">Manual</span></a>
-                    <ul aria-expanded="false" class="collapse  first-level">                        
+                    <ul aria-expanded="false" class="collapse first-level panel-collapse">                        
                         <li class="sidebar-item"><a href="{% url 'manual_scan:add_list_scan' %}" class="sidebar-link"><i
                                 class="fas fa-rocket"></i><span class="hide-menu">Manual Scan</span></a></li>
-                        <li class="sidebar-item"><a href="{% url 'manual_scan:list_scan' %}" class="sidebar-link"><i
-                                class="fas fa-bug"></i><span class="hide-menu">Manual Result</span></a>
                     </ul>
                 </li>
 
                 <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
                                             href="#" aria-expanded="false"><i
                         class="fas fa-eye"></i><span class="hide-menu">NMAP</span></a>
-                    <ul aria-expanded="false" class="collapse  first-level">
+                    <ul aria-expanded="false" class="collapse first-level">
                         <li class="sidebar-item"><a href="{% url 'networkscanners:ip_scan' %}" class="sidebar-link"><i
                                 class="fas fa-rocket"></i><span class="hide-menu">NMAP Scan</span></a></li>
                         <li class="sidebar-item"><a href="{% url 'manual_scan:scan_list' %}" class="sidebar-link"><i
@@ -42,7 +40,7 @@
                 <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
                         href="#" aria-expanded="false"><i
                 class="fab fa-teamspeak"></i><span class="hide-menu">Nikto</span></a>
-                <ul aria-expanded="false" class="collapse  first-level">
+                <ul aria-expanded="false" class="collapse first-level">
                 <li class="sidebar-item"><a href="{% url 'networkscanners:nikto' %}" class="sidebar-link"><i
                         class="fas fa-rocket"></i><span class="hide-menu">Nikto Scan</span></a></li>
                 <li class="sidebar-item"><a href="{% url 'tools:nikto_result' %}" class="sidebar-link"><i
@@ -54,7 +52,7 @@
                 <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
                                         href="#" aria-expanded="false"><i
                 class="fab fa-sistrix"></i><span class="hide-menu">Dirsearch</span></a>
-                <ul aria-expanded="false" class="collapse  first-level">
+                <ul aria-expanded="false" class="collapse first-level">
                 <li class="sidebar-item"><a href="{% url 'networkscanners:dirsearch' %}" class="sidebar-link"><i
                         class="fas fa-rocket"></i><span class="hide-menu">Dirsearch Scan</span></a></li>
                 <li class="sidebar-item"><a href="{% url 'tools:dirsearch_summary' %}" class="sidebar-link"><i
@@ -66,7 +64,7 @@
                 <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
                                             href="#" aria-expanded="false"><i
                         class="fas fa-dog"></i><span class="hide-menu">OpenVAS</span></a>
-                    <ul aria-expanded="false" class="collapse  first-level">
+                    <ul aria-expanded="false" class="collapse first-level">
                         <li class="sidebar-item"><a href="{% url 'networkscanners:open_vas' %}" class="sidebar-link"><i
                                 class="fas fa-rocket"></i><span class="hide-menu">OpenVAS Scan</span></a></li>
                         <li class="sidebar-item"><a href="{% url 'networkscanners:index' %}" class="sidebar-link"><i
@@ -78,7 +76,7 @@
                 <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
                         href="#" aria-expanded="false"><i
                 class="fas fa-user-astronaut"></i><span class="hide-menu">Auto</span></a>
-                <ul aria-expanded="false" class="collapse  first-level">                        
+                <ul aria-expanded="false" class="collapse first-level">                        
                 <li class="sidebar-item"><a href="{% url 'webscanners:web_scan_schedule' %}" class="sidebar-link"><i
                         class="fas fa-rocket"></i><span class="hide-menu">Auto Scan</span></a></li>
                 <li class="sidebar-item"><a href="{% url 'manual_scan:list_scan_auto' %}" class="sidebar-link"><i
@@ -99,3 +97,15 @@
     </div>
     <!-- End Sidebar scroll-->
 </aside>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+function initMenu() {
+        $(".panel-heading").mouseenter(function () {
+        $(".panel-collapse").collapse('show');
+    });
+ $(".panel-collapse").mouseleave(function(){
+       $(".panel-collapse").collapse('hide');
+});
+}
+$(document).ready(initMenu);
+</script>
