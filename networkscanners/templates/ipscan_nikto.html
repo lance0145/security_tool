@@ -105,7 +105,7 @@
                     command:  $('#command').val(),
                     csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
                 },
-                success:function(){
+                success:function(data){
                     alert('Done, scan result saved on Nikto Vulnerability.')                    
                     $("#ip").prop( "disabled", false );
                     $("#command").prop( "disabled", false );
@@ -115,7 +115,7 @@
                     $('#label').text('');
                     $('#ip').val('');
                     $('#command').val('');
-                    window.location.href = "/tools/nikto_result_vul/?scan_url="+IpAddr;
+                    window.location.href = "/tools/nikto_result_vul/?scan_id="+data;
                 },
                 error: function(xhr, status, error) {
                     var err = eval("(" + xhr.responseText + ")");

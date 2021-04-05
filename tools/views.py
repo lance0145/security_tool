@@ -450,6 +450,8 @@ def nikto(request):
 
             dump_scans.save()
 
+        return HttpResponse(scan_id)
+
     return render(request,
                   'nikto_scan_list.html',
                   {'all_nikto': all_nikto}
