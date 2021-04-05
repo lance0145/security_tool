@@ -36,6 +36,7 @@ from django.urls import reverse
 from django.core import signing
 from projects.models import project_db, client_db
 import json
+from django.http import HttpResponse
 
 # NOTE[gmedian]: in order to be more portable we just import everything rather than add anything in this very script
 from tools.nmap_vulners.nmap_vulners_view import nmap_vulners, nmap_vulners_port, nmap_vulners_scan
