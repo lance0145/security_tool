@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+ <title>Nikto Report</title>
+ <style type="text/css">
+  .dataTable
+  {
+   font-family: tahoma, sans-serif;
+   font-size: 11pt; 
+   font-weight: normal; 
+   color: #000066;
+   background: #EEEEEE;
+   border: thin solid black;
+   width: 95%;
+  }
+  .headerTable
+  {
+   font-family: tahoma, sans-serif;
+   font-size: 15pt; 
+   font-weight: normal; 
+   color: white;
+   background: #000066;
+   border: thin solid black;
+   width: 300px;
+  }
+  .column-head
+  {
+   width: 15em;
+   font-weight:bold;
+  }
+  .copyright
+  {
+   font-family: tahoma, sans-serif;
+   font-size: 10pt;
+   font-weight: normal;
+   font-style: italic;
+   color: black;
+  }
+  body
+  {
+   background: white;
+  }
+ </style>
+</head>
+<body>
+<div>
+<a name="1"></a>
+<table class="headerTable">
+ <tr>
+   <td>10.254.10.19 / 10.254.10.19 port 80</td>
+ </tr>
+</table>
+<table class="dataTable">
+ <tr>
+   <td class="column-head">Target IP</td>
+   <td>10.254.10.19</td>
+ </tr>
+ <tr>
+   <td class="column-head">Target hostname</td>
+   <td>10.254.10.19</td>
+ </tr>
+  <tr>
+   <td class="column-head">Target Port</td>
+   <td>80</td>
+ </tr>
+  <tr>
+   <td class="column-head">HTTP Server</td>
+   <td>Apache/2.2.8 (Ubuntu) PHP/5.2.4-2ubuntu5.6 with Suhosin-Patch</td>
+ </tr>
+ <tr>
+   <td class="column-head">Site Link (Name)</td>
+   <td><a href="http://10.254.10.19:80/">http://10.254.10.19:80/</a></td>
+ </tr>
+ <tr>
+   <td class="column-head">Site Link (IP)</td>
+   <td><a href="http://10.254.10.19:80/">http://10.254.10.19:80/</a></td>
+ </tr>
+ </table>
+</div>
+<p></p>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>Cookie PHPSESSID created without the httponly flag</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://10.254.10.19:80/">http://10.254.10.19:80/</a><br>
+      <a href="http://10.254.10.19:80/">http://10.254.10.19:80/</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>Retrieved x-powered-by header: PHP/5.2.4-2ubuntu5.6</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://10.254.10.19:80/">http://10.254.10.19:80/</a><br>
+      <a href="http://10.254.10.19:80/">http://10.254.10.19:80/</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>The anti-clickjacking X-Frame-Options header is not present.</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://10.254.10.19:80/">http://10.254.10.19:80/</a><br>
+      <a href="http://10.254.10.19:80/">http://10.254.10.19:80/</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://10.254.10.19:80/">http://10.254.10.19:80/</a><br>
+      <a href="http://10.254.10.19:80/">http://10.254.10.19:80/</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://10.254.10.19:80/">http://10.254.10.19:80/</a><br>
+      <a href="http://10.254.10.19:80/">http://10.254.10.19:80/</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/favicon.ico</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>Server may leak inodes via ETags, header found with file /favicon.ico, inode: 631780, size: 23126, mtime: Fri Jun  5 19:22:00 2009</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://10.254.10.19:80/favicon.ico">http://10.254.10.19:80/favicon.ico</a><br>
+      <a href="http://10.254.10.19:80/favicon.ico">http://10.254.10.19:80/favicon.ico</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>HEAD</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>PHP/5.2.4-2ubuntu5.6 appears to be outdated (current is at least 7.2.12). PHP 5.6.33, 7.0.27, 7.1.13, 7.2.1 may also current release for each branch.</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://10.254.10.19:80/">http://10.254.10.19:80/</a><br>
+      <a href="http://10.254.10.19:80/">http://10.254.10.19:80/</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>HEAD</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>Apache/2.2.8 appears to be outdated (current is at least Apache/2.4.37). Apache 2.2.34 is the EOL for the 2.x branch.</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://10.254.10.19:80/">http://10.254.10.19:80/</a><br>
+      <a href="http://10.254.10.19:80/">http://10.254.10.19:80/</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>UXKUYQPZ</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>Web Server returns a valid response with junk HTTP methods, this may cause false positives.</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://10.254.10.19:80/">http://10.254.10.19:80/</a><br>
+      <a href="http://10.254.10.19:80/">http://10.254.10.19:80/</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>TRACE</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>HTTP TRACE method is active, suggesting the host is vulnerable to XST</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://10.254.10.19:80/">http://10.254.10.19:80/</a><br>
+      <a href="http://10.254.10.19:80/">http://10.254.10.19:80/</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/877" title="More vulnerability information on OSVDB.org">OSVDB-877</a>
+    </td>
+</table>
+
+<div>
+<p></p>
+<table class="headerTable">
+ <tr>
+  <td>Host Summary</td>
+ </tr>
+</table>
+<table  class="dataTable">
+ <tr>
+  <td class="column-head">Start Time</td>
+  <td>2021-04-05 09:46:14</td>
+ </tr>
+ <tr>
+  <td class="column-head">End Time</td>
+  <td>2021-04-05 09:49:02</td>
+ </tr>
+ <tr>
+  <td class="column-head">Elapsed Time</td>
+  <td>168 seconds</td>
+ </tr>
+ <tr>
+  <td class="column-head">Statistics</td>
+  <td>495 requests, 0 errors, 10 findings</td>
+ </tr>
+</table>
+</div>
+<p></p>
+
+<p></p>
+<table class="headerTable">
+  <tr>
+    <td>Scan Summary</td>
+  </tr>
+</table>
+<table class="dataTable">
+  <tr>
+    <td class="column-head">Software Details</td>
+    <td><a href="http://cirt.net/">Nikto 2.1.6</a></td>
+  <tr>
+    <td class="column-head">CLI Options</td>
+    <td>-o nikto/5d791227-b06d-45c2-bd80-0e94ba6cfa5e.html -Format htm -Tuning 123bde -host 10.254.10.19</td>
+  </tr>
+  <tr>
+    <td class="column-head">Hosts Tested</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td class="column-head">Start Time</td>
+    <td>Mon Apr  5 09:46:12 2021</td>
+  </tr>
+  <tr>
+    <td class="column-head">End Time</td>
+    <td>Mon Apr  5 09:49:02 2021</td>
+  </tr>
+  <tr>
+    <td class="column-head">Elapsed Time</td>
+    <td>170 seconds</td>
+  </tr>
+</table>
+<p></p>
+<p class="copyright">&copy; 2008 Chris Sullo</p>
+
+<!-- (c) 2008 Chris Sullo -->
+
+</body>
+</html>
+
