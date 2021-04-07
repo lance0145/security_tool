@@ -535,7 +535,7 @@ def nikto_result_vul(request):
                    'vuln_data': vuln_data,
                    'vuln_data_close': vuln_data_close,
                    'false_data': false_data,
-                   'scan_url': scan_url
+                #    'scan_url': scan_url
                    }
                   )
 
