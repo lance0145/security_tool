@@ -689,7 +689,7 @@ def nmap_scan_del(request):
     """
     username = request.user.username
     if request.method == 'POST':
-        scan_id = request.POST.get('id')
+        scan_id = request.POST.get('scan_id')
 
         scan_item = str(scan_id)
         value = scan_item.replace(" ", "")
@@ -700,11 +700,12 @@ def nmap_scan_del(request):
             _scan_id = value_split.__getitem__(i)
             print(_scan_id)
 
+            del_scan = nmap_scan_db.objects.filter(username=username, scan_id=_scan_id)
+            del_scan.delete()
             del_scan = nmap_result_db.objects.filter(username=username, scan_id=_scan_id)
-            ip = del_scan[0].ip_address
             del_scan.delete()
 
-        return HttpResponseRedirect("/tools/nmap/?ip=%s" % ip)
+        return HttpResponseRedirect("/manual_scan/scan_list/")
 
 def nmap_vuln_del(request):
     """
