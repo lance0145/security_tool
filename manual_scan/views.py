@@ -431,8 +431,6 @@ def del_scan(request):
     :param request:
     :return:
     """
-    username = request.user.username
-    print("**********************************************************************")
     if request.method == 'POST':
         get_scan_id = request.POST.get('scan_id')
 

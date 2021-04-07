@@ -689,7 +689,7 @@ def nmap_scan_del(request):
     """
     username = request.user.username
     if request.method == 'POST':
-        scan_id = request.POST.get('scan_id')
+        scan_id = request.POST.get('id')
 
         scan_item = str(scan_id)
         value = scan_item.replace(" ", "")
@@ -701,18 +701,32 @@ def nmap_scan_del(request):
             print(_scan_id)
 
             del_scan = nmap_result_db.objects.filter(username=username, scan_id=_scan_id)
-            del_scan.delete()
-            del_scan = nmap_scan_db.objects.filter(username=username, scan_id=_scan_id)
+            ip = del_scan[0].ip_address
             del_scan.delete()
 
-    return HttpResponseRedirect('/tools/nmap_scan/')
+        return HttpResponseRedirect("/tools/nmap/?ip=%s" % ip)
 
-def nmap_del(request):
+def nmap_vuln_del(request):
+    """
+
+    :param request:
+    :return:
+    """
     username = request.user.username
     if request.method == 'POST':
-        id = request.POST.get('id')
-        del_scan = nmap_result_db.objects.filter(username=username, id=id)
-        ip = del_scan[0].ip_address
-        del_scan.delete()
+        scan_id = request.POST.get('id')
+        print(scan_id)
 
-    return HttpResponseRedirect("/tools/nmap/?ip=%s" % ip)
+        scan_item = str(scan_id)
+        value = scan_item.replace(" ", "")
+        value_split = value.split(',')
+        split_length = value_split.__len__()
+
+        for i in range(0, split_length):
+            _scan_id = value_split.__getitem__(i)
+
+            del_scan = nmap_result_db.objects.filter(username=username, id=_scan_id)
+            ip = del_scan[0].ip_address
+            del_scan.delete()
+
+        return HttpResponseRedirect("/tools/nmap/?ip=%s" % ip)
