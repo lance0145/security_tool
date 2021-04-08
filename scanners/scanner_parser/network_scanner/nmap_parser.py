@@ -140,32 +140,32 @@ def xml_parser(root, project_id, scan_id, username):
                 # print(ip_address)
                 # print("------")
                 date_time = datetime.now()
-
-                dump_data = nmap_result_db(
-                    scan_id=scan_id,
-                    ip_address=ip_address,
-                    port=port,
-                    state=state,
-                    reason=reason,
-                    reason_ttl=reason_ttl,
-                    version=version,
-                    extrainfo=extrainfo,
-                    name=name,
-                    conf=conf,
-                    method=method,
-                    type_p=type_p,
-                    osfamily=osfamily,
-                    vendor=vendor,
-                    osgen=osgen,
-                    accuracy=accuracy,
-                    cpe=cpe,
-                    used_state=used_state,
-                    used_portid=used_portid,
-                    used_proto=used_proto,
-                    username=username,
-                    date_time=date_time
-                )
-                dump_data.save()
+                if port != None:
+                    dump_data = nmap_result_db(
+                        scan_id=scan_id,
+                        ip_address=ip_address,
+                        port=port,
+                        state=state,
+                        reason=reason,
+                        reason_ttl=reason_ttl,
+                        version=version,
+                        extrainfo=extrainfo,
+                        name=name,
+                        conf=conf,
+                        method=method,
+                        type_p=type_p,
+                        osfamily=osfamily,
+                        vendor=vendor,
+                        osgen=osgen,
+                        accuracy=accuracy,
+                        cpe=cpe,
+                        used_state=used_state,
+                        used_portid=used_portid,
+                        used_proto=used_proto,
+                        username=username,
+                        date_time=date_time
+                    )
+                    dump_data.save()
     
     ip_address = ""
     for nmap in root:
