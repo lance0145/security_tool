@@ -49,7 +49,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <label
-                                                        class="col-md-3 m-t-15">Instance:</label>
+                                                        class="col-md-3 m-t-15">Instance</label>
                                                 <div class="col-sm-8">
                                                     <textarea name="vuln_instance" class="form-control"
                                                               placeholder="Instances">{{data.vuln_url}}</textarea>
@@ -57,7 +57,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <label
-                                                        class="col-md-3 m-t-15">Description:</label>
+                                                        class="col-md-3 m-t-15">Description</label>
                                                 <div class="col-sm-8">
                                                     <textarea name="vuln_description" class="form-control"
                                                               placeholder="Company Name Here">{{data.description}}</textarea>
@@ -75,8 +75,31 @@
                                                 <label
                                                         class="col-md-3 m-t-15">Reference</label>
                                                 <div class="col-sm-8">
-                                                    <textarea name="vuln_reference" class="form-control">
-                                                        {{data.reference}}</textarea>
+                                                    <textarea name="vuln_reference" class="form-control">{{data.reference}}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label
+                                                        class="col-md-3 m-t-15">Risk Rating</label>
+                                                <div class="col-sm-8">
+                                                    <textarea name="risk_rating" class="form-control"
+                                                              placeholder="Risk Rating">{{data.risk_rating}}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label
+                                                        class="col-md-3 m-t-15">Likelihood</label>
+                                                <div class="col-sm-8">
+                                                    <textarea name="likelihood" class="form-control"
+                                                              placeholder="Likelihood">{{data.likelihood}}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label
+                                                        class="col-md-3 m-t-15">Consequence</label>
+                                                <div class="col-sm-8">
+                                                    <textarea name="consequence" class="form-control"
+                                                              placeholder="Consequence">{{data.consequence}}</textarea>
                                                 </div>
                                             </div>
                                         </div>

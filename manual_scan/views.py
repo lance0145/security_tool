@@ -190,6 +190,9 @@ def add_vuln(request):
         poc_description = request.POST.get('poc_description')
         date_time = datetime.now()
         vuln_id = uuid.uuid4()
+        risk_rating = request.POST.get('risk_rating')
+        likelihood = request.POST.get('likelihood')
+        consequence = request.POST.get('consequence')
 
         # fs = FileSystemStorage()
         # filename = fs.save(poc.name, poc)
@@ -228,6 +231,9 @@ def add_vuln(request):
             Poc_Img=uploaded_poc_url,
             poc_description=poc_description,
             username=username,
+            risk_rating = risk_rating,
+            likelihood = likelihood,
+            consequence = consequence,
         )
         dump_data.save()
 
@@ -299,6 +305,9 @@ def edit_vuln(request):
         reference = request.POST.get('vuln_reference')
         scan_id = request.POST.get('scan_id')
         date_time = datetime.now()
+        risk_rating = request.POST.get('risk_rating')
+        likelihood = request.POST.get('likelihood')
+        consequence = request.POST.get('consequence')
 
         if severity == "Critical":
             severity_color = "danger"
@@ -323,6 +332,9 @@ def edit_vuln(request):
             solution=solution,
             reference=reference,
             severity_color=severity_color,
+            risk_rating = risk_rating,
+            likelihood = likelihood,
+            consequence = consequence,
         )
         all_scan_data = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id)
 

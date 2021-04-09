@@ -53,7 +53,9 @@ class manual_scan_results_db(models.Model):
     poc_description = models.TextField(null=True, blank=True)
     pentest_type = models.TextField(blank=True, null=True)
     username = models.CharField(max_length=256, null=True)
-
+    risk_rating = models.TextField(blank=True, null=True)
+    likelihood = models.TextField(null=True, blank=True)
+    consequence = models.TextField(blank=True, null=True)
 
 class VulnerabilityData(models.Model):
     vuln_data_id = models.TextField(blank=True)
