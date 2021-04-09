@@ -318,17 +318,17 @@ def scan_del(request):
 
     if request.method == 'POST':
         scan_id = request.POST.get('scan_id')
-        # scan_item = str(scan_id)
-        # value = scan_item.replace(" ", "")
-        # value_split = value.split(',')
-        # split_length = value_split.__len__()
-        # # print "split_length", split_length
-        # for i in range(0, split_length):
-        #     scan_id = value_split.__getitem__(i)
-        scans = openvas_scan_db.objects.filter(username=username, scan_id=scan_id).order_by('scan_id')
-        scans.delete()
-        vuln_data = ov_scan_result_db.objects.filter(username=username, scan_id=scan_id)
-        vuln_data.delete()
+        scan_item = str(scan_id)
+        value = scan_item.replace(" ", "")
+        value_split = value.split(',')
+        split_length = value_split.__len__()
+        # print "split_length", split_length
+        for i in range(0, split_length):
+            scan_id = value_split.__getitem__(i)
+            scans = openvas_scan_db.objects.filter(username=username, scan_id=scan_id).order_by('scan_id')
+            scans.delete()
+            vuln_data = ov_scan_result_db.objects.filter(username=username, scan_id=scan_id)
+            vuln_data.delete()
 
     return HttpResponseRedirect(reverse('networkscanners:index'))
 
