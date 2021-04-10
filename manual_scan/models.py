@@ -21,7 +21,7 @@ from django.db import models
 
 class manual_scans_db(models.Model):
     scan_url = models.URLField(blank=True)
-    scan_id = models.TextField(blank=True)
+    scan_id = models.TextField(blank=True, null=True)
     total_vul = models.IntegerField(blank=True, null=True)
     high_vul = models.IntegerField(blank=True, null=True)
     medium_vul = models.IntegerField(blank=True, null=True)
@@ -34,7 +34,7 @@ class manual_scans_db(models.Model):
 
 class manual_scan_results_db(models.Model):
     vuln_id = models.TextField(blank=True)
-    scan_id = models.TextField(blank=True)
+    scan_id = models.TextField(blank=True, null=True)
     date_time = models.DateTimeField(null=True)
     rescan_id = models.TextField(blank=True, null=True)
     vuln_name = models.TextField(blank=True, null=True)

@@ -556,6 +556,8 @@ def vuln_check(request):
     else:
         id_vul = ''
     vul_dat = ov_scan_result_db.objects.filter(username=username, vul_id=id_vul).order_by('vul_id')
+    scan_id = vul_dat[0].scan_id
+    project_id = vul_dat[0].project_id
 
     for cve_dat in vul_dat:
         cve = cve_dat.cve
@@ -565,8 +567,9 @@ def vuln_check(request):
 
     return render(request, 'openvas_scan_data.html', {'vul_dat': vul_dat,
                                                  'cve_list': cve_list,
-                                                 'xref_list': xref_list
-
+                                                 'xref_list': xref_list,
+                                                 'scan_id': scan_id,
+                                                 'project_id': project_id,
                                                  })
 
 def OpenVAS_xml_upload(request):
