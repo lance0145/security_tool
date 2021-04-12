@@ -108,7 +108,7 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <a href="{% url 'manual_scan:vuln_list' %}?scan_id={{data.scan_id}}&project_id={{data.project_id}}">{{data.scan_url}}</a>
+                                            <a href="{% url 'manual_scan:vuln_list' %}?client_id={{data.client_id}}&project_id={{data.project_id}}">{{data.scan_url}}</a>
                                         </td>
                                         <td>{{data.date_time}}</td>
                                         <td><span class="badge badge-pill badge-dark">{{data.total_vul}}</span></td>

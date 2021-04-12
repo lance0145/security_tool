@@ -92,7 +92,7 @@
                                     </thead>
                                     <tbody>{% for data in all_ip %}
                                         <tr data-target="#">
-                                            <td><a href="{% url 'networkscanners:vul_details' %}?scan_id={{data.scan_id}}">{{data.scan_ip}}</a>
+                                            <td><a href="{% url 'networkscanners:vul_details' %}?scan_id={{data.scan_id}}&project_id={{data.project_id}}">{{data.scan_ip}}</a>
                                             </td>
                                          {% csrf_token %}
                                             <td>{{data.date_time}}</td>

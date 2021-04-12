@@ -106,6 +106,7 @@ def add_list_scan(request):
         pentest_type = request.POST.get('pentest_type')
         date_time = datetime.now()
         scanid = uuid.uuid4()
+        client_id = request.POST.get('client_id')
 
         dump_scan = manual_scans_db(
             date_time=date_time,
@@ -114,6 +115,7 @@ def add_list_scan(request):
             pentest_type=pentest_type,
             project_id=project_id,
             username=username,
+            client_id=client_id,
         )
         dump_scan.save()
         return HttpResponseRedirect(reverse('manual_scan:list_scan'))
@@ -143,15 +145,15 @@ def vuln_list(request):
         vuln_id = vul.vuln_data_id
 
     if request.method == 'GET':
-        scan_id = request.GET['scan_id']
+        client_id = request.GET['client_id']
         project_id = request.GET['project_id']
-        all_vuln = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id)#.order_by('severity')
-        scan_url = manual_scans_db.objects.filter(scan_id=scan_id)
+        all_vuln = manual_scan_results_db.objects.filter(username=username, client_id=client_id)#.order_by('severity')
+        scan_url = manual_scans_db.objects.filter(client_id=client_id)
 
     return render(request,
                   'manual_vuln_list.html',
                   {'all_vuln': all_vuln,
-                   'scan_id': scan_id,
+                   'client_id': client_id,
                    'vuln_data': vuln_id,
                    'project_id': project_id,
                    'scan_url': scan_url[0].scan_url
@@ -169,6 +171,7 @@ def add_vuln(request):
     scanid = None
     severity_color = None
     project_id = None
+    client_id = None
     username = request.user.username
 
     if request.method == 'GET':
@@ -186,84 +189,8 @@ def add_vuln(request):
         risk_rating = request.GET.get('risk_rating')
         likelihood = request.GET.get('likelihood')
         consequence = request.GET.get('consequence')
-
-        if severity == "Critical":
-            severity_color = "danger"
-
-        elif severity == "High":
-            severity_color = "danger"
-
-        elif severity == 'Medium':
-            severity_color = "warning"
-
-        elif severity == 'Minimal':
-            severity_color = "info"
-
-        elif severity == 'Very Minimal':
-            severity_color = "info"
-
-
-        dump_data = manual_scan_results_db(
-            vuln_id=vuln_id,
-            vuln_name=vuln_name,
-            severity_color=severity_color,
-            severity=severity,
-            vuln_url=vuln_url,
-            description=description,
-            solution=solution,
-            reference=reference,
-            scan_id='6c7db0c7-13ad-46d0-a56d-4f66a16ca2cb',
-            pentest_type=pentest_type,
-            vuln_status='Open',
-            project_id=project_id,
-            username=username,
-            risk_rating = risk_rating,
-            likelihood = likelihood,
-            consequence = consequence,
-        )
-        dump_data.save()
-
-        all_scan_data = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id)
-
-        total_vuln = len(all_scan_data)
-        total_high = len(all_scan_data.filter(severity="High")) + len(all_scan_data.filter(severity="Critical"))
-        total_medium = len(all_scan_data.filter(severity="Medium"))
-        total_low = len(all_scan_data.filter(severity="Minimal")) + len(all_scan_data.filter(severity="Very Minimal"))
-
-        manual_scans_db.objects.filter(username=username, scan_id=scan_id).update(
-            date_time=date_time,
-            total_vul=total_vuln,
-            high_vul=total_high,
-            medium_vul=total_medium,
-            low_vul=total_low,
-            username=username,
-        )
-
-        return HttpResponseRedirect(reverse('networkscanners:vul_details') + '?scan_id=%s' % (scan_id))
-
-    # if request.method == 'POST' and request.FILES['poc']:
-    if request.method == 'POST':
-        vuln_name = request.POST.get('vuln_name')
-        severity = request.POST.get('vuln_severity')
-        vuln_url = request.POST.get('vuln_instance')
-        description = request.POST.get('vuln_description')
-        solution = request.POST.get('vuln_solution')
-        reference = request.POST.get('vuln_reference')
-        scan_id = request.POST.get('scan_id')
-        project_id = request.POST.get('project_id')
-        pentest_type = request.POST.get('pentest_type')
-        # poc = request.FILES['poc']
-        poc_description = request.POST.get('poc_description')
-        date_time = datetime.now()
-        vuln_id = uuid.uuid4()
-        risk_rating = request.POST.get('risk_rating')
-        likelihood = request.POST.get('likelihood')
-        consequence = request.POST.get('consequence')
-
-        # fs = FileSystemStorage()
-        # filename = fs.save(poc.name, poc)
-        # uploaded_poc_url = fs.url(filename)
-        uploaded_poc_url = None
+        get_client_id = project_db.objects.filter(project_id=project_id)
+        client_id = get_client_id[0].client_id
 
         if severity == "Critical":
             severity_color = "danger"
@@ -294,12 +221,83 @@ def add_vuln(request):
             pentest_type=pentest_type,
             vuln_status='Open',
             project_id=project_id,
-            Poc_Img=uploaded_poc_url,
-            poc_description=poc_description,
             username=username,
             risk_rating = risk_rating,
             likelihood = likelihood,
             consequence = consequence,
+            client_id = client_id,
+        )
+        dump_data.save()
+
+        all_scan_data = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id)
+
+        total_vuln = len(all_scan_data)
+        total_high = len(all_scan_data.filter(severity="High")) + len(all_scan_data.filter(severity="Critical"))
+        total_medium = len(all_scan_data.filter(severity="Medium"))
+        total_low = len(all_scan_data.filter(severity="Minimal")) + len(all_scan_data.filter(severity="Very Minimal"))
+
+        manual_scans_db.objects.filter(username=username, scan_id=scan_id).update(
+            date_time=date_time,
+            total_vul=total_vuln,
+            high_vul=total_high,
+            medium_vul=total_medium,
+            low_vul=total_low,
+            username=username,
+        )
+
+        return HttpResponseRedirect(reverse('networkscanners:vul_details') + '?scan_id=%s' % (scan_id))
+
+    if request.method == 'POST':
+        vuln_name = request.POST.get('vuln_name')
+        severity = request.POST.get('vuln_severity')
+        vuln_url = request.POST.get('vuln_instance')
+        description = request.POST.get('vuln_description')
+        solution = request.POST.get('vuln_solution')
+        reference = request.POST.get('vuln_reference')
+        scan_id = request.POST.get('scan_id')
+        project_id = request.POST.get('project_id')
+        pentest_type = request.POST.get('pentest_type')
+        date_time = datetime.now()
+        vuln_id = uuid.uuid4()
+        risk_rating = request.POST.get('risk_rating')
+        likelihood = request.POST.get('likelihood')
+        consequence = request.POST.get('consequence')
+        client_id = request.POST.get('client_id')
+
+        if severity == "Critical":
+            severity_color = "danger"
+
+        elif severity == "High":
+            severity_color = "danger"
+
+        elif severity == 'Medium':
+            severity_color = "warning"
+
+        elif severity == 'Minimal':
+            severity_color = "info"
+
+        elif severity == 'Very Minimal':
+            severity_color = "info"
+
+
+        dump_data = manual_scan_results_db(
+            vuln_id=vuln_id,
+            vuln_name=vuln_name,
+            severity_color=severity_color,
+            severity=severity,
+            vuln_url=vuln_url,
+            description=description,
+            solution=solution,
+            reference=reference,
+            scan_id=scan_id,
+            pentest_type=pentest_type,
+            vuln_status='Open',
+            project_id=project_id,
+            username=username,
+            risk_rating = risk_rating,
+            likelihood = likelihood,
+            consequence = consequence,
+            client_id = client_id,
         )
         dump_data.save()
 
@@ -321,7 +319,7 @@ def add_vuln(request):
 
         # sk: changing functionality so that it goes back to vuln list after adding a vuln
         #
-        return HttpResponseRedirect(reverse('manual_scan:vuln_list') + '?scan_id=%s&project_id=%s' % (scan_id, project_id))
+        return HttpResponseRedirect(reverse('manual_scan:vuln_list') + '?scan_id=%s&project_id=%s&client_id=%s' % (scan_id, project_id, client_id))
 
     return render(request, 'add_manual_vuln.html', {'scanid': scanid})
 
@@ -577,6 +575,7 @@ def add_new_vuln(request):
         scan_id = request.GET['scan_id']
         vuln_id = request.GET['vuln_id']
         project_id = request.GET['project_id']
+        client_id = request.GET['client_id']
 
         all_vuln = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id)
         vuln_data = VulnerabilityData.objects.filter(username=username, vuln_data_id=vuln_id)
@@ -589,6 +588,7 @@ def add_new_vuln(request):
                       'vuln_data': vuln_data,
                       'all_vuln_data': all_vuln_data,
                       'scan_id': scan_id,
-                      'project_id': project_id
+                      'project_id': project_id,
+                      'client_id': client_id,
                   }
                   )
