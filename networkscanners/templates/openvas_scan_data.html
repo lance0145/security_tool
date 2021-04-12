@@ -2,21 +2,44 @@
 
 {% block body %}
 {% for data in vul_dat %}
+
+<script>
+    $(document).ready(function(){
+        $.ajax({
+            type: 'POST',
+            url: '{% url "networkscanners:check_vul_exist" %}',
+            data: {
+                vul_id: $('input[name=vul_id]').val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+            },
+            success: function (response) {
+                if(response) {
+                    $('#addToManual').prop('disabled', true);    
+                } else {
+                    $('#addToManual').prop('disabled', false)   
+                }
+            }
+        });
+    });
+</script>
 <div class="page-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-auto">
                     <div class="float-right">
-                        <!-- <div>{{project_id}}{{scan_id}}</div> -->
-                        <!-- <a href="/jira/submit_jira_ticket/?summary={{data.name}}&description={{data.description}}%0a%0a%0a Vulnerable Host: {{data.host}} %0a%0a Vulnerable Port: {{data.port}} %0a%0a CVE: {{data.cve}} %0a%0a Archery URL: {SERVERIP}/networkscanners/vuln_check/?vuln_id={{data.vul_id}} &scanner=open_vas&vuln_id={{data.vul_id}}&scan_id={{data.scan_id}} "
-                            class="btn btn-primary btn-lg active" role="button" aria-pressed="true"> Create Jira Ticket</a> -->
                         <form class="form-vertical" action="{% url 'manual_scan:add_vuln' %}" method="GET" enctype="multipart/form-data">
                             {% csrf_token %}
                             <input type="hidden" name="scan_id" value="{{ scan_id }}">
+                            <input type="hidden" name="vul_id" value="{{ data.vul_id }}">
                             <input type="hidden" name="project_id" value="{{ project_id }}">
                             <input type="hidden" name="name" value="{{ data.name }}">
-                            <button type="submit" class="btn btn-primary btn-lg active">Add to Manual Scan</button>
+                            <input type="hidden" name="severity" value="{{ data.threat }}">
+                            <input type="hidden" name="description" value="{{ data.description }}">
+                            <input type="hidden" name="instance" value="{{ data.host }}">
+                            <input type="hidden" name="solution" value="{{ data.tags }}">
+                            <input type="hidden" name="reference" value="{{ xref_list }}">
+                            <button id="addToManual" type="submit" class="btn btn-primary btn-lg active">Add to Manual Scan</button>
                         </form>
                     </div>
                 </div>

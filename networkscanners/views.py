@@ -50,6 +50,8 @@ from archerysettings.models import email_db
 
 from notifications.models import Notification
 from django.urls import reverse
+from django.http import HttpResponse
+from manual_scan.models import manual_scan_results_db
 
 api_data = os.getcwd() + '/' + 'apidata.json'
 
@@ -71,6 +73,11 @@ xref = ""
 tags = ""
 banner = ""
 
+def check_vul_exist(request):
+    username = request.user.username
+    vuln_id = request.POST.get('vul_id')
+    response = manual_scan_results_db.objects.filter(username=username, vuln_id=vuln_id)
+    return HttpResponse(response)
 
 def email_notify(user, subject, message):
     to_mail = ''

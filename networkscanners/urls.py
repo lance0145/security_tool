@@ -74,4 +74,7 @@ urlpatterns = [
     url(r'^del_net_scan_schedule',
         views.del_net_scan_schedule,
         name='del_net_scan_schedule'),
+    url(r'^check_vul_exist',
+        views.check_vul_exist,
+        name='check_vul_exist'),
 ]

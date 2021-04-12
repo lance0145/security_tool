@@ -52,8 +52,6 @@ def ajax_vuln(request):
             date_time=date_time,
         )
 
-    # print("*******************************************************************************")
-    # print(vuln_id, status, edit_status)
     response = {
         'status': edit_status
     }
@@ -176,16 +174,16 @@ def add_vuln(request):
 
     if request.method == 'GET':
         vuln_name = request.GET.get('name', )
-        severity = request.GET.get('severity')
-        vuln_url = request.GET.get('instance')
-        description = request.GET.get('description')
-        solution = request.GET.get('solution')
-        reference = request.GET.get('reference')
-        scan_id = request.GET.get('scan_id')
+        vuln_id = request.GET.get('vul_id', )
+        severity = request.GET.get('severity', )
+        vuln_url = request.GET.get('instance', )
+        description = request.GET.get('description', )
+        solution = request.GET.get('solution', )
+        reference = request.GET.get('reference', )
+        scan_id = request.GET.get('scan_id', )
         project_id = request.GET.get('project_id')
         pentest_type = request.GET.get('pentest_type')
         date_time = datetime.now()
-        vuln_id = uuid.uuid4()
         risk_rating = request.GET.get('risk_rating')
         likelihood = request.GET.get('likelihood')
         consequence = request.GET.get('consequence')
@@ -511,7 +509,6 @@ def del_scan(request):
         get_scan_id = request.POST.get('scan_id')
 
         scan_item = str(get_scan_id)
-        print(scan_item)
         value = scan_item.replace(" ", "")
         value_split = value.split(',')
         split_length = value_split.__len__()
