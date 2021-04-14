@@ -34,7 +34,7 @@ class manual_scans_db(models.Model):
 
 
 class manual_scan_results_db(models.Model):
-    vuln_id = models.TextField(blank=True)
+    vuln_id = models.TextField(blank=True, null=True)
     scan_id = models.TextField(blank=True, null=True)
     client_id = models.TextField(blank=True, null=True)
     date_time = models.DateTimeField(null=True)

@@ -222,7 +222,7 @@
                                         </td>
                                         {% endif %}                                        
                                         <td>
-                                            <div><a href="{% url 'manual_scan:edit_vuln' %}?vuln_id={{data.vuln_id}}&project_id={{project_id}}"
+                                            <div><a href="{% url 'manual_scan:edit_vuln' %}?vuln_id={{data.vuln_id}}&project_id={{project_id}}&client_id={{client_id}}"
                                                     class="btn btn-warning"
                                                     data-original-title="Edit"><i class="fas fa-edit"></i></a>
                                             </div>
@@ -235,6 +235,7 @@
                                                     <input type="hidden" name="vuln_id" value="{{data.vuln_id}}">
                                                     <input type="hidden" name="scan_id" value="{{data.scan_id}}">
                                                     <input type="hidden" name="project_id" value="{{project_id}}">
+                                                    <input type="hidden" name="client_id" value="{{client_id}}">
                                                     <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                                 </form>
                                             </div>
@@ -385,7 +386,7 @@
     });
 
     $(document).on('click', '.confirm-delete', function(){
-    return confirm('Are you sure you want to delete this?');
+        return confirm('Are you sure you want to delete this?');
     })
 </script>
 

@@ -1,32 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE nmaprun>
 <?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
-<!-- Nmap 7.91 scan initiated Thu Apr  8 03:59:11 2021 as: nmap -v -sV -Pn -p 1-65535 -oX nmap.xml 127.0.0.1 -->
-<nmaprun scanner="nmap" args="nmap -v -sV -Pn -p 1-65535 -oX nmap.xml 127.0.0.1" start="1617854351" startstr="Thu Apr  8 03:59:11 2021" version="7.91" xmloutputversion="1.05">
+<!-- Nmap 7.91 scan initiated Wed Apr 14 03:13:03 2021 as: nmap -v -sV -Pn -p 1-65535 -oX nmap.xml 127.0.0.1 -->
+<nmaprun scanner="nmap" args="nmap -v -sV -Pn -p 1-65535 -oX nmap.xml 127.0.0.1" start="1618369983" startstr="Wed Apr 14 03:13:03 2021" version="7.91" xmloutputversion="1.05">
 <scaninfo type="syn" protocol="tcp" numservices="65535" services="1-65535"/>
 <verbose level="1"/>
 <debugging level="0"/>
-<taskbegin task="SYN Stealth Scan" time="1617854352"/>
-<taskend task="SYN Stealth Scan" time="1617854353" extrainfo="65535 total ports"/>
-<taskbegin task="Service scan" time="1617854353"/>
-<taskend task="Service scan" time="1617854368" extrainfo="2 services on 1 host"/>
-<taskbegin task="NSE" time="1617854368"/>
-<taskend task="NSE" time="1617854368"/>
-<taskbegin task="NSE" time="1617854368"/>
-<taskend task="NSE" time="1617854368"/>
-<host starttime="1617854352" endtime="1617854368"><status state="up" reason="user-set" reason_ttl="0"/>
-<address addr="127.0.0.1" addrtype="ipv4"/>
-<hostnames>
-<hostname name="localhost" type="PTR"/>
-</hostnames>
-<ports><extraports state="closed" count="65533">
-<extrareasons reason="resets" count="65533"/>
-</extraports>
-<port protocol="tcp" portid="3389"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="ms-wbt-server" product="xrdp" method="probed" conf="10"><cpe>cpe:/a:jay_sorg:xrdp</cpe></service></port>
-<port protocol="tcp" portid="8000"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http-alt" product="WSGIServer/0.2 CPython/3.9.2" servicefp="SF-Port8000-TCP:V=7.91%I=7%D=4/8%Time=606E7F97%P=x86_64-pc-linux-gnu%r(GetRequest,252,&quot;HTTP/1\.1\x20302\x20Found\r\nDate:\x20Thu,\x2008\x20Apr\x202021\x2003:59:19\x20GMT\r\nServer:\x20WSGIServer/0\.2\x20CPython/3\.9\.2\r\nContent-Type:\x20text/html;\x20charset=utf-8\r\nLocation:\x20/login/\?next=/\r\nContent-Length:\x200\r\nVary:\x20Cookie\r\nX-Content-Type-Options:\x20nosniff\r\nServer-Timing:\x20TimerPanel_utime;dur=31\.826000000002352;desc=\&quot;User\x20CPU\x20time\&quot;,\x20TimerPanel_stime;dur=10\.674999999999102;desc=\&quot;System\x20CPU\x20time\&quot;,\x20TimerPanel_total;dur=42\.501000000001454;desc=\&quot;Total\x20CPU\x20time\&quot;,\x20TimerPanel_total_time;dur=42\.47140884399414;desc=\&quot;Elapsed\x20time\&quot;,\x20SQLPanel_sql_time;dur=0;desc=\&quot;SQL\x200\x20queries\&quot;,\x20CachePanel_total_time;dur=0;desc=\&quot;Cache\x200\x20Calls\&quot;\r\n\r\n&quot;)%r(FourOhFourRequest,4952,&quot;HTTP/1\.1\x20404\x20Not\x20Found\r\nDate:\x20Thu,\x2008\x20Apr\x202021\x2003:59:24\x20GMT\r\nServer:\x20WSGIServer/0\.2\x20CPython/3\.9\.2\r\nContent-Type:\x20text/html\r\nContent-Length:\x2018239\r\nX-Content-Type-Options:\x20nosniff\r\nServer-Timing:\x20TimerPanel_utime;dur=111\.9419999999991;desc=\&quot;User\x20CPU\x20time\&quot;,\x20TimerPanel_stime;dur=0\.0;desc=\&quot;System\x20CPU\x20time\&quot;,\x20TimerPanel_total;dur=111\.9419999999991;desc=\&quot;Total\x20CPU\x20time\&quot;,\x20TimerPanel_total_time;dur=111\.16814613342285;desc=\&quot;Elapsed\x20time\&quot;,\x20SQLPanel_sql_time;dur=0;desc=\&quot;SQL\x200\x20queries\&quot;,\x20CachePanel_total_time;dur=0;desc=\&quot;Cache\x200\x20Calls\&quot;\r\n\r\n&lt;!DOCTYPE\x20html&gt;\n&lt;html\x20lang=\&quot;en\&quot;&gt;\n&lt;head&gt;\n\x20\x20&lt;meta\x20http-equiv=\&quot;content-type\&quot;\x20content=\&quot;text/html;\x20charset=utf-8\&quot;&gt;\n\x20\x20&lt;title&gt;Page\x20not\x20found\x20at\x20/nice\x20ports,/Trinity\.txt\.bak&lt;/title&gt;\n\x20\x20&lt;meta\x20name=\&quot;robots\&quot;\x20content=\&quot;NONE,NOARCHIVE\&quot;&gt;\n\x20\x20&lt;style\x20type=\&quot;text/css\&quot;&gt;\n\x20\x20\x20\x20html\x20\*\x20{\x20padding:0;\x20margin:0;\x20}\n\x20\x20\x20\x20body\x20\*\x20{\x20padding:10px\x2020px;\x20}\n\x20\x20\x20\x20body\x20\*\x20\*\x20{\x20padding:0;\x20}\n\x20\x20\x20\x20body\x20{\x20font:small\x20s&quot;)%r(Socks5,213,&quot;&lt;!DOCTYPE\x20HTML\x20PUBLIC\x20\&quot;-//W3C//DTD\x20HTML\x204\.01//EN\&quot;\n\x20\x20\x20\x20\x20\x20\x20\x20\&quot;http://www\.w3\.org/TR/html4/strict\.dtd\&quot;&gt;\n&lt;html&gt;\n\x20\x20\x20\x20&lt;head&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;meta\x20http-equiv=\&quot;Content-Type\&quot;\x20content=\&quot;text/html;charset=utf-8\&quot;&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;title&gt;Error\x20response&lt;/title&gt;\n\x20\x20\x20\x20&lt;/head&gt;\n\x20\x20\x20\x20&lt;body&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;h1&gt;Error\x20response&lt;/h1&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;p&gt;Error\x20code:\x20400&lt;/p&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;p&gt;Message:\x20Bad\x20request\x20syntax\x20\(&apos;\\x05\\x04\\x00\\x01\\x02\\x80\\x05\\x01\\x00\\x03&apos;\)\.&lt;/p&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;p&gt;Error\x20code\x20explanation:\x20HTTPStatus\.BAD_REQUEST\x20-\x20Bad\x20request\x20syntax\x20or\x20unsupported\x20method\.&lt;/p&gt;\n\x20\x20\x20\x20&lt;/body&gt;\n&lt;/html&gt;\n&quot;);" method="probed" conf="10"/></port>
-</ports>
-<times srtt="5" rttvar="0" to="100000"/>
-</host>
-<runstats><finished time="1617854368" timestr="Thu Apr  8 03:59:28 2021" summary="Nmap done at Thu Apr  8 03:59:28 2021; 1 IP address (1 host up) scanned in 17.13 seconds" elapsed="17.13" exit="success"/><hosts up="1" down="0" total="1"/>
-</runstats>
-</nmaprun>
+<taskbegin task="SYN Stealth Scan" time="1618369983"/>
+<taskend task="SYN Stealth Scan" time="1618369984" extrainfo="65535 total ports"/>
+<taskbegin task="Service scan" time="1618369984"/>

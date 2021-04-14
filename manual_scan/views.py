@@ -132,10 +132,6 @@ def vuln_list(request):
     :return:
     """
     username = request.user.username
-    all_vuln = None
-    scan_id = None
-    vuln_id = None
-    project_id = None
 
     vuln_data = VulnerabilityData.objects.filter(username=username)
 
@@ -143,10 +139,13 @@ def vuln_list(request):
         vuln_id = vul.vuln_data_id
 
     if request.method == 'GET':
-        client_id = request.GET['client_id']
-        project_id = request.GET['project_id']
+        client_id = request.GET.get('client_id', )
+        project_id = request.GET.get('project_id', )
         all_vuln = manual_scan_results_db.objects.filter(username=username, client_id=client_id)#.order_by('severity')
         scan_url = manual_scans_db.objects.filter(client_id=client_id)
+        scan = ""
+        if scan_url:
+            scan = scan_url[0].scan_url
 
     return render(request,
                   'manual_vuln_list.html',
@@ -154,7 +153,7 @@ def vuln_list(request):
                    'client_id': client_id,
                    'vuln_data': vuln_id,
                    'project_id': project_id,
-                   'scan_url': scan_url[0].scan_url
+                   'scan_url': scan
                    }
                   )
 
@@ -350,15 +349,19 @@ def edit_vuln(request):
     severity_color = None
     project_id = None
     vuln_id = None
+    client_id = None
     if request.method == 'GET':
-        vuln_id = request.GET['vuln_id']
-        project_id = request.GET['project_id']
+        vuln_id= request.GET.get('vuln_id', )
+        project_id= request.GET.get('project_id', )
+        global get_client_id
+        get_client_id = request.GET.get('client_id', )
 
     vuln_data = manual_scan_results_db.objects.filter(username=username, vuln_id=vuln_id)
 
     if request.method == 'POST':
         vuln_id = request.POST.get('vuln_id')
         project_id = request.POST.get('project_id')
+        client_id = get_client_id
         vuln_name = request.POST.get('vuln_name')
         severity = request.POST.get('vuln_severity')
         vuln_url = request.POST.get('vuln_instance')
@@ -414,8 +417,7 @@ def edit_vuln(request):
             username=username,
         )
         return HttpResponseRedirect(
-            reverse('manual_scan:vuln_list') + '?scan_id=%(scan_id)s&project_id=%(project_id)s' % {'scan_id': scan_id,
-                                                                                                   'project_id': project_id})
+            reverse('manual_scan:vuln_list') + '?client_id=%s&project_id=%s' % (client_id, project_id))
 
     return render(request, 'edit_vuln.html',
                   {'vuln_data': vuln_data,
@@ -471,11 +473,13 @@ def del_vuln(request):
         scan_id = request.POST.get('scan_id')
         get_vuln_id = request.POST.get('vuln_id')
         project_id = request.POST.get('project_id')
+        client_id = request.POST.get('client_id')
 
         scan_item = str(get_vuln_id)
         value = scan_item.replace(" ", "")
         value_split = value.split(',')
         split_length = value_split.__len__()
+
         for i in range(0, split_length):
             vuln_id = value_split.__getitem__(i)
             del_vuln = manual_scan_results_db.objects.filter(username=username, vuln_id=vuln_id)
@@ -494,9 +498,9 @@ def del_vuln(request):
             medium_vul=total_medium,
             low_vul=total_low,
         )
-
+        
         return HttpResponseRedirect(
-            reverse('manual_scan:vuln_list') + '?scan_id=%s&project_id=%s' % (scan_id, project_id))
+            reverse('manual_scan:vuln_list') + '?client_id=%s&project_id=%s' % (client_id, project_id))
 
 
 def del_scan(request):
@@ -522,7 +526,19 @@ def del_scan(request):
             del_scan_info = manual_scans_db.objects.filter(username=username, scan_id=scan_id)
             del_scan_info.delete()
 
-            # messages.warning(request, "Target Deleted")
+        all_scan_data = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id)
+
+        total_vuln = len(all_scan_data)
+        total_high = len(all_scan_data.filter(severity="High")) + len(all_scan_data.filter(severity="Critical"))
+        total_medium = len(all_scan_data.filter(severity="Medium"))
+        total_low = len(all_scan_data.filter(severity="Minimal"))+ len(all_scan_data.filter(severity="Very Minimal"))
+
+        manual_scans_db.objects.filter(username=username, scan_id=scan_id).update(
+            total_vul=total_vuln,
+            high_vul=total_high,
+            medium_vul=total_medium,
+            low_vul=total_low,
+        )
 
         return HttpResponseRedirect(reverse('manual_scan:list_scan'))
 
@@ -570,10 +586,10 @@ def add_new_vuln(request):
     username = request.user.username
     all_vuln_data = VulnerabilityData.objects.filter(username=username)
     if request.method == 'GET':
-        scan_id = request.GET['scan_id']
-        vuln_id = request.GET['vuln_id']
-        project_id = request.GET['project_id']
-        client_id = request.GET['client_id']
+        scan_id = request.GET.get('scan_id', )
+        vuln_id= request.GET.get('vuln_id', )
+        project_id= request.GET.get('project_id', )
+        client_id = request.GET.get('client_id', )
 
         all_vuln = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id)
         vuln_data = VulnerabilityData.objects.filter(username=username, vuln_data_id=vuln_id)
