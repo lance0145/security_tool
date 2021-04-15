@@ -5,7 +5,7 @@
         <div class="page-wrapper">
             <br>
             <div style="display: flex; justify-content: flex-end">
-                <div><a href="{% url 'manual_scan:edit_vuln' %}?vuln_id={{data.vuln_id}}&project_id={{project_id}}"
+                <div><a href="{% url 'manual_scan:edit_vuln' %}?vuln_id={{data.vuln_id}}&project_id={{data.project_id}}&client_id={{data.client_id}}"
                     class="btn btn-warning"
                     data-original-title="Edit"><i class="fas fa-edit"></i></a>
                 </div>
@@ -39,6 +39,22 @@
                         <br>
                         <h2>Reference</h2>
                         {{ data.reference | safe }}
+                        <br>
+                        <br>
+                        <h2>Severity</h2>
+                        {{ data.severity }}
+                        <br>
+                        <br>
+                        <h2>Risk Rating</h2>
+                        {{ data.risk_rating }}
+                        <br>
+                        <br>
+                        <h2>Likelihood</h2>
+                        {{ data.likelihood}}
+                        <br>
+                        <br>
+                        <h2>Consequence</h2>
+                        {{ data.consequence}}
                         <br>
                     </div>
                 </div>

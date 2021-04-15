@@ -230,16 +230,20 @@ def add_vuln(request):
         all_scan_data = manual_scan_results_db.objects.filter(username=username)
 
         total_vuln = len(all_scan_data)
-        total_high = len(all_scan_data.filter(severity="High")) + len(all_scan_data.filter(severity="Critical"))
+        total_critical =  len(all_scan_data.filter(severity="Critical"))
+        total_high = len(all_scan_data.filter(severity="High"))
         total_medium = len(all_scan_data.filter(severity="Medium"))
-        total_low = len(all_scan_data.filter(severity="Minimal")) + len(all_scan_data.filter(severity="Very Minimal"))
+        total_low = len(all_scan_data.filter(severity="Minimal"))
+        total_very_low = len(all_scan_data.filter(severity="Very Minimal"))
 
-        manual_scans_db.objects.filter(username=username).update(
+        manual_scans_db.objects.filter(username=username, scan_id=scan_id).update(
             date_time=date_time,
             total_vul=total_vuln,
+            critical_vul =total_critical,
             high_vul=total_high,
             medium_vul=total_medium,
             low_vul=total_low,
+            very_low_vul = total_very_low,
             username=username,
         )
 
@@ -302,16 +306,20 @@ def add_vuln(request):
         all_scan_data = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id)
 
         total_vuln = len(all_scan_data)
-        total_high = len(all_scan_data.filter(severity="High")) + len(all_scan_data.filter(severity="Critical"))
+        total_critical =  len(all_scan_data.filter(severity="Critical"))
+        total_high = len(all_scan_data.filter(severity="High"))
         total_medium = len(all_scan_data.filter(severity="Medium"))
-        total_low = len(all_scan_data.filter(severity="Minimal")) + len(all_scan_data.filter(severity="Very Minimal"))
+        total_low = len(all_scan_data.filter(severity="Minimal"))
+        total_very_low = len(all_scan_data.filter(severity="Very Minimal"))
 
         manual_scans_db.objects.filter(username=username, scan_id=scan_id).update(
             date_time=date_time,
             total_vul=total_vuln,
+            critical_vul =total_critical,
             high_vul=total_high,
             medium_vul=total_medium,
             low_vul=total_low,
+            very_low_vul = total_very_low,
             username=username,
         )
 
@@ -346,22 +354,23 @@ def edit_vuln(request):
     """
     username = request.user.username
 
-    severity_color = None
-    project_id = None
-    vuln_id = None
-    client_id = None
     if request.method == 'GET':
         vuln_id= request.GET.get('vuln_id', )
         project_id= request.GET.get('project_id', )
-        global get_client_id
-        get_client_id = request.GET.get('client_id', )
+        client_id = request.GET.get('client_id', )
+        vuln_data = manual_scan_results_db.objects.filter(username=username, vuln_id=vuln_id)
 
-    vuln_data = manual_scan_results_db.objects.filter(username=username, vuln_id=vuln_id)
+        return render(request, 'edit_vuln.html',
+                    {'vuln_data': vuln_data,
+                    'vuln_id': vuln_id,
+                    'project_id': project_id,
+                    'client_id': client_id
+                    })
 
     if request.method == 'POST':
         vuln_id = request.POST.get('vuln_id')
         project_id = request.POST.get('project_id')
-        client_id = get_client_id
+        client_id = request.POST.get('client_id')
         vuln_name = request.POST.get('vuln_name')
         severity = request.POST.get('vuln_severity')
         vuln_url = request.POST.get('vuln_instance')
@@ -404,26 +413,24 @@ def edit_vuln(request):
         all_scan_data = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id)
 
         total_vuln = len(all_scan_data)
-        total_high = len(all_scan_data.filter(severity="High")) + len(all_scan_data.filter(severity="Critical"))
+        total_critical =  len(all_scan_data.filter(severity="Critical"))
+        total_high = len(all_scan_data.filter(severity="High"))
         total_medium = len(all_scan_data.filter(severity="Medium"))
-        total_low = len(all_scan_data.filter(severity="Minimal")) + len(all_scan_data.filter(severity="Very Minimal"))
+        total_low = len(all_scan_data.filter(severity="Minimal"))
+        total_very_low = len(all_scan_data.filter(severity="Very Minimal"))
 
         manual_scans_db.objects.filter(username=username, scan_id=scan_id).update(
             date_time=date_time,
             total_vul=total_vuln,
+            critical_vul =total_critical,
             high_vul=total_high,
             medium_vul=total_medium,
             low_vul=total_low,
+            very_low_vul = total_very_low,
             username=username,
         )
         return HttpResponseRedirect(
             reverse('manual_scan:vuln_list') + '?client_id=%s&project_id=%s' % (client_id, project_id))
-
-    return render(request, 'edit_vuln.html',
-                  {'vuln_data': vuln_data,
-                   'vuln_id': vuln_id,
-                   'project_id': project_id
-                   })
 
 
 def manual_vuln_data(request):
@@ -443,16 +450,20 @@ def manual_vuln_data(request):
         all_scan_data = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id, vuln_status='Open')
 
         total_vuln = len(all_scan_data)
-        total_high = len(all_scan_data.filter(severity="High")) + len(all_scan_data.filter(severity="Critical"))
+        total_critical =  len(all_scan_data.filter(severity="Critical"))
+        total_high = len(all_scan_data.filter(severity="High"))
         total_medium = len(all_scan_data.filter(severity="Medium"))
-        total_low = len(all_scan_data.filter(severity="Minimal")) + len(all_scan_data.filter(severity="Very Minimal"))
+        total_low = len(all_scan_data.filter(severity="Minimal"))
+        total_very_low = len(all_scan_data.filter(severity="Very Minimal"))
 
         manual_scans_db.objects.filter(username=username, scan_id=scan_id).update(
             date_time=date_time,
             total_vul=total_vuln,
+            critical_vul =total_critical,
             high_vul=total_high,
             medium_vul=total_medium,
             low_vul=total_low,
+            very_low_vul = total_very_low,
             username=username,
         )
 
@@ -488,15 +499,20 @@ def del_vuln(request):
         all_scan_data = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id)
 
         total_vuln = len(all_scan_data)
-        total_high = len(all_scan_data.filter(severity="High")) + len(all_scan_data.filter(severity="Critical"))
+        total_critical =  len(all_scan_data.filter(severity="Critical"))
+        total_high = len(all_scan_data.filter(severity="High"))
         total_medium = len(all_scan_data.filter(severity="Medium"))
-        total_low = len(all_scan_data.filter(severity="Minimal"))+ len(all_scan_data.filter(severity="Very Minimal"))
+        total_low = len(all_scan_data.filter(severity="Minimal"))
+        total_very_low = len(all_scan_data.filter(severity="Very Minimal"))
 
         manual_scans_db.objects.filter(username=username, scan_id=scan_id).update(
             total_vul=total_vuln,
+            critical_vul =total_critical,
             high_vul=total_high,
             medium_vul=total_medium,
             low_vul=total_low,
+            very_low_vul = total_very_low,
+            username=username,
         )
         
         return HttpResponseRedirect(
@@ -529,15 +545,20 @@ def del_scan(request):
         all_scan_data = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id)
 
         total_vuln = len(all_scan_data)
-        total_high = len(all_scan_data.filter(severity="High")) + len(all_scan_data.filter(severity="Critical"))
+        total_critical =  len(all_scan_data.filter(severity="Critical"))
+        total_high = len(all_scan_data.filter(severity="High"))
         total_medium = len(all_scan_data.filter(severity="Medium"))
-        total_low = len(all_scan_data.filter(severity="Minimal"))+ len(all_scan_data.filter(severity="Very Minimal"))
+        total_low = len(all_scan_data.filter(severity="Minimal"))
+        total_very_low = len(all_scan_data.filter(severity="Very Minimal"))
 
         manual_scans_db.objects.filter(username=username, scan_id=scan_id).update(
             total_vul=total_vuln,
+            critical_vul =total_critical,
             high_vul=total_high,
             medium_vul=total_medium,
             low_vul=total_low,
+            very_low_vul = total_very_low,
+            username=username,
         )
 
         return HttpResponseRedirect(reverse('manual_scan:list_scan'))

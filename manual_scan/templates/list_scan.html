@@ -41,9 +41,11 @@
                                             <th>Client</th>
                                             <th>Date Time</th>
                                             <th>Total Vulnerability</th>
+                                            <th>Critical</th>
                                             <th>High</th>
                                             <th>Medium</th>
                                             <th>Minimal</th>
+                                            <th>Very Minimal</th>
                                         </tr>
                                     </thead>
                                     <tbody>{% for data in all_scans %}
@@ -53,9 +55,11 @@
                                             </td>
                                             <td>{{data.date_time}}</td>
                                             <td><span class="badge badge-pill badge-dark">{{data.total_vul}}</span></td>
+                                            <td><span class="badge badge-pill badge-dark">{{data.critical_vul}}</span></td>
                                             <td><span class="badge badge-pill badge-danger">{{data.high_vul}}</span></td>
                                             <td><span class="badge badge-pill badge-warning">{{data.medium_vul}}</span></td>
                                             <td><span class="badge badge-pill badge-info">{{data.low_vul}}</span></td>
+                                            <td><span class="badge badge-pill badge-info">{{data.very_low_vul}}</span></td>
                                             {% endfor %}
                                         </tr>
                                     </tbody>
@@ -88,9 +92,11 @@
                                         <th>Client</th>
                                         <th>Date Time</th>
                                         <th>Total Vulnerability</th>
+                                        <th>Critical</th>
                                         <th>High</th>
                                         <th>Medium</th>
                                         <th>Minimal</th>
+                                        <th>Very Minimal</th>
                                         <th>Delete</th>
                                     </tr>
                                     </thead>
@@ -112,9 +118,11 @@
                                         </td>
                                         <td>{{data.date_time}}</td>
                                         <td><span class="badge badge-pill badge-dark">{{data.total_vul}}</span></td>
+                                        <td><span class="badge badge-pill badge-dark">{{data.critical_vul}}</span></td>
                                         <td><span class="badge badge-pill badge-danger">{{data.high_vul}}</span></td>
                                         <td><span class="badge badge-pill badge-warning">{{data.medium_vul}}</span></td>
                                         <td><span class="badge badge-pill badge-info">{{data.low_vul}}</span></td>
+                                        <td><span class="badge badge-pill badge-info">{{data.very_low_vul}}</span></td>
                                         <td class="confirm-delete">
                                             <form action="{% url 'manual_scan:del_scan' %}" method="post" class="forms-sample">
 
