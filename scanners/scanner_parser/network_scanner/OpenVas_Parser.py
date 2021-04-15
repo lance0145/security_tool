@@ -145,9 +145,11 @@ def updated_xml_parser(root, project_id, scan_id, username):
             vuln_color = 'danger'
         elif threat == 'Medium':
             vuln_color = 'warning'
-        elif threat == 'Minimal':
+        elif threat == 'Log':
+            threat = 'Minimal'
             vuln_color = 'info'
-        elif threat == 'Very Minimal':
+        elif threat == 'Info':
+            threat = 'Very Minimal'
             vuln_color = 'info'
         if lenth_match == 1:
             duplicate_vuln = 'Yes'

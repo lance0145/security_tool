@@ -199,13 +199,11 @@ def add_vuln(request):
         elif severity == 'Medium':
             severity_color = "warning"
 
-        elif severity == 'Log':
+        elif severity == 'Minimal':
             severity_color = "info"
-            severity = 'Minimal'
 
-        # elif severity == 'Very Minimal':
-        #     severity_color = "info"
-
+        elif severity == 'Very Minimal':
+            severity_color = "info"
 
         dump_data = manual_scan_results_db(
             vuln_id=vuln_id,
