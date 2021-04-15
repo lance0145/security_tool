@@ -188,6 +188,7 @@ def add_vuln(request):
         # consequence = request.GET.get('consequence')
         get_client_id = project_db.objects.filter(project_id=project_id)
         client_id = get_client_id[0].client_id
+        # client_id = request.GET.get('client_id')
 
         if severity == "Critical":
             severity_color = "danger"
@@ -236,7 +237,7 @@ def add_vuln(request):
         total_low = len(all_scan_data.filter(severity="Minimal"))
         total_very_low = len(all_scan_data.filter(severity="Very Minimal"))
 
-        manual_scans_db.objects.filter(username=username, scan_id=scan_id).update(
+        manual_scans_db.objects.filter(username=username, project_id=project_id, client_id=client_id).update(
             date_time=date_time,
             total_vul=total_vuln,
             critical_vul =total_critical,
@@ -303,7 +304,7 @@ def add_vuln(request):
         )
         dump_data.save()
 
-        all_scan_data = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id)
+        all_scan_data = manual_scan_results_db.objects.filter(username=username)
 
         total_vuln = len(all_scan_data)
         total_critical =  len(all_scan_data.filter(severity="Critical"))
@@ -312,7 +313,7 @@ def add_vuln(request):
         total_low = len(all_scan_data.filter(severity="Minimal"))
         total_very_low = len(all_scan_data.filter(severity="Very Minimal"))
 
-        manual_scans_db.objects.filter(username=username, scan_id=scan_id).update(
+        manual_scans_db.objects.filter(username=username, project_id=project_id, client_id=client_id).update(
             date_time=date_time,
             total_vul=total_vuln,
             critical_vul =total_critical,
@@ -410,7 +411,7 @@ def edit_vuln(request):
             likelihood = likelihood,
             consequence = consequence,
         )
-        all_scan_data = manual_scan_results_db.objects.filter(username=username, scan_id=scan_id)
+        all_scan_data = manual_scan_results_db.objects.filter(username=username, project_id=project_id, client_id=client_id)
 
         total_vuln = len(all_scan_data)
         total_critical =  len(all_scan_data.filter(severity="Critical"))
@@ -419,7 +420,7 @@ def edit_vuln(request):
         total_low = len(all_scan_data.filter(severity="Minimal"))
         total_very_low = len(all_scan_data.filter(severity="Very Minimal"))
 
-        manual_scans_db.objects.filter(username=username, scan_id=scan_id).update(
+        manual_scans_db.objects.filter(username=username, project_id=project_id, client_id=client_id).update(
             date_time=date_time,
             total_vul=total_vuln,
             critical_vul =total_critical,
