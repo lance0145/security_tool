@@ -352,6 +352,10 @@ def edit_vuln(request):
     :return:
     """
     username = request.user.username
+    scanid = None
+    severity_color = None
+    project_id = None
+    client_id = None
 
     if request.method == 'GET':
         vuln_id= request.GET.get('vuln_id', )
