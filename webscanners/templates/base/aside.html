@@ -62,6 +62,15 @@
                 </li>
 
                 <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark panel-heading5"
+                                    href="{% url 'tools:dns_summary' %}" aria-expanded="false"><i
+                    class="fas fa-globe"></i><span class="hide-menu">DNS</span></a>
+                <ul aria-expanded="false" class="collapse first-level panel-collapse5">                        
+                    <li class="sidebar-item"><a href="{% url 'networkscanners:dns' %}"class="sidebar-link"><i
+                            class="fas fa-rocket"></i><span class="hide-menu">DNS Scan</span></a></li>
+                </ul>
+                </li>
+
+                <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark panel-heading5"
                                         href="{% url 'manual_scan:list_scan_auto' %}" aria-expanded="false"><i
                         class="fas fa-user-astronaut"></i><span class="hide-menu">Auto</span></a>
                     <ul aria-expanded="false" class="collapse first-level panel-collapse5">                        

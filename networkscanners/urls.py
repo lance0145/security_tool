@@ -20,6 +20,9 @@ from networkscanners import views
 app_name = 'networkscanners'
 
 urlpatterns = [
+    url(r'^dns',
+        views.dns,
+        name='dns'),
     url(r'^$',
         views.index,
         name='index'),

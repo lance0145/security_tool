@@ -1,0 +1,160 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block body %}
+
+<script src="{% static 'matrix-admin-bt4/dist/js/jquery-1.9.1.min.js' %}"></script>
+
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-md-flex align-items-center">
+                            <h1 class="card-title">DNS Scan</h1>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <form id="start_scan" class="form-horizontal">{% csrf_token %}
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 m-t-15">URL/s</label>
+                                                <div class="col-sm-9">
+                                                    <textarea class="form-control" name="ip" id="ip"
+                                                        placeholder="Place URL/s here..."></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 m-t-15">Projects</label>
+                                                    <div class="col-md-9">
+                                                        <select id="project_id" name="project_id"
+                                                                class="select2 form-control custom-select"
+                                                                style="width: 100%; height:36px;">
+                                                            {% for data in all_proj %}
+                                                            <option value="{{data.project_id}}">{{data.project_name}}
+                                                            </option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 m-t-15">dns custom command</label>
+                                                    <div class="col-sm-9">
+                                                        <input id="command" type="text" name="pentester"
+                                                            class="form-control"                                                             
+                                                            placeholder="Place dns custom command here..."/>
+                                                    </div>
+                                                </div>
+                                            <div class="card-body">
+                                                <div class="controls">
+                                                    <input id="launch" type="submit" class="btn btn-primary" value="Launch">
+                                                    <label class="col-md-3 m-t-15" id="label" for="file"></label>
+                                                    <input id="force" type="submit" class="btn btn-danger" value="Brute Force">
+                                                    <label class="col-md-3 m-t-15" id="label" for="file"></label>
+                                                    <progress id="progress" value ="0" max="100" style="width: 300px;"></progress>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).on('submit', '#start_scan', function(e){        
+        e.preventDefault();
+        IpAddr=$('#ip').val();
+        var ipformat =  /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?|^((http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/; 
+        var ipformat1 = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?|^((http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\/(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+        var ipformat2 = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?|^((http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\-(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+        var ipformat3 = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?|^((http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\:(6553[0-5]|655[0-2][0-9]|65[0-4][0-9][0-9]|6[0-4][0-9][0-9][0-9][0-9]|[1-5](\d){4}|[1-9](\d){0,3})$/;
+        var Command = $('#command').val();
+        var cmdformat = "^nmap";
+        if(Command.match(cmdformat) || IpAddr.match(ipformat) || IpAddr.match(ipformat1) || IpAddr.match(ipformat2) || IpAddr.match(ipformat3)){
+            $('#label').text('Scanning, please wait will prompt...');
+            $("#ip").prop( "disabled", true );
+            $("#command").prop( "disabled", true );
+            $("#launch").prop( "disabled", true );
+            $("#project_id").prop( "disabled", true );
+            $('#progress').show();
+            var progression = 0,
+            progress = setInterval(function() 
+            {
+                $('#progress').val(progression);
+                if(progression == 100) {
+                    // $('#label').text('Please wait, will prompt...');
+                } else
+                    progression += 10;
+                
+            }, 1000);
+            $.ajax({
+                type: 'POST',
+                url: '{% url "tools:openvas" %}',
+                data: {
+                    ip: $('#ip').val(),
+                    project_id: $('#project_id').val(),
+                    command:  $('#command').val(),
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                },
+                success:function(){
+                    alert('Done, scan result saved on dns Vulnerability.')                    
+                    $("#ip").prop( "disabled", false );
+                    $("#command").prop( "disabled", false );
+                    $("#launch").prop( "disabled", false );
+                    $("#project_id").prop( "disabled", false );
+                    $('#progress').hide();
+                    $('#label').text('');
+                    $('#ip').val('');
+                    $('#command').val('');
+                    window.location.href = "/networkscanners/vul_details/?scan_id="+IpAddr;
+                },
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                }
+            });
+        }
+        else {
+            $('#label').text('Invalid URL/s or command, try again...');
+        }
+    });
+
+    $(document).ready(function() {
+        $('#progress').hide();
+        // $('#command').val("dns ");
+        $("#command").keyup(function() {
+            $( "#ip" ).prop( "disabled", true );
+            if(!$('#command').val())
+                $( "#ip" ).prop( "disabled", false );
+        });
+        $("#ip").keyup(function() {
+            $("#command").prop( "disabled", true );
+            if(!$('#ip').val())
+                $( "#command" ).prop( "disabled", false );
+        });
+        $("#command").on("change", function() {
+            $( "#ip" ).prop( "disabled", true );
+            if(!$('#command').val())
+                $( "#ip" ).prop( "disabled", false );
+        });
+        $("#ip").on("change", function() {
+            $("#command").prop( "disabled", true );
+            if(!$('#ip').val())
+                $( "#command" ).prop( "disabled", false );
+        });
+    });
+</script>
+
+{% endblock %}

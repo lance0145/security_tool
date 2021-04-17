@@ -20,6 +20,9 @@ from tools import views
 app_name = 'tools'
 
 urlpatterns = [
+    url(r'^dns_summary',
+        views.dns_summary,
+        name='dns_summary'),
     url(r'^sslscan/$',
         views.sslscan,
         name='sslscan'),

@@ -46,6 +46,28 @@ nikto_output = ''
 scan_result = ''
 all_nmap = ''
 
+def dns_summary(request):
+    """
+    :param request:
+    :return:
+    """
+    username = request.user.username
+    if request.method == 'POST':
+        project_id = request.POST.get('proj_id', )
+        all_openvas = openvas_scan_db.objects.filter(username=username, project_id=project_id)
+        proj_name = project_db.objects.filter(username=username, project_id=project_id) 
+    else:
+        all_openvas = openvas_scan_db.objects.filter(username=username)
+        proj_name = project_db.objects.filter(username=username)
+    all_projects = project_db.objects.filter(username=username)
+
+    return render(request,
+                  'dns_summary.html',
+                  {'all_openvas': all_openvas,
+                  'proj_name': proj_name[0].project_name,
+                  'all_projects': all_projects,}
+                  )
+
 def openvas(request):
 
     username = request.user.username
