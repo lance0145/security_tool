@@ -15,7 +15,7 @@
 # This file is part of ArcherySec Project.
 
 from __future__ import unicode_literals
-from tools.models import sslscan_result_db, nikto_result_db, nmap_result_db, nmap_scan_db, nikto_vuln_db, dirsearch_result_db, dirsearch_scan_db, openvas_result_db, openvas_scan_db
+from tools.models import sslscan_result_db, nikto_result_db, nmap_result_db, nmap_scan_db, nikto_vuln_db, dirsearch_result_db, dirsearch_scan_db, openvas_result_db, openvas_scan_db, sniper_config_db
 from networkscanners.models import openvas_scan_db, \
     ov_scan_result_db, \
     task_schedule_db, serversetting
@@ -46,7 +46,7 @@ nikto_output = ''
 scan_result = ''
 all_nmap = ''
 
-def dns_summary(request):
+def sniper_summary(request):
     """
     :param request:
     :return:
@@ -54,19 +54,41 @@ def dns_summary(request):
     username = request.user.username
     if request.method == 'POST':
         project_id = request.POST.get('proj_id', )
-        all_openvas = openvas_scan_db.objects.filter(username=username, project_id=project_id)
-        proj_name = project_db.objects.filter(username=username, project_id=project_id) 
+        all_nmap = nmap_scan_db.objects.filter(username=username, project_id=project_id)
+        proj_name = project_db.objects.filter(username=username, project_id=project_id)
     else:
-        all_openvas = openvas_scan_db.objects.filter(username=username)
+        all_nmap = nmap_scan_db.objects.filter(username=username)
         proj_name = project_db.objects.filter(username=username)
     all_projects = project_db.objects.filter(username=username)
 
     return render(request,
-                  'dns_summary.html',
-                  {'all_openvas': all_openvas,
+                  'sniper_summary.html',
+                  {'all_nmap': all_nmap,
                   'proj_name': proj_name[0].project_name,
                   'all_projects': all_projects,}
+
                   )
+
+def sniper_edit(request):
+    """
+    :param request:
+    :return:
+    """
+    username = request.user.username
+    all_config = sniper_config_db.objects.filter(username=username)
+    all_proj = project_db.objects.filter(username=username)
+
+    return render(request, 'sniper_form.html', {'all_proj': all_proj,
+                                                'config_name': all_config[0].config_name,                                            
+                                                'ip_address': all_config[0].ip_address,
+                                                'script': all_config[0].script,
+                                                'option1': all_config[0].option1,
+                                                'option2': all_config[0].option2,
+                                                'log1': all_config[0].log1,
+                                                'log2': all_config[0].log2,
+                                                'result1': all_config[0].result1,
+                                                'result2': all_config[0].result2,
+                                                    })
 
 def openvas(request):
 

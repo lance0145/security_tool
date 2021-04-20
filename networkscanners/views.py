@@ -52,6 +52,7 @@ from notifications.models import Notification
 from django.urls import reverse
 from django.http import HttpResponse
 from manual_scan.models import manual_scan_results_db
+from tools.models import sniper_config_db
 
 api_data = os.getcwd() + '/' + 'apidata.json'
 
@@ -314,23 +315,64 @@ def launch_scan(request):
     return render('openvas_vuln_list.html',
                               {'all_ip': all_ip})
 
-def dns(request):
-    username = request.user.username
+def sniper(request):
     """
-    List all network scan IP's.
     :param request:
     :return:
     """
-    all_scans = openvas_scan_db.objects.filter(username=username)
+    username = request.user.username
+    all_config = sniper_config_db.objects.filter(username=username)
     all_proj = project_db.objects.filter(username=username)
 
-    all_notify = Notification.objects.unread()
-    return render(request,
-                  'ipscan_dns.html',
-                  {'all_scans': all_scans,
-                   'all_proj': all_proj,
-                   'message': all_notify,
-                   })
+    if request.method == 'POST':
+        config_name = request.POST.get('config_name')
+        ip_address = request.POST.get('ip_address')
+        script = request.POST.get('script')
+        option1 = request.POST.get('option1')
+        option2 = request.POST.get('option2')
+        log1 = request.POST.get('log1')
+        log2 = request.POST.get('log2')
+        result1 = request.POST.get('result1')
+        result2 = request.POST.get('result2')
+        sniper_config_db.objects.filter(username=username).update(username=username,
+                                config_name = config_name,
+                                ip_address = ip_address,
+                                script = script,
+                                option1 = option1,
+                                option2 = option2,
+                                log1 = log1,
+                                log2 = log2,
+                                result1 = result1,
+                                result2 = result2)
+
+        return HttpResponseRedirect(reverse('networkscanners:sniper'))
+
+    return render(request, 'ipscan_sniper.html', {'all_proj': all_proj,                                             
+                                                'ip_address': all_config[0].ip_address,
+                                                'script': all_config[0].script,
+                                                'option1': all_config[0].option1,
+                                                'option2': all_config[0].option2,
+                                                'log1': all_config[0].log1,
+                                                'log2': all_config[0].log2,
+                                                'result1': all_config[0].result1,
+                                                'result2': all_config[0].result2,
+                                                'ip_address1': all_config[1].ip_address,
+                                                'script1': all_config[1].script,
+                                                'option11': all_config[1].option1,
+                                                'option21': all_config[1].option2,
+                                                'log11': all_config[1].log1,
+                                                'log21': all_config[1].log2,
+                                                'result11': all_config[1].result1,
+                                                'result21': all_config[1].result2,
+                                                'ip_address2': all_config[2].ip_address,
+                                                'script2': all_config[2].script,
+                                                'option12': all_config[2].option1,
+                                                'option22': all_config[2].option2,
+                                                'log12': all_config[2].log1,
+                                                'log22': all_config[2].log2,
+                                                'result12': all_config[2].result1,
+                                                'result22': all_config[2].result2,
+                                                    })
 
 def scan_del(request):
     username = request.user.username

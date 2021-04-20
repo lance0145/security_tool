@@ -20,9 +20,12 @@ from tools import views
 app_name = 'tools'
 
 urlpatterns = [
-    url(r'^dns_summary',
-        views.dns_summary,
-        name='dns_summary'),
+    url(r'^sniper_summary',
+        views.sniper_summary,
+        name='sniper_summary'),
+    url(r'^sniper_edit',
+        views.sniper_edit,
+        name='sniper_edit'),
     url(r'^sslscan/$',
         views.sslscan,
         name='sslscan'),

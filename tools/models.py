@@ -104,7 +104,7 @@ class nmap_result_db(models.Model):
 class nmap_vulners_port_result_db(nmap_result_db):
     vulners_extrainfo = models.TextField(blank=True, null=True)
 
-# Nmap tool models
+# dirsearch tool models
 class dirsearch_scan_db(models.Model):
     scan_id = models.TextField(blank=True, null=True)
     project_id = models.TextField(blank=True, null=True)
@@ -183,3 +183,37 @@ class openvas_scan_db(models.Model):
     total_dup = models.IntegerField(blank=True, null=True)
     username = models.CharField(max_length=256, null=True)
     ip_address = models.TextField(blank=True, null=True)
+
+# Sniper tool models
+class sniper_config_db(models.Model):
+    config_id = models.TextField(blank=True, null=True)
+    config_name = models.TextField(blank=True, null=True)
+    ip_address = models.TextField(blank=True, null=True)
+    script = models.TextField(blank=True, null=True)
+    option1 = models.TextField(blank=True, null=True)
+    option2 = models.TextField(blank=True, null=True)
+    log1 = models.TextField(blank=True, null=True)
+    log2 = models.TextField(blank=True, null=True)
+    result1 = models.TextField(blank=True, null=True)
+    result2 = models.TextField(blank=True, null=True)
+    username = models.CharField(max_length=256, null=True)
+    date_time = models.TextField(null=True, blank=True)
+
+class sniper_scan_db(models.Model):
+    scan_id = models.TextField(blank=True, null=True)
+    project_id = models.TextField(blank=True, null=True)
+    ip_address = models.TextField(blank=True, null=True)
+    total_dirs = models.IntegerField(default=0)
+    username = models.CharField(max_length=256, null=True)
+    date_time = models.TextField(null=True, blank=True)
+
+class sniper_result_db(models.Model):
+    scan_id = models.TextField(blank=True, null=True)
+    project_id = models.TextField(blank=True, null=True)
+    date_time = models.TextField(null=True, blank=True)
+    url = models.TextField(null=True, blank=True)
+    ip_address = models.TextField(blank=True, null=True)
+    status = models.TextField(blank=True, null=True)
+    size = models.TextField(blank=True, null=True)
+    redirection = models.TextField(blank=True, null=True)
+    username = models.CharField(max_length=256, null=True)
