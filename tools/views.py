@@ -69,6 +69,19 @@ def sniper_summary(request):
 
                   )
 
+def sniper_delete(request):
+    """
+
+    :param request:
+    :return:
+    """
+    username = request.user.username
+    if request.method == 'POST':
+        config_id = request.POST.get('config_id')
+        del_config = sniper_config_db.objects.filter(username=username, config_id=config_id)
+        del_config.delete()
+
+    return HttpResponseRedirect(reverse('networkscanners:sniper'))
 
 def sniper_launch(request):
     """
@@ -92,18 +105,38 @@ def sniper_launch(request):
     except Exception as e:
         print('Error in Sniper scan:', e)
 
-    # try:
-    #     tree = ET.parse('nmap.xml')
-    #     root_xml = tree.getroot()
+    try:
+        print('Start Parsing Sniper')
+        date_time = datetime.now()
+        with open(all_config[0].result1, 'r') as f:
+            files = f.readlines()
+            for f in files:
+                dump_data = sniper_result_db(
+                    username=username,
+                    project_id=all_config[0].project_id,
+                    config_id=config_id,
+                    ip_address=all_config[0].ip_address,
+                    date_time=date_time,
+                    dns=f,
+                )
+                dump_data.save()
+        f.close()
+        all_sniper = sniper_result_db.objects.filter(username=username, config_id=config_id)
+        dump_data = sniper_scan_db(
+            username=username,
+            project_id=all_config[0].project_id,
+            config_id=config_id,
+            total_sniper=len(all_sniper),
+            ip_address=all_config[0].ip_address,
+            date_time=date_time,
+        )
+        dump_data.save()
+        print("Finish parsing and saving...")
 
-    #     nmap_parser.xml_parser(root=root_xml,
-    #                             scan_id=scan_id,
-    #                             project_id=project_id,
-    #                             username=username
-    #                             )
+        return HttpResponseRedirect(reverse('tools:sniper_summary'))
 
-    # except Exception as e:
-    #     print('Error in xml parser:', e)
+    except Exception as e:
+        print('Error in Sniper parser:', e)
 
     return HttpResponseRedirect(reverse('networkscanners:sniper'))
 
