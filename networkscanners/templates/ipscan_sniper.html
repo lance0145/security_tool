@@ -69,11 +69,7 @@
                             <div class="table-responsive">
                                 <table id="manual_scans_list" class="table table-bordered data-table table-fixed">
                                     <thead>
-                                    <tr>
-                                        <th><label class="customcheckbox m-b-20">
-                                            <input type="checkbox" id="mainCheckbox1">
-                                            <span class="checkmark"></span>
-                                        </label></th>                                        
+                                    <tr>                                    
                                         <th>Sniper Name</th>
                                         <th>URL/s</th>
                                         <th>Script</th>
@@ -89,18 +85,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>{% for data in all_config %}
-                                    <tr data-target="#">
-                                        <td>
-                                            <form>
-                                                <label class="customcheckbox">
-                                                    <input type="checkbox" class="listCheckbox1"
-                                                           value="{{data.config_id}}"
-                                                           name="del_config_id"
-                                                           onClick="reload">
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </form>
-                                        </td>                                        
+                                    <tr data-target="#">                                       
                                         <td>
                                             <a href="{% url 'tools:nmap' %}?config_id={{data.config_id}}">{{data.config_name}}</a>
                                         </td>
