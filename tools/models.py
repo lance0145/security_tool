@@ -198,6 +198,7 @@ class sniper_config_db(models.Model):
     result2 = models.TextField(blank=True, null=True)
     username = models.CharField(max_length=256, null=True)
     date_time = models.TextField(null=True, blank=True)
+    project_id = models.TextField(blank=True, null=True)
 
 class sniper_scan_db(models.Model):
     scan_id = models.TextField(blank=True, null=True)

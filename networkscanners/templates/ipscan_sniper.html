@@ -21,9 +21,9 @@
                 $.ajax({
                     type:'POST',
                     //contentType: 'application/json; charset=utf-8',
-                    url:'{% url "manual_scan:del_vuln" %}',
+                    url:'{% url "tools:nmap" %}',
                     data:{
-                       vuln_id: json_scanid,
+                       config_id: json_scanid,
                        scan_id: $('input[name=scan_id]').val(),
                        project_id: $('input[name=project_id]').val(),
                        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
@@ -44,17 +44,27 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="float-right">
-                            <a href="{% url 'manual_scan:add_new_vuln' %}?scan_id={{ scan_id }}&vuln_id=&project_id={{ project_id }}&client_id={{ client_id }}">
-                                <button class="btn btn-dark" title="Add Vulnerability"><i class="fas fa-plus"></i></button>
+                            <a href="{% url 'tools:sniper_add' %}?project_id={{ project_id }}">
+                                <button class="btn btn-dark" title="Add Sniper"><i class="fa fa-crosshairs"></i></button>
                             </a>
-                            <button id="delete" class="btn btn-danger" title="Delete Selected"><i class="fas fa-trash-alt"></i></button>
                         </div>
                         <br>
                         <br>
                         <div class="d-md-flex align-items-center">
-                            <h1 class="card-title">Sniper Scanners</h1>
+                            <h1 class="card-title">Sniper Config</h1>
                         </div>
-                        <br>  
+                        <label class="col-md-3 m-t-15">Projects</label>
+                        <div class="col-md-3">
+                            <select id="project_id" name="project_id"
+                                    class="select2 form-control custom-select"
+                                    style="width: 100%; height:36px;">
+                                {% for data in all_proj %}
+                                <option value="{{data.project_id}}">{{data.project_name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <br> 
                         <div class="row">
                             <div class="table-responsive">
                                 <table id="manual_scans_list" class="table table-bordered data-table table-fixed">
@@ -64,7 +74,7 @@
                                             <input type="checkbox" id="mainCheckbox1">
                                             <span class="checkmark"></span>
                                         </label></th>                                        
-                                        <th>Name</th>
+                                        <th>Sniper Name</th>
                                         <th>URL/s</th>
                                         <th>Script</th>
                                         <th>Option 1</th>
@@ -73,64 +83,53 @@
                                         <th>Log 2</th>
                                         <th>Result 1</th>
                                         <th>Result 2</th>
+                                        <th>Launch</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
                                     </thead>
-                                    <tbody>{% for data in all_vuln %}
+                                    <tbody>{% for data in all_config %}
                                     <tr data-target="#">
                                         <td>
                                             <form>
                                                 <label class="customcheckbox">
                                                     <input type="checkbox" class="listCheckbox1"
-                                                           value="{{data.vuln_id}}"
-                                                           name="del_vuln_id"
+                                                           value="{{data.config_id}}"
+                                                           name="del_config_id"
                                                            onClick="reload">
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </form>
                                         </td>                                        
                                         <td>
-                                            <a href="{% url 'manual_scan:vuln_details' %}?vuln_id={{data.vuln_id}}">{{data.vuln_name}}</a>
+                                            <a href="{% url 'tools:nmap' %}?config_id={{data.config_id}}">{{data.config_name}}</a>
                                         </td>
-                                        <td><span
-                                                class="badge badge-pill badge-{{data.severity_color}}">{{data.severity}}</span>
-                                        </td>
-                                        {% if data.vuln_status == 'Closed' %}
-                                        <td><span value="{{data.vuln_id}}" class="badge badge-pill badge-success">{{ data.vuln_status }}</span></td>
-                                        {% endif %}
-                                        {% if data.vuln_status == 'Open' %}
-                                        <td><span value="{{data.vuln_id}}" class="badge badge-pill badge-danger">{{ data.vuln_status }}</span></td>
-                                        {% endif %}
-                                        {% if data.vuln_status == 'Open' %}
+                                        <td>{{data.ip_address}}</td>
+                                        <td>{{data.script}}</td>
+                                        <td>{{data.option1}}</td>
+                                        <td>{{data.option2}}</td>
+                                        <td>{{data.log1}}</td>
+                                        <td>{{data.log2}}</td>
+                                        <td>{{data.result1}}</td>
+                                        <td>{{data.result2}}</td>
                                         <td>
-                                            <input type="hidden" name="project_id" value="{{data.project_id}}">
-                                            <input type="hidden" name="scan_id" value="{{data.scan_id}}">
-                                            <button name ="button" class="btn btn-info btn-mini" value="{{data.vuln_id}}">Closed</button>
-                                        </td>
-                                        {% endif %}
-                                        {% if data.vuln_status == 'Closed' %}
+                                            <div><a href="{% url 'tools:sniper_launch' %}?config_id={{data.config_id}}"
+                                                    class="btn btn-info"
+                                                    data-original-title="Launch"><i class="fas fa-play"></i></a>
+                                            </div>
+                                        </td>                                     
                                         <td>
-                                            <input type="hidden" name="project_id" value="{{data.project_id}}">
-                                            <input type="hidden" name="scan_id" value="{{data.scan_id}}">
-                                            <button name ="button" class="btn btn-info btn-mini" value="{{data.vuln_id}}">Open</button>
-                                        </td>
-                                        {% endif %}                                        
-                                        <td>
-                                            <div><a href="{% url 'manual_scan:edit_vuln' %}?vuln_id={{data.vuln_id}}&project_id={{project_id}}&client_id={{client_id}}"
+                                            <div><a href="{% url 'tools:sniper_edit' %}?config_id={{data.config_id}}"
                                                     class="btn btn-warning"
                                                     data-original-title="Edit"><i class="fas fa-edit"></i></a>
                                             </div>
                                         </td>                                        
                                         <td class="confirm-delete">
                                             <div>
-                                                <form action="{% url 'manual_scan:del_vuln' %}" method="POST"
+                                                <form action="{% url 'tools:nmap' %}" method="POST"
                                                       class="form-horizontal">
                                                     {% csrf_token %}
-                                                    <input type="hidden" name="vuln_id" value="{{data.vuln_id}}">
-                                                    <input type="hidden" name="scan_id" value="{{data.scan_id}}">
-                                                    <input type="hidden" name="project_id" value="{{project_id}}">
-                                                    <input type="hidden" name="client_id" value="{{client_id}}">
+                                                    <input type="hidden" name="config_id" value="{{data.config_id}}">
                                                     <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                                 </form>
                                             </div>

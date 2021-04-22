@@ -69,26 +69,128 @@ def sniper_summary(request):
 
                   )
 
+
+def sniper_launch(request):
+    """
+    :param request:
+    :return:
+    """
+    username = request.user.username
+    config_id = request.GET.get('config_id', )
+    all_config = sniper_config_db.objects.filter(username=username, config_id=config_id)
+
+    try:
+        print('Start Sniper scan')
+        
+        sniper = "./scripts/" + str(all_config[0].script)
+        subprocess.run(
+            [sniper, all_config[0].ip_address]
+        )
+
+        print('Completed Sniper scan')
+
+    except Exception as e:
+        print('Error in Sniper scan:', e)
+
+    # try:
+    #     tree = ET.parse('nmap.xml')
+    #     root_xml = tree.getroot()
+
+    #     nmap_parser.xml_parser(root=root_xml,
+    #                             scan_id=scan_id,
+    #                             project_id=project_id,
+    #                             username=username
+    #                             )
+
+    # except Exception as e:
+    #     print('Error in xml parser:', e)
+
+    return HttpResponseRedirect(reverse('networkscanners:sniper'))
+
 def sniper_edit(request):
     """
     :param request:
     :return:
     """
     username = request.user.username
-    all_config = sniper_config_db.objects.filter(username=username)
+    config_id = request.GET.get('config_id', )
+    all_config = sniper_config_db.objects.filter(username=username, config_id=config_id)
     all_proj = project_db.objects.filter(username=username)
 
-    return render(request, 'sniper_form.html', {'all_proj': all_proj,
-                                                'config_name': all_config[0].config_name,                                            
-                                                'ip_address': all_config[0].ip_address,
-                                                'script': all_config[0].script,
-                                                'option1': all_config[0].option1,
-                                                'option2': all_config[0].option2,
-                                                'log1': all_config[0].log1,
-                                                'log2': all_config[0].log2,
-                                                'result1': all_config[0].result1,
-                                                'result2': all_config[0].result2,
+    # Save Edit
+    if request.method == 'POST':
+        config_name = request.POST.get('config_name')
+        ip_address = request.POST.get('ip_address')
+        script = request.POST.get('script')
+        option1 = request.POST.get('option1')
+        option2 = request.POST.get('option2')
+        log1 = request.POST.get('log1')
+        log2 = request.POST.get('log2')
+        result1 = request.POST.get('result1')
+        result2 = request.POST.get('result2')
+        config_id = request.POST.get('config_id', )
+        sniper_config_db.objects.filter(config_id=config_id).update(
+                                config_name = config_name,
+                                ip_address = ip_address,
+                                script = script,
+                                option1 = option1,
+                                option2 = option2,
+                                log1 = log1,
+                                log2 = log2,
+                                result1 = result1,
+                                result2 = result2)
+
+        return HttpResponseRedirect(reverse('networkscanners:sniper'))
+
+    return render(request, 'sniper_edit.html', {'all_proj': all_proj,
+                                                'all_config': all_config,
                                                     })
+
+def sniper_add(request):
+
+    username = request.user.username
+    config_id = request.GET.get('config_id', )
+    all_config = sniper_config_db.objects.filter(username=username, config_id=config_id)
+    all_proj = project_db.objects.filter(username=username)
+
+    # Save Add
+    if request.method == 'POST':
+        config_name = request.POST.get('config_name')
+        ip_address = request.POST.get('ip_address')
+        script = request.POST.get('script')
+        option1 = request.POST.get('option1')
+        option2 = request.POST.get('option2')
+        log1 = request.POST.get('log1')
+        log2 = request.POST.get('log2')
+        result1 = request.POST.get('result1')
+        result2 = request.POST.get('result2')
+        project_id = request.POST.get('project_id', )
+        config_id = uuid.uuid4()
+        date_time = datetime.now()
+
+        dump_sniper = sniper_config_db(
+            username = username,
+            config_id = config_id,
+            config_name = config_name,
+            ip_address = ip_address,
+            script = script,
+            option1 = option1,
+            option2 = option2,
+            log1 = log1,
+            log2 = log2,
+            result1 = result1,
+            result2 = result2,
+            date_time=date_time,
+            project_id = project_id,
+        )
+        dump_sniper.save()
+        return HttpResponseRedirect(reverse('networkscanners:sniper'))
+
+    return render(request,
+                  'sniper_add.html',
+                  {'all_proj': all_proj,
+                  'all_config': all_config}
+                  )
 
 def openvas(request):
 
@@ -423,12 +525,6 @@ def nikto(request):
     if request.method == 'POST':
         ip = request.POST.get('ip')
         project_id = request.POST.get('project_id')
-
-        # scan_item = str(scan_url)
-        # value = scan_item.replace(" ", "")
-        # value_split = value.split(',')
-        # split_length = value_split.__len__()s
-        # for i in range(0, split_length):
         date_time = datetime.now()
         scan_id = uuid.uuid4()
 
