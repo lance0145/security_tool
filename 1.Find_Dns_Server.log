@@ -1,8 +1,8 @@
-Thu 22 Apr 2021 12:25:34 PM UTC
-# Nmap 7.91 scan initiated Thu Apr 22 12:25:34 2021 as: nmap -v -T4 --open -p 53 -oG - 10.254.10.0/24
+Fri 23 Apr 2021 01:54:53 AM UTC
+# Nmap 7.91 scan initiated Fri Apr 23 01:54:53 2021 as: nmap -v -T4 --open -p 53 -oG - 10.254.10.0/24
 # Ports scanned: TCP(1;53) UDP(0;) SCTP(0;) PROTOCOLS(0;)
 Host: 10.254.10.20 ()	Status: Up
 Host: 10.254.10.20 ()	Ports: 53/open/tcp//domain///
 Host: 10.254.10.254 ()	Status: Up
 Host: 10.254.10.254 ()	Ports: 53/open/tcp//domain///
-# Nmap done at Thu Apr 22 12:26:06 2021 -- 256 IP addresses (5 hosts up) scanned in 31.82 seconds
+# Nmap done at Fri Apr 23 01:55:28 2021 -- 256 IP addresses (5 hosts up) scanned in 34.62 seconds

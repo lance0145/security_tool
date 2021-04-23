@@ -81,16 +81,20 @@
                                 <table class="table table-bordered data-table">
                                     <thead>
                                         <tr>
+                                            <th>Sniper</th>
                                             <th>URL</th>
                                             <th>Date</th>
+                                            <th>Total Scans</th>
                                         </tr>
                                     </thead>
-                                    <tbody>{% for data in all_nikto %}
+                                    <tbody>{% for data in all_sniper %}
                                         <tr data-target="#">
-                                            <td><a href="/tools/nikto_result_vul/?scan_id={{data.scan_id}}&scan_url={{data.scan_url}}">
-                                                {{ data.scan_url}}</a>
+                                            <td>{{data.config_name}}</td>
+                                            <td>
+                                                <a href="/tools/sniper_list/?scan_id={{data.scan_id}}">{{data.ip_address}}</a>
                                             </td>
                                             <td>{{data.date_time}}</td>
+                                            <td>{{data.total_sniper}}</td>
                                             {% endfor %}
                                         </tr>
                                     </tbody>
@@ -120,12 +124,14 @@
                                             <input type="checkbox" id="mainCheckbox">
                                             <span class="checkmark"></span>
                                         </label></th>
+                                        <th>Sniper</th>
                                         <th>URL</th>
                                         <th>Date</th>
+                                        <th>Total Scans</th>
                                         <th>Delete</th>
                                     </tr>
                                     </thead>
-                                    <tbody>{% for data in all_nikto %}
+                                    <tbody>{% for data in all_sniper %}
                                     <tr data-target="#">
                                         <td>
                                             <form>
@@ -138,10 +144,12 @@
                                                 </label>
                                             </form>
                                         </td>
-                                        <td><a href="/tools/nikto_result_vul/?scan_id={{data.scan_id}}&scan_url={{data.scan_url}}">
-                                            {{ data.scan_url}}</a>
+                                        <td>{{data.config_name}}</td>
+                                        <td>
+                                            <a href="/tools/sniper_list/?scan_id={{data.scan_id}}">{{data.ip_address}}</a>
                                         </td>
                                         <td>{{data.date_time}}</td>
+                                        <td>{{data.total_sniper}}</td>
                                         <td class="confirm-delete">
                                             <form action="/tools/nikto_scan_del/" method="post" class="forms-sample">
 

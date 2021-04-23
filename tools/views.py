@@ -15,7 +15,9 @@
 # This file is part of ArcherySec Project.
 
 from __future__ import unicode_literals
-from tools.models import sslscan_result_db, nikto_result_db, nmap_result_db, nmap_scan_db, nikto_vuln_db, dirsearch_result_db, dirsearch_scan_db, openvas_result_db, openvas_scan_db, sniper_config_db
+from tools.models import sslscan_result_db, nikto_result_db, nmap_result_db, nmap_scan_db, \
+    nikto_vuln_db, dirsearch_result_db, dirsearch_scan_db, openvas_result_db, openvas_scan_db, \
+    sniper_config_db, sniper_result_db, sniper_scan_db
 from networkscanners.models import openvas_scan_db, \
     ov_scan_result_db, \
     task_schedule_db, serversetting
@@ -54,19 +56,29 @@ def sniper_summary(request):
     username = request.user.username
     if request.method == 'POST':
         project_id = request.POST.get('proj_id', )
-        all_nmap = nmap_scan_db.objects.filter(username=username, project_id=project_id)
+        all_sniper_scan = sniper_scan_db.objects.filter(username=username, project_id=project_id)
         proj_name = project_db.objects.filter(username=username, project_id=project_id)
     else:
-        all_nmap = nmap_scan_db.objects.filter(username=username)
+        all_sniper_scan = sniper_scan_db.objects.filter(username=username)
         proj_name = project_db.objects.filter(username=username)
     all_projects = project_db.objects.filter(username=username)
 
     return render(request,
-                  'sniper_summary.html',
-                  {'all_nmap': all_nmap,
-                  'proj_name': proj_name[0].project_name,
-                  'all_projects': all_projects,}
+                'sniper_summary.html',
+                {'all_sniper': all_sniper_scan,
+                 'proj_name': proj_name[0].project_name,
+                 'all_projects': all_projects,}
+                )
 
+def sniper_list(request):
+    username = request.user.username
+    scan_id = request.GET.get('scan_id', )
+    all_sniper = sniper_result_db.objects.filter(username=username, scan_id=scan_id)
+    ip_address = all_sniper[0].ip_address
+    return render(request,
+                  'sniper_list.html',
+                  {'all_sniper': all_sniper,
+                   'ip': ip_address}
                   )
 
 def sniper_delete(request):
@@ -94,7 +106,6 @@ def sniper_launch(request):
 
     try:
         print('Start Sniper scan')
-        
         sniper = "./scripts/" + str(all_config[0].script)
         subprocess.run(
             [sniper, all_config[0].ip_address]
@@ -108,32 +119,42 @@ def sniper_launch(request):
     try:
         print('Start Parsing Sniper')
         date_time = datetime.now()
-        with open(all_config[0].result1, 'r') as f:
+        scan_id = uuid.uuid4()
+        sniper_file = str(all_config[0].result1)
+        with open(sniper_file, 'r') as f:
             files = f.readlines()
             for f in files:
+                print(f)
                 dump_data = sniper_result_db(
                     username=username,
+                    vuln_id = uuid.uuid4(),
                     project_id=all_config[0].project_id,
                     config_id=config_id,
                     ip_address=all_config[0].ip_address,
                     date_time=date_time,
+                    scan_id = scan_id,
                     dns=f,
                 )
                 dump_data.save()
-        f.close()
-        all_sniper = sniper_result_db.objects.filter(username=username, config_id=config_id)
+        all_sniper_result = sniper_result_db.objects.filter(username=username, scan_id=scan_id)
         dump_data = sniper_scan_db(
             username=username,
             project_id=all_config[0].project_id,
+            config_name=all_config[0].config_name,
             config_id=config_id,
-            total_sniper=len(all_sniper),
+            total_sniper=len(all_sniper_result),
             ip_address=all_config[0].ip_address,
             date_time=date_time,
+            scan_id = scan_id,
         )
         dump_data.save()
+        all_sniper_scan = sniper_scan_db.objects.filter(username=username, config_id=config_id)
         print("Finish parsing and saving...")
 
-        return HttpResponseRedirect(reverse('tools:sniper_summary'))
+        return render(request,
+                  'sniper_summary.html',
+                  {'all_sniper': all_sniper_scan,
+                  })
 
     except Exception as e:
         print('Error in Sniper parser:', e)
