@@ -217,5 +217,6 @@ class sniper_result_db(models.Model):
     project_id = models.TextField(blank=True, null=True)
     date_time = models.TextField(null=True, blank=True)
     ip_address = models.TextField(blank=True, null=True)
-    dns = models.TextField(blank=True, null=True)
+    output = models.TextField(blank=True, null=True)
+    result = models.TextField(blank=True, null=True)
     username = models.CharField(max_length=256, null=True)

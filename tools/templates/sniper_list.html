@@ -40,13 +40,15 @@
                                     <thead>
                                         <tr>
                                             <th>Date</th>
-                                            <th>DNS</th>
+                                            <th>Result</th>
+                                            <th>Output</th>
                                         </tr>
                                     </thead>
                                     <tbody>{% for data in all_sniper %}
                                         <tr data-target="#">
                                             <td>{{data.date_time}}</td>
-                                            <td>{{data.dns}}</td>
+                                            <td>{{data.result}}</td>
+                                            <td>{{data.output}}</td>
                                         </tr>
                                     </tbody>{% endfor %}
                                 </table>
@@ -63,7 +65,8 @@
                                             <span class="checkmark"></span>
                                         </label></th>
                                         <th>Date</th>
-                                        <th>DNS</th>
+                                        <th>Result</th>
+                                        <th>Output</th>
                                         <th>Delete</th> 
                                     </tr>
                                     </thead>
@@ -81,7 +84,8 @@
                                             </form>
                                         </td>
                                         <td>{{data.date_time}}</td>
-                                        <td>{{data.dns}}</td>
+                                        <td>{{data.result}}</td>
+                                        <td>{{data.output}}</td>
                                         <td class="confirm-delete">
                                             <form action="/tools/sniper_vuln_del/" method="post" class="forms-sample">
                                                 {% csrf_token %}

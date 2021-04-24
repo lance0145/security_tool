@@ -184,7 +184,8 @@ def sniper_launch(request):
                     ip_address=all_config[0].ip_address,
                     date_time=date_time,
                     scan_id = scan_id,
-                    dns=f,
+                    result=sniper_file,
+                    output=f,
                 )
                 dump_data.save()
         all_sniper_result = sniper_result_db.objects.filter(username=username, scan_id=scan_id)
@@ -199,13 +200,41 @@ def sniper_launch(request):
             scan_id = scan_id,
         )
         dump_data.save()
-        all_sniper_scan = sniper_scan_db.objects.filter(username=username, config_id=config_id)
+        sniper_file2 = str(all_config[0].result2)
+        if sniper_file2:
+            with open(sniper_file2, 'r') as f:
+                files = f.readlines()
+                for f in files:
+                    print(f)
+                    dump_data = sniper_result_db(
+                        username=username,
+                        vuln_id = uuid.uuid4(),
+                        project_id=all_config[0].project_id,
+                        config_id=config_id,
+                        ip_address=all_config[0].ip_address,
+                        date_time=date_time,
+                        scan_id = scan_id,
+                        result=sniper_file2,
+                        output=f,
+                    )
+                    dump_data.save()
+            all_sniper_result = sniper_result_db.objects.filter(username=username, scan_id=scan_id)
+            dump_data = sniper_scan_db(
+                username=username,
+                project_id=all_config[0].project_id,
+                config_name=all_config[0].config_name,
+                config_id=config_id,
+                total_sniper=len(all_sniper_result),
+                ip_address=all_config[0].ip_address,
+                date_time=date_time,
+                scan_id = scan_id,
+            )
+            dump_data.save()
+
+        # all_sniper_scan = sniper_scan_db.objects.filter(username=username, config_id=config_id)
         print("Finish parsing and saving...")
 
-        return render(request,
-                  'sniper_summary.html',
-                  {'all_sniper': all_sniper_scan,
-                  })
+        return HttpResponseRedirect("/tools/sniper_list/?scan_id=%s" % scan_id)
 
     except Exception as e:
         print('Error in Sniper parser:', e)
