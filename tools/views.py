@@ -48,6 +48,54 @@ nikto_output = ''
 scan_result = ''
 all_nmap = ''
 
+def sniper_vuln_del(request):
+    """
+
+    :param request:
+    :return:
+    """
+    username = request.user.username
+    if request.method == 'POST':
+        vuln_id = request.POST.get("id")
+        scan_id = request.POST.get("scan_id")
+
+        scan_item = str(vuln_id)
+        value = scan_item.replace(" ", "")
+        value_split = value.split(',')
+        split_length = value_split.__len__()
+        for i in range(0, split_length):
+            _vuln_id = value_split.__getitem__(i)
+            delete_vuln = sniper_result_db.objects.filter(username=username, vuln_id=_vuln_id)
+            delete_vuln.delete()
+
+        return HttpResponseRedirect("/tools/sniper_list/?scan_id=%s" % scan_id)
+
+
+def sniper_scan_del(request):
+    """
+
+    :param request:
+    :return:
+    """
+    username = request.user.username
+    if request.method == 'POST':
+        scan_id = request.POST.get('scan_id')
+
+        scan_item = str(scan_id)
+        value = scan_item.replace(" ", "")
+        value_split = value.split(',')
+        split_length = value_split.__len__()
+
+        for i in range(0, split_length):
+            _scan_id = value_split.__getitem__(i)
+
+            del_scan = sniper_result_db.objects.filter(username=username, scan_id=_scan_id)
+            del_scan.delete()
+            del_scan = sniper_scan_db.objects.filter(username=username, scan_id=_scan_id)
+            del_scan.delete()
+
+    return HttpResponseRedirect('/tools/sniper_summary/')
+
 def sniper_summary(request):
     """
     :param request:
@@ -74,7 +122,10 @@ def sniper_list(request):
     username = request.user.username
     scan_id = request.GET.get('scan_id', )
     all_sniper = sniper_result_db.objects.filter(username=username, scan_id=scan_id)
-    ip_address = all_sniper[0].ip_address
+    if all_sniper:
+        ip_address = all_sniper[0].ip_address
+    else:
+        ip_address = ""
     return render(request,
                   'sniper_list.html',
                   {'all_sniper': all_sniper,
