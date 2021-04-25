@@ -1,4 +1,4 @@
-Thu 22 Apr 2021 08:22:51 PM PST
-# Nmap 7.91 scan initiated Thu Apr 22 20:23:08 2021 as: nmap -v -T4 --open -p 53 -oG - 172.27.91.59
+Mon 26 Apr 2021 05:45:59 AM PST
+# Nmap 7.91 scan initiated Mon Apr 26 05:45:59 2021 as: nmap -v -T4 --open -p 53 -oG - addreslist
 # Ports scanned: TCP(1;53) UDP(0;) SCTP(0;) PROTOCOLS(0;)
-# Nmap done at Thu Apr 22 20:23:09 2021 -- 1 IP address (1 host up) scanned in 1.18 seconds
+# Nmap done at Mon Apr 26 05:46:01 2021 -- 0 IP addresses (0 hosts up) scanned in 2.12 seconds

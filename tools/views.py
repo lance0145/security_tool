@@ -151,27 +151,7 @@ def sniper_launch(request):
     :param request:
     :return:
     """
-    username = request.user.username
-    config_id = request.GET.get('config_id', )
-    all_config = sniper_config_db.objects.filter(username=username, config_id=config_id)
-
-    try:
-        print('Start Sniper scan')
-        sniper = "./scripts/" + str(all_config[0].script)
-        subprocess.run(
-            [sniper, all_config[0].ip_address]
-        )
-
-        print('Completed Sniper scan')
-
-    except Exception as e:
-        print('Error in Sniper scan:', e)
-
-    try:
-        print('Start Parsing Sniper')
-        date_time = datetime.now()
-        scan_id = uuid.uuid4()
-        sniper_file = str(all_config[0].result1)
+    def sniper_parse(all_config, sniper_file, date_time, scan_id, config_id):
         with open(sniper_file, 'r') as f:
             files = f.readlines()
             for f in files:
@@ -200,37 +180,32 @@ def sniper_launch(request):
             scan_id = scan_id,
         )
         dump_data.save()
+
+    username = request.user.username
+    config_id = request.GET.get('config_id', )
+    all_config = sniper_config_db.objects.filter(username=username, config_id=config_id)
+
+    try:
+        print('Start Sniper scan')
+        sniper = "./scripts/" + str(all_config[0].script)
+        subprocess.run(
+            [sniper, all_config[0].ip_address]
+        )
+
+        print('Completed Sniper scan')
+
+    except Exception as e:
+        print('Error in Sniper scan:', e)
+
+    try:
+        print('Start Parsing Sniper')
+        date_time = datetime.now()
+        scan_id = uuid.uuid4()
+        sniper_file = str(all_config[0].result1)
+        sniper_parse(all_config, sniper_file, date_time, scan_id, config_id)
         sniper_file2 = str(all_config[0].result2)
         if sniper_file2:
-            with open(sniper_file2, 'r') as f:
-                files = f.readlines()
-                for f in files:
-                    print(f)
-                    dump_data = sniper_result_db(
-                        username=username,
-                        vuln_id = uuid.uuid4(),
-                        project_id=all_config[0].project_id,
-                        config_id=config_id,
-                        ip_address=all_config[0].ip_address,
-                        date_time=date_time,
-                        scan_id = scan_id,
-                        result=sniper_file2,
-                        output=f,
-                    )
-                    dump_data.save()
-            all_sniper_result = sniper_result_db.objects.filter(username=username, scan_id=scan_id)
-            dump_data = sniper_scan_db(
-                username=username,
-                project_id=all_config[0].project_id,
-                config_name=all_config[0].config_name,
-                config_id=config_id,
-                total_sniper=len(all_sniper_result),
-                ip_address=all_config[0].ip_address,
-                date_time=date_time,
-                scan_id = scan_id,
-            )
-            dump_data.save()
-
+            sniper_parse(all_config, sniper_file2, date_time, scan_id, config_id)
         # all_sniper_scan = sniper_scan_db.objects.filter(username=username, config_id=config_id)
         print("Finish parsing and saving...")
 
