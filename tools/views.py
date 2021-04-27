@@ -104,7 +104,9 @@ def sniper_summary(request):
     username = request.user.username
     if request.method == 'POST':
         project_id = request.POST.get('proj_id', )
+        print(project_id)
         all_sniper_scan = sniper_scan_db.objects.filter(username=username, project_id=project_id)
+        print(len(all_sniper_scan))
         proj_name = project_db.objects.filter(username=username, project_id=project_id)
     else:
         all_sniper_scan = sniper_scan_db.objects.filter(username=username)
@@ -126,6 +128,7 @@ def sniper_list(request):
         ip_address = all_sniper[0].ip_address
     else:
         ip_address = ""
+    print(all_sniper[0].result_file, "*****************************************")
     return render(request,
                   'sniper_list.html',
                   {'all_sniper': all_sniper,
@@ -151,38 +154,10 @@ def sniper_launch(request):
     :param request:
     :return:
     """
-    def sniper_parse(all_config, sniper_file, date_time, scan_id, config_id):
-        with open(sniper_file, 'r') as f:
-            files = f.readlines()
-            for f in files:
-                print(f)
-                dump_data = sniper_result_db(
-                    username=username,
-                    vuln_id = uuid.uuid4(),
-                    project_id=all_config[0].project_id,
-                    config_id=config_id,
-                    ip_address=all_config[0].ip_address,
-                    date_time=date_time,
-                    scan_id = scan_id,
-                    result=sniper_file,
-                    output=f,
-                )
-                dump_data.save()
-        all_sniper_result = sniper_result_db.objects.filter(username=username, scan_id=scan_id)
-        dump_data = sniper_scan_db(
-            username=username,
-            project_id=all_config[0].project_id,
-            config_name=all_config[0].config_name,
-            config_id=config_id,
-            total_sniper=len(all_sniper_result),
-            ip_address=all_config[0].ip_address,
-            date_time=date_time,
-            scan_id = scan_id,
-        )
-        dump_data.save()
-
     username = request.user.username
     config_id = request.GET.get('config_id', )
+    project_id = request.GET.get('project_id', )
+    print(config_id, project_id)
     all_config = sniper_config_db.objects.filter(username=username, config_id=config_id)
 
     try:
@@ -197,16 +172,56 @@ def sniper_launch(request):
     except Exception as e:
         print('Error in Sniper scan:', e)
 
+    def sniper_parse(all_config, sniper_file, date_time, scan_id, config_id, project_id):
+        with open(sniper_file, 'r') as f:
+            files = f.readlines()
+            result_file = f.read()
+            print(result_file)
+            for f in files:
+                dump_data = sniper_result_db(
+                    username=username,
+                    vuln_id = uuid.uuid4(),
+                    project_id=project_id,
+                    config_id=config_id,
+                    ip_address=all_config[0].ip_address,
+                    date_time=date_time,
+                    scan_id = scan_id,
+                    result=sniper_file,
+                    output=f,
+                    result_file=result_file,
+                )
+                dump_data.save()
+
     try:
         print('Start Parsing Sniper')
         date_time = datetime.now()
         scan_id = uuid.uuid4()
         sniper_file = str(all_config[0].result1)
-        sniper_parse(all_config, sniper_file, date_time, scan_id, config_id)
+
+        sniper_parse(all_config, sniper_file, date_time, scan_id, config_id, project_id)
         sniper_file2 = str(all_config[0].result2)
         if sniper_file2:
-            sniper_parse(all_config, sniper_file2, date_time, scan_id, config_id)
-        # all_sniper_scan = sniper_scan_db.objects.filter(username=username, config_id=config_id)
+            sniper_parse(all_config, sniper_file2, date_time, scan_id, config_id, project_id)
+
+        all_sniper_result = sniper_result_db.objects.filter(username=username, scan_id=scan_id)
+        log_file = str(all_config[0].log1)
+
+        with open(log_file, 'r') as f:
+            log_files = f.read()
+            print(log_files)
+
+        dump_data = sniper_scan_db(
+            username=username,
+            project_id=project_id,
+            config_name=all_config[0].config_name,
+            config_id=config_id,
+            total_sniper=len(all_sniper_result),
+            ip_address=all_config[0].ip_address,
+            date_time=date_time,
+            scan_id=scan_id,
+            log_file=log_files,
+        )
+        dump_data.save()
         print("Finish parsing and saving...")
 
         return HttpResponseRedirect("/tools/sniper_list/?scan_id=%s" % scan_id)
@@ -222,9 +237,20 @@ def sniper_edit(request):
     :return:
     """
     username = request.user.username
-    config_id = request.GET.get('config_id', )
-    all_config = sniper_config_db.objects.filter(username=username, config_id=config_id)
-    all_proj = project_db.objects.filter(username=username)
+    if request.method == 'GET': 
+        config_id = request.GET.get('config_id', )
+        all_config = sniper_config_db.objects.filter(username=username, config_id=config_id)
+        all_proj = project_db.objects.filter(username=username)
+        project = project_db.objects.filter(project_id=all_config[0].project_id)
+        if project:
+            proj_name = project[0].project_name
+        else:
+            proj_name = ""
+        
+        return render(request, 'sniper_edit.html', {'all_proj': all_proj,
+                                                    'proj_name' : proj_name,
+                                                    'all_config': all_config,
+                                                        })
 
     # Save Edit
     if request.method == 'POST':
@@ -238,6 +264,7 @@ def sniper_edit(request):
         result1 = request.POST.get('result1')
         result2 = request.POST.get('result2')
         config_id = request.POST.get('config_id', )
+        project_id = request.POST.get('project_id', )
         sniper_config_db.objects.filter(config_id=config_id).update(
                                 config_name = config_name,
                                 ip_address = ip_address,
@@ -247,13 +274,10 @@ def sniper_edit(request):
                                 log1 = log1,
                                 log2 = log2,
                                 result1 = result1,
-                                result2 = result2)
+                                result2 = result2,
+                                project_id = project_id)
 
         return HttpResponseRedirect(reverse('networkscanners:sniper'))
-
-    return render(request, 'sniper_edit.html', {'all_proj': all_proj,
-                                                'all_config': all_config,
-                                                    })
 
 def sniper_add(request):
 

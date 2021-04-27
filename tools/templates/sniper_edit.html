@@ -26,6 +26,18 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Project</label>
+                                                            <div class="col-sm-6">
+                                                                <select name="project_id" class="select2 form-control custom-select"
+                                                                        style="width: 50%; height:36px;">
+                                                                        <option value="" disabled selected>{{proj_name}}</option>
+                                                                    {% for data in all_proj %}
+                                                                        <option value="{{data.project_id}}">{{data.project_name}}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
+                                                    </div>
+                                                    <div class="form-group row">
                                                         <label
                                                                 class="col-sm-4 col-form-label">Sniper Name</label>
                                                         <div class="col-sm-6">

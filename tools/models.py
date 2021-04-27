@@ -209,6 +209,7 @@ class sniper_scan_db(models.Model):
     date_time = models.TextField(null=True, blank=True)
     config_id = models.TextField(blank=True, null=True)
     config_name = models.TextField(blank=True, null=True)
+    log_file = models.TextField(blank=True, null=True)
 
 class sniper_result_db(models.Model):
     scan_id = models.TextField(blank=True, null=True)
@@ -220,3 +221,4 @@ class sniper_result_db(models.Model):
     output = models.TextField(blank=True, null=True)
     result = models.TextField(blank=True, null=True)
     username = models.CharField(max_length=256, null=True)
+    result_file = models.TextField(blank=True, null=True)

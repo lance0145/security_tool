@@ -44,7 +44,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="float-right">
-                            <a href="{% url 'tools:sniper_add' %}?project_id={{ project_id }}">
+                            <a href="{% url 'tools:sniper_add' %}">
                                 <button class="btn btn-dark" title="Add Sniper"><i class="fa fa-crosshairs"></i></button>
                             </a>
                         </div>
@@ -52,17 +52,6 @@
                         <br>
                         <div class="d-md-flex align-items-center">
                             <h1 class="card-title">Sniper Config</h1>
-                        </div>
-                        <label class="col-md-3 m-t-15">Projects</label>
-                        <div class="col-md-3">
-                            <select id="project_id" name="project_id"
-                                    class="select2 form-control custom-select"
-                                    style="width: 100%; height:36px;">
-                                {% for data in all_proj %}
-                                <option value="{{data.project_id}}">{{data.project_name}}
-                                </option>
-                                {% endfor %}
-                            </select>
                         </div>
                         <br> 
                         <div class="row">
@@ -72,6 +61,7 @@
                                     <tr>                                    
                                         <th>Sniper Name</th>
                                         <th>URL/s</th>
+                                        <th>Project Id</th>
                                         <th>Script</th>
                                         <th>Option 1</th>
                                         <th>Option 2</th>
@@ -87,9 +77,10 @@
                                     <tbody>{% for data in all_config %}
                                     <tr data-target="#">                                       
                                         <td>
-                                            <a href="{% url 'tools:nmap' %}?config_id={{data.config_id}}">{{data.config_name}}</a>
+                                            <a href="{% url 'tools:sniper_edit' %}?config_id={{data.config_id}}">{{data.config_name}}</a>
                                         </td>
                                         <td>{{data.ip_address}}</td>
+                                        <td>{{data.project_id}}</td>
                                         <td>{{data.script}}</td>
                                         <td>{{data.option1}}</td>
                                         <td>{{data.option2}}</td>
@@ -98,9 +89,18 @@
                                         <td>{{data.result1}}</td>
                                         <td>{{data.result2}}</td>
                                         <td>
-                                            <div><a href="{% url 'tools:sniper_launch' %}?config_id={{data.config_id}}"
+                                            <!-- <div><a href="{% url 'tools:sniper_launch' %}?config_id={{data.config_id}}&project_id={{project_id}}"
                                                     class="btn btn-info"
                                                     data-original-title="Launch"><i class="fas fa-play"></i></a>
+                                            </div> -->
+                                            <div>
+                                                <form action="{% url 'tools:sniper_launch' %}" method="GET"
+                                                    class="form-horizontal">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="config_id" value="{{data.config_id}}">
+                                                    <input type="hidden" name="project_id" value="{{data.project_id}}">
+                                                    <button class="btn btn-info"><i class="fas fa-play"></i></button>
+                                                </form>
                                             </div>
                                         </td>                                     
                                         <td>
