@@ -213,9 +213,15 @@ def sniper_launch(request):
     try:
         print('Start Sniper scan')
         sniper = "./scripts/" + str(all_config[0].script)
-        subprocess.run(
-            [sniper, all_config[0].ip_address]
-        )
+        
+        if all_config[0].option2:
+            subprocess.run(
+                [sniper, all_config[0].option1, all_config[0].option2]
+            )
+        else:
+            subprocess.run(
+                [sniper, all_config[0].ip_address]
+            )
 
         print('Completed Sniper scan')
 
