@@ -86,6 +86,9 @@
                                             <th>URL</th>
                                             <th>Date</th>
                                             <th>Total Scans</th>
+                                            <th>Result1</th>
+                                            <th>Result2</th>
+                                            <th>Logs</th>
                                         </tr>
                                     </thead>
                                     <tbody>{% for data in all_sniper %}
@@ -96,6 +99,9 @@
                                             </td>
                                             <td>{{data.date_time}}</td>
                                             <td>{{data.total_sniper}}</td>
+                                            <td>{{data.result1}}</td>
+                                            <td>{{data.resutl2}}</td>
+                                            <td>{{data.log}}</td>
                                             {% endfor %}
                                         </tr>
                                     </tbody>
@@ -128,7 +134,10 @@
                                         <th>Sniper</th>
                                         <th>URL</th>
                                         <th>Date</th>
-                                        <th>Total Scans</th>
+                                        <th>Total Scans</th>                                        
+                                        <th>Result1</th>
+                                        <th>Result2</th>
+                                        <th>Logs</th>
                                         <th>Delete</th>
                                     </tr>
                                     </thead>
@@ -151,6 +160,15 @@
                                         </td>
                                         <td>{{data.date_time}}</td>
                                         <td>{{data.total_sniper}}</td>
+                                        <td>
+                                            <a href="/tools/sniper_result1/?scan_id={{data.scan_id}}">{{data.result1}}</a>
+                                        </td>
+                                        <td>
+                                            <a href="/tools/sniper_result1/?scan_id={{data.scan_id}}">{{data.result1}}</a>
+                                        </td>
+                                        <td>
+                                            <a href="/tools/sniper_log/?scan_id={{data.scan_id}}">{{data.log}}</a>
+                                        </td>
                                         <td class="confirm-delete">
                                             <form action="/tools/sniper_scan_del/" method="post" class="forms-sample">
 

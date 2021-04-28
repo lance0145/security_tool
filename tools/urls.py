@@ -20,6 +20,15 @@ from tools import views
 app_name = 'tools'
 
 urlpatterns = [
+    url(r'^sniper_result1',
+        views.sniper_result1,
+        name='sniper_result1'),
+    url(r'^sniper_result2',
+        views.sniper_result2,
+        name='sniper_result2'),
+    url(r'^sniper_log',
+        views.sniper_log,
+        name='sniper_log'),
     url(r'^sniper_scan_del',
         views.sniper_scan_del,
         name='sniper_scan_del'),

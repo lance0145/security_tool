@@ -103,10 +103,9 @@ def sniper_summary(request):
     """
     username = request.user.username
     if request.method == 'POST':
+        # Choose a project
         project_id = request.POST.get('proj_id', )
-        print(project_id)
         all_sniper_scan = sniper_scan_db.objects.filter(username=username, project_id=project_id)
-        print(len(all_sniper_scan))
         proj_name = project_db.objects.filter(username=username, project_id=project_id)
     else:
         all_sniper_scan = sniper_scan_db.objects.filter(username=username)
@@ -128,11 +127,62 @@ def sniper_list(request):
         ip_address = all_sniper[0].ip_address
     else:
         ip_address = ""
-    print(all_sniper[0].result_file, "*****************************************")
+
     return render(request,
                   'sniper_list.html',
                   {'all_sniper': all_sniper,
                    'ip': ip_address}
+                  )
+
+def sniper_result1(request):
+    username = request.user.username
+    scan_id = request.GET.get('scan_id', )
+    all_sniper = sniper_scan_db.objects.filter(username=username, scan_id=scan_id)
+    if all_sniper:
+        file_name = all_sniper[0].result1
+        file = all_sniper[0].result_file1
+    else:
+        file_name = ""
+        file = ""
+
+    return render(request,
+                  'sniper_result.html',
+                  {'file_name': file_name,
+                   'file': file}
+                  )
+
+def sniper_result2(request):
+    username = request.user.username
+    scan_id = request.GET.get('scan_id', )
+    all_sniper = sniper_scan_db.objects.filter(username=username, scan_id=scan_id)
+    if all_sniper:
+        file_name = all_sniper[0].result2
+        file = all_sniper[0].result_file2
+    else:
+        file_name = ""
+        file = ""
+
+    return render(request,
+                  'sniper_result.html',
+                  {'file_name': file_name,
+                   'file': file}
+                  )
+                
+def sniper_log(request):
+    username = request.user.username
+    scan_id = request.GET.get('scan_id', )
+    all_sniper = sniper_scan_db.objects.filter(username=username, scan_id=scan_id)
+    if all_sniper:
+        file_name = all_sniper[0].log
+        file = all_sniper[0].log_file
+    else:
+        file_name = ""
+        file = ""
+
+    return render(request,
+                  'sniper_result.html',
+                  {'file_name': file_name,
+                   'file': file}
                   )
 
 def sniper_delete(request):
@@ -175,8 +225,6 @@ def sniper_launch(request):
     def sniper_parse(all_config, sniper_file, date_time, scan_id, config_id, project_id):
         with open(sniper_file, 'r') as f:
             files = f.readlines()
-            result_file = f.read()
-            print(result_file)
             for f in files:
                 dump_data = sniper_result_db(
                     username=username,
@@ -188,7 +236,6 @@ def sniper_launch(request):
                     scan_id = scan_id,
                     result=sniper_file,
                     output=f,
-                    result_file=result_file,
                 )
                 dump_data.save()
 
@@ -197,18 +244,22 @@ def sniper_launch(request):
         date_time = datetime.now()
         scan_id = uuid.uuid4()
         sniper_file = str(all_config[0].result1)
-
         sniper_parse(all_config, sniper_file, date_time, scan_id, config_id, project_id)
+        with open(sniper_file, 'r') as f:
+            result_file1 = f.read()
+
         sniper_file2 = str(all_config[0].result2)
         if sniper_file2:
             sniper_parse(all_config, sniper_file2, date_time, scan_id, config_id, project_id)
+            with open(sniper_file2, 'r') as f:
+                result_file2 = f.read()
+        else:
+            result_file2 = ""
 
         all_sniper_result = sniper_result_db.objects.filter(username=username, scan_id=scan_id)
         log_file = str(all_config[0].log1)
-
         with open(log_file, 'r') as f:
             log_files = f.read()
-            print(log_files)
 
         dump_data = sniper_scan_db(
             username=username,
@@ -220,6 +271,11 @@ def sniper_launch(request):
             date_time=date_time,
             scan_id=scan_id,
             log_file=log_files,
+            result_file1=result_file1,
+            result_file2=result_file2,
+            log=log_file,
+            result1=sniper_file,
+            result2=sniper_file2,
         )
         dump_data.save()
         print("Finish parsing and saving...")

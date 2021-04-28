@@ -42,8 +42,6 @@
                                             <th>Date</th>
                                             <th>Result File</th>
                                             <th>Result</th>
-                                            <th>Results</th>
-                                            <th>Logs</th>
                                         </tr>
                                     </thead>
                                     <tbody>{% for data in all_sniper %}
@@ -51,8 +49,6 @@
                                             <td>{{data.date_time}}</td>
                                             <td>{{data.result}}</td>
                                             <td>{{data.output}}</td>
-                                            <td>{{data.result_file}}</td>
-                                            <td>{{data.log_file}}</td>
                                         </tr>
                                     </tbody>{% endfor %}
                                 </table>
@@ -71,8 +67,6 @@
                                         <th>Date</th>
                                         <th>Result File</th>
                                         <th>Result</th>
-                                        <th>Results</th>
-                                        <th>Logs</th>
                                         <th>Delete</th> 
                                     </tr>
                                     </thead>
@@ -92,8 +86,6 @@
                                         <td>{{data.date_time}}</td>
                                         <td>{{data.result}}</td>
                                         <td>{{data.output}}</td>
-                                        <td>{{data.result_file}}</td>
-                                        <td>{{data.log_file}}</td>
                                         <td class="confirm-delete">
                                             <form action="/tools/sniper_vuln_del/" method="post" class="forms-sample">
                                                 {% csrf_token %}
