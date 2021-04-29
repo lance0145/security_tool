@@ -215,8 +215,12 @@ def sniper_launch(request):
         sniper = "./scripts/" + str(all_config[0].script)
         
         if all_config[0].option2:
+            ip = str(all_config[0].ip_address)
+            ip_ranges = ip.split(".")
+            ip_range = ip_ranges[0] + "." + ip_ranges[1] + "." + ip_ranges[2] + "." + "0/24"
+            print(ip_range)
             subprocess.run(
-                [sniper, all_config[0].option1, all_config[0].option2]
+                [sniper, all_config[0].ip_address, ip_range]
             )
         else:
             subprocess.run(
