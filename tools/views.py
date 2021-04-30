@@ -223,6 +223,7 @@ def sniper_launch(request):
                 [sniper, all_config[0].ip_address, ip_range]
             )
         else:
+            print(sniper, all_config[0].ip_address)
             subprocess.run(
                 [sniper, all_config[0].ip_address]
             )
