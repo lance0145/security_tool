@@ -1,6 +1,4 @@
-Tue 27 Apr 2021 10:32:06 PM UTC
-# Nmap 7.91 scan initiated Tue Apr 27 22:32:06 2021 as: nmap -v -T4 --open -p 389 -sV -oG - 10.254.10.20
+Sun 02 May 2021 11:57:09 PM UTC
+# Nmap 7.91 scan initiated Sun May  2 23:57:09 2021 as: nmap -v -T4 --open -p 389 -sV -oG - 81.4.108.0/24
 # Ports scanned: TCP(1;389) UDP(0;) SCTP(0;) PROTOCOLS(0;)
-Host: 10.254.10.20 ()	Status: Up
-Host: 10.254.10.20 ()	Ports: 389/open/tcp//ldap//Microsoft Windows Active Directory LDAP (Domain: domain.local, Site: Default-First-Site-Name)/
-# Nmap done at Tue Apr 27 22:32:14 2021 -- 1 IP address (1 host up) scanned in 8.39 seconds
+# Nmap done at Sun May  2 23:59:11 2021 -- 256 IP addresses (84 hosts up) scanned in 122.21 seconds

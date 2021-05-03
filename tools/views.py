@@ -207,7 +207,6 @@ def sniper_launch(request):
     username = request.user.username
     config_id = request.GET.get('config_id', )
     project_id = request.GET.get('project_id', )
-    print(config_id, project_id)
     all_config = sniper_config_db.objects.filter(username=username, config_id=config_id)
 
     try:
@@ -218,14 +217,16 @@ def sniper_launch(request):
             ip = str(all_config[0].ip_address)
             ip_ranges = ip.split(".")
             ip_range = ip_ranges[0] + "." + ip_ranges[1] + "." + ip_ranges[2] + "." + "0/24"
-            print(ip_range)
             subprocess.run(
                 [sniper, all_config[0].ip_address, ip_range]
             )
-        else:
-            print(sniper, all_config[0].ip_address)
+        elif all_config[0].option1:
             subprocess.run(
                 [sniper, all_config[0].ip_address]
+            )
+        else:
+            subprocess.run(
+                [sniper]
             )
 
         print('Completed Sniper scan')

@@ -1,8 +1,6 @@
-Tue 27 Apr 2021 09:33:13 AM UTC
-# Nmap 7.91 scan initiated Tue Apr 27 09:33:13 2021 as: nmap -v -T4 --open -p 53 -oG - 10.254.10.0/24
+Sun 02 May 2021 11:55:07 PM UTC
+# Nmap 7.91 scan initiated Sun May  2 23:55:07 2021 as: nmap -v -T4 --open -p 53 -oG - nsztm1.digi.ninja
 # Ports scanned: TCP(1;53) UDP(0;) SCTP(0;) PROTOCOLS(0;)
-Host: 10.254.10.20 ()	Status: Up
-Host: 10.254.10.20 ()	Ports: 53/open/tcp//domain///
-Host: 10.254.10.254 ()	Status: Up
-Host: 10.254.10.254 ()	Ports: 53/open/tcp//domain///
-# Nmap done at Tue Apr 27 09:33:44 2021 -- 256 IP addresses (5 hosts up) scanned in 30.89 seconds
+Host: 81.4.108.41 ()	Status: Up
+Host: 81.4.108.41 ()	Ports: 53/open/tcp//domain///
+# Nmap done at Sun May  2 23:55:10 2021 -- 1 IP address (1 host up) scanned in 2.82 seconds

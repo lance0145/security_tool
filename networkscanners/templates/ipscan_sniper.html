@@ -58,11 +58,11 @@
                             <div class="table-responsive">
                                 <table id="manual_scans_list" class="table table-bordered data-table table-fixed">
                                     <thead>
-                                    <tr>                                    
+                                    <tr>   
+                                        <th>Script</th>                                 
                                         <th>Sniper Name</th>
                                         <th>URL/s</th>
-                                        <th>Project Id</th>
-                                        <th>Script</th>
+                                        <th>Project Id</th>                                        
                                         <th>Option 1</th>
                                         <th>Option 2</th>
                                         <th>Log 1</th>
@@ -77,11 +77,11 @@
                                     <tbody>{% for data in all_config %}
                                     <tr data-target="#">                                       
                                         <td>
-                                            <a href="{% url 'tools:sniper_edit' %}?config_id={{data.config_id}}">{{data.config_name}}</a>
+                                            <a href="{% url 'tools:sniper_edit' %}?config_id={{data.config_id}}">{{data.script}}</a>
                                         </td>
+                                        <td>{{data.config_name}}</td>
                                         <td>{{data.ip_address}}</td>
                                         <td>{{data.project_id}}</td>
-                                        <td>{{data.script}}</td>
                                         <td>{{data.option1}}</td>
                                         <td>{{data.option2}}</td>
                                         <td>{{data.log1}}</td>
