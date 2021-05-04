@@ -45,6 +45,7 @@ def ajax_vuln(request):
     username = request.user.username
     vuln_id = request.GET.get('id')
     status = request.GET.get('status')
+    print(status)
     date_time = datetime.now()
     if vuln_id and status:
         edit_status = manual_scan_results_db.objects.filter(username=username, vuln_id=vuln_id).update(
@@ -53,7 +54,7 @@ def ajax_vuln(request):
         )
 
     response = {
-        'status': edit_status
+        'status': status
     }
     return JsonResponse(response)
 

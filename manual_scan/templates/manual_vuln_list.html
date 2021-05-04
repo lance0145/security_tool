@@ -54,14 +54,16 @@
                     success: function (response) {
                         if (status == 'Open'){
                             $(self).text('Closed');
-                        } else{
+                        }
+                        if (status == 'Closed'){
                             $(self).text('Open');
                         }
                         status_field = $("span[value = "+id+"]");
-                        if ( status_field.text() == 'Open'){
+                        if ($(self).text() == 'Open'){
                             status_field.text('Closed');
                             status_field.removeClass("badge badge-pill badge-danger").addClass("badge badge-pill badge-success");
-                        } else{
+                        }
+                        else{
                             status_field.text('Open');
                             status_field.removeClass("badge badge-pill badge-success").addClass("badge badge-pill badge-danger");
                         }

@@ -1,10 +1,5 @@
-Mon 03 May 2021 09:38:17 PM UTC
+Tue 04 May 2021 02:24:57 PM UTC
 Checking for common account names for domain.local on 10.254.10.20
-./dc_userenum_ldap.py 10.254.10.20 domain.local /home/lance0145/afovos/scripts/name-lists/server.txt
-administrator
-test
-legal
-Administrator
-p1
-./dc_userenum_ldap.py 10.254.10.20 domain.local /home/lance0145/afovos/scripts/name-lists/john.smith.txt
-./dc_userenum_ldap.py 10.254.10.20 domain.local /home/lance0145/afovos/scripts/name-lists/jsmith.txt
+./dc_userenum_ldap.py 10.254.10.20 domain.local /root/cecuri/groot/scripts/name-lists/server.txt
+./dc_userenum_ldap.py 10.254.10.20 domain.local /root/cecuri/groot/scripts/name-lists/john.smith.txt
+./dc_userenum_ldap.py 10.254.10.20 domain.local /root/cecuri/groot/scripts/name-lists/jsmith.txt

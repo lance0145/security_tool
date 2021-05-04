@@ -1,0 +1,306 @@
+<report id="6c5265c6-72c9-435c-b5da-3100cf7b2f1d" format_id="a994b278-1f62-11e1-96ac-406186ea4fc5" extension="xml" type="scan" content_type="text/xml"><owner><name>ossim</name></owner><name>2021-05-04T11:01:18Z</name><comment></comment><creation_time>2021-05-04T11:01:18Z</creation_time><modification_time>2021-05-04T11:07:24Z</modification_time><writable>0</writable><in_use>0</in_use><task id="37fd3117-ccb7-49df-b276-8a97bc92c326"><name>10.254.10.20</name></task><report_format id="a994b278-1f62-11e1-96ac-406186ea4fc5"><name>XML</name></report_format><report id="6c5265c6-72c9-435c-b5da-3100cf7b2f1d"><omp><version>7.0</version></omp><sort><field>type<order>ascending</order></field></sort><filters id=""><term>apply_overrides=0 min_qod=70 first=1 rows=-1 sort=name</term><filter>High</filter><filter>Medium</filter><filter>Low</filter><filter>Log</filter><filter>Debug</filter><keywords><keyword><column>apply_overrides</column><relation>=</relation><value>0</value></keyword><keyword><column>min_qod</column><relation>=</relation><value>70</value></keyword><keyword><column>first</column><relation>=</relation><value>1</value></keyword><keyword><column>rows</column><relation>=</relation><value>-1</value></keyword><keyword><column>sort</column><relation>=</relation><value>name</value></keyword></keywords></filters><severity_class id="d4c74cda-89e1-11e3-9c29-406186ea4fc5"><name>nist</name><full_name>NVD Vulnerability Severity Ratings</full_name><severity_range><name>None</name><min>0.0</min><max>0.0</max></severity_range><severity_range><name>Low</name><min>0.1</min><max>3.9</max></severity_range><severity_range><name>Medium</name><min>4.0</min><max>6.9</max></severity_range><severity_range><name>High</name><min>7.0</min><max>10.0</max></severity_range></severity_class><user_tags><count>0</count></user_tags><scan_run_status>Done</scan_run_status><hosts><count>1</count></hosts><closed_cves><count>3</count></closed_cves><vulns><count>21</count></vulns><os><count>1</count></os><apps><count>0</count></apps><ssl_certs><count>1</count></ssl_certs><task id="37fd3117-ccb7-49df-b276-8a97bc92c326"><name>10.254.10.20</name><comment>Auto generated</comment><target id="84e837a6-a246-4a37-a96d-b66533dac21c"><trash>0</trash></target><progress>-1</progress><user_tags><count>0</count></user_tags></task><scan><task><slave id=""><name></name><host></host><port>0</port></slave><preferences><preference><name>Network Source Interface</name><scanner_name>source_iface</scanner_name><value></value></preference></preferences></task></scan><timestamp>2021-05-04T11:01:13Z</timestamp><scan_start>2021-05-04T11:01:18Z</scan_start><timezone>Coordinated Universal Time</timezone><timezone_abbrev>UTC</timezone_abbrev><ports max="-1" start="1"><count>11</count><port>3389/tcp<host>10.254.10.20</host><severity>0.0</severity><threat>Log</threat></port><port>636/tcp<host>10.254.10.20</host><severity>0.0</severity><threat>Log</threat></port><port>general/CPE-T<host>10.254.10.20</host><severity>0.0</severity><threat>Log</threat></port><port>3268/tcp<host>10.254.10.20</host><severity>0.0</severity><threat>Log</threat></port><port>135/tcp<host>10.254.10.20</host><severity>5.0</severity><threat>Medium</threat></port><port>389/tcp<host>10.254.10.20</host><severity>0.0</severity><threat>Log</threat></port><port>88/tcp<host>10.254.10.20</host><severity>0.0</severity><threat>Log</threat></port><port>464/tcp<host>10.254.10.20</host><severity>0.0</severity><threat>Log</threat></port><port>139/tcp<host>10.254.10.20</host><severity>0.0</severity><threat>Log</threat></port><port>3269/tcp<host>10.254.10.20</host><severity>0.0</severity><threat>Log</threat></port><port>general/tcp<host>10.254.10.20</host><severity>2.6</severity><threat>Low</threat></port><port>445/tcp<host>10.254.10.20</host><severity>9.3</severity><threat>High</threat></port><port>53/tcp<host>10.254.10.20</host><severity>0.0</severity><threat>Log</threat></port></ports><results max="-1" start="1"><result id="25406273-8dca-42bf-9991-cf6df5d7a83c"><name>CPE Inventory</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:07:24Z</creation_time><modification_time>2021-05-04T11:07:24Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>general/CPE-T</port><nvt oid="1.3.6.1.4.1.25623.1.0.810002"><type>nvt</type><name>CPE Inventory</name><family>Service detection</family><cvss_base>0.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>URL:http://cpe.mitre.org/</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:N/I:N/A:N|summary=This routine uses information collected by other routines about
+  CPE identities of operating systems, services and
+  applications detected during the scan.|qod_type=remote_banner</tags><cert></cert></nvt><scan_nvt_version>$Revision: 14324 $</scan_nvt_version><threat>Log</threat><severity>0.0</severity><qod><value>80</value><type>remote_banner</type></qod><description>10.254.10.20|cpe:/o:microsoft:windows_server_2008:r2:sp1</description></result><result id="175924d8-6b88-4aa5-a5f8-1c7b1483f2b3"><name>DCE/RPC and MSRPC Services Enumeration</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:03:31Z</creation_time><modification_time>2021-05-04T11:03:31Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>135/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.108044"><type>nvt</type><name>DCE/RPC and MSRPC Services Enumeration</name><family>Service detection</family><cvss_base>0.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>NOXREF</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:N/I:N/A:N|summary=Distributed Computing Environment / Remote Procedure Calls (DCE/RPC) or MSRPC services running
+  on the remote host can be enumerated by connecting on port 135 and doing the appropriate queries.
+
+  The actual reporting takes place in the NVT &apos;DCE/RPC and MSRPC Services Enumeration Reporting&apos;
+  (OID: 1.3.6.1.4.1.25623.1.0.10736)|impact=An attacker may use this fact to gain more knowledge
+  about the remote host.|solution=Filter incoming traffic to this port.|solution_type=Mitigation|qod_type=remote_banner</tags><cert></cert></nvt><scan_nvt_version>$Revision: 11885 $</scan_nvt_version><threat>Log</threat><severity>0.0</severity><qod><value>80</value><type>remote_banner</type></qod><description>A DCE endpoint resolution service seems to be running on this port.</description></result><result id="bcd5eb32-0b4d-4f37-9c58-502a4491b94b"><name>DCE/RPC and MSRPC Services Enumeration Reporting</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:06:09Z</creation_time><modification_time>2021-05-04T11:06:09Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>135/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.10736"><type>nvt</type><name>DCE/RPC and MSRPC Services Enumeration Reporting</name><family>Windows</family><cvss_base>5.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>NOXREF</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:P/I:N/A:N|summary=Distributed Computing Environment / Remote Procedure Calls (DCE/RPC) or MSRPC services running
+  on the remote host can be enumerated by connecting on port 135 and doing the appropriate queries.|impact=An attacker may use this fact to gain more knowledge
+  about the remote host.|solution=Filter incoming traffic to this ports.|solution_type=Mitigation|qod_type=remote_banner</tags><cert></cert></nvt><scan_nvt_version>$Revision: 6319 $</scan_nvt_version><threat>Medium</threat><severity>5.0</severity><qod><value>80</value><type>remote_banner</type></qod><description>Here is the list of DCE/RPC or MSRPC services running on this host via the TCP protocol:
+
+Port: 49152/tcp
+
+     UUID: d95afe70-a6d5-4259-822e-2c84da1ddb0d, version 1
+     Endpoint: ncacn_ip_tcp:10.254.10.20[49152]
+
+Port: 49153/tcp
+
+     UUID: 30adc50c-5cbc-46ce-9a0e-91914789e23c, version 1
+     Endpoint: ncacn_ip_tcp:10.254.10.20[49153]
+     Annotation: NRP server endpoint
+
+     UUID: 3c4728c5-f0ab-448b-bda1-6ce01eb0a6d5, version 1
+     Endpoint: ncacn_ip_tcp:10.254.10.20[49153]
+     Annotation: DHCP Client LRPC Endpoint
+
+     UUID: 3c4728c5-f0ab-448b-bda1-6ce01eb0a6d6, version 1
+     Endpoint: ncacn_ip_tcp:10.254.10.20[49153]
+     Annotation: DHCPv6 Client LRPC Endpoint
+
+     UUID: f6beaff7-1e19-4fbb-9f8f-b89e2018337c, version 1
+     Endpoint: ncacn_ip_tcp:10.254.10.20[49153]
+     Annotation: Event log TCPIP
+
+Port: 49154/tcp
+
+     UUID: 30b044a5-a225-43f0-b3a4-e060df91f9c1, version 1
+     Endpoint: ncacn_ip_tcp:10.254.10.20[49154]
+
+     UUID: 552d076a-cb29-4e44-8b6a-d15e59e2c0af, version 1
+     Endpoint: ncacn_ip_tcp:10.254.10.20[49154]
+     Annotation: IP Transition Configuration endpoint
+
+     UUID: 86d35949-83c9-4044-b424-db363231fd0c, version 1
+     Endpoint: ncacn_ip_tcp:10.254.10.20[49154]
+
+     UUID: 98716d03-89ac-44c7-bb8c-285824e51c4a, version 1
+     Endpoint: ncacn_ip_tcp:10.254.10.20[49154]
+     Annotation: XactSrv service
+
+     UUID: c9ac6db5-82b7-4e55-ae8a-e464ed7b4277, version 1
+     Endpoint: ncacn_ip_tcp:10.254.10.20[49154]
+     Annotation: Impl friendly name
+
+Port: 49155/tcp
+
+     UUID: 12345678-1234-abcd-ef00-01234567cffb, version 1
+     Endpoint: ncacn_ip_tcp:10.254.10.20[49155]
+     Named pipe : lsass
+     Win32 service or process : Netlogon
+     Description : Net Logon service
+
+     UUID: 12345778-1234-abcd-ef00-0123456789ab, version 0
+     Endpoint: ncacn_ip_tcp:10.254.10.20[49155]
+     Named pipe : lsass
+     Win32 service or process : lsass.exe
+     Description : LSA access
+
+     UUID: 12345778-1234-abcd-ef00-0123456789ac, version 1
+     Endpoint: ncacn_ip_tcp:10.254.10.20[49155]
+     Named pipe : lsass
+     Win32 service or process : lsass.exe
+     Description : SAM access
+
+     UUID: e3514235-4b06-11d1-ab04-00c04fc2dcd2, version 4
+     Endpoint: ncacn_ip_tcp:10.254.10.20[49155]
+     Annotation: MS NT Directory DRS Interface
+
+Port: 49157/tcp
+
+     UUID: 12345678-1234-abcd-ef00-01234567cffb, version 1
+     Endpoint: ncacn_http:10.254.10.20[49157]
+     Named pipe : lsass
+     Win32 service or process : Netlogon
+     Description : Net Logon service
+
+     UUID: 12345778-1234-abcd-ef00-0123456789ab, version 0
+     Endpoint: ncacn_http:10.254.10.20[49157]
+     Named pipe : lsass
+     Win32 service or process : lsass.exe
+     Description : LSA access
+
+     UUID: 12345778-1234-abcd-ef00-0123456789ac, version 1
+     Endpoint: ncacn_http:10.254.10.20[49157]
+     Named pipe : lsass
+     Win32 service or process : lsass.exe
+     Description : SAM access
+
+     UUID: e3514235-4b06-11d1-ab04-00c04fc2dcd2, version 4
+     Endpoint: ncacn_http:10.254.10.20[49157]
+     Annotation: MS NT Directory DRS Interface
+
+Port: 49158/tcp
+
+     UUID: 12345678-1234-abcd-ef00-01234567cffb, version 1
+     Endpoint: ncacn_ip_tcp:10.254.10.20[49158]
+     Named pipe : lsass
+     Win32 service or process : Netlogon
+     Description : Net Logon service
+
+     UUID: 12345778-1234-abcd-ef00-0123456789ac, version 1
+     Endpoint: ncacn_ip_tcp:10.254.10.20[49158]
+     Named pipe : lsass
+     Win32 service or process : lsass.exe
+     Description : SAM access
+
+Port: 49161/tcp
+
+     UUID: a00c021c-2be2-11d2-b678-0000f87a8f8e, version 1
+     Endpoint: ncacn_ip_tcp:10.254.10.20[49161]
+     Annotation: PERFMON SERVICE
+
+     UUID: d049b186-814f-11d1-9a3c-00c04fc9b232, version 1
+     Endpoint: ncacn_ip_tcp:10.254.10.20[49161]
+     Annotation: NtFrs API
+
+     UUID: f5cc59b4-4264-101a-8c59-08002b2f8426, version 1
+     Endpoint: ncacn_ip_tcp:10.254.10.20[49161]
+     Annotation: NtFrs Service
+
+Port: 49165/tcp
+
+     UUID: 367abb81-9844-35f1-ad32-98f038001003, version 2
+     Endpoint: ncacn_ip_tcp:10.254.10.20[49165]
+
+Port: 49169/tcp
+
+     UUID: 50abc2a4-574d-40b3-9d66-ee4fd5fba076, version 5
+     Endpoint: ncacn_ip_tcp:10.254.10.20[49169]
+     Named pipe : dnsserver
+     Win32 service or process : dns.exe
+     Description : DNS Server
+
+Note: DCE/RPC or MSRPC services running on this host locally were identified. Reporting this list is not enabled by default due to the possible large size of this list. See the script preferences to enable this reporting.</description></result><result id="3e6261cf-3626-405c-a1a6-d631736ad913"><name>DNS Server Detection (TCP)</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:05:45Z</creation_time><modification_time>2021-05-04T11:05:45Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>53/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.108018"><type>nvt</type><name>DNS Server Detection (TCP)</name><family>Service detection</family><cvss_base>0.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>NOXREF</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:N/I:N/A:N|summary=A DNS Server is running at this Host.
+  A Name Server translates domain names into IP addresses. This makes it
+  possible for a user to access a website by typing in the domain name instead of
+  the website&apos;s actual IP address.|qod_type=remote_banner</tags><cert></cert></nvt><scan_nvt_version>$Revision: 13541 $</scan_nvt_version><threat>Log</threat><severity>0.0</severity><qod><value>80</value><type>remote_banner</type></qod><description></description></result><result id="c953659d-43f5-41a9-8856-3e0a9a6d1f6d"><name>Kerberos Detection (TCP)</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:05:38Z</creation_time><modification_time>2021-05-04T11:05:38Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>88/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.103854"><type>nvt</type><name>Kerberos Detection (TCP)</name><family>Service detection</family><cvss_base>0.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>NOXREF</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:N/I:N/A:N|summary=The script sends a connection request to detect a running kerberos server.|qod_type=remote_banner</tags><cert></cert></nvt><scan_nvt_version>$Revision: 13541 $</scan_nvt_version><threat>Log</threat><severity>0.0</severity><qod><value>80</value><type>remote_banner</type></qod><description>A Kerberos Server is running at this port.
+
+Realm: DOMAIN.LOCAL
+Server time: 2021-05-04 11:06:35</description></result><result id="a1d9ff5b-ce7f-460d-8069-55d6df20bc27"><name>LDAP Detection</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:04:34Z</creation_time><modification_time>2021-05-04T11:04:34Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>3268/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.100082"><type>nvt</type><name>LDAP Detection</name><family>Service detection</family><cvss_base>0.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>NOXREF</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:N/I:N/A:N|summary=A LDAP Server is running at this host.
+
+  The Lightweight Directory Access Protocol, or LDAP is an application
+  protocol for querying and modifying directory services running over
+  TCP/IP.|qod_type=remote_banner</tags><cert></cert></nvt><scan_nvt_version>$Revision: 13541 $</scan_nvt_version><threat>Log</threat><severity>0.0</severity><qod><value>80</value><type>remote_banner</type></qod><description>The LDAP Server supports LDAPv3.</description></result><result id="6fb629aa-bbf7-4bbc-bb44-88e347303ea5"><name>LDAP Detection</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:04:36Z</creation_time><modification_time>2021-05-04T11:04:36Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>389/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.100082"><type>nvt</type><name>LDAP Detection</name><family>Service detection</family><cvss_base>0.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>NOXREF</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:N/I:N/A:N|summary=A LDAP Server is running at this host.
+
+  The Lightweight Directory Access Protocol, or LDAP is an application
+  protocol for querying and modifying directory services running over
+  TCP/IP.|qod_type=remote_banner</tags><cert></cert></nvt><scan_nvt_version>$Revision: 13541 $</scan_nvt_version><threat>Log</threat><severity>0.0</severity><qod><value>80</value><type>remote_banner</type></qod><description>The LDAP Server supports LDAPv3.</description></result><result id="1ad6e389-691c-480b-b18f-5b3a1bc02e30"><name>Microsoft Remote Desktop Protocol Detection</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:04:01Z</creation_time><modification_time>2021-05-04T11:04:01Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>3389/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.100062"><type>nvt</type><name>Microsoft Remote Desktop Protocol Detection</name><family>Service detection</family><cvss_base>0.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>NOXREF</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:N/I:N/A:N|summary=A service supporting the Microsoft Remote Desktop Protocol (RDP) is running
+  at this host.
+
+  Remote Desktop Services, formerly known as Terminal Services, is one of the components of Microsoft Windows
+  (both server and client versions) that allows a user to access applications and data on a remote computer over
+  a network.|qod_type=remote_banner</tags><cert></cert></nvt><scan_nvt_version>$Revision: 11031 $</scan_nvt_version><threat>Log</threat><severity>0.0</severity><qod><value>80</value><type>remote_banner</type></qod><description></description></result><result id="91ce10fe-cf39-49e6-80b3-74cfaddfb35e"><name>Microsoft Windows SMB Server Multiple Vulnerabilities-Remote (4013389)</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:06:27Z</creation_time><modification_time>2021-05-04T11:06:27Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>445/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.810676"><type>nvt</type><name>Microsoft Windows SMB Server Multiple Vulnerabilities-Remote (4013389)</name><family>Windows : Microsoft Bulletins</family><cvss_base>9.3</cvss_base><cve>CVE-2017-0143, CVE-2017-0144, CVE-2017-0145, CVE-2017-0146, CVE-2017-0147, CVE-2017-0148</cve><bid>96703, 96704, 96705, 96707, 96709, 96706</bid><xref>URL:https://support.microsoft.com/en-in/kb/4013078, URL:https://technet.microsoft.com/library/security/MS17-010, URL:https://github.com/rapid7/metasploit-framework/pull/8167/files</xref><tags>cvss_base_vector=AV:N/AC:M/Au:N/C:C/I:C/A:C|summary=This host is missing a critical security
+  update according to Microsoft Bulletin MS17-010.|vuldetect=Send the crafted SMB transaction request
+  with fid = 0 and check the response to confirm the vulnerability.|insight=Multiple flaws exist due to the way that the
+  Microsoft Server Message Block 1.0 (SMBv1) server handles certain requests.|impact=Successful exploitation will allow remote
+  attackers to gain the ability to execute code on the target server, also
+  could lead to information disclosure from the server.|affected=Microsoft Windows 10 x32/x64 Edition
+  Microsoft Windows Server 2012 Edition
+  Microsoft Windows Server 2016
+  Microsoft Windows 8.1 x32/x64 Edition
+  Microsoft Windows Server 2012 R2 Edition
+  Microsoft Windows 7 x32/x64 Edition Service Pack 1
+  Microsoft Windows Vista x32/x64 Edition Service Pack 2
+  Microsoft Windows Server 2008 R2 x64 Edition Service Pack 1
+  Microsoft Windows Server 2008 x32/x64 Edition Service Pack 2|solution=The vendor has released updates. Please see the references for more information.|solution_type=VendorFix|qod_type=remote_active</tags><cert><cert_ref id="CB-K17/0435" type="CERT-Bund"></cert_ref><cert_ref id="DFN-CERT-2017-0448" type="DFN-CERT"></cert_ref></cert></nvt><scan_nvt_version>2019-05-03T10:54:50+0000</scan_nvt_version><threat>High</threat><severity>9.3</severity><qod><value>95</value><type>remote_active</type></qod><description></description></result><result id="3709e3ea-2edd-49b4-ad1c-04b6c86e5086"><name>OS Detection Consolidation and Reporting</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:05:45Z</creation_time><modification_time>2021-05-04T11:05:45Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>general/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.105937"><type>nvt</type><name>OS Detection Consolidation and Reporting</name><family>Product detection</family><cvss_base>0.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>URL:https://community.greenbone.net/c/vulnerability-tests</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:N/I:N/A:N|summary=This script consolidates the OS information detected by several NVTs and tries to find the best matching OS.
+
+  Furthermore it reports all previously collected information leading to this best matching OS. It also reports possible additional information
+  which might help to improve the OS detection.
+
+  If any of this information is wrong or could be improved please consider to report these to the referenced community portal.|qod_type=remote_banner</tags><cert></cert></nvt><scan_nvt_version>2019-06-01T08:20:43+0000</scan_nvt_version><threat>Log</threat><severity>0.0</severity><qod><value>80</value><type>remote_banner</type></qod><description>Best matching OS:
+
+OS:           Windows Server 2008 R2 Standard 7601 Service Pack 1
+CPE:          cpe:/o:microsoft:windows_server_2008:r2:sp1
+Found by NVT: 1.3.6.1.4.1.25623.1.0.102011 (SMB NativeLanMan)
+Concluded from SMB/Samba banner on port 445/tcp: 
+OS String:  Windows Server 2008 R2 Standard 7601 Service Pack 1
+SMB String: Windows Server 2008 R2 Standard 6.1
+Setting key &quot;Host/runs_windows&quot; based on this information
+
+Other OS detections (in order of reliability):
+
+OS:           Microsoft Windows
+CPE:          cpe:/o:microsoft:windows
+Found by NVT: 1.3.6.1.4.1.25623.1.0.100062 (Microsoft Remote Desktop Protocol Detection)
+Concluded from Microsoft Remote Desktop Protocol on port 3389/tcp: Windows, possible Windows 7 or Server 2008 based on binary response fingerprinting: 030000130ed000001234000201080002000000
+
+OS:           Microsoft Windows
+CPE:          cpe:/o:microsoft:windows
+Found by NVT: 1.3.6.1.4.1.25623.1.0.108044 (DCE/RPC and MSRPC Services Enumeration)
+Concluded from DCE/RPC and MSRPC Services Enumeration on port 135/tcp</description></result><result id="7000752a-3f7f-435a-9362-40f0681affc7"><name>Services</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:02:12Z</creation_time><modification_time>2021-05-04T11:02:12Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>3389/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.10330"><type>nvt</type><name>Services</name><family>Service detection</family><cvss_base>0.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>NOXREF</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:N/I:N/A:N|summary=This routine attempts to guess which service is running on the
+  remote ports. For instance, it searches for a web server which could listen on another port than
+  80 or 443 and makes this information available for other check routines.|qod_type=remote_banner</tags><cert></cert></nvt><scan_nvt_version>$Revision: 13541 $</scan_nvt_version><threat>Log</threat><severity>0.0</severity><qod><value>80</value><type>remote_banner</type></qod><description>A TLScustom server answered on this port</description></result><result id="7afca1a3-d75e-43b2-af7d-0bdfd60d3c3b"><name>SMB NativeLanMan</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:04:32Z</creation_time><modification_time>2021-05-04T11:04:32Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>445/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.102011"><type>nvt</type><name>SMB NativeLanMan</name><family>Product detection</family><cvss_base>0.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>NOXREF</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:N/I:N/A:N|summary=It is possible to extract OS, domain and SMB server information
+  from the Session Setup AndX Response packet which is generated during NTLM authentication.|qod_type=remote_active</tags><cert></cert></nvt><scan_nvt_version>2019-04-24T11:06:32+0000</scan_nvt_version><threat>Log</threat><severity>0.0</severity><qod><value>95</value><type>remote_active</type></qod><description>Detected SMB workgroup: DOMAIN
+Detected SMB server: Windows Server 2008 R2 Standard 6.1
+Detected OS: Windows Server 2008 R2 Standard 7601 Service Pack 1</description></result><result id="0becbe29-b640-43da-a782-2c1bd4ce76a0"><name>SMB Remote Version Detection</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:05:38Z</creation_time><modification_time>2021-05-04T11:05:38Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>445/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.807830"><type>nvt</type><name>SMB Remote Version Detection</name><family>Service detection</family><cvss_base>0.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>NOXREF</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:N/I:N/A:N|summary=Detection of Server Message Block(SMB).
+
+  This script sends SMB Negotiation request and try to get the version from the
+  response.|qod_type=remote_banner</tags><cert></cert></nvt><scan_nvt_version>2019-05-16T07:13:31+0000</scan_nvt_version><threat>Log</threat><severity>0.0</severity><qod><value>80</value><type>remote_banner</type></qod><description>SMBv1 and SMBv2 are enabled on remote target</description></result><result id="dc06e3e6-6a95-450c-a785-bb272148a91d"><name>SMB/CIFS Server Detection</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:03:32Z</creation_time><modification_time>2021-05-04T11:03:32Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>445/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.11011"><type>nvt</type><name>SMB/CIFS Server Detection</name><family>Service detection</family><cvss_base>0.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>NOXREF</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:N/I:N/A:N|summary=This script detects whether port 445 and 139 are open and
+  if they are running a CIFS/SMB server.|qod_type=remote_banner</tags><cert></cert></nvt><scan_nvt_version>$Revision: 13541 $</scan_nvt_version><threat>Log</threat><severity>0.0</severity><qod><value>80</value><type>remote_banner</type></qod><description>A CIFS server is running on this port</description></result><result id="008b0a8b-9527-4a88-9b0c-0b5b6c17c3bd"><name>SMB/CIFS Server Detection</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:03:32Z</creation_time><modification_time>2021-05-04T11:03:32Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>139/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.11011"><type>nvt</type><name>SMB/CIFS Server Detection</name><family>Service detection</family><cvss_base>0.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>NOXREF</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:N/I:N/A:N|summary=This script detects whether port 445 and 139 are open and
+  if they are running a CIFS/SMB server.|qod_type=remote_banner</tags><cert></cert></nvt><scan_nvt_version>$Revision: 13541 $</scan_nvt_version><threat>Log</threat><severity>0.0</severity><qod><value>80</value><type>remote_banner</type></qod><description>A SMB server is running on this port</description></result><result id="727fc8c9-b80b-4136-98d4-753477c4a282"><name>SMBv1 enabled (Remote Check)</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:06:13Z</creation_time><modification_time>2021-05-04T11:06:13Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>445/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.140151"><type>nvt</type><name>SMBv1 enabled (Remote Check)</name><family>General</family><cvss_base>0.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>URL:https://www.us-cert.gov/ncas/current-activity/2017/01/16/SMB-Security-Best-Practices, URL:https://support.microsoft.com/en-us/kb/2696547, URL:https://support.microsoft.com/en-us/kb/204279</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:N/I:N/A:N|summary=The host has enabled SMBv1 for the SMB Server.|vuldetect=Checks if SMBv1 is enabled for the SMB Server based on the
+  information provided by the following VT:
+
+  - SMB Remote Version Detection (OID: 1.3.6.1.4.1.25623.1.0.807830).|qod_type=remote_banner</tags><cert></cert></nvt><scan_nvt_version>2019-05-20T06:24:13+0000</scan_nvt_version><threat>Log</threat><severity>0.0</severity><qod><value>80</value><type>remote_banner</type></qod><description>SMBv1 is enabled for the SMB Server</description></result><result id="9d5e9a15-fcb0-4684-82c8-6023304ca67c"><name>SSL/TLS: Certificate - Self-Signed Certificate Detection</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:05:49Z</creation_time><modification_time>2021-05-04T11:05:49Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>3389/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.103140"><type>nvt</type><name>SSL/TLS: Certificate - Self-Signed Certificate Detection</name><family>SSL and TLS</family><cvss_base>0.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>URL:http://en.wikipedia.org/wiki/Self-signed_certificate</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:N/I:N/A:N|summary=The SSL/TLS certificate on this port is self-signed.|qod_type=remote_app</tags><cert></cert></nvt><scan_nvt_version>$Revision: 8981 $</scan_nvt_version><threat>Log</threat><severity>0.0</severity><qod><value>98</value><type>remote_app</type></qod><description>The certificate of the remote service is self signed.
+
+Certificate details:
+subject ...: CN=server2008.domain.local
+subject alternative names (SAN):
+None
+issued by .: CN=server2008.domain.local
+serial ....: 3C44FCF0909A3680495DB894D8DDFDEE
+valid from : 2021-04-09 13:57:59 UTC
+valid until: 2021-10-09 13:57:59 UTC
+fingerprint (SHA-1): E8E1293DD026A7B9B6D6833D080CD4D27652F11C
+fingerprint (SHA-256): 83CAA88767D49116EA5D0F2B22F45B45CB8E4102CFB5115ACCC2F9621802F630</description></result><result id="78abd107-a5c0-4f5c-bf57-1770a932f8ba"><name>SSL/TLS: Collect and Report Certificate Details</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:05:36Z</creation_time><modification_time>2021-05-04T11:05:36Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>3389/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.103692"><type>nvt</type><name>SSL/TLS: Collect and Report Certificate Details</name><family>SSL and TLS</family><cvss_base>0.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>NOXREF</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:N/I:N/A:N|summary=This script collects and reports the details of all SSL/TLS certificates.
+
+  This data will be used by other tests to verify server certificates.|qod_type=remote_app</tags><cert></cert></nvt><scan_nvt_version>2019-04-04T13:38:03+0000</scan_nvt_version><threat>Log</threat><severity>0.0</severity><qod><value>98</value><type>remote_app</type></qod><description>The following certificate details of the remote service were collected.
+
+Certificate details:
+subject ...: CN=server2008.domain.local
+subject alternative names (SAN):
+None
+issued by .: CN=server2008.domain.local
+serial ....: 3C44FCF0909A3680495DB894D8DDFDEE
+valid from : 2021-04-09 13:57:59 UTC
+valid until: 2021-10-09 13:57:59 UTC
+fingerprint (SHA-1): E8E1293DD026A7B9B6D6833D080CD4D27652F11C
+fingerprint (SHA-256): 83CAA88767D49116EA5D0F2B22F45B45CB8E4102CFB5115ACCC2F9621802F630</description></result><result id="0ac391da-80a4-4d93-9b8c-44bc2d8d852a"><name>SSL/TLS: Hostname discovery from server certificate</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:05:36Z</creation_time><modification_time>2021-05-04T11:05:36Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>general/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.111010"><type>nvt</type><name>SSL/TLS: Hostname discovery from server certificate</name><family>SSL and TLS</family><cvss_base>0.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>NOXREF</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:N/I:N/A:N|summary=It was possible to discover an additional hostname
+  of this server from its certificate Common or Subject Alt Name.|qod_type=remote_app</tags><cert></cert></nvt><scan_nvt_version>$Revision: 13774 $</scan_nvt_version><threat>Log</threat><severity>0.0</severity><qod><value>98</value><type>remote_app</type></qod><description>The following additional but not resolvable hostnames were detected:
+
+server2008.domain.local</description></result><result id="3b1acae7-80d9-4a3e-9d1b-e2e1f619685a"><name>TCP timestamps</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:05:38Z</creation_time><modification_time>2021-05-04T11:05:38Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>general/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.80091"><type>nvt</type><name>TCP timestamps</name><family>General</family><cvss_base>2.6</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>URL:http://www.ietf.org/rfc/rfc1323.txt, URL:http://www.microsoft.com/en-us/download/details.aspx?id=9152</xref><tags>cvss_base_vector=AV:N/AC:H/Au:N/C:P/I:N/A:N|summary=The remote host implements TCP timestamps and therefore allows to compute
+  the uptime.|vuldetect=Special IP packets are forged and sent with a little delay in between to the
+  target IP. The responses are searched for a timestamps. If found, the timestamps are reported.|solution=To disable TCP timestamps on linux add the line &apos;net.ipv4.tcp_timestamps = 0&apos; to
+  /etc/sysctl.conf. Execute &apos;sysctl -p&apos; to apply the settings at runtime.
+
+  To disable TCP timestamps on Windows execute &apos;netsh int tcp set global timestamps=disabled&apos;
+
+  Starting with Windows Server 2008 and Vista, the timestamp can not be completely disabled.
+
+  The default behavior of the TCP/IP stack on this Systems is to not use the
+  Timestamp options when initiating TCP connections, but use them if the TCP peer
+  that is initiating communication includes them in their synchronize (SYN) segment.
+
+  See the references for more information.|affected=TCP/IPv4 implementations that implement RFC1323.|insight=The remote host implements TCP timestamps, as defined by RFC1323.|impact=A side effect of this feature is that the uptime of the remote
+  host can sometimes be computed.|solution_type=Mitigation|qod_type=remote_banner</tags><cert></cert></nvt><scan_nvt_version>$Revision: 14310 $</scan_nvt_version><threat>Low</threat><severity>2.6</severity><qod><value>80</value><type>remote_banner</type></qod><description>It was detected that the host implements RFC1323/RFC7323.
+
+The following timestamps were retrieved with a delay of 1 seconds in-between:
+Packet 1: 12112883
+Packet 2: 12112993</description></result><result id="e4599cd5-a5ec-434e-beef-0b4d4e4be565"><name>Traceroute</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:06:03Z</creation_time><modification_time>2021-05-04T11:06:03Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>general/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.51662"><type>nvt</type><name>Traceroute</name><family>General</family><cvss_base>0.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>NOXREF</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:N/I:N/A:N|solution=Block unwanted packets from escaping your network.|summary=A traceroute from the scanning server to the target system was
+  conducted. This traceroute is provided primarily for informational value only. In the vast
+  majority of cases, it does not represent a vulnerability. However, if the displayed traceroute
+  contains any private addresses that should not have been publicly visible, then you have an
+  issue you need to correct.|qod_type=remote_banner</tags><cert></cert></nvt><scan_nvt_version>$Revision: 10411 $</scan_nvt_version><threat>Log</threat><severity>0.0</severity><qod><value>80</value><type>remote_banner</type></qod><description>Here is the route from 10.254.10.45 to 10.254.10.20:
+
+10.254.10.45
+10.254.10.20</description></result><result id="19cc70cb-a43e-4ff7-8358-896194360ffd"><name>Unknown OS and Service Banner Reporting</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:06:09Z</creation_time><modification_time>2021-05-04T11:06:09Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>636/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.108441"><type>nvt</type><name>Unknown OS and Service Banner Reporting</name><family>Service detection</family><cvss_base>0.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>URL:https://community.greenbone.net/c/vulnerability-tests</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:N/I:N/A:N|summary=This NVT consolidates and reports the information collected by
+  the following NVTs:
+
+  - Collect banner of unknown services (OID: 1.3.6.1.4.1.25623.1.0.11154)
+
+  - Service Detection (unknown) with nmap (OID: 1.3.6.1.4.1.25623.1.0.66286)
+
+  - Service Detection (wrapped) with nmap (OID: 1.3.6.1.4.1.25623.1.0.108525)
+
+  - OS Detection Consolidation and Reporting (OID: 1.3.6.1.4.1.25623.1.0.105937)
+
+  If you know any of the information reported here, please send the full output to
+  the referenced community portal.|qod_type=remote_banner</tags><cert></cert></nvt><scan_nvt_version>$Revision: 12934 $</scan_nvt_version><threat>Log</threat><severity>0.0</severity><qod><value>80</value><type>remote_banner</type></qod><description>Nmap service detection (unknown) result for this port: tcpwrapped</description></result><result id="144d8d89-3d7b-4f38-851c-259c4edf4c6c"><name>Unknown OS and Service Banner Reporting</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:06:09Z</creation_time><modification_time>2021-05-04T11:06:09Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>464/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.108441"><type>nvt</type><name>Unknown OS and Service Banner Reporting</name><family>Service detection</family><cvss_base>0.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>URL:https://community.greenbone.net/c/vulnerability-tests</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:N/I:N/A:N|summary=This NVT consolidates and reports the information collected by
+  the following NVTs:
+
+  - Collect banner of unknown services (OID: 1.3.6.1.4.1.25623.1.0.11154)
+
+  - Service Detection (unknown) with nmap (OID: 1.3.6.1.4.1.25623.1.0.66286)
+
+  - Service Detection (wrapped) with nmap (OID: 1.3.6.1.4.1.25623.1.0.108525)
+
+  - OS Detection Consolidation and Reporting (OID: 1.3.6.1.4.1.25623.1.0.105937)
+
+  If you know any of the information reported here, please send the full output to
+  the referenced community portal.|qod_type=remote_banner</tags><cert></cert></nvt><scan_nvt_version>$Revision: 12934 $</scan_nvt_version><threat>Log</threat><severity>0.0</severity><qod><value>80</value><type>remote_banner</type></qod><description>Nmap service detection (unknown) result for this port: kpasswd5
+
+This is a guess. A confident identification of the service was not possible.
+
+Hint: If you&apos;re running a recent nmap version try to run nmap with the following command: &apos;nmap -sV -Pn -p 464 10.254.10.20&apos; and submit a possible collected fingerprint to the nmap database.</description></result><result id="f2c0cb42-2d00-403d-84fa-bf7d7f36004f"><name>Unknown OS and Service Banner Reporting</name><owner><name>ossim</name></owner><comment></comment><creation_time>2021-05-04T11:06:09Z</creation_time><modification_time>2021-05-04T11:06:09Z</modification_time><user_tags><count>0</count></user_tags><host>10.254.10.20<asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset></host><port>3269/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.108441"><type>nvt</type><name>Unknown OS and Service Banner Reporting</name><family>Service detection</family><cvss_base>0.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>URL:https://community.greenbone.net/c/vulnerability-tests</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:N/I:N/A:N|summary=This NVT consolidates and reports the information collected by
+  the following NVTs:
+
+  - Collect banner of unknown services (OID: 1.3.6.1.4.1.25623.1.0.11154)
+
+  - Service Detection (unknown) with nmap (OID: 1.3.6.1.4.1.25623.1.0.66286)
+
+  - Service Detection (wrapped) with nmap (OID: 1.3.6.1.4.1.25623.1.0.108525)
+
+  - OS Detection Consolidation and Reporting (OID: 1.3.6.1.4.1.25623.1.0.105937)
+
+  If you know any of the information reported here, please send the full output to
+  the referenced community portal.|qod_type=remote_banner</tags><cert></cert></nvt><scan_nvt_version>$Revision: 12934 $</scan_nvt_version><threat>Log</threat><severity>0.0</severity><qod><value>80</value><type>remote_banner</type></qod><description>Nmap service detection (unknown) result for this port: tcpwrapped</description></result></results><result_count>25<full>25</full><filtered>24</filtered><debug><full>0</full><filtered>0</filtered></debug><hole><full>1</full><filtered>1</filtered></hole><info><full>1</full><filtered>1</filtered></info><log><full>21</full><filtered>21</filtered></log><warning><full>1</full><filtered>1</filtered></warning><false_positive><full>0</full><filtered>0</filtered></false_positive></result_count><severity><full>9.3</full><filtered>9.3</filtered></severity><host><ip>10.254.10.20</ip><asset asset_id="49e6afec-90cf-496d-b2e8-db1526c63829"></asset><start>2021-05-04T11:01:57Z</start><end>2021-05-04T11:07:24Z</end><port_count><page>11</page></port_count><result_count><page>24</page><hole><page>1</page></hole><warning><page>1</page></warning><info><page>1</page></info><log><page>21</page></log><false_positive><page>0</page></false_positive></result_count><detail><name>Closed CVE</name><value>CVE-2006-3439</value><source><type>openvasmd</type><name>1.3.6.1.4.1.25623.1.0.902782</name><description>Microsoft Windows Server Service Remote Code Execution Vulnerability (921883)</description></source><extra>10.0</extra></detail><detail><name>Closed CVE</name><value>CVE-2009-2526, CVE-2009-2532, CVE-2009-3103</value><source><type>openvasmd</type><name>1.3.6.1.4.1.25623.1.0.900965</name><description>Microsoft Windows SMB2 Negotiation Protocol Remote Code Execution Vulnerability</description></source><extra>10.0</extra></detail><detail><name>Closed CVE</name><value>CVE-2010-0020, CVE-2010-0021, CVE-2010-0022, CVE-2010-0231</value><source><type>openvasmd</type><name>1.3.6.1.4.1.25623.1.0.902269</name><description>Microsoft Windows SMB Server NTLM Multiple Vulnerabilities (971468)</description></source><extra>10.0</extra></detail><detail><name>Cert:83CAA88767D49116EA5D0F2B22F45B45CB8E4102CFB5115ACCC2F9621802F630</name><value>x509:MIIC8jCCAdqgAwIBAgIQPET88JCaNoBJXbiU2N397jANBgkqhkiG9w0BAQUFADAiMSAwHgYDVQQDExdzZXJ2ZXIyMDA4LmRvbWFpbi5sb2NhbDAeFw0yMTA0MDkxMzU3NTlaFw0yMTEwMDkxMzU3NTlaMCIxIDAeBgNVBAMTF3NlcnZlcjIwMDguZG9tYWluLmxvY2FsMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApV51U0x/yVcl9YZ2ioOrDYgBbOkVjn4Pj1s+TTiAfR3pkazo+cbH0xIeS7AKNp2EAk53IjBTtQnoR5WxA02oSVNHFJ96rBGHJnRDINPLH4OT0PZ/9T5ipJa1XMmlN99+FaashaEAkUjXsaQWWsTudX1FLoO8xQEiUiPTx7W4RF5ZFp8R5tfKWKy+7klva1dUdL5cYf6Oh488ATDCd/QStAPSQxPsMKJ0WwqYVCb0UAe9aknmXe+5rQm2vVWS44ziLMjMNdqo4paxI7+UnRlzvXZkQVo/oCkoa9DNZNlIg1m2hwnClsGhCa1VURVWFDqWYSJpcAjWXJv242f5FrKQ7QIDAQABoyQwIjATBgNVHSUEDDAKBggrBgEFBQcDATALBgNVHQ8EBAMCBDAwDQYJKoZIhvcNAQEFBQADggEBAEtojBBqZqtDOu9EYyjtm639m5sC/fMxPh5pv02EsTDtRXFsPFPPoZbaU8iMnC1gdgkOORjviC25AAXQy98gVqZmH6wqpCB22A1Dk/+/XGNS0xDu/ZXa6amzNCVQzzUETPPduBxnzyunkzk4r5A6Pjxk9duLQrMD29dw4t0bnSCJHV4nsqUn5wEIPKmQRUa7SYke2f46JyRprkRAvafKvt7kZsZGn568qiYv3+87M/FfO53cDdE57pn2oGkNc5P6ss4g6S12ZGDiFtgWtFtesbvtZiT94Mj1vemXgQV1IE+6EHdQIrAaG0YNONKOOQ9pSANebJYjG5UUSMAUmg+akSo=</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.103692</name><description>SSL/TLS Certificate</description></source><extra></extra></detail><detail><name>SSLDetails:83CAA88767D49116EA5D0F2B22F45B45CB8E4102CFB5115ACCC2F9621802F630</name><value>issuer:CN=server2008.domain.local|serial:3C44FCF0909A3680495DB894D8DDFDEE|notBefore:20210409T135759|notAfter:20211009T135759</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.103692</name><description>SSL/TLS Certificate Details</description></source><extra></extra></detail><detail><name>SSLInfo</name><value>3389::83CAA88767D49116EA5D0F2B22F45B45CB8E4102CFB5115ACCC2F9621802F630</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.103692</name><description>SSL/TLS Certificate Information</description></source><extra></extra></detail><detail><name>traceroute</name><value>10.254.10.45,10.254.10.20</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.51662</name><description>Traceroute</description></source><extra></extra></detail><detail><name>TLS/3389</name><value>TLSv1.0</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.103823</name><description>SSL/TLS: Version Detection Report</description></source><extra></extra></detail><detail><name>TLS/port</name><value>3389</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.103823</name><description>SSL/TLS: Version Detection Report</description></source><extra></extra></detail><detail><name>Services</name><value>445,tcp,cifs</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.11011</name><description>Service detection (1.3.6.1.4.1.25623.1.0.11011)</description></source><extra></extra></detail><detail><name>Services</name><value>139,tcp,smb</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.11011</name><description>Service detection (1.3.6.1.4.1.25623.1.0.11011)</description></source><extra></extra></detail><detail><name>OS</name><value>cpe:/o:microsoft:windows_server_2008:r2:sp1</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.102011</name><description>SMB NativeLanMan</description></source><extra></extra></detail><detail><name>OS</name><value>Windows Server 2008 R2 Standard 7601 Service Pack 1</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.102011</name><description>SMB NativeLanMan</description></source><extra></extra></detail><detail><name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.802454</name><description></description></source><extra></extra></detail><detail><name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.105042</name><description></description></source><extra></extra></detail><detail><name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.10723</name><description></description></source><extra></extra></detail><detail><name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.107183</name><description></description></source><extra></extra></detail><detail><name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.900965</name><description></description></source><extra></extra></detail><detail><name>cpe:/o:microsoft:windows_server_2008:r2:sp1</name><value>general/tcp</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.105937</name><description></description></source><extra></extra></detail><detail><name>OS-Detection</name><value>cpe:/o:microsoft:windows_server_2008:r2:sp1</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.105937</name><description></description></source><extra></extra></detail><detail><name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.11913</name><description></description></source><extra></extra></detail><detail><name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.103190</name><description></description></source><extra></extra></detail><detail><name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.802455</name><description></description></source><extra></extra></detail><detail><name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.10722</name><description></description></source><extra></extra></detail><detail><name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.103936</name><description></description></source><extra></extra></detail><detail><name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.111012</name><description></description></source><extra></extra></detail><detail><name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.902798</name><description></description></source><extra></extra></detail><detail><name>Services</name><value>636,tcp,tcpwrapped</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.66286</name><description>Service detection (1.3.6.1.4.1.25623.1.0.66286)</description></source><extra></extra></detail><detail><name>Services</name><value>3269,tcp,tcpwrapped</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.66286</name><description>Service detection (1.3.6.1.4.1.25623.1.0.66286)</description></source><extra></extra></detail><detail><name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.802726</name><description></description></source><extra></extra></detail><detail><name>MAC</name><value>00:0C:29:78:3C:2A</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.103585</name><description>Nmap MAC Scan</description></source><extra></extra></detail><detail><name>ports</name><value>135,139,3268,3269,3389,389,445,464,53,593,636,88</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.900239</name><description>Check Open TCP Ports</description></source><extra></extra></detail><detail><name>tcp_ports</name><value>135,139,3268,3269,3389,389,445,464,53,593,636,88</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.900239</name><description>Check Open TCP Ports</description></source><extra></extra></detail><detail><name>Services</name><value>88,tcp,kerberos</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.103854</name><description>Service detection (1.3.6.1.4.1.25623.1.0.103854)</description></source><extra></extra></detail><detail><name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.15405</name><description></description></source><extra></extra></detail><detail><name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.902269</name><description></description></source><extra></extra></detail><detail><name>OS</name><value>Microsoft Windows</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.100062</name><description>Service detection (1.3.6.1.4.1.25623.1.0.100062)</description></source><extra></extra></detail><detail><name>OS</name><value>cpe:/o:microsoft:windows</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.100062</name><description>Service detection (1.3.6.1.4.1.25623.1.0.100062)</description></source><extra></extra></detail><detail><name>Services</name><value>3389,tcp,ms-wbt-server</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.100062</name><description>Service detection (1.3.6.1.4.1.25623.1.0.100062)</description></source><extra></extra></detail><detail><name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.103549</name><description></description></source><extra></extra></detail><detail><name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.12104</name><description></description></source><extra></extra></detail><detail><name>Services</name><value>3268,tcp,ldap</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.100082</name><description>Service detection (1.3.6.1.4.1.25623.1.0.100082)</description></source><extra></extra></detail><detail><name>Services</name><value>389,tcp,ldap</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.100082</name><description>Service detection (1.3.6.1.4.1.25623.1.0.100082)</description></source><extra></extra></detail><detail><name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.902782</name><description></description></source><extra></extra></detail><detail><name>scanned_with_scanner</name><value>9.0.3</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.103739</name><description>Host Scan End</description></source><extra></extra></detail><detail><name>scanned_with_feedversion</name><value>202102171109</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.103739</name><description>Host Scan End</description></source><extra></extra></detail><detail><name>scanned_with_feedtype</name><value>Greenbone Community Feed</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.103739</name><description>Host Scan End</description></source><extra></extra></detail><detail><name>Services</name><value>53,tcp,domain</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.108018</name><description>Service detection (1.3.6.1.4.1.25623.1.0.108018)</description></source><extra></extra></detail><detail><name>OS</name><value>Microsoft Windows</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.108044</name><description>DCE/RPC and MSRPC Services Enumeration</description></source><extra></extra></detail><detail><name>OS</name><value>cpe:/o:microsoft:windows</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.108044</name><description>DCE/RPC and MSRPC Services Enumeration</description></source><extra></extra></detail><detail><name>Services</name><value>135,tcp,epmap,A DCE endpoint resolution service seems to be running on this port.</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.108044</name><description>DCE/RPC and MSRPC Services Enumeration</description></source><extra></extra></detail><detail><name>best_os_cpe</name><value>cpe:/o:microsoft:windows_server_2008:r2:sp1</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.102011;</name><description>SMB NativeLanMan</description></source><extra></extra></detail><detail><name>best_os_txt</name><value>Windows Server 2008 R2 Standard 7601 Service Pack 1</value><source><type>nvt</type><name>1.3.6.1.4.1.25623.1.0.102011;</name><description>SMB NativeLanMan</description></source><extra></extra></detail></host><host_start>2021-05-04T11:01:57Z<host>10.254.10.20</host></host_start><host_end>2021-05-04T11:07:24Z<host>10.254.10.20</host></host_end><scan_end>2021-05-04T11:07:24Z</scan_end><errors><count>0</count></errors><report_format></report_format></report></report>
