@@ -1,4 +1,4 @@
-Tue 04 May 2021 02:23:30 PM UTC
-# Nmap 7.91 scan initiated Tue May  4 14:23:30 2021 as: nmap -v -T4 --open -p 389 -sV -oG - 81.4.108.0/24
+Wed 05 May 2021 04:05:57 AM UTC
+# Nmap 7.91 scan initiated Wed May  5 04:05:57 2021 as: nmap -v -T4 --open -p 389 -sV -oG - 81.4.108.0/24
 # Ports scanned: TCP(1;389) UDP(0;) SCTP(0;) PROTOCOLS(0;)
-# Nmap done at Tue May  4 14:25:47 2021 -- 256 IP addresses (86 hosts up) scanned in 136.57 seconds
+# Nmap done at Wed May  5 04:07:55 2021 -- 256 IP addresses (86 hosts up) scanned in 118.12 seconds
