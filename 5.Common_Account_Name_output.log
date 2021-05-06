@@ -1,5 +1,11 @@
-Tue 04 May 2021 02:24:57 PM UTC
-Checking for common account names for domain.local on 10.254.10.20
-./dc_userenum_ldap.py 10.254.10.20 domain.local /root/cecuri/groot/scripts/name-lists/server.txt
-./dc_userenum_ldap.py 10.254.10.20 domain.local /root/cecuri/groot/scripts/name-lists/john.smith.txt
-./dc_userenum_ldap.py 10.254.10.20 domain.local /root/cecuri/groot/scripts/name-lists/jsmith.txt
+Thu 06 May 2021 11:36:20 AM UTC
+Checking for common account names for  on 
+./dc_userenum_ldap.py /root/cecuri/groot/scripts/name-lists/server.txt
+Usage:   python3 dc_userenum_ldap.py DomainControlerIP DNSDomainName Userlist
+Example: python3 dc_userenum_ldap.py 192.168.1.10 Contoso.com userlist.txt
+./dc_userenum_ldap.py /root/cecuri/groot/scripts/name-lists/john.smith.txt
+Usage:   python3 dc_userenum_ldap.py DomainControlerIP DNSDomainName Userlist
+Example: python3 dc_userenum_ldap.py 192.168.1.10 Contoso.com userlist.txt
+./dc_userenum_ldap.py /root/cecuri/groot/scripts/name-lists/jsmith.txt
+Usage:   python3 dc_userenum_ldap.py DomainControlerIP DNSDomainName Userlist
+Example: python3 dc_userenum_ldap.py 192.168.1.10 Contoso.com userlist.txt

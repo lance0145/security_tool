@@ -103,7 +103,9 @@
                                                          aria-valuenow="10" aria-valuemin="0"
                                                          aria-valuemax="100"></div>
                                                 </div>
-                                                <a value="{{data.config_id}}"></a>
+                                                {% if data.last_scan_id %}<a value="{{data.config_id}}" href="{% url 'tools:sniper_list' %}?scan_id={{data.last_scan_id}}">Last Results</a>
+                                                {% else %}<a value="{{data.config_id}}"></a>
+                                                {% endif %}
                                             </div>
                                         </td>                                   
                                         <td>
@@ -160,6 +162,7 @@
                 {
                     if(progression < 100) {
                         span.text(progression + "% Completed");
+                        href.text("");
                         progress_bar[index].style.width = progression + "%";
                         if(progression == 99) {
                             span.text("99% Pls Wait");

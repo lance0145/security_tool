@@ -290,6 +290,10 @@ def sniper_launch(request):
             result2=sniper_file2,
         )
         dump_data.save()
+
+        sniper_config_db.objects.filter(config_id=config_id).update(
+                                last_scan_id = scan_id)
+
         print("Finish parsing and saving...")
 
         # return HttpResponseRedirect("/tools/sniper_list/?scan_id=%s" % scan_id)
