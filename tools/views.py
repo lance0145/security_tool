@@ -292,7 +292,8 @@ def sniper_launch(request):
         dump_data.save()
         print("Finish parsing and saving...")
 
-        return HttpResponseRedirect("/tools/sniper_list/?scan_id=%s" % scan_id)
+        # return HttpResponseRedirect("/tools/sniper_list/?scan_id=%s" % scan_id)
+        return HttpResponse(scan_id)
 
     except Exception as e:
         print('Error in Sniper parser:', e)
