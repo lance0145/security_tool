@@ -96,7 +96,7 @@
                                         <td width="20%">
                                             <div>
                                                 <div class="d-flex no-block align-items-center">
-                                                    <span value="{{data.config_id}}"></span>
+                                                    <span name="span" value="{{data.config_id}}"></span>
                                                 </div>
                                                 <div class="progress active progress-striped">                                                    
                                                     <div class="progress-bar progress-bar-striped" role="progressbar"
@@ -144,6 +144,25 @@
     })
 
     $(document).ready(function(){
+        var spans = document.getElementsByName("span");
+
+        //if (spans[0].innerText == "99% Pls Wait" || spans[1].innerText == "99% Pls Wait" || spans[2].innerText == "99% Pls Wait" || spans[3].innerText == "99% Pls Wait" || spans[5].innerText == "99% Pls Wait"){
+
+        window.onbeforeunload = function(event) {
+            var s = "Sniper still on process. Really leave?";
+
+            event = event || window.event;
+            if (event) {
+                // This is for IE
+                event.returnValue = s;
+            }
+
+            // This is for all other browsers
+            return s;
+        }
+
+        //}
+
         var buttons = document.getElementsByClassName("btn btn-info");
 
         for (var i=0 ; i < buttons.length ; i++){
@@ -172,8 +191,6 @@
                         }
                     }
                 }, 10);
-
-                var xhr = new XMLHttpRequest();
 
                 $.ajax({
                     url: '{% url "tools:sniper_launch" %}',
