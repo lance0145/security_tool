@@ -146,22 +146,22 @@
     $(document).ready(function(){
         var spans = document.getElementsByName("span");
 
-        //if (spans[0].innerText == "99% Pls Wait" || spans[1].innerText == "99% Pls Wait" || spans[2].innerText == "99% Pls Wait" || spans[3].innerText == "99% Pls Wait" || spans[5].innerText == "99% Pls Wait"){
-
         window.onbeforeunload = function(event) {
-            var s = "Sniper still on process. Really leave?";
+            for (var i=0 ; i < spans.length ; i++){
+                if (spans[i].innerText == "99% Pls Wait"){
+                    var s = "Sniper still on process!";
 
-            event = event || window.event;
-            if (event) {
-                // This is for IE
-                event.returnValue = s;
+                    event = event || window.event;
+                    if (event) {
+                        // This is for IE
+                        event.returnValue = s;
+                    }
+
+                    // This is for all other browsers
+                    return s;
+                }
             }
-
-            // This is for all other browsers
-            return s;
         }
-
-        //}
 
         var buttons = document.getElementsByClassName("btn btn-info");
 

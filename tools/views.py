@@ -93,6 +93,8 @@ def sniper_scan_del(request):
             del_scan.delete()
             del_scan = sniper_scan_db.objects.filter(username=username, scan_id=_scan_id)
             del_scan.delete()
+            sniper_config_db.objects.filter(last_scan_id=_scan_id).update(
+                                last_scan_id = "")
 
     return HttpResponseRedirect('/tools/sniper_summary/')
 
@@ -237,19 +239,23 @@ def sniper_launch(request):
     def sniper_parse(all_config, sniper_file, date_time, scan_id, config_id, project_id):
         with open(sniper_file, 'r') as f:
             files = f.readlines()
-            for f in files:
-                dump_data = sniper_result_db(
-                    username=username,
-                    vuln_id = uuid.uuid4(),
-                    project_id=project_id,
-                    config_id=config_id,
-                    ip_address=all_config[0].ip_address,
-                    date_time=date_time,
-                    scan_id = scan_id,
-                    result=sniper_file,
-                    output=f,
-                )
-                dump_data.save()
+            for fi in files:
+                fil = fi.replace("'", "")
+                file = fil.replace("|", "")
+                f = file.replace("=", "")
+                if f != None or f != "":
+                    dump_data = sniper_result_db(
+                        username=username,
+                        vuln_id = uuid.uuid4(),
+                        project_id=project_id,
+                        config_id=config_id,
+                        ip_address=all_config[0].ip_address,
+                        date_time=date_time,
+                        scan_id = scan_id,
+                        result=sniper_file,
+                        output=f,
+                    )
+                    dump_data.save()
 
     try:
         print('Start Parsing Sniper')

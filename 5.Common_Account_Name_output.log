@@ -1,4 +1,4 @@
-Thu 06 May 2021 11:36:20 AM UTC
+Mon 10 May 2021 01:13:43 AM UTC
 Checking for common account names for  on 
 ./dc_userenum_ldap.py /root/cecuri/groot/scripts/name-lists/server.txt
 Usage:   python3 dc_userenum_ldap.py DomainControlerIP DNSDomainName Userlist
