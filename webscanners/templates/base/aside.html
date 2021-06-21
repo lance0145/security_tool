@@ -68,12 +68,21 @@
                     <li class="sidebar-item"><a href="{% url 'networkscanners:sniper' %}"class="sidebar-link"><i
                             class="fas fa-cog"></i><span class="hide-menu">Sniper Config</span></a></li>
                 </ul>
+
+                <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark panel-heading6"
+                    href="{% url 'projects:list_clients' %}" aria-expanded="false"><i
+                    class="fas fa-spider"></i><span class="hide-menu">Audit</span></a>
+                <ul aria-expanded="false" class="collapse first-level panel-collapse6">                        
+                    <li class="sidebar-item"><a href="{% url 'tools:audit_scripts' %}" class="sidebar-link"><i
+                            class="fab fa-keycdn"></i><span class="hide-menu">Audit Script</span></a></li>
+                </ul>
+
                 </li>
 
-                <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark panel-heading5"
+                <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark panel-heading7"
                                         href="{% url 'manual_scan:list_scan_auto' %}" aria-expanded="false"><i
                         class="fas fa-user-astronaut"></i><span class="hide-menu">Auto</span></a>
-                    <ul aria-expanded="false" class="collapse first-level panel-collapse5">                        
+                    <ul aria-expanded="false" class="collapse first-level panel-collapse7">                        
                         <li class="sidebar-item"><a href="{% url 'webscanners:web_scan_schedule' %}" class="sidebar-link"><i
                                 class="fas fa-rocket"></i><span class="hide-menu">Auto Scan</span></a></li>
                     </ul>
@@ -130,6 +139,18 @@ function initMenu() {
     });
     $(".panel-collapse5").mouseleave(function(){
         $(".panel-collapse5").collapse('hide');
+    });
+    $(".panel-heading6").mouseenter(function () {
+        $(".panel-collapse6").collapse('show');
+    });
+    $(".panel-collapse6").mouseleave(function(){
+        $(".panel-collapse6").collapse('hide');
+    });
+    $(".panel-heading7").mouseenter(function () {
+        $(".panel-collapse7").collapse('show');
+    });
+    $(".panel-collapse7").mouseleave(function(){
+        $(".panel-collapse7").collapse('hide');
     });
 }
 $(document).ready(initMenu);

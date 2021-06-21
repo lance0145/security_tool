@@ -48,6 +48,21 @@ nikto_output = ''
 scan_result = ''
 all_nmap = ''
 
+def audit_scripts(request):
+    username = request.user.username
+    scan_id = request.GET.get('scan_id', )
+    all_sniper = sniper_result_db.objects.filter(username=username, scan_id=scan_id)
+    if all_sniper:
+        ip_address = all_sniper[0].ip_address
+    else:
+        ip_address = ""
+
+    return render(request,
+                  'audit_scripts.html',
+                  {'all_sniper': all_sniper,
+                   'ip': ip_address}
+                  )
+
 def sniper_vuln_del(request):
     """
 
