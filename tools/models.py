@@ -1,19 +1,3 @@
-# -*- coding: utf-8 -*-
-#                    _
-#     /\            | |
-#    /  \   _ __ ___| |__   ___ _ __ _   _
-#   / /\ \ | '__/ __| '_ \ / _ \ '__| | | |
-#  / ____ \| | | (__| | | |  __/ |  | |_| |
-# /_/    \_\_|  \___|_| |_|\___|_|   \__, |
-#                                     __/ |
-#                                    |___/
-# Copyright (C) 2017 Anand Tiwari
-#
-# Email:   anandtiwarics@gmail.com
-# Twitter: @anandtiwarics
-#
-# This file is part of ArcherySec Project.
-
 from __future__ import unicode_literals
 
 from django.db import models
@@ -227,3 +211,22 @@ class sniper_result_db(models.Model):
     output = models.TextField(blank=True, null=True)
     result = models.TextField(blank=True, null=True)
     username = models.CharField(max_length=256, null=True)
+
+# Audit scripts tool models
+class audit_db(models.Model):
+    client_id = models.TextField(blank=True, null=True)
+    question_id = models.TextField(blank=True, null=True)
+    answer = models.TextField(blank=True, null=True)
+    answer_color = models.TextField(blank=True, null=True)
+    date_time = models.TextField(null=True, blank=True)
+
+class audit_question_db(models.Model):
+    question_id = models.TextField(blank=True, null=True)
+    question_group_id = models.TextField(blank=True, null=True)
+    question = models.TextField(blank=True, null=True)
+    date_time = models.TextField(null=True, blank=True)
+
+class audit_question_group_db(models.Model):
+    question_group_id = models.TextField(blank=True, null=True)
+    question_group = models.TextField(blank=True, null=True)
+    date_time = models.TextField(null=True, blank=True)

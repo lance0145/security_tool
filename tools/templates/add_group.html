@@ -1,0 +1,44 @@
+{% extends 'dashboard/base.html' %}
+
+{% block body %}
+
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row justify-content-md-center">
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-md-flex align-items-center">
+                            <h1 class="card-title">Add Question Group</h1>
+                        </div>
+                        <br>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="col-md-12">
+                                    <form class="form-horizontal" method="POST" action="{% url 'tools:add_group_save' %}">
+                                        {% csrf_token %}
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">Question Group:</label>
+                                            <div class="col-sm-6">
+                                                <textarea name="question_group" value="{{ question_group }}"
+                                                          class="form-control"
+                                                          placeholder="Question Group"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-actions">
+                                            <button type="submit" class="btn btn-success">Save</button>
+                                        </div>
+                                    </form>
+                                    <div class="card">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

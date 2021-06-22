@@ -17,7 +17,7 @@
 from __future__ import unicode_literals
 from tools.models import sslscan_result_db, nikto_result_db, nmap_result_db, nmap_scan_db, \
     nikto_vuln_db, dirsearch_result_db, dirsearch_scan_db, openvas_result_db, openvas_scan_db, \
-    sniper_config_db, sniper_result_db, sniper_scan_db
+    sniper_config_db, sniper_result_db, sniper_scan_db, audit_question_db, audit_db, audit_question_group_db
 from networkscanners.models import openvas_scan_db, \
     ov_scan_result_db, \
     task_schedule_db, serversetting
@@ -48,20 +48,54 @@ nikto_output = ''
 scan_result = ''
 all_nmap = ''
 
+def add_group(request):
+    username = request.user.username
+    all_clients = client_db.objects.filter(username=username)
+
+    return render(request, 'add_group.html', {'all_clients': all_clients})
+
+def add_group_save(request):
+    if request.method == 'POST':
+        question_group = request.POST.get('question_group')
+        date_time = datetime.now()
+        question_group_id = uuid.uuid4()
+
+        dump_scan = audit_question_group_db(
+            date_time=date_time,
+            question_group=question_group,
+            question_group_id=question_group_id
+        )
+        dump_scan.save()
+
+        return HttpResponseRedirect(reverse('tools:add_audit'))
+
+def add_audit(request):
+    all_groups = audit_question_group_db.objects.all
+
+    return render(request, 'add_audit.html', {'all_groups': all_groups})
+
+def add_audit_save(request):
+    if request.method == 'POST':
+        question = request.POST.get('question')
+        question_group_id = request.POST.get('question_group_id')
+        date_time = datetime.now()
+        question_id = uuid.uuid4()
+
+        dump_scan = audit_question_db(
+            date_time=date_time,
+            question=question,
+            question_id=question_id,
+            question_group_id=question_group_id
+        )
+        dump_scan.save()
+
+        return HttpResponseRedirect(reverse('tools:audit_scripts'))
+
 def audit_scripts(request):
     username = request.user.username
-    scan_id = request.GET.get('scan_id', )
-    all_sniper = sniper_result_db.objects.filter(username=username, scan_id=scan_id)
-    if all_sniper:
-        ip_address = all_sniper[0].ip_address
-    else:
-        ip_address = ""
+    all_clients = client_db.objects.filter(username=username)
 
-    return render(request,
-                  'audit_scripts.html',
-                  {'all_sniper': all_sniper,
-                   'ip': ip_address}
-                  )
+    return render(request, 'audit_scripts.html', {'all_clients': all_clients})
 
 def sniper_vuln_del(request):
     """

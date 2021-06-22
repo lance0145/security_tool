@@ -1,0 +1,61 @@
+{% extends 'dashboard/base.html' %}
+
+{% block body %}
+
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row justify-content-md-center">
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-md-flex align-items-center">
+                            <h1 class="card-title">Add Audit Scripts Question</h1>
+                        </div>
+                        <br>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="col-md-12">
+                                    <form class="form-horizontal" method="POST" action="{% url 'tools:add_audit_save' %}">
+                                        {% csrf_token %}
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">Question Group :</label>
+                                                <div class="col-sm-6">
+                                                    <select name="question_group_id" class="select2 form-control custom-select"
+                                                            style="width: 50%; height:36px;">
+                                                        {% for data in all_groups %}
+                                                            <option value="{{data.question_group_id}}">{{data.question_group}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    <div class="btn-group"><a
+                                                        href="{% url 'tools:add_group' %}?"
+                                                        class="btn btn-primary btn-sm"><i
+                                                        class="icon-plus icon-white"></i>Add</a>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">Question :</label>
+                                            <div class="col-sm-6">
+                                                <textarea name="question" value="{{ question }}"
+                                                          class="form-control"
+                                                          placeholder="Note"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-actions">
+                                            <input type="hidden" name="question_group_id" value="{{question_group_id}}">
+                                            <button type="submit" class="btn btn-success">Save</button>
+                                        </div>
+                                    </form>
+                                    <div class="card">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

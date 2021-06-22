@@ -4,6 +4,30 @@
 
 <div class="page-wrapper">
     <div class="container-fluid">
+        <div class="float-right">
+            <div class="btn-group"><a href="{% url 'tools:add_audit' %}"
+                                      class="btn btn-primary btn-mini"><i
+                    class="icon-plus icon-white"></i> Add</a>
+            </div>
+        </div>
+        <br>
+        <div class="d-md-flex align-items-center">
+            <h1 class="card-title">{{cli_name}} Audit Scripts</h1>
+        </div>
+        <form class="form-horizontal" method="POST" action="{% url 'projects:list_projects' %}">
+        {% csrf_token %}
+            <label class="col-sm-4 col-form-label">Clients</label>
+            <div class="col-sm-6">
+                <select name="cli_id" onChange="form.submit();" class="select2 form-control custom-select"
+                        style="width: 50%; height:36px;" >
+                        <option value="" disabled selected>{{cli_name}}</option>
+                    {% for data in all_clients %}
+                        <option value="{{data.client_id}}">{{data.client_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form>
+        <br>
         <div class="row justify-content-md-center">
             <div class="col-6">
                 <div class="card">
