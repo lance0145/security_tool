@@ -94,8 +94,9 @@ def add_audit_save(request):
 def audit_scripts(request):
     username = request.user.username
     all_clients = client_db.objects.filter(username=username)
+    all_groups = audit_question_group_db.objects.all
 
-    return render(request, 'audit_scripts.html', {'all_clients': all_clients})
+    return render(request, 'audit_scripts.html', {'all_clients': all_clients, 'all_groups': all_groups})
 
 def sniper_vuln_del(request):
     """
