@@ -28,13 +28,13 @@
             </div>
         </form>
         <br>
-    {% for data in all_groups %}
         <div class="row justify-content-md-center">
+            {% for group in all_groups %}
             <div class="col-6">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-md-flex align-items-center">
-                            <h1 class="card-title">{{data.question_group}}</h1>
+                            <h2 class="card-title">{{group.question_group}}</h2>
                         </div>
                         <br>
                         <div class="card">
@@ -44,36 +44,26 @@
                                         <form class="form-horizontal">
                                             <div class="card-body">
                                                 <form>
-                                                    <div class="form-group row">
-                                                        <label
-                                                                class="col-sm-4 col-form-label">Has your organization implemented scanning tools (active & passive) to identify all the devices attached to the network?</label>
-                                                        <div class="col-sm-6">
-                                                            <select name="type" class="custom-select mr-sm-2"
-                                                                    id="inlineFormCustomSelect">
-                                                                <option value="csv" selected>Not Implemented</option>
-                                                                <option value="json">Implemented on Some Systems</option>
-                                                                <option value="yaml">Implemented on All Systems</option>
-                                                                <option value="yaml">Implemented & Automated on All Systems</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label
-                                                                class="col-sm-4 col-form-label">Has your organization implemented a network port control solution (802.1x), which requires certificates, to authenticate devices before they can connect to the network?</label>
-                                                        <div class="col-sm-6">
-                                                            <select name="type" class="custom-select mr-sm-2"
-                                                                    id="inlineFormCustomSelect">
+                                                    {% for question in all_questions %}
+                                                        {% if group.question_group_id == question.question_group_id %}
+                                                        <div class="form-group row">
+                                                            <label
+                                                                    class="col-sm-4 col-form-label">{{question.question}}</label>
+                                                            <div class="col-sm-6">
+                                                                <select name="type" class="custom-select mr-sm-2"
+                                                                        id="inlineFormCustomSelect">
                                                                     <option value="csv" selected>Not Implemented</option>
                                                                     <option value="json">Implemented on Some Systems</option>
                                                                     <option value="yaml">Implemented on All Systems</option>
                                                                     <option value="yaml">Implemented & Automated on All Systems</option>
-                                                            </select>
+                                                                </select>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <a class="btn btn-warning" href="{% url 'networkscanners:server_setting' %}"
-                                                       role="button">Save</a>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    <!-- <a class="btn btn-warning" href="{% url 'networkscanners:server_setting' %}"
+                                                       role="button">Save</a> -->
                                                 </form>
-
                                             </div>
                                         </form>
                                     </div>
@@ -83,8 +73,8 @@
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
-    {% endfor %}
     </div>
 </div>
 
