@@ -1,0 +1,83 @@
+{% extends 'dashboard/base.html' %}
+
+{% block body %}
+
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="float-right">
+            <div class="btn-group"><a href="{% url 'tools:add_audit' %}"
+                                      class="btn btn-primary btn-mini"><i
+                    class="icon-plus icon-white"></i> Add</a>
+            </div>
+        </div>
+        <br>
+        <div class="d-md-flex align-items-center">
+            <h1 class="card-title">{{cli_name}} Audit Scripts</h1>
+        </div>
+        <form class="form-horizontal" method="POST" action="{% url 'tools:audit_scripts' %}">
+        {% csrf_token %}
+            <label class="col-sm-4 col-form-label">Clients</label>
+            <div class="col-sm-6">
+                <select name="cli_id" onChange="form.submit();" class="select2 form-control custom-select"
+                        style="width: 50%; height:36px;" >
+                        <option value="" disabled selected>{{cli_name}}</option>
+                    {% for data in all_clients %}
+                        <option value="{{data.client_id}}">{{data.client_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form>
+        <br>
+        <div class="row justify-content-md-center">
+            {% for group in all_groups %}
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-md-flex align-items-center">
+                            <h2 class="card-title">{{group.question_group}}</h2>
+                        </div>
+                        <br>
+                        <div class="card">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <form class="form-horizontal">
+                                            <div class="card-body">
+                                                <form>
+                                                    {% for question in all_questions %}
+                                                        {% if group.question_group_id == question.question_group_id %}
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 col-form-label">{{question.question}}</label>
+                                                            <div class="col-sm-6">
+                                                                <select name="answer_id" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                                                    <option value="" disabled selected>{{answer}}</option>
+                                                                    <!-- <option value={{question.answer}}>Not Implemented</option>
+                                                                    <option value={{question.answer}}>Implemented on Some Systems</option>
+                                                                    <option value={{question.answer}}>Implemented on All Systems</option>
+                                                                    <option value={{question.answer}}>Implemented & Automated on All Systems</option> -->
+                                                                {% for answer in all_answers %}
+                                                                    <option value="{{answer.answer_id}}">{{answer.answer}}</option>
+                                                                {% endfor %}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    <!-- <a class="btn btn-warning" href="{% url 'networkscanners:server_setting' %}"
+                                                       role="button">Save</a> -->
+                                                </form>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

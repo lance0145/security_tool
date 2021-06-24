@@ -216,9 +216,15 @@ class sniper_result_db(models.Model):
 class audit_db(models.Model):
     client_id = models.TextField(blank=True, null=True)
     question_id = models.TextField(blank=True, null=True)
+    question_group_id = models.TextField(blank=True, null=True)
     answer = models.TextField(blank=True, null=True)
     answer_color = models.TextField(blank=True, null=True)
     date_time = models.TextField(null=True, blank=True)
+
+# class audit_answer_db(models.Model):
+#     answer_id = models.TextField(blank=True, null=True)
+#     answer = models.TextField(blank=True, null=True)
+#     date_time = models.TextField(null=True, blank=True)
 
 class audit_question_db(models.Model):
     question_id = models.TextField(blank=True, null=True)

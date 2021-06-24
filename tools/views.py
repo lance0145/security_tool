@@ -17,10 +17,8 @@
 from __future__ import unicode_literals
 from tools.models import sslscan_result_db, nikto_result_db, nmap_result_db, nmap_scan_db, \
     nikto_vuln_db, dirsearch_result_db, dirsearch_scan_db, openvas_result_db, openvas_scan_db, \
-    sniper_config_db, sniper_result_db, sniper_scan_db, audit_question_db, audit_db, audit_question_group_db
-from networkscanners.models import openvas_scan_db, \
-    ov_scan_result_db, \
-    task_schedule_db, serversetting
+    sniper_config_db, sniper_result_db, sniper_scan_db, audit_question_db, audit_db, audit_question_group_db#, audit_answer_db
+from networkscanners.models import openvas_scan_db, ov_scan_result_db, task_schedule_db, serversetting
 from django.shortcuts import render, HttpResponseRedirect
 import subprocess
 import defusedxml.ElementTree as ET
@@ -96,10 +94,53 @@ def audit_scripts(request):
     all_clients = client_db.objects.filter(username=username)
     all_groups = audit_question_group_db.objects.all
     all_questions = audit_question_db.objects.all
+    # all_answers = audit_answer_db.objects.all
+    if request.method == 'POST':
+        client_id = request.POST.get('cli_id', )
+        all_audits = audit_db.objects.filter(client_id=client_id)
+        cli_name = client_db.objects.filter(username=username, client_id=client_id)
 
-    return render(request, 'audit_scripts.html', {'all_clients': all_clients,
-                                                  'all_groups': all_groups,
-                                                  'all_questions': all_questions})
+        return render(request, 'audit_scripts.html', {'all_clients': all_clients,
+                                                    'all_groups': all_groups,
+                                                    'all_questions': all_questions,
+                                                    # 'all_answers': all_answers,
+                                                    'all_audits': all_audits,
+                                                    'cli_name': cli_name[0].client_name})
+    else:        
+        all_audits = audit_db.objects.filter(client_id=all_clients[0].client_id)
+    
+        return render(request, 'audit_scripts.html', {'all_clients': all_clients,
+                                                    'all_groups': all_groups,
+                                                    'all_questions': all_questions,
+                                                    # 'all_answers': all_answers,
+                                                    'all_audits': all_audits})
+
+# def list_projects(request):
+
+#     username = request.user.username
+#     cli_name = []
+#     if request.method == 'POST':
+#         client_id = request.POST.get('cli_id', )
+#         all_projects = project_db.objects.filter(username=username, client_id=client_id)
+#         cli_name = client_db.objects.filter(username=username, client_id=client_id)
+#     else:
+#         all_projects = project_db.objects.filter(username=username)
+#     all_clients = client_db.objects.filter(username=username)
+
+#     if cli_name:
+#         return render(request,
+#                   'projects.html',
+#                   {'all_clients': all_clients,
+#                    'cli_name': cli_name[0].client_name,
+#                    'all_projects': all_projects}
+#                   )
+#     else:
+#         return render(request,
+#                   'projects.html',
+#                   {'all_clients': all_clients,
+#                    'all_projects': all_projects}
+#                   )
+
 
 def sniper_vuln_del(request):
     """
