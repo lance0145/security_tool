@@ -96,7 +96,7 @@ def audit_scripts(request):
     all_questions = audit_question_db.objects.all
     # all_answers = audit_answer_db.objects.all
     if request.method == 'POST':
-        client_id = request.POST.get('cli_id', )
+        client_id = request.POST.get('client_id', )
         all_audits = audit_db.objects.filter(client_id=client_id)
         cli_name = client_db.objects.filter(username=username, client_id=client_id)
 
@@ -115,32 +115,17 @@ def audit_scripts(request):
                                                     # 'all_answers': all_answers,
                                                     'all_audits': all_audits})
 
-# def list_projects(request):
+def audit_scripts_save(request):
+    # if request.method == 'GET':
+    print("Pumasok ditoooooooooooooooooooooooooooooooooooo")
+    client_id = request.POST.get('client_id', )
+    question_id = request.POST.get('question_id', )
+    answer = request.POST.get('answer', )
+    print("*********************************", client_id, question_id, answer)
 
-#     username = request.user.username
-#     cli_name = []
-#     if request.method == 'POST':
-#         client_id = request.POST.get('cli_id', )
-#         all_projects = project_db.objects.filter(username=username, client_id=client_id)
-#         cli_name = client_db.objects.filter(username=username, client_id=client_id)
-#     else:
-#         all_projects = project_db.objects.filter(username=username)
-#     all_clients = client_db.objects.filter(username=username)
-
-#     if cli_name:
-#         return render(request,
-#                   'projects.html',
-#                   {'all_clients': all_clients,
-#                    'cli_name': cli_name[0].client_name,
-#                    'all_projects': all_projects}
-#                   )
-#     else:
-#         return render(request,
-#                   'projects.html',
-#                   {'all_clients': all_clients,
-#                    'all_projects': all_projects}
-#                   )
-
+    audit_db.objects.filter(client_id=client_id, question_id=question_id).update(
+        answer=answer
+    )
 
 def sniper_vuln_del(request):
     """
