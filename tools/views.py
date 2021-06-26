@@ -1,19 +1,3 @@
-# -*- coding: utf-8 -*-
-#                    _
-#     /\            | |
-#    /  \   _ __ ___| |__   ___ _ __ _   _
-#   / /\ \ | '__/ __| '_ \ / _ \ '__| | | |
-#  / ____ \| | | (__| | | |  __/ |  | |_| |
-# /_/    \_\_|  \___|_| |_|\___|_|   \__, |
-#                                     __/ |
-#                                    |___/
-# Copyright (C) 2017 Anand Tiwari
-#
-# Email:   anandtiwarics@gmail.com
-# Twitter: @anandtiwarics
-#
-# This file is part of ArcherySec Project.
-
 from __future__ import unicode_literals
 from tools.models import sslscan_result_db, nikto_result_db, nmap_result_db, nmap_scan_db, \
     nikto_vuln_db, dirsearch_result_db, dirsearch_scan_db, openvas_result_db, openvas_scan_db, \
@@ -116,16 +100,22 @@ def audit_scripts(request):
                                                     'all_audits': all_audits})
 
 def audit_scripts_save(request):
-    # if request.method == 'GET':
-    print("Pumasok ditoooooooooooooooooooooooooooooooooooo")
-    client_id = request.POST.get('client_id', )
-    question_id = request.POST.get('question_id', )
-    answer = request.POST.get('answer', )
-    print("*********************************", client_id, question_id, answer)
+    username = request.user.username
+    if request.method == 'POST':
+        client_id = request.POST.get('client_id', )
+        _question_id = request.POST.get('question_id', )
+        _answer = request.POST.get('answer', )
+        question_ids = _question_id.split('|')
+        answers = _answer.split('|')
 
-    audit_db.objects.filter(client_id=client_id, question_id=question_id).update(
-        answer=answer
-    )
+        for a in range(len(answers)):
+            answer = answers.__getitem__(a)
+            question_id = question_ids.__getitem__(a)
+            audit_db.objects.filter(client_id=client_id, question_id=question_id).update(
+                answer=answer
+            )
+
+        return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
 
 def sniper_vuln_del(request):
     """

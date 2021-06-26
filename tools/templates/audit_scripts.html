@@ -41,30 +41,28 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="card">
-                                        <form class="form-horizontal">
-                                            <div class="card-body">
-                                            {% for question in all_questions %}
-                                                {% if group.question_group_id == question.question_group_id %}
-                                                <div class="form-group row">
-                                                    <label name="question_id" value="{{question.question_id}}" class="col-sm-4 col-form-label">{{question.question}}</label>
-                                                    <div class="col-sm-6">
-                                                        <select name="answer" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                                            {% for audit in all_audits %}
-                                                                {% if question.question_id == audit.question_id %}
-                                                                    <option value="" disabled selected>{{audit.answer}}</option>
-                                                                {% endif %}
-                                                            {% endfor %}
-                                                                    <option value="Not Implemented">Not Implemented</option>
-                                                                    <option value="Implemented on Some Systems">Implemented on Some Systems</option>
-                                                                    <option value="Implemented on All Systems">Implemented on All Systems</option>
-                                                                    <option value="Implemented & Automated on All Systems">Implemented & Automated on All Systems</option>
-                                                        </select>
-                                                    </div>
+                                        <div class="card-body">
+                                        {% for question in all_questions %}
+                                            {% if group.question_group_id == question.question_group_id %}
+                                            <div class="form-group row">
+                                                <label name="question_id" value="{{question.question_id}}" class="col-sm-4 col-form-label">{{question.question}}</label>
+                                                <div class="col-sm-6">
+                                                    <select name="answer" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                                        {% for audit in all_audits %}
+                                                            {% if question.question_id == audit.question_id %}
+                                                                <option value="" disabled selected>{{audit.answer}}</option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                                <option value="Not Implemented">Not Implemented</option>
+                                                                <option value="Implemented on Some Systems">Implemented on Some Systems</option>
+                                                                <option value="Implemented on All Systems">Implemented on All Systems</option>
+                                                                <option value="Implemented & Automated on All Systems">Implemented & Automated on All Systems</option>
+                                                    </select>
                                                 </div>
-                                                {% endif %}
-                                            {% endfor %}
                                             </div>
-                                        </form>
+                                            {% endif %}
+                                        {% endfor %}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -87,13 +85,13 @@
                 $.each($("label[name='question_id']"), function(){
                     question_id.push($(this).val());
                 });
-                var json_question_id = question_id.join(", ");
+                var json_question_id = question_id.join("|");
 
                 var answer = [];
                 $.each($("select[name='answer']"), function(){
                     answer.push($(this).val());
                 });
-                var json_answer = answer.join(", ");
+                var json_answer = answer.join("|");
 
                 $.ajax({
                     type:'POST',
