@@ -4,12 +4,12 @@
 
 <div class="page-wrapper">
     <div class="container-fluid">
-        <div class="float-right">
+        <!-- <div class="float-right">
             <div class="btn-group"><a href="{% url 'tools:add_audit' %}"
                                       class="btn btn-primary btn-mini"><i
                     class="icon-plus icon-white"></i> Add</a>
             </div>
-        </div>
+        </div> -->
         <br>
         <div class="d-md-flex align-items-center">
             <h1 class="card-title">{{cli_name}} Audit Scripts</h1>
@@ -18,9 +18,9 @@
         {% csrf_token %}
             <label class="col-sm-4 col-form-label">Clients</label>
             <div class="col-sm-6">
-                <select id="client_id" name="client_id" onChange="form.submit();" class="select2 form-control custom-select"
+                <select name="client_id" onChange="form.submit();" class="select2 form-control custom-select"
                         style="width: 50%; height:36px;" >
-                        <option value="" disabled selected>{{cli_name}}</option>
+                        <option value="{{cli_id}}" disabled selected>{{cli_name}}</option>
                     {% for data in all_clients %}
                         <option value="{{data.client_id}}">{{data.client_name}}</option>
                     {% endfor %}
@@ -45,7 +45,8 @@
                                         {% for question in all_questions %}
                                             {% if group.question_group_id == question.question_group_id %}
                                             <div class="form-group row">
-                                                <label name="question_id" value="{{question.question_id}}" class="col-sm-4 col-form-label">{{question.question}}</label>
+                                                <label class="col-sm-4 col-form-label">{{question.question}}</label>
+                                                <input type="hidden" name="question_id" value="{{question.question_id}}">
                                                 <div class="col-sm-6">
                                                     <select name="answer" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
                                                         {% for audit in all_audits %}
@@ -72,43 +73,32 @@
             </div>
             {% endfor %}
         </div>
-        <a class="btn btn-warning" id="save" role="button">Save</a>
     </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#save').click(function(){
-            if (confirm('Update Client Audit Scripts?')) {
-                var question_id = [];
-                $.each($("label[name='question_id']"), function(){
-                    question_id.push($(this).val());
-                });
-                var json_question_id = question_id.join("|");
-
-                var answer = [];
-                $.each($("select[name='answer']"), function(){
-                    answer.push($(this).val());
-                });
-                var json_answer = answer.join("|");
-
-                $.ajax({
-                    type:'POST',
-                    url:"{% url 'tools:audit_scripts_save' %}",
-                    data:{
-                        client_id: $('#client_id').val(),
-                        question_id: json_question_id,
-                        answer: json_answer,
-                        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
-                    },
-                    sucess:function(){
-
-                    }
-                });
-                setTimeout(function(){location.reload();},1000);
-            }
-        });
+        var dropdown = document.getElementsByName("answer");
+        var client_id = document.getElementsByName("client_id")[0].value;
+        for (var i=0 ; i < dropdown.length ; i++){
+            (function(index){
+                dropdown[index].onchange = function(){
+                    var question_id = document.getElementsByName("question_id")[index].value;
+                    var answer = $(this).val();                    
+                    alert(client_id+question_id+answer);
+                    $.ajax({
+                        url:"{% url 'tools:audit_scripts_save' %}",
+                        data:{
+                            'client_id': client_id,
+                            'question_id': question_id,
+                            'answer': answer,
+                            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val()
+                        }
+                    });
+                };
+            })(i)
+        }
     });
 </script>
 {% endblock %}

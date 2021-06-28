@@ -21,6 +21,7 @@ from django.core import signing
 from projects.models import project_db, client_db
 import json
 from django.http import HttpResponse
+from django.http import JsonResponse
 
 # NOTE[gmedian]: in order to be more portable we just import everything rather than add anything in this very script
 from tools.nmap_vulners.nmap_vulners_view import nmap_vulners, nmap_vulners_port, nmap_vulners_scan
@@ -89,7 +90,8 @@ def audit_scripts(request):
                                                     'all_questions': all_questions,
                                                     # 'all_answers': all_answers,
                                                     'all_audits': all_audits,
-                                                    'cli_name': cli_name[0].client_name})
+                                                    'cli_name': cli_name[0].client_name,
+                                                    'cli_id': cli_name[0].client_id})
     else:        
         all_audits = audit_db.objects.filter(client_id=all_clients[0].client_id)
     
@@ -100,22 +102,34 @@ def audit_scripts(request):
                                                     'all_audits': all_audits})
 
 def audit_scripts_save(request):
-    username = request.user.username
-    if request.method == 'POST':
-        client_id = request.POST.get('client_id', )
-        _question_id = request.POST.get('question_id', )
-        _answer = request.POST.get('answer', )
-        question_ids = _question_id.split('|')
-        answers = _answer.split('|')
+    client_id = request.GET.get('client_id')
+    question_id = request.GET.get('question_id')
+    answer = request.GET.get('answer')
+    print(client_id, question_id, answer, "***********************************")
+    if answer and client_id and question_id:
+        audit_db.objects.filter(client_id=client_id, question_id=question_id).update(
+            answer=answer
+        )
 
-        for a in range(len(answers)):
-            answer = answers.__getitem__(a)
-            question_id = question_ids.__getitem__(a)
-            audit_db.objects.filter(client_id=client_id, question_id=question_id).update(
-                answer=answer
-            )
+    response = {
+        'answer': answer
+    }
+    return JsonResponse(response)
 
-        return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
+    # username = request.user.username
+    # vuln_id = request.GET.get('id')
+    # status = request.GET.get('status')
+    # date_time = datetime.now()
+    # if vuln_id and status:
+    #     edit_status = manual_scan_results_db.objects.filter(username=username, vuln_id=vuln_id).update(
+    #         vuln_status=status,
+    #         date_time=date_time,
+    #     )
+
+    # response = {
+    #     'status': status
+    # }
+    # return JsonResponse(response)
 
 def sniper_vuln_del(request):
     """

@@ -19,6 +19,7 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import messages
 import uuid
 from projects.models import project_db, project_scan_db, client_db
+from tools.models import audit_question_db, audit_db
 from webscanners.models import zap_scans_db, zap_scan_results_db, \
     burp_scan_db, burp_scan_result_db, \
     arachni_scan_db, arachni_scan_result_db, \
@@ -138,6 +139,19 @@ def create_client(request):
                                   client_note=client_note,
                                   )
         save_client.save()
+
+        all_questions = audit_question_db.objects.all()
+
+        for question in all_questions:
+            audit_client = audit_db(client_id = client_id,
+                                    question_id = question.question_id,
+                                    question_group_id = question.question_group_id,
+                                    answer = "",
+                                    answer_color = "",
+                                    date_time = "",
+                                    )
+            audit_client.save()
+            print(question.question_id, question.question_group_id)
 
         return HttpResponseRedirect(reverse('projects:list_clients'))
 

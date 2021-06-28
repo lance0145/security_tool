@@ -1,0 +1,118 @@
+{% extends 'dashboard/base.html' %}
+
+{% block body %}
+
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <!-- <div class="float-right">
+            <div class="btn-group"><a href="{% url 'tools:add_audit' %}"
+                                      class="btn btn-primary btn-mini"><i
+                    class="icon-plus icon-white"></i> Add</a>
+            </div>
+        </div> -->
+        <br>
+        <div class="d-md-flex align-items-center">
+            <h1 class="card-title">{{cli_name}} Audit Scripts</h1>
+        </div>
+        <form class="form-horizontal" method="POST" action="{% url 'tools:audit_scripts' %}">
+        {% csrf_token %}
+            <label class="col-sm-4 col-form-label">Clients</label>
+            <div class="col-sm-6">
+                <select name="client_id" onChange="form.submit();" class="select2 form-control custom-select"
+                        style="width: 50%; height:36px;" >
+                        <option value="{{cli_id}}" disabled selected>{{cli_name}}</option>
+                    {% for data in all_clients %}
+                        <option value="{{data.client_id}}">{{data.client_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form>
+        <br>
+        <div class="row justify-content-md-center">
+            {% for group in all_groups %}
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-md-flex align-items-center">
+                            <h2 class="card-title">{{group.question_group}}</h2>
+                        </div>
+                        <br>
+                        <div class="card">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                        {% for question in all_questions %}
+                                            {% if group.question_group_id == question.question_group_id %}
+                                            <div class="form-group row">
+                                                <label name="question_id" class="col-sm-4 col-form-label">{{question.question}}</label>
+                                                <input type="hidden" name="question_id" value="{{question.question_id}}">
+                                                <div class="col-sm-6">
+                                                    <select name="answer" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                                        {% for audit in all_audits %}
+                                                            {% if question.question_id == audit.question_id %}
+                                                                <option value="" disabled selected>{{audit.answer}}</option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                                <option value="Not Implemented">Not Implemented</option>
+                                                                <option value="Implemented on Some Systems">Implemented on Some Systems</option>
+                                                                <option value="Implemented on All Systems">Implemented on All Systems</option>
+                                                                <option value="Implemented & Automated on All Systems">Implemented & Automated on All Systems</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <button class="btn btn-warning">Save</button>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.btn-warning').click(function(){
+            // if (confirm('Update Client Audit Scripts?')) {
+                window.location=window.location;
+                var question_id = [];
+                $.each($("input[name='question_id']"), function(){
+                    question_id.push($(this).val());
+                });
+                var json_question_id = question_id.join("|");
+
+                var answer = [];
+                $.each($("select[name='answer']"), function(){
+                    answer.push($(this).val());
+                });
+                var json_answer = answer.join("|");
+                
+                var client_id = document.getElementsByName("client_id")[0].value;
+
+                $.ajax({
+                    type:'GET',
+                    url:"{% url 'tools:audit_scripts' %}",
+                    data:{
+                        client_id: client_id,
+                        question_id: json_question_id,
+                        answer: json_answer,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    sucess:function(){
+                        alert("Success");
+                    }
+                });
+                setTimeout(function(){location.reload();},1000);
+            // }
+        });
+    });
+</script>
+{% endblock %}
