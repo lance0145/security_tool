@@ -31,6 +31,18 @@ nikto_output = ''
 scan_result = ''
 all_nmap = ''
 
+def audit_scripts_save(request):
+    try:
+        client_id = request.GET.get('client_id')
+        question_id = request.GET.get('question_id')
+        answer = request.GET.get('answer')
+        if answer and client_id and question_id:
+            audit_db.objects.filter(client_id=client_id, question_id=question_id).update(
+                answer=answer
+            )
+    except Exception as e:
+        return e
+
 def add_group(request):
     username = request.user.username
     all_clients = client_db.objects.filter(username=username)
@@ -80,8 +92,8 @@ def audit_scripts(request):
     all_groups = audit_question_group_db.objects.all
     all_questions = audit_question_db.objects.all
     # all_answers = audit_answer_db.objects.all
-    if request.method == 'POST':
-        client_id = request.POST.get('client_id', )
+    client_id = request.POST.get('client_id', )
+    if request.method == 'POST' and client_id:
         all_audits = audit_db.objects.filter(client_id=client_id)
         cli_name = client_db.objects.filter(username=username, client_id=client_id)
 
@@ -100,36 +112,6 @@ def audit_scripts(request):
                                                     'all_questions': all_questions,
                                                     # 'all_answers': all_answers,
                                                     'all_audits': all_audits})
-
-def audit_scripts_save(request):
-    client_id = request.GET.get('client_id')
-    question_id = request.GET.get('question_id')
-    answer = request.GET.get('answer')
-    print(client_id, question_id, answer, "***********************************")
-    if answer and client_id and question_id:
-        audit_db.objects.filter(client_id=client_id, question_id=question_id).update(
-            answer=answer
-        )
-
-    response = {
-        'answer': answer
-    }
-    return JsonResponse(response)
-
-    # username = request.user.username
-    # vuln_id = request.GET.get('id')
-    # status = request.GET.get('status')
-    # date_time = datetime.now()
-    # if vuln_id and status:
-    #     edit_status = manual_scan_results_db.objects.filter(username=username, vuln_id=vuln_id).update(
-    #         vuln_status=status,
-    #         date_time=date_time,
-    #     )
-
-    # response = {
-    #     'status': status
-    # }
-    # return JsonResponse(response)
 
 def sniper_vuln_del(request):
     """

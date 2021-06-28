@@ -4,12 +4,12 @@
 
 <div class="page-wrapper">
     <div class="container-fluid">
-        <!-- <div class="float-right">
+        <div class="float-right">
             <div class="btn-group"><a href="{% url 'tools:add_audit' %}"
                                       class="btn btn-primary btn-mini"><i
                     class="icon-plus icon-white"></i> Add</a>
             </div>
-        </div> -->
+        </div>
         <br>
         <div class="d-md-flex align-items-center">
             <h1 class="card-title">{{cli_name}} Audit Scripts</h1>
@@ -51,7 +51,7 @@
                                                     <select name="answer" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
                                                         {% for audit in all_audits %}
                                                             {% if question.question_id == audit.question_id %}
-                                                                <option value="" disabled selected>{{audit.answer}}</option>
+                                                                <option value="{{audit.answer}}" disabled selected>{{audit.answer}}</option>
                                                             {% endif %}
                                                         {% endfor %}
                                                                 <option value="Not Implemented">Not Implemented</option>
@@ -83,20 +83,23 @@
         var client_id = document.getElementsByName("client_id")[0].value;
         for (var i=0 ; i < dropdown.length ; i++){
             (function(index){
-                dropdown[index].onchange = function(){
-                    var question_id = document.getElementsByName("question_id")[index].value;
-                    var answer = $(this).val();                    
-                    alert(client_id+question_id+answer);
-                    $.ajax({
-                        url:"{% url 'tools:audit_scripts_save' %}",
-                        data:{
-                            'client_id': client_id,
-                            'question_id': question_id,
-                            'answer': answer,
-                            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val()
-                        }
-                    });
-                };
+            dropdown[index].onchange = function(){
+                // e.preventDefault();
+                var question_id = document.getElementsByName("question_id")[index].value;
+                var answer = $(this).val();
+                $.ajax({
+                    url:'{% url "tools:audit_scripts_save" %}',
+                    data:{
+                        'client_id': client_id,
+                        'question_id': question_id,
+                        'answer': answer,
+                    },
+                    success: function (response) {
+                        
+                    }
+                });
+                // return false;
+            };
             })(i)
         }
     });

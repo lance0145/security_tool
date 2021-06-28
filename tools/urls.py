@@ -20,6 +20,9 @@ from tools import views
 app_name = 'tools'
 
 urlpatterns = [
+    url(r'^audit_scripts_save',
+        views.audit_scripts_save,
+        name='audit_scripts_save'),
     url(r'^add_group_save',
         views.add_group_save,
         name='add_group_save'),
@@ -35,9 +38,6 @@ urlpatterns = [
     url(r'^audit_scripts',
         views.audit_scripts,
         name='audit_scripts'),
-    url(r'^audit_scripts_save',
-        views.audit_scripts_save,
-        name='audit_scripts_save'),
     url(r'^sniper_result1',
         views.sniper_result1,
         name='sniper_result1'),

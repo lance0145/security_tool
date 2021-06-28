@@ -151,7 +151,6 @@ def create_client(request):
                                     date_time = "",
                                     )
             audit_client.save()
-            print(question.question_id, question.question_group_id)
 
         return HttpResponseRedirect(reverse('projects:list_clients'))
 
