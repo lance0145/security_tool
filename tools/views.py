@@ -31,6 +31,17 @@ nikto_output = ''
 scan_result = ''
 all_nmap = ''
 
+def add_audit_del(request):
+    if request.method == 'GET':
+        question_group_id = request.GET.get("question_group_id", )
+        print("*****************************************")
+        print(question_group_id)
+
+        # dump_scan = audit_question_group_db.objects.filter(question_group_id=question_group_id)
+        # dump_scan.delete()
+
+        return HttpResponseRedirect("/tools/add_audit")
+
 def audit_scripts_del(request):
     if request.method == 'POST':
         client_id = request.POST.get("client_id")

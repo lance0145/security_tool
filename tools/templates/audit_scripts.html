@@ -71,7 +71,7 @@
                                                     <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                                                 </div> -->
                                                 <div class="confirm-delete float-right">
-                                                    <form action="{% url 'tools:audit_scripts_del' %}" method="post" class="forms-sample">        
+                                                    <form action="{% url 'tools:add_audit_del' %}" method="post" class="forms-sample">        
                                                         {% csrf_token %}
                                                         <input type="hidden" name="question_id" value="{{question.question_id}}"/>
                                                         <button style="border: none; background: none;"><i class="fas fa-window-close"></i></button>
