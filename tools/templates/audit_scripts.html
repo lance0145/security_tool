@@ -14,13 +14,19 @@
         <div class="d-md-flex align-items-center">
             <h1 class="card-title">{{cli_name}} Audit Scripts</h1>
         </div>
+        <div class="d-md-flex align-items-center">
+            <h4 class="card-title">Critical Security Controls Executive Assessment Tool</h4>
+        </div>
         <form class="form-horizontal" method="POST" action="{% url 'tools:audit_scripts' %}">
         {% csrf_token %}
+            <label style="background:green; color:white" class="col-sm-3 col-form-label"><b>Risk Addressed: %</b></label><br>
+            <label style="background:red; color:white" class="col-sm-3 col-form-label"><b>Risk Accepted: %</b></label><br>
             <label class="col-sm-4 col-form-label">Clients</label>
             <div class="col-sm-6">
                 <select name="client_id" onChange="form.submit();" class="select2 form-control custom-select"
                         style="width: 50%; height:36px;" >
-                        <option value="{{cli_id}}" disabled selected>{{cli_name}}</option>
+                        <option disabled selected>{{cli_name}}</option>
+                        <!-- value="{{cli_id}}"  -->
                     {% for data in all_clients %}
                         <option value="{{data.client_id}}">{{data.client_name}}</option>
                     {% endfor %}
@@ -48,17 +54,28 @@
                                                 <label class="col-sm-4 col-form-label">{{question.question}}</label>
                                                 <input type="hidden" name="question_id" value="{{question.question_id}}">
                                                 <div class="col-sm-6">
-                                                    <select name="answer" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                                    <select style="color:black" name="answer" class="custom-select mr-sm-2">
                                                         {% for audit in all_audits %}
                                                             {% if question.question_id == audit.question_id %}
-                                                                <option value="{{audit.answer}}" disabled selected>{{audit.answer}}</option>
+                                                                <option style="background:grey" disabled selected>{{audit.answer}}</option>
+                                                                <!-- value="{{audit.answer}}"  -->
                                                             {% endif %}
                                                         {% endfor %}
-                                                                <option value="Not Implemented">Not Implemented</option>
-                                                                <option value="Implemented on Some Systems">Implemented on Some Systems</option>
-                                                                <option value="Implemented on All Systems">Implemented on All Systems</option>
-                                                                <option value="Implemented & Automated on All Systems">Implemented & Automated on All Systems</option>
+                                                                <option style="background:red" value="Not Implemented">Not Implemented</option>
+                                                                <option style="background:orange" value="Implemented on Some Systems">Implemented on Some Systems</option>
+                                                                <option style="background:yellow" value="Implemented on All Systems">Implemented on All Systems</option>
+                                                                <option style="background:green" value="Implemented & Automated on All Systems">Implemented & Automated on All Systems</option>
                                                     </select>
+                                                </div>
+                                                <!-- <div class="float-right">
+                                                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                                </div> -->
+                                                <div class="confirm-delete float-right">
+                                                    <form action="{% url 'tools:audit_scripts_del' %}" method="post" class="forms-sample">        
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="question_id" value="{{question.question_id}}"/>
+                                                        <button style="border: none; background: none;"><i class="fas fa-window-close"></i></button>
+                                                    </form>
                                                 </div>
                                             </div>
                                             {% endif %}
@@ -103,5 +120,9 @@
             })(i)
         }
     });
+
+    $(document).on('click', '.confirm-delete', function(){
+        return confirm('Are you sure you want to delete this question?');
+    })
 </script>
 {% endblock %}

@@ -148,7 +148,7 @@ def create_client(request):
                                     question_group_id = question.question_group_id,
                                     answer = "",
                                     answer_color = "",
-                                    date_time = "",
+                                    date_time = datetime.now(),
                                     )
             audit_client.save()
 

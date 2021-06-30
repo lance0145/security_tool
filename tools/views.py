@@ -31,6 +31,16 @@ nikto_output = ''
 scan_result = ''
 all_nmap = ''
 
+def audit_scripts_del(request):
+    if request.method == 'POST':
+        client_id = request.POST.get("client_id")
+        question_id = request.POST.get("question_id")
+
+        dump_scan = audit_question_db.objects.filter(question_id=question_id)
+        dump_scan.delete()
+
+        return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
+
 def audit_scripts_save(request):
     try:
         client_id = request.GET.get('client_id')
@@ -84,9 +94,22 @@ def add_audit_save(request):
         )
         dump_scan.save()
 
+        all_clients = client_db.objects.all()
+
+        for client in all_clients:
+            audit_client = audit_db(client_id = client.client_id,
+                                    question_id = question_id,
+                                    question_group_id = question_group_id,
+                                    answer = "",
+                                    answer_color = "",
+                                    date_time = datetime.now(),
+                                    )
+            audit_client.save()
+
         return HttpResponseRedirect(reverse('tools:audit_scripts'))
 
 def audit_scripts(request):
+    # bug it loads the first client on the dropdown answer
     username = request.user.username
     all_clients = client_db.objects.filter(username=username)
     all_groups = audit_question_group_db.objects.all
