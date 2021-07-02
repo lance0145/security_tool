@@ -20,15 +20,15 @@ from tools import views
 app_name = 'tools'
 
 urlpatterns = [
-    url(r'^add_audit_del',
-        views.add_audit_del,
-        name='add_audit_del'),
-    url(r'^audit_scripts_del',
-        views.audit_scripts_del,
-        name='audit_scripts_del'),
     url(r'^audit_scripts_save',
         views.audit_scripts_save,
         name='audit_scripts_save'),
+    url(r'^audit_scripts_del',
+        views.audit_scripts_del,
+        name='audit_scripts_del'),
+    url(r'^add_audit_del',
+        views.add_audit_del,
+        name='add_audit_del'),
     url(r'^add_group_save',
         views.add_group_save,
         name='add_group_save'),
@@ -116,15 +116,12 @@ urlpatterns = [
     url(r'^nikto_scan_del/$',
         views.nikto_scan_del,
         name='nikto_scan_del'),
-
     url(r'^nikto_result_vul/$',
         views.nikto_result_vul,
         name='nikto_result_vul'),
     url(r'^nikto_vuln_del/$',
         views.nikto_vuln_del,
         name='nikto_vuln_del'),
-
-    # nmap requests
     url(r'^nmap_scan/$',
         views.nmap_scan,
         name='nmap_scan'),
@@ -140,7 +137,6 @@ urlpatterns = [
     url(r'^nmap_vuln_del/$',
         views.nmap_vuln_del,
         name='nmap_vuln_del'),
-    #Nmap_Vulners
     url(r'^nmap_vulners_scan/$',
         views.nmap_vulners_scan,
         name='nmap_scan'),

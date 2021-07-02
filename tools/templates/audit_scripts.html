@@ -19,8 +19,8 @@
         </div>
         <form class="form-horizontal" method="POST" action="{% url 'tools:audit_scripts' %}">
         {% csrf_token %}
-            <label style="background:green; color:white" class="col-sm-3 col-form-label"><b>Risk Addressed: %</b></label><br>
-            <label style="background:red; color:white" class="col-sm-3 col-form-label"><b>Risk Accepted: %</b></label><br>
+            <label style="background:green; color:white" class="col-sm-3 col-form-label"><b>Risk Addressed: {{address}}</b></label><br>
+            <label style="background:red; color:white" class="col-sm-3 col-form-label"><b>Risk Accepted: {{accept}}</b></label><br>
             <label class="col-sm-4 col-form-label">Clients</label>
             <div class="col-sm-6">
                 <select name="client_id" onChange="form.submit();" class="select2 form-control custom-select"
@@ -71,7 +71,7 @@
                                                     <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                                                 </div> -->
                                                 <div class="confirm-delete float-right">
-                                                    <form action="{% url 'tools:add_audit_del' %}" method="post" class="forms-sample">        
+                                                    <form action="{% url 'tools:audit_scripts_del' %}" method="post" class="forms-sample">        
                                                         {% csrf_token %}
                                                         <input type="hidden" name="question_id" value="{{question.question_id}}"/>
                                                         <button style="border: none; background: none;"><i class="fas fa-window-close"></i></button>
@@ -110,6 +110,7 @@
                         'client_id': client_id,
                         'question_id': question_id,
                         'answer': answer,
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
                     },
                     success: function (response) {
                         

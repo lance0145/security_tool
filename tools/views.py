@@ -31,26 +31,47 @@ nikto_output = ''
 scan_result = ''
 all_nmap = ''
 
-def add_audit_del(request):
-    if request.method == 'GET':
-        question_group_id = request.GET.get("question_group_id", )
-        print("*****************************************")
-        print(question_group_id)
+def audit_scripts(request):
+    # bug it loads the first client on the dropdown answer
+    username = request.user.username
+    all_clients = client_db.objects.filter(username=username)
+    all_groups = audit_question_group_db.objects.all
+    all_questions = audit_question_db.objects.all
+    client_id = request.POST.get('client_id', )
+    if request.method == 'POST' and client_id:
+        all_audits = audit_db.objects.filter(client_id=client_id)
+        cli_name = client_db.objects.filter(username=username, client_id=client_id)
+        addressed = 0
+        for audit in all_audits:
+            if audit.answer == "" or audit.answer == None or audit.answer == "Not Implemented":
+                addressed = addressed + 0
+            elif audit.answer == "Implemented on Some Systems":
+                addressed = addressed + .33
+            elif audit.answer == "Implemented on All Systems":
+                addressed = addressed + .66
+            elif audit.answer == "Implemented & Automated on All Systems":
+                addressed = addressed + 1
+        addressed = addressed / 100
+        accepted = 1 - addressed
+        address = "{:.2%}".format(addressed)
+        accept = "{:.2%}".format(accepted)
+        
 
-        # dump_scan = audit_question_group_db.objects.filter(question_group_id=question_group_id)
-        # dump_scan.delete()
-
-        return HttpResponseRedirect("/tools/add_audit")
-
-def audit_scripts_del(request):
-    if request.method == 'POST':
-        client_id = request.POST.get("client_id")
-        question_id = request.POST.get("question_id")
-
-        dump_scan = audit_question_db.objects.filter(question_id=question_id)
-        dump_scan.delete()
-
-        return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
+        return render(request, 'audit_scripts.html', {'all_clients': all_clients,
+                                                    'all_groups': all_groups,
+                                                    'all_questions': all_questions,
+                                                    'all_audits': all_audits,
+                                                    'cli_name': cli_name[0].client_name,
+                                                    'cli_id': cli_name[0].client_id,
+                                                    'address': address,
+                                                    'accept': accept})
+    else:        
+        all_audits = audit_db.objects.filter(client_id=all_clients[0].client_id)
+    
+        return render(request, 'audit_scripts.html', {'all_clients': all_clients,
+                                                    'all_groups': all_groups,
+                                                    'all_questions': all_questions,
+                                                    'all_audits': all_audits})
 
 def audit_scripts_save(request):
     try:
@@ -63,6 +84,26 @@ def audit_scripts_save(request):
             )
     except Exception as e:
         return e
+
+def add_audit_del(request):
+    if request.method == 'POST':
+        question_group_id = request.POST.get("question_group_id")
+        print(question_group_id)
+
+        dump_scan = audit_question_group_db.objects.filter(question_group_id=question_group_id)
+        dump_scan.delete()
+
+    return HttpResponseRedirect(reverse('tools:add_audit'))
+    
+def audit_scripts_del(request):
+    if request.method == 'POST':
+        client_id = request.POST.get("client_id")
+        question_id = request.POST.get("question_id")
+
+        dump_scan = audit_question_db.objects.filter(question_id=question_id)
+        dump_scan.delete()
+
+        return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
 
 def add_group(request):
     username = request.user.username
@@ -118,34 +159,6 @@ def add_audit_save(request):
             audit_client.save()
 
         return HttpResponseRedirect(reverse('tools:audit_scripts'))
-
-def audit_scripts(request):
-    # bug it loads the first client on the dropdown answer
-    username = request.user.username
-    all_clients = client_db.objects.filter(username=username)
-    all_groups = audit_question_group_db.objects.all
-    all_questions = audit_question_db.objects.all
-    # all_answers = audit_answer_db.objects.all
-    client_id = request.POST.get('client_id', )
-    if request.method == 'POST' and client_id:
-        all_audits = audit_db.objects.filter(client_id=client_id)
-        cli_name = client_db.objects.filter(username=username, client_id=client_id)
-
-        return render(request, 'audit_scripts.html', {'all_clients': all_clients,
-                                                    'all_groups': all_groups,
-                                                    'all_questions': all_questions,
-                                                    # 'all_answers': all_answers,
-                                                    'all_audits': all_audits,
-                                                    'cli_name': cli_name[0].client_name,
-                                                    'cli_id': cli_name[0].client_id})
-    else:        
-        all_audits = audit_db.objects.filter(client_id=all_clients[0].client_id)
-    
-        return render(request, 'audit_scripts.html', {'all_clients': all_clients,
-                                                    'all_groups': all_groups,
-                                                    'all_questions': all_questions,
-                                                    # 'all_answers': all_answers,
-                                                    'all_audits': all_audits})
 
 def sniper_vuln_del(request):
     """
