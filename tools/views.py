@@ -31,6 +31,25 @@ nikto_output = ''
 scan_result = ''
 all_nmap = ''
 
+
+def audit_scripts_save(request):
+    try:
+        client_id = request.GET.get('client_id')
+        question_id = request.GET.get('question_id')
+        answer = request.GET.get('answer')
+        if answer and client_id and question_id:
+            print("*************************", client_id, question_id, answer)
+            audit_db.objects.filter(client_id=client_id, question_id=question_id).update(
+                answer=answer
+            )
+    except Exception as e:
+        return e
+
+    response = {
+        'answer': answer
+    }
+    return JsonResponse(response)
+
 def audit_scripts(request):
     # bug it loads the first client on the dropdown answer
     username = request.user.username
@@ -38,6 +57,7 @@ def audit_scripts(request):
     all_groups = audit_question_group_db.objects.all
     all_questions = audit_question_db.objects.all
     client_id = request.POST.get('client_id', )
+    print(client_id)
     if request.method == 'POST' and client_id:
         all_audits = audit_db.objects.filter(client_id=client_id)
         cli_name = client_db.objects.filter(username=username, client_id=client_id)
@@ -72,18 +92,6 @@ def audit_scripts(request):
                                                     'all_groups': all_groups,
                                                     'all_questions': all_questions,
                                                     'all_audits': all_audits})
-
-def audit_scripts_save(request):
-    try:
-        client_id = request.GET.get('client_id')
-        question_id = request.GET.get('question_id')
-        answer = request.GET.get('answer')
-        if answer and client_id and question_id:
-            audit_db.objects.filter(client_id=client_id, question_id=question_id).update(
-                answer=answer
-            )
-    except Exception as e:
-        return e
 
 def add_audit_del(request):
     if request.method == 'POST':

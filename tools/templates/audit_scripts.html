@@ -15,7 +15,7 @@
             <h1 class="card-title">{{cli_name}} Audit Scripts</h1>
         </div>
         <div class="d-md-flex align-items-center">
-            <h4 class="card-title">Critical Security Controls Executive Assessment Tool</h4>
+            <h4 class="card-title">Critical Security Controls(CSC) Executive Assessment Tool</h4>
         </div>
         <form class="form-horizontal" method="POST" action="{% url 'tools:audit_scripts' %}">
         {% csrf_token %}
@@ -25,8 +25,7 @@
             <div class="col-sm-6">
                 <select name="client_id" onChange="form.submit();" class="select2 form-control custom-select"
                         style="width: 50%; height:36px;" >
-                        <option disabled selected>{{cli_name}}</option>
-                        <!-- value="{{cli_id}}"  -->
+                        <option value="{{cli_id}}" disabled selected>{{cli_name}}</option>
                     {% for data in all_clients %}
                         <option value="{{data.client_id}}">{{data.client_name}}</option>
                     {% endfor %}
@@ -103,6 +102,7 @@
             dropdown[index].onchange = function(){
                 // e.preventDefault();
                 var question_id = document.getElementsByName("question_id")[index].value;
+                alert(index+question_id)
                 var answer = $(this).val();
                 $.ajax({
                     url:'{% url "tools:audit_scripts_save" %}',
@@ -110,7 +110,7 @@
                         'client_id': client_id,
                         'question_id': question_id,
                         'answer': answer,
-                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                        // 'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
                     },
                     success: function (response) {
                         
