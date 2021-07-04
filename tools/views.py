@@ -33,20 +33,32 @@ all_nmap = ''
 
 
 def audit_scripts_save(request):
-    try:
-        client_id = request.GET.get('client_id')
-        question_id = request.GET.get('question_id')
-        answer = request.GET.get('answer')
-        if answer and client_id and question_id:
-            print("*************************", client_id, question_id, answer)
-            audit_db.objects.filter(client_id=client_id, question_id=question_id).update(
-                answer=answer
-            )
-    except Exception as e:
-        return e
+    client_id = request.GET.get('client_id')
+    question_id = request.GET.get('question_id')
+    answer = request.GET.get('answer')
+    if answer and client_id and question_id:
+        audit_db.objects.filter(client_id=client_id, question_id=question_id).update(
+            answer=answer
+        )
+    all_audits = audit_db.objects.filter(client_id=client_id)
+    addressed = 0
+    for audit in all_audits:
+        if audit.answer == "" or audit.answer == None or audit.answer == "Not Implemented":
+            addressed = addressed + 0
+        elif audit.answer == "Implemented on Some Systems":
+            addressed = addressed + .33
+        elif audit.answer == "Implemented on All Systems":
+            addressed = addressed + .66
+        elif audit.answer == "Implemented & Automated on All Systems":
+            addressed = addressed + 1
+    addressed = addressed / 100
+    accepted = 1 - addressed
+    address = "{:.2%}".format(addressed)
+    accept = "{:.2%}".format(accepted)
 
     response = {
-        'answer': answer
+        'address': address,
+        'accept': accept
     }
     return JsonResponse(response)
 

@@ -19,8 +19,8 @@
         </div>
         <form class="form-horizontal" method="POST" action="{% url 'tools:audit_scripts' %}">
         {% csrf_token %}
-            <label style="background:green; color:white" class="col-sm-3 col-form-label"><b>Risk Addressed: {{address}}</b></label><br>
-            <label style="background:red; color:white" class="col-sm-3 col-form-label"><b>Risk Accepted: {{accept}}</b></label><br>
+            <label id="address" style="background:green; color:white" class="col-sm-2 col-form-label"><b>Risk Addressed: {{address}}</b></label><br>
+            <label id="accept" style="background:red; color:white" class="col-sm-2 col-form-label"><b>Risk Accepted: {{accept}}</b></label><br>
             <label class="col-sm-4 col-form-label">Clients</label>
             <div class="col-sm-6">
                 <select name="client_id" onChange="form.submit();" class="select2 form-control custom-select"
@@ -50,8 +50,8 @@
                                         {% for question in all_questions %}
                                             {% if group.question_group_id == question.question_group_id %}
                                             <div class="form-group row">
-                                                <label class="col-sm-4 col-form-label">{{question.question}}</label>
-                                                <input type="hidden" name="question_id" value="{{question.question_id}}">
+                                                <p name="{{question.question_id}}" class="col-sm-4 col-form-label">{{question.question}}</p>
+                                                <!-- <input type="hidden" name="question_id" value="{{question.question_id}}"> -->
                                                 <div class="col-sm-6">
                                                     <select style="color:black" name="answer" class="custom-select mr-sm-2">
                                                         {% for audit in all_audits %}
@@ -101,8 +101,7 @@
             (function(index){
             dropdown[index].onchange = function(){
                 // e.preventDefault();
-                var question_id = document.getElementsByName("question_id")[index].value;
-                alert(index+question_id)
+                var question_id = document.getElementsByTagName("p")[index].getAttribute("name");
                 var answer = $(this).val();
                 $.ajax({
                     url:'{% url "tools:audit_scripts_save" %}',
@@ -113,7 +112,8 @@
                         // 'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
                     },
                     success: function (response) {
-                        
+                        $("#address").text("Risk Addressed: " + response.address);
+                        $("#accept").text("Risk Accepted: " + response.accept);
                     }
                 });
                 // return false;
