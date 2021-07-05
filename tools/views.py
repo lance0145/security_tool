@@ -63,13 +63,12 @@ def audit_scripts_save(request):
     return JsonResponse(response)
 
 def audit_scripts(request):
-    # bug it loads the first client on the dropdown answer
+    # Note: minor bug it loads the first client on the dropdown answer
     username = request.user.username
     all_clients = client_db.objects.filter(username=username)
     all_groups = audit_question_group_db.objects.all
     all_questions = audit_question_db.objects.all
     client_id = request.POST.get('client_id', )
-    print(client_id)
     if request.method == 'POST' and client_id:
         all_audits = audit_db.objects.filter(client_id=client_id)
         cli_name = client_db.objects.filter(username=username, client_id=client_id)
@@ -107,17 +106,18 @@ def audit_scripts(request):
 
 def add_audit_del(request):
     if request.method == 'POST':
+        client_id = request.POST.get("cli_id")
         question_group_id = request.POST.get("question_group_id")
-        print(question_group_id)
 
         dump_scan = audit_question_group_db.objects.filter(question_group_id=question_group_id)
         dump_scan.delete()
 
-    return HttpResponseRedirect(reverse('tools:add_audit'))
+        # Note: minor bug doesn't return directly to client audit script page
+        return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
     
 def audit_scripts_del(request):
     if request.method == 'POST':
-        client_id = request.POST.get("client_id")
+        client_id = request.POST.get("cli_id")
         question_id = request.POST.get("question_id")
 
         dump_scan = audit_question_db.objects.filter(question_id=question_id)
