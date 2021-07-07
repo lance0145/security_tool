@@ -31,6 +31,20 @@ nikto_output = ''
 scan_result = ''
 all_nmap = ''
 
+def audit_list(request):
+    username = request.user.username
+    all_clients = client_db.objects.filter(username=username)
+    all_questions = audit_question_db.objects.all
+    all_clients_audits = []
+    for client in all_clients:
+        all_audits = audit_db.objects.filter(client_id=client.client_id)
+        all_clients_audits.append(all_audits)
+    
+    return render(request, 'audit_list.html', { 'all_clients': all_clients,
+                                                'all_clients_audits': all_clients_audits,
+                                                'all_questions': all_questions,
+                                                'address': "address",
+                                                'accept': "accept"})
 
 def audit_scripts_save(request):
     client_id = request.GET.get('client_id')
@@ -170,11 +184,14 @@ def add_audit_save(request):
 
         for client in all_clients:
             audit_client = audit_db(client_id = client.client_id,
+                                    client_name = client.client_name,
                                     question_id = question_id,
                                     question_group_id = question_group_id,
                                     answer = "",
                                     answer_color = "",
                                     date_time = datetime.now(),
+                                    address = "",
+                                    accept = ""
                                     )
             audit_client.save()
 
