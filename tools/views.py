@@ -65,10 +65,11 @@ def audit_scripts_save(request):
             addressed = addressed + .66
         elif audit.answer == "Implemented & Automated on All Systems":
             addressed = addressed + 1
-    addressed = addressed * 8.333333
-    addressed = addressed / 100
-    accepted = 1 - addressed
-    address = "{:.2%}".format(addressed)
+    x = 100 / len(all_audits)
+    multiply = addressed * x
+    divide = multiply / 100
+    accepted = 1 - divide
+    address = "{:.2%}".format(divide)
     accept = "{:.2%}".format(accepted)
 
     audit_db.objects.filter(client_id=client_id, question_id=question_id).update(
