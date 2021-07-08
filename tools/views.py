@@ -65,10 +65,16 @@ def audit_scripts_save(request):
             addressed = addressed + .66
         elif audit.answer == "Implemented & Automated on All Systems":
             addressed = addressed + 1
+    addressed = addressed * 8.333333
     addressed = addressed / 100
     accepted = 1 - addressed
     address = "{:.2%}".format(addressed)
     accept = "{:.2%}".format(accepted)
+
+    audit_db.objects.filter(client_id=client_id, question_id=question_id).update(
+            address=address,
+            accept=accept
+        )
 
     response = {
         'address': address,
@@ -86,21 +92,8 @@ def audit_scripts(request):
     if request.method == 'POST' and client_id:
         all_audits = audit_db.objects.filter(client_id=client_id)
         cli_name = client_db.objects.filter(username=username, client_id=client_id)
-        addressed = 0
-        for audit in all_audits:
-            if audit.answer == "" or audit.answer == None or audit.answer == "Not Implemented":
-                addressed = addressed + 0
-            elif audit.answer == "Implemented on Some Systems":
-                addressed = addressed + .33
-            elif audit.answer == "Implemented on All Systems":
-                addressed = addressed + .66
-            elif audit.answer == "Implemented & Automated on All Systems":
-                addressed = addressed + 1
-        addressed = addressed / 100
-        accepted = 1 - addressed
-        address = "{:.2%}".format(addressed)
-        accept = "{:.2%}".format(accepted)
-        
+        address = audit_db.objects.filter(client_id=client_id).last()
+        accept = audit_db.objects.filter(client_id=client_id).last()
 
         return render(request, 'audit_scripts.html', {'all_clients': all_clients,
                                                     'all_groups': all_groups,
@@ -108,8 +101,8 @@ def audit_scripts(request):
                                                     'all_audits': all_audits,
                                                     'cli_name': cli_name[0].client_name,
                                                     'cli_id': cli_name[0].client_id,
-                                                    'address': address,
-                                                    'accept': accept})
+                                                    'address': address.address,
+                                                    'accept': accept.accept})
     else:        
         all_audits = audit_db.objects.filter(client_id=all_clients[0].client_id)
     

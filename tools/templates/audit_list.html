@@ -60,12 +60,24 @@
                                                     </label>
                                                 </form>
                                             </td>
-                                            <td>Client</td>
+                                            {% for data in datas %}
+                                                {% if forloop.first %}   
+                                                    <td>{{data.client_name}}</td>
+                                                {% endif %}
+                                            {% endfor %}
                                             {% for data in datas %}
                                                 <td>{{data.answer}}</td>
                                             {% endfor %}
-                                            <!-- <td>{{data.address}}</td>
-                                            <td>{{data.accept}}</td> -->
+                                            {% for data in datas %}
+                                                {% if forloop.last %}   
+                                                    <td>{{data.address}}</td>
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% for data in datas %}
+                                                {% if forloop.last %}
+                                                    <td>{{data.accept}}</td>
+                                                {% endif %}
+                                            {% endfor %}
                                         </tr>
                                         {% endfor %}
                                     </tbody>
