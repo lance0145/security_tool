@@ -42,9 +42,7 @@ def audit_list(request):
     
     return render(request, 'audit_list.html', { 'all_clients': all_clients,
                                                 'all_clients_audits': all_clients_audits,
-                                                'all_questions': all_questions,
-                                                'address': "address",
-                                                'accept': "accept"})
+                                                'all_questions': all_questions})
 
 def audit_scripts_save(request):
     client_id = request.GET.get('client_id')
@@ -71,8 +69,10 @@ def audit_scripts_save(request):
     accepted = 1 - divide
     address = "{:.2%}".format(divide)
     accept = "{:.2%}".format(accepted)
+    date_time = datetime.now()
 
     audit_db.objects.filter(client_id=client_id, question_id=question_id).update(
+            date_time=date_time,
             address=address,
             accept=accept
         )
@@ -93,8 +93,9 @@ def audit_scripts(request):
     if request.method == 'POST' and client_id:
         all_audits = audit_db.objects.filter(client_id=client_id)
         cli_name = client_db.objects.filter(username=username, client_id=client_id)
-        address = audit_db.objects.filter(client_id=client_id).last()
-        accept = audit_db.objects.filter(client_id=client_id).last()
+        address = audit_db.objects.filter(client_id=client_id).order_by('-date_time')[0]
+        accept = audit_db.objects.filter(client_id=client_id).order_by('-date_time')[0]
+        print(accept, address)
 
         return render(request, 'audit_scripts.html', {'all_clients': all_clients,
                                                     'all_groups': all_groups,
@@ -183,7 +184,7 @@ def add_audit_save(request):
                                     question_group_id = question_group_id,
                                     answer = "",
                                     answer_color = "",
-                                    date_time = datetime.now(),
+                                    date_time = date_time,
                                     address = "",
                                     accept = ""
                                     )
