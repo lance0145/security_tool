@@ -39,7 +39,7 @@ def audit_list(request):
     for client in all_clients:
         all_audits = audit_db.objects.filter(client_id=client.client_id)
         all_clients_audits.append(all_audits)
-    
+
     return render(request, 'audit_list.html', { 'all_clients': all_clients,
                                                 'all_clients_audits': all_clients_audits,
                                                 'all_questions': all_questions})
@@ -70,11 +70,14 @@ def audit_scripts_save(request):
     address = "{:.2%}".format(divide)
     accept = "{:.2%}".format(accepted)
     date_time = datetime.now()
-
+    audit_db.objects.filter(client_id=client_id).update(
+            flag="old"
+        )
     audit_db.objects.filter(client_id=client_id, question_id=question_id).update(
             date_time=date_time,
             address=address,
-            accept=accept
+            accept=accept,
+            flag="new"
         )
 
     response = {
