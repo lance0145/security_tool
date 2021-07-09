@@ -223,6 +223,7 @@ class audit_db(models.Model):
     date_time = models.DateTimeField(null=True)
     address = models.TextField(null=True, blank=True)
     accept = models.TextField(null=True, blank=True)
+    flag = models.TextField(null=True, blank=True)
 
 # class audit_answer_db(models.Model):
 #     answer_id = models.TextField(blank=True, null=True)
