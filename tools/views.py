@@ -67,8 +67,8 @@ def audit_scripts_save(request):
     multiply = addressed * x
     divide = multiply / 100
     accepted = 1 - divide
-    address = "{:.2%}".format(divide)
-    accept = "{:.2%}".format(accepted)
+    address = "{:.0%}".format(divide)
+    accept = "{:.0%}".format(accepted)
     date_time = datetime.now()
     audit_db.objects.filter(client_id=client_id).update(
             flag="old"
@@ -98,7 +98,6 @@ def audit_scripts(request):
         cli_name = client_db.objects.filter(username=username, client_id=client_id)
         address = audit_db.objects.filter(client_id=client_id).order_by('-date_time')[0]
         accept = audit_db.objects.filter(client_id=client_id).order_by('-date_time')[0]
-        print(accept, address)
 
         return render(request, 'audit_scripts.html', {'all_clients': all_clients,
                                                     'all_groups': all_groups,
