@@ -36,9 +36,24 @@
                                         <div class="form-group row">
                                             <label class="col-sm-4 col-form-label">Question :</label>
                                             <div class="col-sm-6">
-                                                <textarea name="question" value="{{ question }}"
+                                                <!-- <textarea name="question" value="{{ question }}"
                                                           class="form-control"
-                                                          placeholder="Question"></textarea>
+                                                          placeholder="Question"></textarea> -->
+                                                <input list="question" name="question" value="{{ question }}" class="form-control" placeholder="Input Question">
+                                                <datalist id="question">
+                                                    <option value="Has your organization implemented scanning tools (active & passive) to identify all the devices attached to the network?">
+                                                    <option value="Has your organization implemented a network port control solution (802.1x), which requires certificates, to authenticate devices before they can connect to the network?">
+                                                    <option value="Has your organization implemented scanning tools to identify all software applications installed in the organization?">
+                                                    <option value="Has your organization implemented a software whitelisting tool that only allows authorized software program to execute on the organization's systems?">
+                                                    <option value="Has your organization implemented scanning tools to identify any software vulnerabilities on systems in the organization?">
+                                                    <option value="Has your organization implemented an automated patch management system to continuously update the organization's systems?">
+                                                    <option value="Has your organization implemented a scanning tool to inventory all users with elevated administrative rights on the organization's systems?">
+                                                    <option value="Has your organization ensured that only users with clear business need are granted elevated administrative rights on the organization's systems?">
+                                                    <option value="Has your organization implemented scanning tools to identify any mis-configured security settings on systems in the organization?">
+                                                    <option value="Has your organization implemented a security setting configuration enforcement system on the organization's systems?">
+                                                    <option value="Has your organization enabled comprehensive audit logging on each of its critical information systems (including network devices and applications)?">
+                                                    <option value="Has your organization centrally aggregated their critical audit logs on a Security Information and Event Management (SIEM) platform?">
+                                                </datalist>
                                             </div>
                                         </div>
                                         <div class="form-actions">

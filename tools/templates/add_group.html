@@ -20,9 +20,18 @@
                                         <div class="form-group row">
                                             <label class="col-sm-4 col-form-label">Question Group:</label>
                                             <div class="col-sm-6">
-                                                <textarea name="question_group" value="{{ question_group }}"
+                                                <!-- <textarea name="question_group" value="{{ question_group }}"
                                                           class="form-control"
-                                                          placeholder="Question Group"></textarea>
+                                                          placeholder="Question Group"></textarea> -->
+                                                <input list="question_group" name="question_group" value="{{ question_group }}" class="form-control" placeholder="Input Question Group">
+                                                <datalist id="question_group">
+                                                    <option value="CSC#1: Inventory and Control of Hardware Assets">
+                                                    <option value="CSC#2: Inventory and Control of Software Assets">
+                                                    <option value="CSC #3: Continuous Vulnerability Management">
+                                                    <option value="CSC #4: Controlled Use of Administrative Privileges">
+                                                    <option value="CSC #5: Secure Configuration for Hardware and Software">
+                                                    <option value="CSC #6: Maintenance, Monitoring, and Analysis of Audit Logs">
+                                                </datalist>
                                             </div>
                                         </div>
                                         <div class="form-actions">
