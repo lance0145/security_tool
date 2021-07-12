@@ -20,6 +20,12 @@ from tools import views
 app_name = 'tools'
 
 urlpatterns = [
+    url(r'^edit_audit',
+        views.edit_audit,
+        name='edit_audit'),
+    url(r'^edit_group',
+        views.edit_group,
+        name='edit_group'),
     url(r'^audit_list',
         views.audit_list,
         name='audit_list'),

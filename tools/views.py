@@ -31,6 +31,25 @@ nikto_output = ''
 scan_result = ''
 all_nmap = ''
 
+def edit_audit(request):
+    if request.method == 'GET': 
+        question_id = request.GET.get('question_id')
+        all_questions = audit_question_db.objects.filter(question_id=question_id)
+        all_groups = audit_question_group_db.objects.all
+
+        return render(request, 'edit_audit.html', {'all_questions': all_questions,
+                                                    'all_groups': all_groups,
+                                                        })
+
+def edit_group(request):
+    username = request.user.username
+    if request.method == 'GET': 
+        question_group_id = request.GET.get('question_group_id')
+        all_groups = audit_question_group_db.objects.filter(question_group_id=question_group_id)
+
+        return render(request, 'edit_group.html', {'all_groups': all_groups,
+                                                        })
+
 def audit_list(request):
     username = request.user.username
     all_clients = client_db.objects.filter(username=username)
@@ -120,6 +139,12 @@ def add_audit_del(request):
         client_id = request.POST.get("cli_id")
         question_group_id = request.POST.get("question_group_id")
 
+        # dump_scan = audit_db.objects.filter(question_group_id=question_group_id)
+        # dump_scan.delete()
+
+        # dump_scan = audit_question_db.objects.filter(question_group_id=question_group_id)
+        # dump_scan.delete()
+
         dump_scan = audit_question_group_db.objects.filter(question_group_id=question_group_id)
         dump_scan.delete()
 
@@ -130,6 +155,9 @@ def audit_scripts_del(request):
     if request.method == 'POST':
         client_id = request.POST.get("cli_id")
         question_id = request.POST.get("question_id")
+
+        dump_scan = audit_db.objects.filter(question_id=question_id)
+        dump_scan.delete()
 
         dump_scan = audit_question_db.objects.filter(question_id=question_id)
         dump_scan.delete()
