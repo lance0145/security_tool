@@ -40,15 +40,16 @@
                     <div class="card-body">
                         <div class="d-md-flex align-items-center">
                             <h2 class="card-title">{{group.question_group}}</h2>&nbsp;&nbsp;&nbsp;
-                            <div id="delete" class="float-right">
-                                <form action="{% url 'tools:edit_group' %}" method="post" class="forms-sample">        
-                                    {% csrf_token %}
-                                    <input type="hidden" name="cli_id" value="{{cli_id}}"/>
-                                    <input type="hidden" name="question_group_id" value="{{group.question_group_id}}"/>
-                                    <button style="border: none; background: none;"><i class="fas fa-pencil-alt"></i></button>
-                                </form>
+                            <div class="float-right" title="Edit question group">
+                                <a style="color: black;" href="/tools/edit_group/?client_id={{client_id}}&question_group_id={{group.question_group_id}}"><i class="fas fa-pencil-alt"></i></a>
                             </div>
-                        </div>                       
+                            <!-- <form action="{% url 'tools:add_audit_del' %}" method="post" class="foclient_idrms-sample">
+                                {% csrf_token %}
+                                <input type="hidden" name="cli_id" value="{{cli_id}}"/>
+                                <input type="hidden" name="question_group_id" value="{{group.question_group_id}}"/>
+                                <button style="border: none; background: none;"><i class="fas fa-pencil-alt"></i></button>
+                            </form> -->
+                        </div>
                         <br>
                         <div class="card">
                             <div class="row">
@@ -74,14 +75,15 @@
                                                                 <option style="background:green" value="Implemented & Automated on All Systems">Implemented & Automated on All Systems</option>
                                                     </select>
                                                 </div>
-                                                <div class="confirm-delete float-right">
-                                                    <form action="{% url 'tools:edit_audit' %}" method="post" class="forms-sample">        
-                                                        {% csrf_token %}
-                                                        <input type="hidden" name="client_id" value="{{client_id}}"/>
-                                                        <input type="hidden" name="question_id" value="{{question.question_id}}"/>
-                                                        <button style="border: none; background: none;"><i class="fas fa-pencil-alt"></i></button>
-                                                    </form>
+                                                <div class="float-right" title="Edit question">
+                                                    <a style="color: black;" href="/tools/edit_audit/?client_id={{client_id}}&question_id={{group.question_id}}"><i class="fas fa-pencil-alt"></i></a>
                                                 </div>
+                                                <!-- <form action="{% url 'tools:edit_audit' %}" method="post" class="forms-sample">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="client_id" value="{{client_id}}"/>
+                                                    <input type="hidden" name="question_id" value="{{question.question_id}}"/>
+                                                    <button style="border: none; background: none;"><i class="fas fa-pencil-alt"></i></button>
+                                                </form> -->
                                             </div>
                                             {% endif %}
                                         {% endfor %}
@@ -128,12 +130,13 @@
         }
     });
 
-    $(document).on('click', '.confirm-delete', function(){
-        return confirm('Are you sure you want to delete this question?');
-    })
+    // $(document).on('click', '.confirm-delete', function(){
+    //     return confirm('Are you sure you want to delete this question?');
+    // })
 
-    $(document).on('click', '#delete', function(){
-        return confirm('Are you sure you want to delete this question group?');
-    })
+    // $(document).on('click', '#delete', function(){
+    //     return confirm('Are you sure you want to delete this question group?');
+    // })
+
 </script>
 {% endblock %}
