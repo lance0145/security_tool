@@ -1,25 +1,15 @@
-# -*- coding: utf-8 -*-
-#                    _
-#     /\            | |
-#    /  \   _ __ ___| |__   ___ _ __ _   _
-#   / /\ \ | '__/ __| '_ \ / _ \ '__| | | |
-#  / ____ \| | | (__| | | |  __/ |  | |_| |
-# /_/    \_\_|  \___|_| |_|\___|_|   \__, |
-#                                     __/ |
-#                                    |___/
-# Copyright (C) 2017 Anand Tiwari
-#
-# Email:   anandtiwarics@gmail.com
-# Twitter: @anandtiwarics
-#
-# This file is part of ArcherySec Project.
-
 from django.conf.urls import url
 from tools import views
 
 app_name = 'tools'
 
 urlpatterns = [
+    url(r'^edit_group_save',
+        views.edit_group_save,
+        name='edit_group_save'),
+    url(r'^edit_audit_save',
+        views.edit_audit_save,
+        name='edit_audit_save'),
     url(r'^edit_audit',
         views.edit_audit,
         name='edit_audit'),

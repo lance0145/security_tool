@@ -31,24 +31,43 @@ nikto_output = ''
 scan_result = ''
 all_nmap = ''
 
-def edit_audit(request):
-    if request.method == 'GET': 
-        question_id = request.GET.get('question_id')
-        all_questions = audit_question_db.objects.filter(question_id=question_id)
-        all_groups = audit_question_group_db.objects.all
+def edit_group_save(request):
+    if request.method == 'POST':
+        question_group = request.POST.get('question_group')
+        question_group_id = request.POST.get('question_group_id')
 
-        return render(request, 'edit_audit.html', {'all_questions': all_questions,
-                                                    'all_groups': all_groups,
-                                                        })
+        audit_question_group_db.objects.filter(question_group_id=question_group_id).update(
+            question_group=question_group,
+        )
+
+        # return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
+        return HttpResponseRedirect(reverse('tools:audit_scripts'))
+
+def edit_audit_save(request):
+    if request.method == 'POST':
+        question = request.POST.get('question')
+        question_id = request.POST.get('question_id')
+
+        audit_question_db.objects.filter(question_id=question_id).update(
+            question=question,
+        )
+
+        return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
 
 def edit_group(request):
-    username = request.user.username
-    if request.method == 'GET': 
-        question_group_id = request.GET.get('question_group_id')
-        all_groups = audit_question_group_db.objects.filter(question_group_id=question_group_id)
+    question_group_id = request.GET.get('question_group_id')
+    all_groups = audit_question_group_db.objects.filter(question_group_id=question_group_id)
 
-        return render(request, 'edit_group.html', {'all_groups': all_groups,
-                                                        })
+    return render(request, 'edit_group.html', {'all_groups': all_groups})
+
+def edit_audit(request):
+    question_id = request.POST.get('question_id')
+    all_questions = audit_question_db.objects.filter(question_id=question_id)
+    all_groups = audit_question_group_db.objects.all
+
+    return render(request, 'edit_audit.html', {'all_questions': all_questions,
+                                                'all_groups': all_groups,
+                                                    })
 
 def audit_list(request):
     username = request.user.username
@@ -135,9 +154,9 @@ def audit_scripts(request):
                                                     'all_audits': all_audits})
 
 def add_audit_del(request):
-    if request.method == 'POST':
-        client_id = request.POST.get("cli_id")
-        question_group_id = request.POST.get("question_group_id")
+    if request.method == 'GET':
+        client_id = request.GET.get("client_id")
+        question_group_id = request.GET.get("question_group_id")
 
         # dump_scan = audit_db.objects.filter(question_group_id=question_group_id)
         # dump_scan.delete()
@@ -149,8 +168,10 @@ def add_audit_del(request):
         dump_scan.delete()
 
         # Note: minor bug doesn't return directly to client audit script page
-        return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
-    
+        #return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
+        # return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
+        return HttpResponseRedirect(reverse('tools:audit_scripts'))
+
 def audit_scripts_del(request):
     if request.method == 'POST':
         client_id = request.POST.get("cli_id")
