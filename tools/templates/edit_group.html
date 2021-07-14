@@ -19,7 +19,7 @@
                                         {% csrf_token %}
                                         {% for group in all_groups %}
                                         <div class="form-group row">
-                                            <label class="col-sm-4 col-form-label">Question Group:</label>
+                                            <label class="col-sm-4 col-form-label">Question Group :</label>
                                             <div class="col-sm-6">
                                                 <textarea name="question_group" class="form-control">{{group.question_group}}</textarea>
                                             </div>

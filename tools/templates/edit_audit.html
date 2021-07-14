@@ -9,48 +9,36 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-md-flex align-items-center">
-                            <h1 class="card-title">Edit Audit Scripts Question</h1>
+                            <h1 class="card-title">Edit Question</h1>
                         </div>
                         <br>
                         <div class="card">
                             <div class="card-body">
                                 <div class="col-md-12">
-                                    <form class="form-horizontal" method="POST" action="{% url 'tools:edit_audit_save' %}?question_group_id={{ question_group_id }}">
+                                    <form class="form-horizontal" method="POST" action="{% url 'tools:edit_audit_save' %}">
                                         {% csrf_token %}
-                                        <div class="form-group row">
-                                            <label class="col-sm-4 col-form-label">Question Group :</label>
-                                                <div class="col-sm-6">
-                                                    <select name="question_group_id" class="select2 form-control custom-select"
-                                                            style="width: 50%; height:36px;">
-                                                        {% for data in all_groups %}
-                                                            <option value="{{data.question_group_id}}">{{data.question_group}}</option>
-                                                        {% endfor %}
-                                                    </select>
-                                                    <div class="btn-group" title="Add question group"><a
-                                                        href="{% url 'tools:add_group' %}?"
-                                                        class="btn btn-primary btn-sm"><i
-                                                        class="icon-plus icon-white"></i>Add</a>
-                                                    </div>
-                                                </div>
-                                        </div>
-                                        {% for data in all_questions %}
+                                        {% for question in all_questions %}
                                         <div class="form-group row">
                                             <label class="col-sm-4 col-form-label">Question :</label>
                                             <div class="col-sm-6">
-                                                <textarea name="question" class="form-control">{{data.question}}</textarea>
+                                                <textarea name="question" class="form-control">{{question.question}}</textarea>
+                                            </div>
+                                            <div class="confirm-delete float-right" title="Delete question">
+                                                <a style="color: black;" href="/tools/audit_scripts_del/?client_id={{client_id}}&question_id={{question.question_id}}"><i class="far fa-window-close"></i></a>
                                             </div>
                                         </div>
-                                        {% endfor %}
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">Comment :</label>
+                                            <div class="col-sm-6">
+                                                <textarea name="comment" class="form-control">{{question.comment}}</textarea>
+                                            </div>
+                                        </div>
                                         <div class="form-actions">
-                                            <!-- <input type="hidden" name="question_group_id" value="{{data.question_group_id}}"> -->
+                                            <input type="hidden" name="client_id" value="{{client_id}}"/>
+                                            <input type="hidden" name="question_id" value="{{question.question_id}}"/>
                                             <button type="submit" class="btn btn-success">Save</button>
                                         </div>
-                                    </form>
-                                    <form action="{% url 'tools:audit_scripts_del' %}" method="post" class="forms-sample">        
-                                        {% csrf_token %}
-                                        <input type="hidden" name="client_id" value="{{client_id}}"/>
-                                        <input type="hidden" name="question_id" value="{{question.question_id}}"/>
-                                        <button type="submit" class="btn btn-danger">Del</button>
+                                        {% endfor %}
                                     </form>
                                 </div>
                             </div>
@@ -65,9 +53,10 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 
-    $(document).on('click', '.btn btn-danger', function(){
+    $(document).on('click', '.confirm-delete', function(){
         return confirm('Are you sure you want to delete this question?');
     })
 
 </script>
+
 {% endblock %}

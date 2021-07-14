@@ -46,13 +46,16 @@ def edit_group_save(request):
 def edit_audit_save(request):
     if request.method == 'POST':
         question = request.POST.get('question')
+        comment = request.POST.get('comment')
         question_id = request.POST.get('question_id')
 
         audit_question_db.objects.filter(question_id=question_id).update(
             question=question,
+            comment=comment,
         )
 
-        return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
+        # return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
+        return HttpResponseRedirect(reverse('tools:audit_scripts'))
 
 def edit_group(request):
     question_group_id = request.GET.get('question_group_id')
@@ -61,12 +64,10 @@ def edit_group(request):
     return render(request, 'edit_group.html', {'all_groups': all_groups})
 
 def edit_audit(request):
-    question_id = request.POST.get('question_id')
+    question_id = request.GET.get('question_id')
     all_questions = audit_question_db.objects.filter(question_id=question_id)
-    all_groups = audit_question_group_db.objects.all
 
     return render(request, 'edit_audit.html', {'all_questions': all_questions,
-                                                'all_groups': all_groups,
                                                     })
 
 def audit_list(request):
@@ -169,13 +170,12 @@ def add_audit_del(request):
 
         # Note: minor bug doesn't return directly to client audit script page
         #return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
-        # return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
         return HttpResponseRedirect(reverse('tools:audit_scripts'))
 
 def audit_scripts_del(request):
-    if request.method == 'POST':
-        client_id = request.POST.get("cli_id")
-        question_id = request.POST.get("question_id")
+    if request.method == 'GET':
+        client_id = request.GET.get("client_id")
+        question_id = request.GET.get("question_id")
 
         dump_scan = audit_db.objects.filter(question_id=question_id)
         dump_scan.delete()
@@ -183,7 +183,8 @@ def audit_scripts_del(request):
         dump_scan = audit_question_db.objects.filter(question_id=question_id)
         dump_scan.delete()
 
-        return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
+        # return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
+        return HttpResponseRedirect(reverse('tools:audit_scripts'))
 
 def add_group(request):
     username = request.user.username
@@ -214,6 +215,7 @@ def add_audit(request):
 def add_audit_save(request):
     if request.method == 'POST':
         question = request.POST.get('question')
+        comment = request.POST.get('comment')
         question_group_id = request.POST.get('question_group_id')
         date_time = datetime.now()
         question_id = uuid.uuid4()
@@ -221,6 +223,7 @@ def add_audit_save(request):
         dump_scan = audit_question_db(
             date_time=date_time,
             question=question,
+            comment=comment,
             question_id=question_id,
             question_group_id=question_group_id
         )
