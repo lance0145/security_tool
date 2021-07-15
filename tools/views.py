@@ -31,8 +31,40 @@ nikto_output = ''
 scan_result = ''
 all_nmap = ''
 
+def audit_scripts(request):
+    # Fix: minor bug it loads the first client on the dropdown answer
+    username = request.user.username
+    all_clients = client_db.objects.filter(username=username)
+    all_groups = audit_question_group_db.objects.all
+    all_questions = audit_question_db.objects.all
+
+    if request.method == 'POST':
+        client_id = request.POST.get('client_id')
+    elif request.method == 'GET':
+        client_id = request.GET.get("client_id")
+
+    if client_id:
+        all_audits = audit_db.objects.filter(client_id=client_id)
+        cli_name = client_db.objects.filter(username=username, client_id=client_id)
+        address = audit_db.objects.filter(client_id=client_id).order_by('-date_time')[0]
+        accept = audit_db.objects.filter(client_id=client_id).order_by('-date_time')[0]
+
+        return render(request, 'audit_scripts.html', {'all_clients': all_clients,
+                                                    'all_groups': all_groups,
+                                                    'all_questions': all_questions,
+                                                    'all_audits': all_audits,
+                                                    'client_name': cli_name[0].client_name,
+                                                    'client_id': cli_name[0].client_id,
+                                                    'address': address.address,
+                                                    'accept': accept.accept})
+    else:
+        return render(request, 'audit_scripts.html', {'all_clients': all_clients,
+                                                    'all_groups': all_groups,
+                                                    'all_questions': all_questions})
+
 def edit_group_save(request):
     if request.method == 'POST':
+        client_id = request.POST.get('client_id')
         question_group = request.POST.get('question_group')
         question_group_id = request.POST.get('question_group_id')
 
@@ -40,11 +72,11 @@ def edit_group_save(request):
             question_group=question_group,
         )
 
-        # return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
-        return HttpResponseRedirect(reverse('tools:audit_scripts'))
+        return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
 
 def edit_audit_save(request):
     if request.method == 'POST':
+        client_id = request.POST.get('client_id')
         question = request.POST.get('question')
         comment = request.POST.get('comment')
         question_id = request.POST.get('question_id')
@@ -54,21 +86,25 @@ def edit_audit_save(request):
             comment=comment,
         )
 
-        # return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
-        return HttpResponseRedirect(reverse('tools:audit_scripts'))
+        return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
 
 def edit_group(request):
     question_group_id = request.GET.get('question_group_id')
+    client_id = request.GET.get("client_id")
+    print(client_id, question_group_id)
     all_groups = audit_question_group_db.objects.filter(question_group_id=question_group_id)
 
-    return render(request, 'edit_group.html', {'all_groups': all_groups})
+    return render(request, 'edit_group.html', {'all_groups': all_groups,
+                                               'client_id': client_id})
 
 def edit_audit(request):
     question_id = request.GET.get('question_id')
+    client_id = request.GET.get("client_id")
+    print(client_id, question_id)
     all_questions = audit_question_db.objects.filter(question_id=question_id)
 
     return render(request, 'edit_audit.html', {'all_questions': all_questions,
-                                                    })
+                                               'client_id': client_id})
 
 def audit_list(request):
     username = request.user.username
@@ -125,35 +161,6 @@ def audit_scripts_save(request):
     }
     return JsonResponse(response)
 
-def audit_scripts(request):
-    # Note: minor bug it loads the first client on the dropdown answer
-    username = request.user.username
-    all_clients = client_db.objects.filter(username=username)
-    all_groups = audit_question_group_db.objects.all
-    all_questions = audit_question_db.objects.all
-    client_id = request.POST.get('client_id', )
-    if request.method == 'POST' and client_id:
-        all_audits = audit_db.objects.filter(client_id=client_id)
-        cli_name = client_db.objects.filter(username=username, client_id=client_id)
-        address = audit_db.objects.filter(client_id=client_id).order_by('-date_time')[0]
-        accept = audit_db.objects.filter(client_id=client_id).order_by('-date_time')[0]
-
-        return render(request, 'audit_scripts.html', {'all_clients': all_clients,
-                                                    'all_groups': all_groups,
-                                                    'all_questions': all_questions,
-                                                    'all_audits': all_audits,
-                                                    'cli_name': cli_name[0].client_name,
-                                                    'cli_id': cli_name[0].client_id,
-                                                    'address': address.address,
-                                                    'accept': accept.accept})
-    else:        
-        all_audits = audit_db.objects.filter(client_id=all_clients[0].client_id)
-    
-        return render(request, 'audit_scripts.html', {'all_clients': all_clients,
-                                                    'all_groups': all_groups,
-                                                    'all_questions': all_questions,
-                                                    'all_audits': all_audits})
-
 def add_audit_del(request):
     if request.method == 'GET':
         client_id = request.GET.get("client_id")
@@ -169,8 +176,7 @@ def add_audit_del(request):
         dump_scan.delete()
 
         # Note: minor bug doesn't return directly to client audit script page
-        #return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
-        return HttpResponseRedirect(reverse('tools:audit_scripts'))
+        return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
 
 def audit_scripts_del(request):
     if request.method == 'GET':
@@ -183,8 +189,7 @@ def audit_scripts_del(request):
         dump_scan = audit_question_db.objects.filter(question_id=question_id)
         dump_scan.delete()
 
-        # return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
-        return HttpResponseRedirect(reverse('tools:audit_scripts'))
+        return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
 
 def add_group(request):
     username = request.user.username

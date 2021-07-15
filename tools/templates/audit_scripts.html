@@ -25,7 +25,7 @@
             <div class="col-sm-6">
                 <select name="client_id" onChange="form.submit();" class="select2 form-control custom-select"
                         style="width: 50%; height:36px;" >
-                        <option value="{{cli_id}}" disabled selected>{{cli_name}}</option>
+                        <option value="{{client_id}}" disabled selected>{{client_name}}</option>
                     {% for data in all_clients %}
                         <option value="{{data.client_id}}">{{data.client_name}}</option>
                     {% endfor %}
@@ -43,12 +43,6 @@
                             <div class="float-right" title="Edit question group">
                                 <a style="color: black;" href="/tools/edit_group/?client_id={{client_id}}&question_group_id={{group.question_group_id}}"><i class="fas fa-pencil-alt"></i></a>
                             </div>
-                            <!-- <form action="{% url 'tools:add_audit_del' %}" method="post" class="foclient_idrms-sample">
-                                {% csrf_token %}
-                                <input type="hidden" name="cli_id" value="{{cli_id}}"/>
-                                <input type="hidden" name="question_group_id" value="{{group.question_group_id}}"/>
-                                <button style="border: none; background: none;"><i class="fas fa-pencil-alt"></i></button>
-                            </form> -->
                         </div>
                         <br>
                         <div class="card">
