@@ -224,6 +224,7 @@ class audit_db(models.Model):
     address = models.TextField(null=True, blank=True)
     accept = models.TextField(null=True, blank=True)
     flag = models.TextField(null=True, blank=True)
+    comment = models.TextField(blank=True, null=True)
 
 # class audit_answer_db(models.Model):
 #     answer_id = models.TextField(blank=True, null=True)
@@ -234,7 +235,6 @@ class audit_question_db(models.Model):
     question_id = models.TextField(blank=True, null=True)
     question_group_id = models.TextField(blank=True, null=True)
     question = models.TextField(blank=True, null=True)
-    comment = models.TextField(blank=True, null=True)
     date_time = models.DateTimeField(null=True)
 
 class audit_question_group_db(models.Model):
