@@ -76,8 +76,8 @@ from django.contrib.auth import user_logged_in
 from django.contrib.auth.models import User
 from django.urls import reverse
 from dashboard.scans_data import scans_query
-from projects.models import Month, MonthSqlite
-from projects.models import month_db
+from projects.models import Month, MonthSqlite, client_db, month_db
+from tools.models import audit_question_db, audit_db
 
 # Create your views here.
 chart = []
@@ -221,9 +221,19 @@ def dashboard(request):
 
     all_month_data_display = month_db.objects.filter(username=username).values('month', 'high', 'medium', 'low').distinct()
 
+    all_clients = client_db.objects.filter(username=username)
+    all_questions = audit_question_db.objects.all
+    all_clients_audits = []
+    for client in all_clients:
+        all_audits = audit_db.objects.filter(client_id=client.client_id)
+        all_clients_audits.append(all_audits)
+
     return render(request,
                   'dashboard/index.html',
-                  {'all_project': all_project,
+                  {'all_clients': all_clients,
+                   'all_clients_audits': all_clients_audits,
+                   'all_questions': all_questions,
+                   'all_project': all_project,
                    'scanners': scanners,
                    'total_count_project': project_db.objects.filter(username=username).aggregate(Sum('total_vuln')),
                    'open_count_project': project_db.objects.filter(username=username).aggregate(Sum('total_open')),

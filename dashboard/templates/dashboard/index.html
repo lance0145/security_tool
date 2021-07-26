@@ -135,6 +135,61 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-md-flex align-items-center">
+                                <div>
+                                    <h1>Audit Scripts List</h1>
+                                    <h5 class="card-subtitle"></h5>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="row">
+                                <!-- column -->
+                                <div class="table-responsive">
+                                    <table id="manual_scans_list" class="table table-bordered data-table">
+                                        <thead>
+                                        <tr>
+                                            <th>Client</th>
+                                            {% for question in all_questions %}
+                                                <th>{{question.question}}</th>
+                                            {% endfor %}
+                                            <th>Risk Addressed</th>
+                                            <th>Risk Accepted</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for datas in all_clients_audits %}
+                                            <tr data-target="#">
+                                                {% for data in datas %}
+                                                    {% if forloop.first %}   
+                                                        <td>{{data.client_name}}</td>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% for data in datas %}
+                                                    <td>{{data.answer}}</td>
+                                                {% endfor %}
+                                                {% for data in datas %}
+                                                    {% if forloop.last %}   
+                                                        <td bgcolor="green" style="color: white; font-weight:bold;">{{data.address}}</td>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% for data in datas %}
+                                                    {% if forloop.last %}
+                                                        <td bgcolor="red" style="color: white; font-weight:bold;">{{data.accept}}</td>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
