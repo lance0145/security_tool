@@ -4,6 +4,9 @@ from tools import views
 app_name = 'tools'
 
 urlpatterns = [
+    url(r'^audit_comment_save',
+        views.audit_comment_save,
+        name='audit_comment_save'),
     url(r'^edit_group_save',
         views.edit_group_save,
         name='edit_group_save'),

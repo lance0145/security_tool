@@ -31,6 +31,20 @@ nikto_output = ''
 scan_result = ''
 all_nmap = ''
 
+def audit_comment_save(request):
+    client_id = request.GET.get('client_id')
+    question_id = request.GET.get('question_id')
+    comment = request.GET.get('comment')
+    if comment and client_id and question_id:
+        audit_db.objects.filter(client_id=client_id, question_id=question_id).update(
+            comment=comment
+        )
+
+    response = {
+        'comment': comment
+    }
+    return JsonResponse(response)
+
 def audit_scripts(request):
     # Fix: minor bug it loads the first client on the dropdown answer
     username = request.user.username
@@ -78,12 +92,10 @@ def edit_audit_save(request):
     if request.method == 'POST':
         client_id = request.POST.get('client_id')
         question = request.POST.get('question')
-        comment = request.POST.get('comment')
         question_id = request.POST.get('question_id')
 
         audit_question_db.objects.filter(question_id=question_id).update(
             question=question,
-            comment=comment,
         )
 
         return HttpResponseRedirect("/tools/audit_scripts/?client_id=%s" % client_id)
@@ -220,7 +232,6 @@ def add_audit(request):
 def add_audit_save(request):
     if request.method == 'POST':
         question = request.POST.get('question')
-        comment = request.POST.get('comment')
         question_group_id = request.POST.get('question_group_id')
         date_time = datetime.now()
         question_id = uuid.uuid4()
@@ -228,7 +239,6 @@ def add_audit_save(request):
         dump_scan = audit_question_db(
             date_time=date_time,
             question=question,
-            comment=comment,
             question_id=question_id,
             question_group_id=question_group_id
         )

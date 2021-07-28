@@ -60,9 +60,8 @@
                                                         {% for audit in all_audits %}
                                                             {% if question.question_id == audit.question_id %}
                                                                 <option style="background:grey" disabled selected>{{audit.answer}}</option>
-                                                                <!-- value="{{audit.answer}}"  -->
                                                             {% endif %}
-                                                        {% endfor %}
+                                                        {% endfor %}                                                 
                                                                 <option style="background:red" value="Not Implemented">Not Implemented</option>
                                                                 <option style="background:orange" value="Implemented on Some Systems">Implemented on Some Systems</option>
                                                                 <option style="background:yellow" value="Implemented on All Systems">Implemented on All Systems</option>
@@ -72,12 +71,14 @@
                                                 <div class="float-right" title="Edit question">
                                                     <a style="color: black;" href="/tools/edit_audit/?client_id={{client_id}}&question_id={{question.question_id}}"><i class="fas fa-pencil-alt"></i></a>
                                                 </div>
-                                                <!-- <form action="{% url 'tools:edit_audit' %}" method="post" class="forms-sample">
-                                                    {% csrf_token %}
-                                                    <input type="hidden" name="client_id" value="{{client_id}}"/>
-                                                    <input type="hidden" name="question_id" value="{{question.question_id}}"/>
-                                                    <button style="border: none; background: none;"><i class="fas fa-pencil-alt"></i></button>
-                                                </form> -->
+                                                {% for audit in all_audits %}
+                                                    {% if question.question_id == audit.question_id %}
+                                                <div class="float-right">
+                                                    &nbsp;&nbsp;<label class="">Comment :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <textarea name="{{audit.client_id}}" class="{{audit.question_id}}" onkeydown="buttonCode(event);" >{{audit.comment}}</textarea>
+                                                </div>
+                                                    {% endif %}
+                                                {% endfor %}  
                                             </div>
                                             {% endif %}
                                         {% endfor %}
@@ -101,36 +102,47 @@
         var client_id = document.getElementsByName("client_id")[0].value;
         for (var i=0 ; i < dropdown.length ; i++){
             (function(index){
-            dropdown[index].onchange = function(){
-                // e.preventDefault();
-                var question_id = document.getElementsByTagName("p")[index].getAttribute("name");
-                var answer = $(this).val();
-                $.ajax({
-                    url:'{% url "tools:audit_scripts_save" %}',
-                    data:{
-                        'client_id': client_id,
-                        'question_id': question_id,
-                        'answer': answer,
-                        // 'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
-                    },
-                    success: function (response) {
-                        $("#address").text("Risk Addressed: " + response.address);
-                        $("#accept").text("Risk Accepted: " + response.accept);
-                    }
-                });
-                // return false;
-            };
+                dropdown[index].onchange = function(){
+                    // e.preventDefault();
+                    var question_id = document.getElementsByTagName("p")[index].getAttribute("name");
+                    var answer = $(this).val();
+                    $.ajax({
+                        url:'{% url "tools:audit_scripts_save" %}',
+                        data:{
+                            'client_id': client_id,
+                            'question_id': question_id,
+                            'answer': answer,
+                            // 'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                        },
+                        success: function (response) {
+                            $("#address").text("Risk Addressed: " + response.address);
+                            $("#accept").text("Risk Accepted: " + response.accept);
+                        }
+                    });
+                };
             })(i)
         }
     });
 
-    // $(document).on('click', '.confirm-delete', function(){
-    //     return confirm('Are you sure you want to delete this question?');
-    // })
-
-    // $(document).on('click', '#delete', function(){
-    //     return confirm('Are you sure you want to delete this question group?');
-    // })
+    function buttonCode(event)
+    {
+        if (event.keyCode == 13 && event.target.value != ""){
+            var client_id = event.target.name;
+            var question_id = event.target.className;
+            var comment = event.target.value;
+            $.ajax({
+                url:'{% url "tools:audit_comment_save" %}',
+                data:{
+                    'client_id': client_id,
+                    'question_id': question_id,
+                    'comment': comment,
+                },
+                success: function (response) {
+                    alert(response.comment);
+                }
+            });
+        }
+    }
 
 </script>
 {% endblock %}
