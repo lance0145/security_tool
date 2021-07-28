@@ -126,7 +126,7 @@
 
     function buttonCode(event)
     {
-        if (event.keyCode == 13 && event.target.value != ""){
+        if (event.keyCode == 13 && event.target.value !== "" && !event.shiftKey){
             var client_id = event.target.name;
             var question_id = event.target.className;
             var comment = event.target.value;
@@ -138,7 +138,7 @@
                     'comment': comment,
                 },
                 success: function (response) {
-                    alert(response.comment);
+                    document.getElementsByName(client_id)[0].blur();
                 }
             });
         }
